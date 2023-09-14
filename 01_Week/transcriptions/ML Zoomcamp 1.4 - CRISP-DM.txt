@@ -1,0 +1,404 @@
+[0:00:00.44 --> 0:00:03.32]	  Okay, hi everyone, welcome back.
+[0:00:03.82 --> 0:00:07.74]	  So now we have lesson four from session number one
+[0:00:07.74 --> 0:00:08.80]	  of machine learning in ZoomCamp
+[0:00:08.80 --> 0:00:12.34]	  and we will talk about processes for machine learning projects.
+[0:00:13.12 --> 0:00:14.26]	  In the previous lecture, we talked,
+[0:00:14.70 --> 0:00:15.64]	  in the previous lesson,
+[0:00:15.70 --> 0:00:17.84]	  we talked about supervised machine learning.
+[0:00:18.28 --> 0:00:21.96]	  Now we'll take a step back and look at the big picture
+[0:00:21.96 --> 0:00:25.40]	  and see how processes are organized.
+[0:00:25.76 --> 0:00:28.26]	  So the plan for today is we will talk about
+[0:00:28.26 --> 0:00:31.92]	  a specific methodology for organizing ML projects
+[0:00:31.92 --> 0:00:33.08]	  called CRISP-DM.
+[0:00:33.34 --> 0:00:36.86]	  CRISP-DM stands for cross industry standard process
+[0:00:36.86 --> 0:00:38.26]	  and data mining, I think.
+[0:00:39.86 --> 0:00:42.56]	  And then we'll cover the entire process
+[0:00:42.56 --> 0:00:45.06]	  from the problem understanding to deployment.
+[0:00:45.34 --> 0:00:46.40]	  There are actually six steps
+[0:00:46.40 --> 0:00:48.14]	  and we will talk about each of these steps.
+[0:00:49.04 --> 0:00:52.04]	  And we again, we'll use our spam detection example
+[0:00:52.04 --> 0:00:55.32]	  to illustrate how exactly we can use this methodology
+[0:00:55.32 --> 0:00:56.88]	  for our projects.
+[0:00:56.88 --> 0:00:57.60]	  So let's start.
+[0:00:58.60 --> 0:01:00.54]	  So for machine learning projects,
+[0:01:00.66 --> 0:01:02.68]	  we first need to understand the problem.
+[0:01:03.14 --> 0:01:04.36]	  We need to collect the data,
+[0:01:04.56 --> 0:01:06.96]	  we need to train the model and we need to use it.
+[0:01:07.70 --> 0:01:10.92]	  And methodologies like CRISP-DM and others
+[0:01:10.92 --> 0:01:14.68]	  help us to actually organize it in a way that is manageable
+[0:01:14.68 --> 0:01:16.80]	  and we know what actually needs to happen
+[0:01:16.80 --> 0:01:17.74]	  and in which order.
+[0:01:18.64 --> 0:01:20.86]	  So we will talk about the spam example
+[0:01:20.86 --> 0:01:26.44]	  and to remind you the idea behind this spam detection system
+[0:01:26.44 --> 0:01:29.26]	  is we get some mail, right?
+[0:01:29.56 --> 0:01:32.54]	  So then we extract some features from this email,
+[0:01:33.12 --> 0:01:34.56]	  we put them in the model,
+[0:01:35.12 --> 0:01:39.48]	  the model gives some score for each email.
+[0:01:39.76 --> 0:01:45.14]	  And let's say if the score is higher than 50%,
+[0:01:45.14 --> 0:01:46.90]	  it goes to the spam folder.
+[0:01:47.10 --> 0:01:52.60]	  If it's lower than 60%, 50% then it goes to the inbox, right?
+[0:01:52.78 --> 0:01:55.54]	  So this is the spam detector system
+[0:01:55.54 --> 0:01:56.74]	  that we talked about previously.
+[0:01:57.40 --> 0:02:00.94]	  And now we'll see how we can actually use CRISP-DM
+[0:02:00.94 --> 0:02:03.08]	  to work on this problem.
+[0:02:04.14 --> 0:02:09.06]	  So CRISP-DM as I said is across industry standard process
+[0:02:09.06 --> 0:02:11.92]	  for data mining, which is a methodology
+[0:02:11.92 --> 0:02:15.76]	  that talks how machine learning projects should be organized.
+[0:02:16.56 --> 0:02:18.22]	  It's a pretty old methodology.
+[0:02:18.58 --> 0:02:23.64]	  So it was invented in I think 90s by IBM,
+[0:02:23.84 --> 0:02:27.48]	  even though it's quite old, it's still very useful.
+[0:02:27.84 --> 0:02:32.56]	  Even today after 25 or something like that,
+[0:02:32.62 --> 0:02:35.10]	  years after its invention, it's still useful.
+[0:02:35.46 --> 0:02:37.06]	  So some things are a bit outdated,
+[0:02:37.44 --> 0:02:41.14]	  but surprisingly it really stood the test of time
+[0:02:41.14 --> 0:02:45.34]	  and it still can be used today almost with no modifications.
+[0:02:45.94 --> 0:02:47.12]	  So let's talk about this.
+[0:02:47.56 --> 0:02:48.86]	  So yeah, there are six steps.
+[0:02:49.52 --> 0:02:51.72]	  So in the first step, business understanding,
+[0:02:51.72 --> 0:02:53.30]	  we try to understand the problem
+[0:02:53.30 --> 0:02:55.26]	  and then there are many other steps.
+[0:02:55.50 --> 0:02:59.68]	  One of them is modeling, where we actually train our model
+[0:02:59.68 --> 0:03:01.78]	  and then there is a step of deployment
+[0:03:01.78 --> 0:03:04.06]	  when our model is used.
+[0:03:04.26 --> 0:03:06.22]	  So let's talk about each of these steps.
+[0:03:06.90 --> 0:03:11.34]	  And we will try to map our spam detection example
+[0:03:11.34 --> 0:03:13.16]	  to this methodology.
+[0:03:13.86 --> 0:03:17.38]	  So the first step is the business understanding step.
+[0:03:17.64 --> 0:03:20.32]	  So here the goal is to identify the problem
+[0:03:20.46 --> 0:03:21.72]	  we want to solve.
+[0:03:23.22 --> 0:0]	  And we really want to understand this problem.
+[0:03:26.22 --> 0:03:30.46]	  So we want to understand if this problem is important
+[0:03:30.46 --> 0:03:35.44]	  and most importantly is we want to measure,
+[0:03:35.62 --> 0:03:37.94]	  to understand how we measure the success of our project.
+[0:03:38.52 --> 0:03:41.16]	  One important thing we need to ask ourselves at this step
+[0:03:41.16 --> 0:0]	  is do we actually need machine learning?
+[0:03:44.50 --> 0:03:46.90]	  Because often for many problems,
+[0:03:47.02 --> 0:03:48.58]	  we don't need machine learning at all.
+[0:03:50.30 --> 0:03:54.04]	  And yeah, sometimes like if we have a hammer,
+[0:03:54.24 --> 0:03:55.28]	  everything looks like an L,
+[0:03:55.70 --> 0:03:57.78]	  but we really need to think like,
+[0:03:57.90 --> 0:0]	  is machine learning a right solution for this?
+[0:04:02.02 --> 0:04:05.76]	  So let's take our example of spam detection is,
+[0:04:06.28 --> 0:04:08.80]	  first we want to understand the problem.
+[0:04:09.06 --> 0:04:11.96]	  So problem is that users complain about spam.
+[0:04:12.76 --> 0:04:14.68]	  Yes, users complain.
+[0:04:14.96 --> 0:04:16.46]	  So what we need to do is understand
+[0:04:16.66 --> 0:04:18.98]	  to what extent it's a problem.
+[0:04:19.60 --> 0:04:22.78]	  A lot of users complain or maybe it's just one user.
+[0:04:23.62 --> 0:04:24.88]	  Yeah, so we need to understand that.
+[0:04:25.60 --> 0:04:31.46]	  Like to also perhaps understand how impactful our project is
+[0:04:31.46 --> 0:04:35.32]	  and to motivate, like to say,
+[0:04:35.44 --> 0:04:37.94]	  like really need to invest time into doing this.
+[0:04:38.40 --> 0:04:41.38]	  Then we need to understand if machine learning
+[0:04:41.38 --> 0:04:45.18]	  is actually the right tool for solving this problem.
+[0:04:45.24 --> 0:04:51.14]	  So maybe we will be fine with just developing a rule-based system
+[0:04:51.14 --> 0:04:53.34]	  or just developing some heuristic
+[0:04:53.34 --> 0:04:57.04]	  without investing a lot of time and resources
+[0:04:57.04 --> 0:04:58.98]	  in developing a machine learning system.
+[0:05:00.36 --> 0:05:04.46]	  And at this step, like let's say if we decide
+[0:05:04.46 --> 0:05:05.90]	  to go with machine learning,
+[0:05:07.22 --> 0:05:12.26]	  so we need to understand what is the actual problem
+[0:05:12.26 --> 0:0]	  we try to solve.
+[0:05:13.10 --> 0:05:17.42]	  So it can be reduce the amount of spam messages, right?
+[0:05:17.52 --> 0:05:19.62]	  Or reduce the amount of complaints about spam.
+[0:05:20.38 --> 0:05:24.50]	  But we need to come up with some metric,
+[0:05:24.72 --> 0:05:25.94]	  some way of measuring it.
+[0:05:26.24 --> 0:05:28.84]	  So if we can measure the number of spam messages,
+[0:05:29.02 --> 0:05:29.76]	  then we can say, okay,
+[0:05:29.80 --> 0:05:31.66]	  we want to reduce this number of spam messages.
+[0:05:32.30 --> 0:05:35.66]	  And it's important here to, instead of just saying,
+[0:05:35.84 --> 0:05:38.02]	  hey, we want to reduce the number of spam messages,
+[0:05:38.16 --> 0:05:41.94]	  we also want to say how much exactly we want to reduce it.
+[0:05:42.10 --> 0:05:44.66]	  Because like how do we measure success?
+[0:05:44.88 --> 0:05:48.30]	  How do we then say that this project is actually successful?
+[0:05:48.72 --> 0:05:50.48]	  So we need to say, okay,
+[0:05:50.54 --> 0:05:53.70]	  we want to reduce the amount of spam messages by 50%.
+[0:05:53.70 --> 0:05:56.50]	  So it has to be some number attached to the API.
+[0:05:58.64 --> 0:06:01.34]	  So once we have this,
+[0:06:01.56 --> 0:06:03.10]	  once we decided that machine learning
+[0:06:03.10 --> 0:06:05.32]	  is actually the right tool for this problem,
+[0:06:05.54 --> 0:06:07.58]	  we made sure we understood the problem
+[0:06:07.58 --> 0:06:10.44]	  and we came up with a way to measure success.
+[0:06:11.46 --> 0:06:12.78]	  We go to the next step
+[0:06:12.78 --> 0:06:15.82]	  and we try to understand what data is actually available
+[0:06:15.82 --> 0:06:17.18]	  for us to solve the problem.
+[0:06:17.60 --> 0:06:21.10]	  Because for machine learning, we really need to have data.
+[0:06:21.36 --> 0:06:22.20]	  If there is no data,
+[0:06:22.38 --> 0:06:24.54]	  then we cannot have any machine learning.
+[0:06:25.06 --> 0:06:26.56]	  So this step, we really need to make sure
+[0:06:26.56 --> 0:06:27.58]	  that the data is available.
+[0:06:27.88 --> 0:06:32.36]	  And if it's not, we need to understand how we can get it,
+[0:06:32.58 --> 0:06:33.86]	  what is missing, what is not.
+[0:06:34.22 --> 0:06:36.58]	  So we basically need to understand what is there.
+[0:06:36.78 --> 0:06:40.26]	  Maybe perhaps we need to buy a data source,
+[0:06:41.96 --> 0:06:44.04]	  or maybe start collecting some data.
+[0:06:44.70 --> 0:06:46.34]	  And in our particular example,
+[0:06:47.08 --> 0:06:50.58]	  so for example, for the spam case, we have a spam button.
+[0:06:51.56 --> 0:06:53.64]	  So first we want to understand,
+[0:06:53.98 --> 0:06:55.50]	  does it really work well?
+[0:06:56.14 --> 0:06:58.68]	  Like what happens when a user click on this?
+[0:06:59.52 --> 0:07:01.96]	  Is the data reliable there?
+[0:07:02.20 --> 0:07:03.98]	  Do we always track the clicks?
+[0:07:04.20 --> 0:07:05.70]	  Do we always, when a user clicks,
+[0:07:05.70 --> 0:07:10.36]	  we can say that the data actually is recorded.
+[0:07:11.10 --> 0:07:15.10]	  And then we also need to ask if this data is good enough.
+[0:07:15.46 --> 0:07:19.06]	  Maybe users click on spam,
+[0:07:19.98 --> 0:07:21.40]	  they say messages are spam,
+[0:07:21.66 --> 0:07:23.72]	  when they aren't actually spam.
+[0:07:24.46 --> 0:07:26.28]	  So this can happen, right?
+[0:07:27.34 --> 0:07:29.70]	  And if we use such data,
+[0:07:30.24 --> 0:07:33.26]	  then our system, our machine learning algorithm,
+[0:07:33.50 --> 0:07:35.30]	  we'll just learn from this data, right?
+[0:07:35.30 --> 0:07:37.56]	  And we will try to mimic this behavior.
+[0:07:37.96 --> 0:07:41.62]	  And it will also try to predict something as spam,
+[0:07:41.82 --> 0:07:42.94]	  even though it's not spam,
+[0:07:43.14 --> 0:07:45.90]	  because this is the kind of training data it used.
+[0:07:46.32 --> 0:07:47.36]	  So we need to understand,
+[0:07:47.74 --> 0:07:50.28]	  and often manually analyze, look at the data,
+[0:07:50.48 --> 0:07:52.90]	  and try to understand if this is good enough.
+[0:07:54.22 --> 0:07:56.28]	  And we also need to ask ourselves
+[0:07:56.28 --> 0:07:58.30]	  if this data is large enough.
+[0:07:58.84 --> 0:08:01.68]	  So maybe if this data set is small,
+[0:08:02.24 --> 0:08:04.36]	  like we have only 10 records or something like this,
+[0:08:05.48 --> 0:08:08.32]	  then we cannot do much, so we need to collect more data.
+[0:08:09.04 --> 0:08:11.22]	  And this could be an output on this step,
+[0:08:11.36 --> 0:08:13.30]	  saying, hey, right now we're not ready,
+[0:08:13.58 --> 0:08:15.70]	  but we need to have, I don't know,
+[0:08:16.02 --> 0:08:17.16]	  two, three thousand records
+[0:08:17.16 --> 0:08:19.80]	  before we even can start doing anything else.
+[0:08:21.08 --> 0:08:24.54]	  Yeah, so this is what we do at this data understanding.
+[0:08:24.66 --> 0:08:26.94]	  So understanding what data is available,
+[0:08:27.70 --> 0:08:30.88]	  if something is missing, what is missing,
+[0:08:31.08 --> 0:08:33.04]	  and how there are some problems in tracking
+[0:08:33.04 --> 0:08:35.78]	  that we need to fix before we actually move on
+[0:08:35.78 --> 0:08:37.88]	  and base our model on this data.
+[0:08:39.80 --> 0:08:44.86]	  And here we sometimes may find out that,
+[0:08:45.30 --> 0:08:47.92]	  you know, some things we don't have some data,
+[0:08:48.56 --> 0:08:53.58]	  or let's say we understand that our problem is not,
+[0:08:55.36 --> 0:08:57.24]	  like our problem is different.
+[0:08:57.68 --> 0:08:58.20]	  So sometimes,
+[0:09:02.54 --> 0:09:05.06]	  these steps, sometimes we can learn new information
+[0:09:05.06 --> 0:09:10.06]	  about the problem and what we learned at this step
+[0:09:10.06 --> 0:09:13.94]	  may influence our initial understanding of the problem.
+[0:09:14.22 --> 0:09:17.30]	  So actually here we can go back and revise everything
+[0:09:17.30 --> 0:09:18.78]	  we did in the first step
+[0:09:18.78 --> 0:09:21.98]	  and then come back to the data understanding step again.
+[0:09:22.84 --> 0:09:25.10]	  So after data understanding step,
+[0:09:25.16 --> 0:09:26.46]	  we have data preparation step.
+[0:09:26.52 --> 0:09:30.40]	  So here we already analyzed the data.
+[0:09:30.66 --> 0:09:32.24]	  We know that we have enough data.
+[0:09:32.52 --> 0:09:33.84]	  We know that the data is reliable.
+[0:09:34.42 --> 0:09:39.12]	  It can be used and it's sufficiently big.
+[0:0 --> 0:09:43.20]	  So now we move to the next step
+[0:09:43.20 --> 0:09:46.32]	  and we take this data and transform it in such a way
+[0:09:46.32 --> 0:09:48.58]	  that it can be put in a machine learning algorithm.
+[0:09:49.46 --> 0:09:52.12]	  Usually here it means extracting different features.
+[0:09:52.12 --> 0:09:55.66]	  If you remember that for most of the models,
+[0:09:56.14 --> 0:09:58.90]	  like for the examples that we talked about,
+[0:09:59.18 --> 0:10:06.14]	  we actually needed to extract some features from the data.
+[0:10:06.86 --> 0:10:10.70]	  And also this step, we need to clean the data,
+[0:10:11.08 --> 0:10:12.58]	  remove all the noise.
+[0:10:13.10 --> 0:10:17.78]	  Let's say sometimes users accidentally mark spam messages.
+[0:10:18.92 --> 0:10:21.68]	  Users accidentally mark good messages as spam.
+[0:10:22.48 --> 0:10:24.32]	  So maybe there is a way to clean this data.
+[0:10:25.02 --> 0:10:29.30]	  Then we, like it's called building the pipelines.
+[0:10:29.92 --> 0:10:33.28]	  So by pipeline, I mean we have like a sequence of steps
+[0:10:33.28 --> 0:10:39.26]	  that takes the raw data and there's some transformation
+[0:10:39.26 --> 0:10:42.36]	  and then it produces clean data.
+[0:10:43.46 --> 0:10:46.38]	  So we need to write all this code for doing this.
+[0:10:46.38 --> 0:10:48.92]	  And then finally we need to convert our data
+[0:10:48.92 --> 0:10:52.82]	  in a tabular format, which means tabular is something
+[0:10:52.82 --> 0:10:54.72]	  that can be put in machine learning model.
+[0:10:55.52 --> 0:10:59.18]	  So here is an example for our spam detection system.
+[0:10:59.48 --> 0:11:00.94]	  So let's say we have all these emails.
+[0:11:01.90 --> 0:11:04.64]	  We have the spam data, right?
+[0:11:04.96 --> 0:11:07.98]	  And this pipeline would put together everything
+[0:11:07.98 --> 0:11:11.40]	  into a tabular format where clearly know
+[0:11:11.40 --> 0:11:13.52]	  who the sender is, who the receiver is,
+[0:11:13.52 --> 0:11:15.52]	  the subject, the body, et cetera.
+[0:11:15.94 --> 0:11:18.94]	  And most importantly, we have our target variable.
+[0:11:19.50 --> 0:11:23.64]	  And then we can take this and do extract features
+[0:11:23.64 --> 0:11:24.82]	  from this data, right?
+[0:11:25.12 --> 0:11:27.16]	  The features, this is something that we had talked
+[0:11:27.16 --> 0:11:32.18]	  about previously in previous lessons is like everything
+[0:11:32.18 --> 0:11:33.66]	  you can extract from this.
+[0:11:33.86 --> 0:11:36.08]	  So for example, I think the last column was
+[0:11:36.08 --> 0:11:40.46]	  if there is a word deposit in this and yeah.
+[0:11:40.62 --> 0:11:41.70]	  So here's a word deposit.
+[0:11:41.90 --> 0:11:46.16]	  Maybe here, here this one goes here, right?
+[0:11:46.26 --> 0:11:48.40]	  So we do this feature extraction.
+[0:11:49.46 --> 0:11:53.06]	  So once the data is prepared, it's ready.
+[0:11:53.34 --> 0:11:57.82]	  And it's in this format, right?
+[0:11:57.92 --> 0:12:01.04]	  You remember that we talked about this capital X
+[0:12:01.04 --> 0:12:02.96]	  and small y.
+[0:12:03.34 --> 0:12:05.24]	  So once the data is in this format,
+[0:12:05.40 --> 0:12:07.72]	  we can actually train the model.
+[0:12:08.10 --> 0:12:09.86]	  So the machine learning, actual machine learning
+[0:12:10.12 --> 0:12:11.96]	  happens at this step.
+[0:12:13.34 --> 0:12:16.22]	  So here what we do is we try different models
+[0:12:16.22 --> 0:12:18.02]	  and we select the best one.
+[0:12:18.72 --> 0:12:20.82]	  There are many different models.
+[0:12:21.08 --> 0:12:23.16]	  And in this course throughout the course,
+[0:12:23.38 --> 0:12:24.98]	  we'll talk about all of them.
+[0:12:25.08 --> 0:12:27.24]	  We'll talk about logistic regression, decision tree,
+[0:12:27.32 --> 0:12:29.98]	  neural network, and there are many, many other models.
+[0:12:30.40 --> 0:12:32.84]	  So at this step, we actually need to try different models
+[0:12:32.84 --> 0:12:35.14]	  and see which one works best.
+[0:12:35.64 --> 0:12:38.22]	  So this is where actual machine learning happens.
+[0:12:40.72 --> 0:12:42.60]	  And just in the next lesson,
+[0:12:42.70 --> 0:12:45.34]	  we actually will talk in more details
+[0:12:45.34 --> 0:12:48.90]	  how we are going to choose the bus model, right?
+[0:12:50.30 --> 0:12:53.60]	  Sometimes often we find out that the features we extract
+[0:12:53.60 --> 0:12:54.70]	  that they are not sufficient.
+[0:12:55.12 --> 0:12:58.02]	  We need to go back and add more features
+[0:12:58.02 --> 0:13:01.74]	  or we discover that there are some data issues.
+[0:13:01.92 --> 0:13:04.52]	  We need to go back and fix them.
+[0:13:04.52 --> 0:13:08.58]	  So that's why there is this...
+[0:13:08.58 --> 0:13:11.32]	  You quite often need to go back to the data preparation step
+[0:13:11.32 --> 0:13:14.60]	  and adjust something there to make your model better.
+[0:13:15.76 --> 0:13:18.88]	  After we do this, so here at this step,
+[0:13:19.08 --> 0:13:20.92]	  we selected the best possible model.
+[0:13:21.90 --> 0:13:27.82]	  After that, we need to measure how well this model is performing.
+[0:13:28.18 --> 0:13:31.68]	  So we need to go back to the business and the incentive step
+[0:13:32.58 --> 0:13:35.08]	  and remember what was the goal that we set.
+[0:13:35.84 --> 0:13:39.30]	  So if you remember that the goal we set
+[0:13:39.30 --> 0:13:41.66]	  was to reduce the amount of spam by 50%.
+[0:13:41.66 --> 0:13:44.32]	  So now we look back at the goal,
+[0:13:44.60 --> 0:1]	  we look at the actual results,
+[0:13:46.58 --> 0:1]	  because we take the model and apply it,
+[0:13:49.44 --> 0:13:51.86]	  and we ask ourselves, have we reached the goal?
+[0:13:52.28 --> 0:13:54.42]	  Do our metrics improve?
+[0:13:55.28 --> 0:13:59.66]	  And yeah, like if we reduced, did we reduce by 50%
+[0:13:59.80 --> 0:14:03.38]	  or we let's say reduced by 30%, right?
+[0:14:03.54 --> 0:14:05.22]	  Is 30% good enough or not?
+[0:14:05.58 --> 0:14:08.76]	  So here we do evaluation of our model.
+[0:14:09.40 --> 0:14:14.20]	  And actually it can happen that we need to go back
+[0:14:14.20 --> 0:14:16.22]	  to this data understanding step
+[0:14:16.22 --> 0:14:17.94]	  or to business understanding step.
+[0:14:18.40 --> 0:14:24.82]	  Maybe we realize that the goal we set was not achievable, right?
+[0:14:25.54 --> 0:14:28.68]	  So we can do some sort of retrospective
+[0:14:29.72 --> 0:1]	  and understand did we actually,
+[0:14:32.48 --> 0:14:34.78]	  like was it a successful project or not, right?
+[0:14:35.48 --> 0:14:40.18]	  And here, yeah, we can either go back and start again
+[0:14:40.18 --> 0:14:43.30]	  using all the information we learned about the project,
+[0:14:43.30 --> 0:14:47.50]	  or we can just say, okay, like this looks like a waste of time,
+[0:14:47.58 --> 0:14:49.54]	  we don't want to spend time working on this project
+[0:14:49.54 --> 0:14:52.26]	  because it's hopeless,
+[0:14:52.54 --> 0:14:55.16]	  and then we can just stop working on this project, right?
+[0:14:55.72 --> 0:14:56.86]	  But if everything works well,
+[0:14:56.86 --> 0:14:59.84]	  we go to the next step, deployment.
+[0:15:00.44 --> 0:15:03.54]	  And here I actually say that evaluation and deployment
+[0:15:03.54 --> 0:15:08.16]	  often come together because this is,
+[0:15:08.92 --> 0:15:12.16]	  as I mentioned, this framework is from 90s, right?
+[0:15:12.30 --> 0:15:16.08]	  And maybe in 90s, first they were doing evaluation
+[0:15:16.08 --> 0:15:16.90]	  and then deployment.
+[0:15:17.20 --> 0:15:21.50]	  But today the way we evaluate models
+[0:15:21.50 --> 0:15:23.60]	  is often through deployment.
+[0:15:23.60 --> 0:15:28.42]	  So we deploy a model, then we see how well the model is doing,
+[0:15:28.70 --> 0:15:32.54]	  and then we conclude if things are good or not.
+[0:15:33.40 --> 0:15:37.04]	  And usually it means that we test the model on real users, right?
+[0:15:37.52 --> 0:15:40.52]	  It's called online evaluation, right?
+[0:15:40.62 --> 0:15:42.24]	  So we evaluate it on real users.
+[0:15:42.52 --> 0:15:44.52]	  Usually we don't evaluate it on all users.
+[0:15:45.16 --> 0:15:48.16]	  We would say if we have all the users,
+[0:15:48.40 --> 0:15:51.26]	  we take only, I don't know, 5% of users
+[0:15:51.56 --> 0:15:53.54]	  and evaluate our model there.
+[0:15:53.96 --> 0:15:57.22]	  And if we see that this model actually works well,
+[0:15:57.36 --> 0:16:01.28]	  then we roll out the model to the remaining users.
+[0:16:01.66 --> 0:16:05.18]	  This is what we call a deployment actually,
+[0:16:05.38 --> 0:16:07.98]	  because at this deployment step,
+[0:16:08.12 --> 0:16:10.88]	  we deploy a model to production to all the users, right?
+[0:16:12.28 --> 0:16:15.56]	  And then, yeah, so here at this deployment step,
+[0:16:17.14 --> 0:16:23.18]	  what is important is how well maintainable the model is.
+[0:16:23.34 --> 0:16:26.76]	  So here, if on this step, on monitoring step,
+[0:16:27.10 --> 0:16:30.10]	  we are focusing more on machine learning.
+[0:16:30.62 --> 0:16:32.74]	  Here the focus on engineering.
+[0:16:33.30 --> 0:16:36.82]	  So here we want to make sure that the service is monitored,
+[0:16:37.50 --> 0:16:40.96]	  that it's maintainable, the quality is good.
+[0:16:41.72 --> 0:16:43.86]	  Basically all the best engineering practices
+[0:16:43.86 --> 0:16:47.44]	  come into picture here.
+[0:16:47.68 --> 0:16:49.68]	  So this is where we really care about this,
+[0:16:49.94 --> 0:16:54.02]	  because when we deploy our service, it has to work,
+[0:16:54.28 --> 0:16:55.28]	  right? It has to be reliable.
+[0:16:55.50 --> 0:16:58.60]	  And this is the step where we actually care about this.
+[0:16:59.06 --> 0:17:02.06]	  After doing all the previous steps, right?
+[0:17:02.38 --> 0:17:05.50]	  So then we care about scalability and other things.
+[0:17:06.20 --> 0:17:08.44]	  And of course, we don't stop here.
+[0:17:08.44 --> 0:17:11.36]	  It's not like we deployed something and forget about this.
+[0:17:11.64 --> 0:17:15.52]	  We iterate because in machine learning projects,
+[0:17:15.68 --> 0:17:17.40]	  they have very, like,
+[0:17:20.22 --> 0:17:22.94]	  yeah, so we don't stop at the deployment.
+[0:17:23.68 --> 0:17:28.44]	  We again learn from the process
+[0:17:28.44 --> 0:17:31.40]	  and we come back again to business understanding step
+[0:17:31.40 --> 0:17:34.06]	  and see, okay, we deployed this model.
+[0:17:34.62 --> 0:17:36.46]	  How can we actually improve it?
+[0:17:36.80 --> 0:17:38.28]	  Like, should we improve it?
+[0:17:38.44 --> 0:17:39.12]	  Is it good or not?
+[0:17:39.98 --> 0:17:42.22]	  Maybe we say it's good enough for now,
+[0:17:42.38 --> 0:17:43.84]	  but half a year later,
+[0:17:43.88 --> 0:17:45.52]	  we see that there are some problems.
+[0:17:45.86 --> 0:17:48.26]	  We come back to this business understanding step
+[0:17:48.26 --> 0:17:53.14]	  and go follow this process one more time.
+[0:17:53.48 --> 0:17:54.76]	  So we have another iteration.
+[0:17:54.92 --> 0:1]	  We define a new business goal.
+[0:17:57.38 --> 0:17:58.90]	  We look at the available data.
+[0:17:59.22 --> 0:18:01.94]	  We see if maybe there is a new data source that we need
+[0:18:02.02 --> 0:18:07.40]	  and we do another loop through this.
+[0:1 --> 0:18:11.88]	  And actually it's a very good idea to always start simple.
+[0:18:13.12 --> 0:18:16.02]	  So like here on the business understanding step,
+[0:18:16.64 --> 0:18:19.10]	  we do something very simple.
+[0:18:19.26 --> 0:18:21.14]	  So we quickly move through the iteration.
+[0:18:21.60 --> 0:18:24.58]	  We do the evaluation here and then we deploy.
+[0:18:24.82 --> 0:18:26.50]	  We learn from this process, right?
+[0:18:26.62 --> 0:18:29.02]	  We see that, okay, a simple model is useful.
+[0:18:29.10 --> 0:18:32.26]	  And now you go back to business understanding step again
+[0:18:32.26 --> 0:18:36.32]	  and you try to make this model a bit more complex, right?
+[0:18:36.84 --> 0:18:39.60]	  And you do two, three iterations,
+[0:1 --> 0:18:41.72]	  fast iterations like this.
+[0:1 --> 0:18:46.06]	  And then at the end, the iterations are small.
+[0:18:46.52 --> 0:18:48.08]	  You don't waste a lot of time
+[0:18:48.08 --> 0:18:51.56]	  and you can quickly show that the things you're working on
+[0:18:51.56 --> 0:18:52.32]	  are quite useful.
+[0:18:54.04 --> 0:18:57.48]	  So yeah, that's the process.
+[0:18:57.76 --> 0:19:02.16]	  So let me just quickly go through the process once more
+[0:19:02.16 --> 0:19:04.16]	  just to summarize everything we learned today.
+[0:19:04.66 --> 0:19:07.08]	  So there are six steps in Chris D'Am process.
+[0:19:07.34 --> 0:19:09.28]	  So the first step is business understanding step.
+[0:19:09.66 --> 0:19:11.94]	  So here we define a goal that is measurable
+[0:19:11.94 --> 0:19:16.68]	  and we always need to ask if actually ML machine learning
+[0:19:16.68 --> 0:19:18.56]	  is the right tool for solving the problem.
+[0:19:19.38 --> 0:19:21.06]	  Then we go to the next step
+[0:19:21.06 --> 0:19:24.64]	  where we understand which data are there,
+[0:19:25.24 --> 0:19:27.14]	  which data sets are there,
+[0:19:27.38 --> 0:19:30.12]	  is the data good enough for our purpose or not?
+[0:19:30.36 --> 0:19:33.24]	  Do we need to get more data, different kind of data
+[0:19:33.24 --> 0:19:34.20]	  or just more volume?
+[0:19:34.66 --> 0:19:36.68]	  All these questions we ask ourselves
+[0:19:36.68 --> 0:19:37.96]	  on the data understanding step,
+[0:19:38.26 --> 0:19:39.44]	  then we prepare the data,
+[0:19:39.60 --> 0:19:42.16]	  we transform it into such a format
+[0:19:42.16 --> 0:19:44.36]	  that is possible to put in machine learning.
+[0:19:44.66 --> 0:19:47.32]	  So here we usually talk about data pipelines
+[0:19:47.32 --> 0:19:49.22]	  and feature extraction and things like this.
+[0:19:49.94 --> 0:19:51.28]	  Then we go to the next step
+[0:19:51.28 --> 0:19:53.14]	  where the actual machine learning happens.
+[0:19:53.14 --> 0:19:56.30]	  So here our goal is to try different models
+[0:19:56.30 --> 0:19:57.44]	  and select the best one.
+[0:19:58.12 --> 0:20:01.98]	  After that, we make sure that the best model
+[0:20:01.98 --> 0:20:04.30]	  we selected on the previous step
+[0:20:04.30 --> 0:20:06.92]	  actually lives up to our expectations.
+[0:20:07.46 --> 0:20:11.16]	  So it can reach the goal that we set
+[0:20:11.16 --> 0:20:12.68]	  in the business understanding step.
+[0:20:13.16 --> 0:20:15.16]	  And here we might revise the goal
+[0:20:15.16 --> 0:20:17.74]	  and do another iteration or completely close a project.
+[0:20:18.10 --> 0:20:21.18]	  And then at the deployment phase step,
+[0:20:21.18 --> 0:20:23.84]	  we roll out the model to all the users.
+[0:20:25.46 --> 0:20:28.10]	  And then important thing is we always need to iterate.
+[0:20:28.68 --> 0:20:31.20]	  So we start simple, we learn from feedback,
+[0:20:31.66 --> 0:20:34.94]	  we improve and we make multiple iterations.
+[0:20:36.92 --> 0:20:42.90]	  And that's it for overview of KISP-DEM.
+[0:20:43.46 --> 0:20:45.40]	  And in the next lesson,
+[0:20:45.50 --> 0:20:48.46]	  we focus more on the modeling step because at the end,
+[0:20:48.82 --> 0:20:50.74]	  this course is more about machine learning.
+[0:20:50.74 --> 0:20:52.66]	  So we'll talk about more details
+[0:20:52.66 --> 0:20:56.04]	  of this particular step in the next lesson.

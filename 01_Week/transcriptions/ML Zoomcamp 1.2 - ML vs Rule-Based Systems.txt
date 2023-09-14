@@ -1,0 +1,207 @@
+[0:00:00.64 --> 0:00:04.78]	  Welcome to the second lesson of our first session of Machine Learning Zoom Camp.
+[0:00:05.80 --> 0:00:11.26]	  And we will talk, we will compare machine learning systems with rule-based systems.
+[0:00:11.74 --> 0:0]	  So in the previous lesson we talked about an example where how we can use machine learning for predicting the price of a car.
+[0:00:20.12 --> 0:00:31.08]	  And now in this lesson we will compare the old way of doing things without machine learning and using machine learning.
+[0:00:31.76 --> 0:00:36.60]	  And we will illustrate this using S-POM detection example.
+[0:00:37.44 --> 0:00:45.06]	  So I mentioned that you have a system, this is a system for emails, right?
+[0:00:45.22 --> 0:00:53.38]	  So usually we have Gmail or Outlook, so you have emails and you use this for talking to your colleagues,
+[0:00:54.04 --> 0:00:57.70]	  for work related things, for chatting with friends and so on.
+[0:00:58.14 --> 0:01:01.70]	  So each row here is an email, right?
+[0:01:02.80 --> 0:01:07.22]	  And everything works well, so you can send emails, receive emails,
+[0:01:07.44 --> 0:01:12.86]	  and then at some point users of our system start complaining about unsolicited emails.
+[0:01:13.32 --> 0:01:21.22]	  So there can be promotions about discounts that people are unsubscribed to, so these unsolicited promotions,
+[0:01:21.72 --> 0:01:31.88]	  or even fraudulent messages that try to, people try to cheat other people and ask them to give somebody.
+[0:01:33.24 --> 0:01:40.18]	  So, and we want to fight this, so we want to fight all these emails, we don't want our users to receive these emails.
+[0:01:40.58 --> 0:01:43.20]	  So we want to develop a S-POM detection system.
+[0:01:43.42 --> 0:01:49.24]	  So we want to take these emails and let's say have a folder for S-POM here,
+[0:01:49.84 --> 0:01:54.56]	  and send all the emails that are S-POM to this folder, right?
+[0:01:54.64 --> 0:01:56.20]	  So this is the system we want to develop.
+[0:01:57.08 --> 0:02:08.12]	  And for that we want to build a classifier that classifies things into S-POM or not S-POM, right?
+[0:02:08.42 --> 0:0]	  So what we can do is we can just take all the S-POM messages and try to come up with some, to find some patterns.
+[0:02:18.40 --> 0:02:21.24]	  So what makes a S-POM message S-POM, right?
+[0:02:22.18 --> 0:02:31.84]	  And what we can see here is, for example, we analyze the data and we see that all emails that come from this particular email,
+[0:02:32.28 --> 0:02:35.32]	  promotions at online.com, they are all S-POM messages.
+[0:02:35.68 --> 0:02:42.18]	  Or we can see that if a tax review is in the title, then it's also a S-POM message,
+[0:02:42.48 --> 0:02:49.68]	  or tax review and all the messages from this domain, online.com, they are all S-POM messages.
+[0:0 --> 0:02:57.30]	  And we can come up with rules, like, okay, if sender is promotionsonline.com, then it's S-POM.
+[0:02:57.80 --> 0:03:04.82]	  Because we did some analysis and we saw that all emails from this particular S-POM, they are all S-POM, right?
+[0:03:05.44 --> 0:03:09.42]	  And then we can see if subject contains tax review, like we see here.
+[0:03:09.86 --> 0:03:18.64]	  And if the domain of the S-POM is online.com, then in all the examples we saw and analyzed all these messages for S-POM.
+[0:03:19.32 --> 0:03:24.88]	  So we can say that if title contains tax review and S-POM is online, then it's S-POM.
+[0:03:25.04 --> 0:03:26.42]	  Otherwise, it's a good email, right?
+[0:03:26.50 --> 0:03:29.08]	  So we have all these three rules, right?
+[0:03:29.90 --> 0:03:37.36]	  What we can do with these rules now, we can write a simple program and encode these rules, using, for example, Python.
+[0:0 --> 0:03:46.94]	  So we just sit down and write a few lines of Python code where we encode these rules, saying, okay, if sender is this particular sender,
+[0:03:47.54 --> 0:03:49.24]	  promotionsetonline.com, then it's S-POM.
+[0:03:49.66 --> 0:03:55.60]	  If title contains tax review and the sender, the domain of the sender is online.com, then it's S-POM.
+[0:03:55.96 --> 0:04:00.38]	  In all other cases, we consider this is a good email.
+[0:04:01.08 --> 0:04:11.04]	  So we write this code, we deploy the system, and it works until people start complaining about other different unsolicited messages.
+[0:04:11.50 --> 0:04:21.86]	  And, you know, for example, in this case, yeah, this is a different kind of email that people get that talks about deposit.
+[0:04:22.16 --> 0:04:31.18]	  So you want a price, if you want to get it, you have to pay a small fee, $10 and transfer this to this account.
+[0:04:31.40 --> 0:04:34.16]	  So this is the kind of messages people start complaining about.
+[0:04:34.24 --> 0:04:42.06]	  We analyze and we see that if all these S-POM messages contain deposit, all good messages don't contain deposit.
+[0:04:42.64 --> 0:04:50.02]	  So we come with a rule that says if a body contains a word deposit, then we mark this message as S-POM.
+[0:04:51.06 --> 0:04:53.56]	  That works fine for a little while.
+[0:04:54.58 --> 0:04:55.60]	  Yeah, we implement this.
+[0:04:55.60 --> 0:05:08.08]	  It works fine for a little while until a user uses a word deposit for a genuine person, for a totally legitimate reason.
+[0:05:08.68 --> 0:05:14.96]	  Right, so somebody, Pedro, paid a deposit and now he wants to get the deposit again.
+[0:05:15.38 --> 0:05:22.18]	  So he uses the word deposit, but our system indirectly classifies this message as S-POM and puts this into a S-POM folder.
+[0:05:23.36 --> 0:05:25.88]	  Right, so we do analysis again.
+[0:05:26.30 --> 0:05:31.26]	  We do, we see okay, how we can make sure that this doesn't happen.
+[0:05:31.42 --> 0:05:40.24]	  So how can we separate good emails that contain the word deposit from bad emails that contain the word deposit and we come with other rules.
+[0:05:40.64 --> 0:05:45.64]	  And we encode these rules again with Python and we do this over and over again.
+[0:05:45.64 --> 0:05:53.06]	  And you can imagine that this is a never ending process because S-POM keeps changing the rules.
+[0:05:53.78 --> 0:05:58.10]	  We need to keep them up to date.
+[0:05:58.34 --> 0:06:00.70]	  So we constantly need to change them as well.
+[0:06:01.30 --> 0:06:09.06]	  Some other rules don't work and we write a lot of code, we write more code, more and more and more and more.
+[0:06:09.06 --> 0:06:17.10]	  And at the end it becomes a nightmare to maintain all this code and it's very difficult.
+[0:06:17.58 --> 0:06:24.34]	  The system is just every time we change something, things break in different places.
+[0:06:25.28 --> 0:06:32.50]	  So this is a situation when we need to think, okay, is there other tool that we can use to solve these problems?
+[0:06:32.82 --> 0:06:35.26]	  And the other tool for this is machine learning.
+[0:06:35.26 --> 0:06:40.54]	  So we can actually use machine learning to solve this problem in a different way.
+[0:06:41.26 --> 0:06:49.12]	  So the way we do this is we first need to get the data and by that I mean in this particular case all the emails.
+[0:06:50.46 --> 0:06:53.52]	  Then we need to extract some features from these emails.
+[0:06:53.96 --> 0:06:58.86]	  So things that we can use to describe emails, all these characteristics of emails.
+[0:06:59.14 --> 0:07:11.82]	  Then we need to extract these features and then we use these to train the model and then after that we can once we train the model, we can use this model for classifying messages into SPOM and not SPOM.
+[0:07:12.90 --> 0:07:26.40]	  So for getting data, what usually email providers do, they have this SPOM folder, right, that people can just use to mark email as unwanted as SPOM and then it usually goes to the SPOM folder.
+[0:07:27.56 --> 0:07:35.62]	  So if we have a button like that, we can just take all the data that users generated because users tell us, hey, this message is SPOM.
+[0:07:36.10 --> 0:07:45.54]	  So we can take all the emails we have, we can take emails that are SPOM, we can take emails that are not SPOM and we can use them for training the model, right?
+[0:07:46.48 --> 0:07:52.36]	  So we took this, so we took the emails, we took the labels, SPOM or not SPOM.
+[0:07:52.80 --> 0:07:54.74]	  Now we need to define and calculate features.
+[0:07:55.24 --> 0:08:04.02]	  And features can be very simple, like things like, is the title long, like what is the length of the title?
+[0:08:04.42 --> 0:08:10.10]	  If the title is longer than 10, then this feature is true.
+[0:08:10.62 --> 0:08:15.06]	  If the title is 10 or less, then the feature is false, right?
+[0:08:15.18 --> 0:08:22.48]	  And then we can features like this, about the length of the body, about the particular sender and so on.
+[0:08:22.48 --> 0:08:35.74]	  And if you remember that these features, like about this particular sender or the domain or the word deposit, they actually come from the rules we have.
+[0:08:36.42 --> 0:08:43.98]	  So most of these features, they are based on the rules we previously had.
+[0:08:43.98 --> 0:08:47.28]	  And that's actually a good idea to start with the rules.
+[0:08:47.54 --> 0:08:50.34]	  So first you don't jump immediately into using machine learning.
+[0:08:50.50 --> 0:09:00.34]	  So first you do a rule-based system, and then you can use these rules as features for a machine learning system, right?
+[0:09:00.48 --> 0:09:01.20]	  Like we did here.
+[0:09:02.64 --> 0:09:13.06]	  And so here we have six features, each, like this is called a binary feature, because we have features that are either true or false, so they can only take two values.
+[0:09:13.06 --> 0:09:14.56]	  That's why they're called binary features.
+[0:09:15.20 --> 0:09:20.94]	  We have six of them, and we can encode all our emails with this feature.
+[0:09:21.32 --> 0:09:22.42]	  So let's see how we can do this.
+[0:09:23.16 --> 0:09:25.38]	  So we have an email, right?
+[0:09:26.36 --> 0:09:29.66]	  And we want to extract these six features.
+[0:09:29.86 --> 0:09:31.98]	  So first we look at the length of the title.
+[0:09:32.54 --> 0:09:39.22]	  So the title is longer than 10 characters, and that's why the feature is true.
+[0:09:39.30 --> 0:09:46.92]	  So here, like it's true, but yeah, so we encode true as one and false as zero.
+[0:09:47.30 --> 0:09:50.08]	  So for us, the value of this feature is true.
+[0:09:50.72 --> 0:09:51.24]	  So it's one.
+[0:09:52.20 --> 0:09:54.30]	  Then the second feature is length of the body.
+[0:09:54.80 --> 0:09:56.36]	  So the body is pretty long.
+[0:09:56.78 --> 0:09:58.84]	  So this, the value of this feature is also true.
+[0:09:59.56 --> 0:10:02.62]	  Then the next one is about the sender name.
+[0:10:03.42 --> 0:10:05.12]	  So the email.
+[0:10:05.30 --> 0:10:08.68]	  So the email is not promotions at online.com.
+[0:10:08.86 --> 0:10:11.02]	  So that's why the value of this feature is zero.
+[0:10:11.94 --> 0:10:18.38]	  The next sender is not this email that is hard to read.
+[0:10:18.84 --> 0:10:21.22]	  So again, the value of this feature is zero.
+[0:10:22.64 --> 0:10:29.10]	  Then we see that the domain of the email is actually test.com.
+[0:10:29.32 --> 0:10:31.86]	  So if we see, that's a test here.
+[0:10:33.16 --> 0:10:38.40]	  So that's why, so for this particular feature, it's true to have one here.
+[0:10:39.20 --> 0:10:41.64]	  And the same for the last one.
+[0:10:41.92 --> 0:10:43.50]	  So description contains a word deposit.
+[0:10:43.72 --> 0:10:44.28]	  It's here.
+[0:10:44.62 --> 0:10:50.62]	  So that's why for this particular feature, the value is actually should be true.
+[0:10:55.36 --> 0:10:55.92]	  So,
+[0:10:56.48 --> 0:11:02.56]	  and finally, we know that this particular email is spam because the user market is email is spam.
+[0:11:02.78 --> 0:11:04.64]	  So we know that the value.
+[0:11:05.72 --> 0:11:07.36]	  So the target variable is one.
+[0:11:07.98 --> 0:11:11.56]	  So we take this, and we put this as our data set.
+[0:11:12.14 --> 0:11:14.54]	  So all the features we extracted plus the target variable.
+[0:11:15.20 --> 0:11:26.82]	  And we do this for other email for another email for another email and so on until we take all our emails and extract these features from them.
+[0:11:27.04 --> 0:11:28.46]	  And this is what we have.
+[0:11:28.76 --> 0:11:29.08]	  Right.
+[0:11:29.18 --> 0:11:32.48]	  So we have our data set and we have the target variable.
+[0:11:32.94 --> 0:11:35.68]	  So this is our, our data.
+[0:11:36.18 --> 0:11:42.44]	  And what we do next is we need to use this data to train a model.
+[0:11:42.46 --> 0:11:43.66]	  So we take this.
+[0:11:44.22 --> 0:11:48.30]	  And if you remember, so we put this into a machine learning algorithm.
+[0:11:48.96 --> 0:11:53.26]	  So feature features and target variable go in.
+[0:1 --> 0:11:55.06]	  So we train a model.
+[0:11:55.76 --> 0:11:58.30]	  And sometimes we call this process of training is fitting.
+[0:11:58.68 --> 0:11:59.74]	  So we hit a model.
+[0:12:00.18 --> 0:1]	  And then the output is a model.
+[0:12:04.72 --> 0:12:11.56]	  The model that we can use for predicting if a message is spam or not.
+[0:12:11.62 --> 0:12:13.02]	  So we take this model.
+[0:12:14.34 --> 0:12:19.06]	  Let's say we have a model here that we trained previously.
+[0:12:19.72 --> 0:12:19.72]	 
+[0:12:19.78 --> 0:12:27.90]	  And now for each of the messages we have, we have some predictions.
+[0:12:28.24 --> 0:12:28.36]	  Right.
+[0:12:28.42 --> 0:12:41.04]	  So for example, for this message, our prediction is, we say that the probability that this message is spam is 0.8, meaning that 80% likely that this
+[0:12:41.04 --> 0:12:41.88]	  message is spam.
+[0:12:42.24 --> 0:12:42.24]	 
+[0:12:42.50 --> 0:12:45.76]	  For example, for the second one can be 60%.
+[0:12:45.76 --> 0:12:48.44]	  Maybe this one is not spam.
+[0:12:48.70 --> 0:12:51.62]	  So only 10% likelihood that this email is spam.
+[0:12:52.32 --> 0:12:55.48]	  Then maybe this one is 0.01.
+[0:12:56.10 --> 0:13:03.16]	  So very unlikely that this is spam for the next one could be 70% and maybe 40%.
+[0:13:03.16 --> 0:13:03.32]	  Right.
+[0:13:05.38 --> 0:13:08.80]	  Then so we have this outputs from the model.
+[0:13:09.16 --> 0:1]	  So the model outputs probabilities.
+[0:13:11.46 --> 0:13:11.50]	  Right.
+[0:13:11.56 --> 0:13:18.12]	  So it thinks that this message looks like spam and I'm sure about that with probability.
+[0:13:18.56 --> 0:13:21.06]	  So my confidence level, let's say it's 80%.
+[0:13:21.06 --> 0:13:21.40]	  Right.
+[0:13:22.08 --> 0:13:24.86]	  So now we actually need to make a decision.
+[0:13:25.02 --> 0:13:27.30]	  Should we put this in a spam folder or not?
+[0:13:27.54 --> 0:13:27.82]	  Right.
+[0:13:28.22 --> 0:13:29.86]	  So this is the decision we need to make.
+[0:13:30.26 --> 0:13:42.94]	  And we can say if something is greater or equals to 0.5, so if something has more than 50% chance of being spam, then we put this in the spam folder.
+[0:13:43.42 --> 0:13:50.14]	  So for this, for this one, say it's spam, because it's more than 50%.
+[0:13:50.14 --> 0:13:51.90]	  So this one is also spam.
+[0:13:52.40 --> 0:13:57.78]	  This one is actually good because it's less than 5.0.5.
+[0:13:58.12 --> 0:13:58.14]	  Right.
+[0:13:58.22 --> 0:13:59.44]	  It's less than 50%.
+[0:13:59.44 --> 0:14:01.26]	  So this one is also good.
+[0:14:01.86 --> 0:14:05.92]	  This one looks like spam 70% is more than 50%.
+[0:14:05.92 --> 0:14:08.08]	  And 40% is a good message.
+[0:14:08.36 --> 0:14:08.36]	 
+[0:14:09.12 --> 0:14:15.58]	  And everything that we predicted as spam, it will go to the spam folder.
+[0:14:15.72 --> 0:14:17.96]	  Everything that is good will go to the inbox.
+[0:14:18.44 --> 0:14:20.12]	  And this is how we can use our model.
+[0:14:21.48 --> 0:14:30.84]	  So now to summarize, let's illustrate the difference between these two approaches between the rule-based systems and between machine learning.
+[0:14:31.60 --> 0:14:34.42]	  So in the rule-based systems, we have software.
+[0:14:35.58 --> 0:14:40.56]	  So our system, this is what we code.
+[0:14:40.86 --> 0:14:40.86]	 
+[0:14:40.98 --> 0:14:45.48]	  So we needed to extract some rules to extract some rules and write code.
+[0:14:46.08 --> 0:14:46.16]	  Right.
+[0:14:46.36 --> 0:14:47.46]	  So we write some code.
+[0:14:49.58 --> 0:14:52.06]	  And then we have some data.
+[0:14:53.02 --> 0:14:55.48]	  We have these emails that we want to score.
+[0:14:56.08 --> 0:15:00.26]	  So we have data and we have code.
+[0:15:00.62 --> 0:15:06.46]	  And then for these emails using this code, we have predictions.
+[0:15:06.94 --> 0:15:07.02]	  Right.
+[0:15:07.10 --> 0:15:08.38]	  So this is our outcome.
+[0:15:09.18 --> 0:15:14.54]	  So if something is spam or not spam.
+[0:15:15.94 --> 0:15:16.58]	  Right.
+[0:15:17.10 --> 0:15:23.64]	  So we hard code this rule into our software system and our software system makes decisions.
+[0:15:23.80 --> 0:15:28.96]	  And we, as we discussed, the system is at some point becomes quite difficult to maintain.
+[0:15:29.90 --> 0:15:31.40]	  That's why I'm machine learning.
+[0:15:31.54 --> 0:15:34.50]	  In machine learning, it's a bit different.
+[0:15:35.20 --> 0:15:40.46]	  So in machine learning, so in case of usual software, we produce outcome.
+[0:15:40.70 --> 0:15:40.76]	  Right.
+[0:15:40.76 --> 0:15:43.64]	  So we hard code the outcome in the code.
+[0:15:44.38 --> 0:15:51.44]	  But in case of machine learning, outcome is the input to machine learning algorithm.
+[0:15:51.92 --> 0:15:56.24]	  So we know that something is spam and we put this to a machine learning.
+[0:15:56.42 --> 0:16:00.74]	  So we say, if something is spam or not.
+[0:16:02.18 --> 0:16:02.20]	  Right.
+[0:16:02.80 --> 0:16:04.30]	  And then we have the data.
+[0:16:04.68 --> 0:16:06.92]	  So this is our emails.
+[0:16:07.70 --> 0:16:10.90]	  And for each email, we know if something is spam or not.
+[0:16:11.12 --> 0:16:12.98]	  So we feed this in a system.
+[0:16:13.64 --> 0:16:15.98]	  And then the output is a model.
+[0:16:17.64 --> 0:16:23.86]	  And then we can use this model to make predictions for cases when we don't know the outcome.
+[0:16:24.06 --> 0:16:30.86]	  So cases when we only have data, then we can use this to, to make the predictions.
+[0:16:31.26 --> 0:16:32.16]	  So we take data.
+[0:16:33.50 --> 0:16:34.98]	  We take model.
+[0:16:36.72 --> 0:16:38.94]	  And it produces outcome.
+[0:16:41.12 --> 0:16:45.54]	  For cases for which we don't know whether a message is spam or not.
+[0:16:45.74 --> 0:16:52.70]	  And we can use this model in our system to sort the sort messages into spam or inbox.
+[0:16:54.28 --> 0:1]	  Okay, so we talked about a spam classification example and we illustrated the difference between the rule based systems and machine learning.
+[0:17:03.86 --> 0:17:07.46]	  And in the next lesson, we talk about supervised learning.
+[0:17:08.02 --> 0:17:17.18]	  So all we discussed, like examples of price prediction and spam predictions, these are examples of supervised machine learning.
+[0:17:17.18 --> 0:17:20.56]	  And we formalize this concept a bit more.
+[0:17:21.04 --> 0:17:26.46]	  And we talk about different kinds of supervised machine learning like regression classification and ranking.

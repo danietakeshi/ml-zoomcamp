@@ -1,0 +1,337 @@
+[0:00:01.86 --> 0:00:02.90]	  Okay, welcome back.
+[0:00:03.08 --> 0:00:06.48]	  This is the first lesson of our first session
+[0:00:06.48 --> 0:00:07.42]	  of machine learning in ZoomCamp,
+[0:00:07.64 --> 0:00:09.86]	  and we will talk about supervised machine learning.
+[0:00:10.52 --> 0:00:13.36]	  So we will define more formally
+[0:00:13.36 --> 0:00:15.20]	  what supervised machine learning is,
+[0:00:15.48 --> 0:00:17.12]	  and we will talk about a couple of examples
+[0:00:17.12 --> 0:00:19.02]	  like regression, classification, and ranking.
+[0:00:19.50 --> 0:00:20.16]	  So let's start.
+[0:00:21.24 --> 0:00:25.20]	  So in lesson one, we talked about an example
+[0:00:25.20 --> 0:00:26.02]	  of price prediction.
+[0:00:26.36 --> 0:00:28.40]	  So we wanted to predict the price of a car.
+[0:00:28.70 --> 0:00:33.96]	  And what we did is we kind of supervised the model.
+[0:00:34.66 --> 0:00:36.04]	  We were teachers of a model,
+[0:00:36.24 --> 0:00:40.06]	  and we showed the model different examples.
+[0:00:40.50 --> 0:00:42.02]	  We showed models different cars,
+[0:00:42.64 --> 0:00:45.12]	  and for each car, we showed the price.
+[0:00:45.36 --> 0:00:47.14]	  And we did it for all the cars we had.
+[0:00:47.74 --> 0:00:52.66]	  And this way we supervised the algorithms, the machines.
+[0:00:53.20 --> 0:00:55.26]	  We showed them, for this kind of cars,
+[0:00:55.44 --> 0:00:57.04]	  this is what the price should be.
+[0:00:57.62 --> 0:01:02.40]	  And this is the idea behind supervised machine learning.
+[0:01:02.70 --> 0:01:05.42]	  So in all these cases, we have this label,
+[0:01:05.62 --> 0:01:07.68]	  and this is how we supervised machine learning.
+[0:01:08.16 --> 0:01:10.22]	  We show them, we teach the machines
+[0:01:10.22 --> 0:01:11.46]	  by showing them examples.
+[0:01:12.34 --> 0:01:14.08]	  And from these examples, the machines
+[0:01:14.08 --> 0:01:16.18]	  are able to learn the patterns
+[0:01:16.18 --> 0:01:19.94]	  and use these patterns to generalize new examples.
+[0:01:20.26 --> 0:01:22.80]	  So let's say when we have a car
+[0:01:22.80 --> 0:01:24.66]	  for which we don't know a price,
+[0:01:25.60 --> 0:01:28.66]	  then the machines using the patterns they extracted,
+[0:01:28.92 --> 0:01:30.90]	  they can predict the price of a car.
+[0:01:31.54 --> 0:01:34.64]	  So we teach the algorithms.
+[0:01:35.62 --> 0:01:38.50]	  And we also talked about the different example
+[0:01:38.50 --> 0:01:40.16]	  of spam prediction.
+[0:01:40.74 --> 0:01:42.96]	  So it was exactly the same.
+[0:01:43.22 --> 0:01:46.86]	  So we were teachers, we were showing the machines
+[0:01:46.86 --> 0:01:50.44]	  different example of spam and not spam messages.
+[0:01:50.86 --> 0:01:52.84]	  And just by looking at these examples,
+[0:01:53.12 --> 0:01:56.08]	  the algorithm was able to pick the patterns
+[0:01:56.08 --> 0:01:59.50]	  and understand if there is the word deposit,
+[0:01:59.74 --> 0:02:04.22]	  maybe this is more likely to be a spam message.
+[0:02:04.88 --> 0:02:08.04]	  So these are the examples we saw so far.
+[0:02:09.60 --> 0:02:12.68]	  And this is what we actually need to,
+[0:02:13.54 --> 0:02:15.16]	  this is how the data looks like.
+[0:02:15.42 --> 0:02:17.44]	  So we don't, of course, show pictures.
+[0:0 --> 0:02:20.94]	  We don't just show text, not always.
+[0:02:22.02 --> 0:02:25.76]	  So in some cases we do show pictures, we do show text,
+[0:02:26.10 --> 0:02:28.06]	  but most of the time we need to extract features.
+[0:02:28.90 --> 0:02:31.78]	  We need to extract, we need to show,
+[0:02:32.16 --> 0:02:34.28]	  and we need to tell the models what exactly
+[0:02:34.28 --> 0:02:35.34]	  we want them to predict.
+[0:02:36.18 --> 0:02:38.74]	  We tell the model, okay, we want to predict
+[0:02:38.74 --> 0:02:40.86]	  if something is spam or not spam.
+[0:02:41.52 --> 0:02:44.86]	  So one means spam, zero means not spam,
+[0:02:45.18 --> 0:02:47.32]	  but most of the models don't care if it's spam
+[0:02:47.32 --> 0:02:50.34]	  or something else, or they care if it's zero or one.
+[0:02:50.72 --> 0:02:50.72]	 
+[0:02:51.98 --> 0:02:54.20]	  So we have these features, we have this target variable,
+[0:02:54.70 --> 0:02:56.04]	  and we'll put this in a model.
+[0:02:57.08 --> 0:03:02.16]	  And we can make it a bit more formal.
+[0:03:02.76 --> 0:03:06.14]	  So for like a machine learning actually is a branch
+[0:03:06.14 --> 0:03:08.32]	  of computer science and mathematics,
+[0:03:08.68 --> 0:03:09.56]	  of applied mathematics.
+[0:03:10.18 --> 0:03:13.54]	  So it uses mathematics, statistics and so on
+[0:03:13.54 --> 0:03:15.72]	  to be able to extract these patterns.
+[0:03:15.72 --> 0:03:20.48]	  So it can see that, let's say this feature is called
+[0:03:20.48 --> 0:03:21.38]	  deposit, right?
+[0:03:22.40 --> 0:03:27.98]	  And if we see that often, when we see that this feature
+[0:03:27.98 --> 0:03:31.14]	  is one, then more often than not,
+[0:03:32.70 --> 0:03:36.30]	  in three out of four cases, like this is probably,
+[0:03:36.52 --> 0:03:39.26]	  but example, but in 50% of the cases actually,
+[0:03:40.62 --> 0:03:44.80]	  if a word deposit is there, then it's spam.
+[0:03:44.80 --> 0:03:47.54]	  So a model tries to extract patterns like that,
+[0:03:47.70 --> 0:03:51.64]	  using concepts from mathematics and statistics.
+[0:03:52.36 --> 0:03:54.14]	  So this is what it relies on,
+[0:03:54.34 --> 0:03:57.36]	  and we will now define it a bit more formally.
+[0:03:58.10 --> 0:04:01.62]	  So this feature matrix, so this is called feature matrix,
+[0:04:02.44 --> 0:04:09.92]	  feature matrix, and we call it usually using capital X.
+[0:04:12.56 --> 0:04:17.78]	  So this is our matrix, and matrix is like two-dimensional
+[0:04:17.78 --> 0:04:22.94]	  array where rows are our observations or objects
+[0:04:22.94 --> 0:04:24.46]	  for which we want to predict something,
+[0:04:24.96 --> 0:04:26.64]	  and columns are features.
+[0:04:27.28 --> 0:04:32.16]	  So this is first spam message, this is second message,
+[0:04:32.24 --> 0:04:35.46]	  we have all these messages as a row of this matrix.
+[0:0 --> 0:04:38.58]	  And then for each row, we have a corresponding,
+[0:04:38.58 --> 0:04:41.28]	  like we have a matrix Y.
+[0:04:42.60 --> 0:04:46.70]	  So this is, actually, this is a lowercase Y.
+[0:04:47.68 --> 0:04:50.64]	  So this is a vector, right?
+[0:04:50.88 --> 0:04:56.18]	  So this vector, for each row of the matrix,
+[0:04:56.36 --> 0:04:58.62]	  we know if this is spama node,
+[0:04:58.90 --> 0:05:01.74]	  so it just contains zeroes and ones in this case, right?
+[0:05:03.42 --> 0:05:07.04]	  So we have this X and Y, capital X is the matrix feature,
+[0:05:08.56 --> 0:05:13.90]	  smaller lowercase Y is our vector with target variable.
+[0:05:14.86 --> 0:05:17.28]	  And I know that many of you,
+[0:05:18.24 --> 0:05:21.64]	  like maybe you studied math, but forgot long time ago.
+[0:05:22.10 --> 0:05:26.02]	  So you can think of this as Y as one-dimensional array.
+[0:05:26.68 --> 0:05:28.98]	  So it's just an array with numbers, right?
+[0:05:29.16 --> 0:05:33.08]	  So there's zero, one, zero, and so on.
+[0:05:33.56 --> 0:05:35.94]	  So this is a one-dimensional array, right?
+[0:05:36.16 --> 0:05:38.58]	  And X is a two-dimensional array.
+[0:05:38.78 --> 0:05:39.94]	  So it's an array of arrays.
+[0:05:40.50 --> 0:05:44.14]	  So we have basically like here, we have six,
+[0:05:45.02 --> 0:05:48.14]	  six observations, so we have six arrays inside,
+[0:05:48.52 --> 0:05:51.82]	  and this is a two-dimensional array or a table, right?
+[0:05:52.02 --> 0:05:56.08]	  So you can think of this as just two-dimensional array, right?
+[0:05:56.36 --> 0:06:02.06]	  So we have this, and now we need to put this in a model, right?
+[0:06:02.18 --> 0:06:03.60]	  So what we usually do,
+[0:06:03.60 --> 0:06:09.74]	  so we have our teacher matrix X, right?
+[0:06:10.40 --> 0:06:13.42]	  And we want to produce Y.
+[0:06:13.56 --> 0:06:18.62]	  So we want to, when we teach a model,
+[0:06:18.78 --> 0:06:23.16]	  when we train a model, we want to be as close
+[0:06:23.16 --> 0:06:25.88]	  to this Y as possible, right?
+[0:06:26.28 --> 0:06:29.98]	  And we do this by training this function G.
+[0:06:29.98 --> 0:06:33.96]	  So G is nothing else but our model.
+[0:06:35.04 --> 0:06:42.76]	  So our model that takes in this matrix X,
+[0:06:43.40 --> 0:06:48.56]	  and that produces something that is approximately close
+[0:06:48.56 --> 0:06:50.74]	  to the target variable Y.
+[0:06:51.46 --> 0:06:54.20]	  So this is target variable, target,
+[0:06:55.14 --> 0:06:57.88]	  and these are our features.
+[0:07:03.86 --> 0:07:07.38]	  So again, the goal of machine learning is to be able
+[0:07:07.38 --> 0:07:11.24]	  to train to come up with this function G
+[0:07:11.24 --> 0:07:13.48]	  that takes in the feature matrix
+[0:07:13.48 --> 0:07:17.26]	  and produces something that is as close as possible
+[0:07:17.26 --> 0:07:18.84]	  to the target variable, right?
+[0:07:20.22 --> 0:07:22.72]	  And yeah, so in our example,
+[0:07:22.82 --> 0:07:25.58]	  so target could be the price of a car,
+[0:07:27.20 --> 0:07:31.66]	  G X could be like all the information about cars,
+[0:07:31.90 --> 0:07:34.58]	  model, make, mileage, and so on.
+[0:07:34.98 --> 0:07:38.96]	  And we want to train our model G in such a way
+[0:07:38.96 --> 0:07:41.68]	  when it takes the X, all this information about the car,
+[0:07:42.04 --> 0:07:45.18]	  it produces the price that is as close as possible
+[0:07:45.18 --> 0:07:47.74]	  to the price of a car.
+[0:07:47.96 --> 0:07:49.60]	  And remember, if you remember the example,
+[0:07:50.26 --> 0:07:54.40]	  the actual price of a car was 1.5,000.
+[0:07:56.48 --> 0:07:59.60]	  And actually the actual price was 1.1,000
+[0:07:59.60 --> 0:08:01.64]	  and the model predicted 1.5.
+[0:08:02.10 --> 0:08:06.38]	  It's not always possible to predict the exact price,
+[0:08:06.54 --> 0:08:10.20]	  but we want it to be as close as possible, right?
+[0:08:10.46 --> 0:08:13.36]	  And in this case, it's close enough for our purpose.
+[0:08:14.12 --> 0:08:17.48]	  So this is a formal definition of supervised machine learning.
+[0:08:18.10 --> 0:08:21.26]	  So the goal is to produce this function G.
+[0:08:23.24 --> 0:08:26.16]	  And then the output of this G,
+[0:08:26.68 --> 0:08:29.50]	  so we already talked a bit about the output
+[0:08:29.50 --> 0:08:34.24]	  of the price prediction model.
+[0:08:34.62 --> 0:08:38.74]	  So the output was a number, the price of a car.
+[0:08:39.26 --> 0:08:41.28]	  In case of spam classification,
+[0:08:41.74 --> 0:08:45.62]	  the output was probability, right?
+[0:08:45.82 --> 0:08:48.48]	  So again, this is our X, right?
+[0:08:49.52 --> 0:08:51.26]	  And this is our predictions.
+[0:08:51.72 --> 0:08:54.26]	  So we take our function G, which is our model
+[0:08:54.26 --> 0:09:00.78]	  and we put our X, the features,
+[0:09:01.12 --> 0:09:03.80]	  and it produces these predictions, right?
+[0:09:04.08 --> 0:09:07.38]	  So and these predictions, they are like,
+[0:09:07.56 --> 0:09:10.24]	  let's say the original target was one for this one,
+[0:09:10.32 --> 0:09:12.90]	  it's spam for this maybe zero, zero,
+[0:09:13.58 --> 0:09:16.14]	  I don't know, one, zero, one.
+[0:09:16.22 --> 0:09:21.86]	  And we try to be as close to the target as possible, right?
+[0:09:22.64 --> 0:09:27.50]	  So, and this is this process of looking at the features
+[0:09:27.50 --> 0:09:31.98]	  and then coming up with this G is called training.
+[0:09:32.80 --> 0:09:36.12]	  So we have this G function
+[0:09:36.12 --> 0:09:40.16]	  and based on the output it produces
+[0:09:40.16 --> 0:09:42.66]	  and based on the target variable that we have,
+[0:09:42.96 --> 0:09:46.18]	  we have different types of supervised machine learning.
+[0:09:46.94 --> 0:09:50.14]	  So in the first case, and this was the case
+[0:09:50.14 --> 0:09:53.76]	  for the car price prediction example.
+[0:09:54.62 --> 0:09:58.30]	  So this is an example of a regression problem.
+[0:09:58.66 --> 0:10:02.66]	  So this is the function G here in this case,
+[0:10:02.80 --> 0:10:09.84]	  returns a number that is like between zero and plus infinity.
+[0:10:09.84 --> 0:10:13.66]	  So from zero dollars to however many dollars.
+[0:10:14.98 --> 0:10:20.44]	  And yeah, so basically the function G here
+[0:10:20.44 --> 0:10:24.32]	  outputs the price, the prediction for the price, right?
+[0:10:24.56 --> 0:10:27.94]	  And there are other examples of regression problems
+[0:10:27.94 --> 0:10:32.72]	  that anything that outputs a number from,
+[0:10:33.42 --> 0:10:37.48]	  can be any number from minus minus infinity to plus infinity
+[0:10:38.52 --> 0:10:41.64]	  or whatever range, it is a regression problem.
+[0:10:41.80 --> 0:10:44.72]	  So for example, if we want to predict the price of a house
+[0:10:44.72 --> 0:10:47.36]	  and say, okay, this is the house
+[0:10:47.36 --> 0:10:49.42]	  with this kind of rectifices
+[0:10:49.42 --> 0:10:52.16]	  like this number of square meters, number of rooms,
+[0:10:52.92 --> 0:10:54.44]	  distance from the center,
+[0:10:54.68 --> 0:10:58.66]	  distance from the closest subway station and so on.
+[0:10:59.58 --> 0:11:02.22]	  And based on all this information,
+[0:11:02.46 --> 0:11:04.82]	  we can say that this house costs for example,
+[0:11:04.98 --> 0:1]	  one million or something like this.
+[0:11:07.14 --> 0:11:09.46]	  So these are all examples of regression problems.
+[0:11:10.22 --> 0:11:14.68]	  So and usually the output in this case is always a number.
+[0:11:15.64 --> 0:11:18.36]	  Then there's a different type of supervised
+[0:11:18.36 --> 0:11:21.94]	  machine learning problem type is called classification.
+[0:11:22.56 --> 0:11:26.64]	  When we don't output a number, but we output a category.
+[0:11:27.12 --> 0:11:30.82]	  So for example, if we look at a picture
+[0:11:30.82 --> 0:11:32.98]	  and we say on this picture, we have a car.
+[0:11:33.22 --> 0:11:34.92]	  So this is a picture of a car.
+[0:11:35.36 --> 0:11:37.12]	  Then this is a classification problem.
+[0:11:37.74 --> 0:11:42.10]	  Our input is the picture, the output is car.
+[0:11:42.58 --> 0:11:44.88]	  So we classify this picture as a picture of a car.
+[0:1 --> 0:11:48.28]	  Then the spam example we talked about,
+[0:11:48.98 --> 0:11:51.32]	  it's also classification.
+[0:11:52.06 --> 0:11:57.58]	  So we have all these characteristics of an email
+[0:11:57.58 --> 0:11:59.56]	  and then based on this characteristic,
+[0:11:59.56 --> 0:12:02.50]	  we predict if something is spam or not.
+[0:12:02.98 --> 0:12:09.04]	  So here the function G produces like the output is a category
+[0:12:09.04 --> 0:12:12.64]	  and the target variable most importantly is a category.
+[0:12:13.72 --> 0:12:20.88]	  And then there are different subclasses of classification.
+[0:12:21.62 --> 0:12:25.18]	  So there is a multi-class classification
+[0:12:26.28 --> 0:12:28.38]	  when we want to classify something
+[0:12:28.38 --> 0:12:30.20]	  into multiple different categories.
+[0:12:30.82 --> 0:12:33.16]	  So for example, let's say we have images
+[0:12:33.16 --> 0:12:35.40]	  and this could be images of cars.
+[0:12:35.86 --> 0:12:38.56]	  This could be images of cats or images of dogs.
+[0:12:38.76 --> 0:12:43.58]	  And we need to classify images into three different categories.
+[0:12:43.92 --> 0:12:45.16]	  This is a multi-class category.
+[0:12:45.50 --> 0:12:47.90]	  And of course it can be 10 categories.
+[0:12:48.16 --> 0:12:50.16]	  It can be a thousand categories.
+[0:12:50.38 --> 0:12:53.96]	  It can be as many categories as you need.
+[0:12:53.96 --> 0:12:56.46]	  So as long as it's more than two,
+[0:12:56.68 --> 0:13:00.74]	  because for two there is a special subtype
+[0:13:00.74 --> 0:13:02.82]	  of classification problem,
+[0:13:02.86 --> 0:13:04.96]	  which is called the binary classification problem.
+[0:13:05.58 --> 0:13:08.52]	  And this is the example we already looked at.
+[0:13:08.76 --> 0:13:10.08]	  So for spam classification,
+[0:13:10.82 --> 0:13:13.44]	  it was a case of binary classification problem.
+[0:13:13.90 --> 0:13:18.08]	  And there we wanted to predict if something is spam or not.
+[0:13:18.64 --> 0:13:22.92]	  And if you remember, so for spam it was one or zero
+[0:13:22.96 --> 0:13:25.82]	  and actually the function G that we had
+[0:13:25.82 --> 0:13:30.60]	  would output a probability between zero and one.
+[0:13:31.50 --> 0:13:34.34]	  And the target variable looked like
+[0:13:34.34 --> 0:13:37.50]	  just an array with ones and zeros.
+[0:13:38.24 --> 0:13:41.98]	  So that's why for binary classification there,
+[0:13:42.40 --> 0:13:44.56]	  like a special, it's a special subtype
+[0:13:44.56 --> 0:13:46.10]	  of classification problem that is
+[0:13:46.10 --> 0:13:49.16]	  very widely used in practice.
+[0:13:50.54 --> 0:13:56.14]	  And then there is a different type of supervised learning,
+[0:13:56.38 --> 0:13:57.14]	  which is called ranking.
+[0:13:58.38 --> 0:14:00.78]	  We will not talk a lot about this course,
+[0:14:00.86 --> 0:14:02.54]	  but I just want to mention it exists.
+[0:14:03.74 --> 0:14:06.94]	  So ranking is usually used in cases
+[0:14:06.94 --> 0:14:08.26]	  when you want to rank something.
+[0:14:08.78 --> 0:14:10.54]	  So it can be a recommender system.
+[0:14:10.74 --> 0:14:13.24]	  So for example, I am a user,
+[0:14:13.48 --> 0:14:15.12]	  I go to an e-commerce website
+[0:14:15.12 --> 0:14:17.08]	  and there are many, many products
+[0:14:17.08 --> 0:14:19.96]	  that I am potentially interested in.
+[0:14:20.42 --> 0:14:22.32]	  How to select the most interesting one.
+[0:14:22.86 --> 0:14:25.22]	  So what happens under the hood is there a function
+[0:14:25.22 --> 0:14:29.78]	  that ranks the items in such a way.
+[0:14:29.92 --> 0:14:32.12]	  So the function tries to understand for me.
+[0:14:32.64 --> 0:14:36.38]	  So in this case, like for me as a user,
+[0:14:37.46 --> 0:14:40.46]	  what would be the, let's say the probability
+[0:14:40.46 --> 0:14:41.68]	  that I like this item?
+[0:14:41.78 --> 0:14:44.84]	  And it looks at all the items that are there
+[0:14:44.84 --> 0:14:47.98]	  and tries to score them, give them a score.
+[0:14:48.64 --> 0:14:53.20]	  Can be just for simplicity, let's take a score from zero to one.
+[0:14:54.28 --> 0:14:56.12]	  So they score everything that is there,
+[0:14:56.84 --> 0:14:58.58]	  assign it a score from zero to one.
+[0:14:59.04 --> 0:15:02.88]	  Then it takes all these items and returns the top six.
+[0:15:03.20 --> 0:15:04.60]	  So here we have the top six, right?
+[0:15:05.08 --> 0:15:10.78]	  So these are the items that had the biggest score.
+[0:15:10.92 --> 0:15:13.94]	  So for example, let's say this can be 0.7,
+[0:15:14.12 --> 0:15:15.76]	  this can be 0.66.
+[0:15:16.72 --> 0:15:18.54]	  I have no idea what is that actually,
+[0:15:18.92 --> 0:15:22.08]	  but apparently this is something I potentially would like.
+[0:15:22.58 --> 0:15:27.40]	  Then I don't know a case for headphones
+[0:15:27.40 --> 0:15:28.42]	  and things like this.
+[0:15:28.68 --> 0:1]	  So they basically score everything
+[0:1 --> 0:15:33.58]	  and then they sort everything by the score
+[0:15:33.58 --> 0:15:37.38]	  and then they show me top six results.
+[0:15:37.66 --> 0:15:39.48]	  So this is how I recommend the system works.
+[0:15:39.90 --> 0:15:43.64]	  And this is an example of a ranking problem.
+[0:15:43.96 --> 0:15:45.74]	  So we want to have a list of items
+[0:15:45.74 --> 0:15:48.34]	  that I will probably want to buy.
+[0:15:49.22 --> 0:15:51.08]	  And if you think about this,
+[0:15:51.22 --> 0:15:52.68]	  Google is doing something similar.
+[0:15:53.38 --> 0:1]	  So if I go to Google and try machine learning zoom camp,
+[0:15:57.38 --> 0:16:00.62]	  it wants to show not only what is relevant,
+[0:16:00.68 --> 0:16:03.14]	  but also what is most interesting for me.
+[0:16:03.38 --> 0:1]	  So they look at all the documents in the world
+[0:1 --> 0:16:11.18]	  that contain this particular phrase, right?
+[0:16:11.64 --> 0:16:12.90]	  And then they score them.
+[0:16:14.92 --> 0:16:17.68]	  They want to see how likely that this document
+[0:16:17.68 --> 0:16:18.72]	  is relevant for me.
+[0:16:18.94 --> 0:16:20.82]	  So they again, maybe have for this document
+[0:16:20.82 --> 0:16:24.18]	  that probability of relevance is 0.9.
+[0:16:24.60 --> 0:16:28.56]	  Then for this one, maybe 0.85 and so on.
+[0:16:28.90 --> 0:16:33.80]	  So they basically show their rank by this relevant score
+[0:16:33.80 --> 0:16:37.54]	  and then they show the most relevant as the first one.
+[0:16:37.90 --> 0:16:40.90]	  So this is an example of ranking again.
+[0:16:41.98 --> 0:16:48.94]	  And for e-commerce shops and marketplaces like Eulix,
+[0:16:49.46 --> 0:16:52.98]	  this search problem is also quite important.
+[0:16:53.44 --> 0:16:56.26]	  So if you want, let's say to buy an iPhone,
+[0:16:56.50 --> 0:17:00.48]	  you go to Eulix and you type iPhone in search.
+[0:17:00.48 --> 0:17:03.48]	  So you want to, we want to show the user
+[0:17:03.48 --> 0:17:05.44]	  what is most relevant for this particular user.
+[0:17:05.74 --> 0:17:09.16]	  So this is again an example of ranking problem.
+[0:17:10.76 --> 0:17:17.26]	  And yeah, in summary, so supervised machine learning
+[0:17:17.26 --> 0:17:23.72]	  is about teaching computer, teaching an algorithm
+[0:17:23.72 --> 0:17:25.22]	  by showing different examples.
+[0:17:26.70 --> 0:17:31.48]	  And the examples are usually we put them in matrix X
+[0:17:31.48 --> 0:17:34.60]	  and then we have the vector Y, so in matrix X
+[0:17:34.60 --> 0:17:36.98]	  we have, we call it the feature matrix.
+[0:17:37.40 --> 0:17:40.14]	  These are all the characteristics of an item
+[0:17:40.14 --> 0:1]	  for which we want to make a prediction
+[0:1 --> 0:17:46.02]	  and to Y is the prediction we want to make.
+[0:17:46.38 --> 0:17:48.12]	  So this is what we want to learn from.
+[0:17:49.18 --> 0:17:52.14]	  And then the goal of supervised learning
+[0:17:52.14 --> 0:17:54.66]	  is to come up with a function G.
+[0:17:57.08 --> 0:18:00.96]	  And in such a way that when we apply this G
+[0:18:00.96 --> 0:18:05.08]	  to our feature matrix, we get something very close
+[0:18:05.08 --> 0:18:06.48]	  to our target variable.
+[0:18:07.14 --> 0:18:10.58]	  And here inside G, and we will talk about throughout
+[0:18:10.58 --> 0:18:12.92]	  the course what this G looks like exactly.
+[0:18:13.52 --> 0:18:16.24]	  So here this G actually tries to extract patterns
+[0:18:16.24 --> 0:18:18.94]	  from this matrix X.
+[0:18:19.52 --> 0:18:22.74]	  In such a way, when we apply this matrix X to G,
+[0:18:22.86 --> 0:18:25.72]	  we get something that is very close to target variable.
+[0:18:26.26 --> 0:18:29.18]	  So this is the essence of supervised machine learning.
+[0:18:29.60 --> 0:18:31.86]	  And then based on the type of target variable,
+[0:18:32.24 --> 0:18:35.50]	  we can have regression classification,
+[0:18:36.18 --> 0:18:39.42]	  which can be multiclass classification or binary.
+[0:18:39.78 --> 0:18:42.12]	  And we can have ranking, right?
+[0:18:42.76 --> 0:18:47.62]	  And in this course, we will focus mostly on classification
+[0:18:47.62 --> 0:18:49.80]	  and we will have a chapter also.
+[0:18:49.80 --> 0:18:51.22]	  It will be the next lesson.
+[0:18:51.56 --> 0:18:52.54]	  We'll talk about regression.
+[0:18:53.60 --> 0:18:55.40]	  And actually the case of binary classification,
+[0:18:56.26 --> 0:19:02.48]	  this is probably the most widely used type
+[0:19:02.48 --> 0:19:03.66]	  of machine learning, I would say,
+[0:19:03.72 --> 0:19:05.02]	  of supervised machine learning.
+[0:19:05.54 --> 0:19:10.66]	  You definitely need to, you will definitely have a problem
+[0:19:10.66 --> 0:19:14.12]	  that can be solved as a binary classification problem
+[0:19:14.12 --> 0:19:15.78]	  when you work with machine learning.
+[0:19:16.48 --> 0:19:18.60]	  So that's it for this lesson.
+[0:19:18.70 --> 0:19:23.70]	  So in the next lesson, we will look at the bigger picture
+[0:19:23.70 --> 0:19:25.86]	  of organizing machine learning projects.
+[0:19:26.06 --> 0:19:28.22]	  And we will talk about a special methodology
+[0:19:28.22 --> 0:19:31.78]	  for organizing machine learning projects called CRISP-M.

@@ -1,0 +1,58 @@
+[0:00:00.16 --> 0:00:05.78]	  Hello everyone. This is our first lesson of the first session of machine learning zoom camp.
+[0:00:06.22 --> 0:00:11.36]	  And in this lesson, we will introduce machine learning using a simple example.
+[0:00:11.66 --> 0:00:15.42]	  So we will talk about predicting the price of a car.
+[0:00:16.12 --> 0:00:25.80]	  And imagine we are running a car classifieds website. This is a website where you go if you want to sell your car,
+[0:00:25.80 --> 0:00:29.36]	  or this is a website where you go if you want to buy a used car.
+[0:00:30.04 --> 0:00:38.92]	  For example, I work at Elix and we also have a section on the website for selling cars and for buying cars.
+[0:00:39.48 --> 0:00:48.88]	  And this is what you see when you go on Elix and you want to buy a car. You see different cars and you see pictures of these cars, you see prices of these cars.
+[0:00:51.20 --> 0:00:55.90]	  And imagine that there is a person who wants to sell a car.
+[0:00:56.10 --> 0:01:11.78]	  What they do is they take a picture, go to our app, upload the picture, put the title, put all the description, and then they reach this price field.
+[0:01:12.02 --> 0:01:13.94]	  So they need to put the price.
+[0:01:15.26 --> 0:01:23.28]	  And this is difficult. You don't want to put a price that is too high because nobody will buy a car.
+[0:01:23.76 --> 0:01:28.56]	  You also don't want to put a price that is too low because in this case you're leaving money on the table.
+[0:01:29.32 --> 0:01:33.30]	  So somebody maybe would buy a car for a higher price.
+[0:01:33.86 --> 0:01:40.16]	  So you want to find a price that is just right. So it's difficult. So how do you do this?
+[0:01:41.08 --> 0:01:43.72]	  So what some people do is they go on the website.
+[0:01:45.86 --> 0:01:53.54]	  They look at existing ads and they try to do some analysis to understand how exactly they should select the price.
+[0:01:53.64 --> 0:02:00.20]	  They look at similar ads and based on that, they select the price that works. That probably works.
+[0:02:01.28 --> 0:02:08.56]	  But how can we, as the owners of this website, help the user select the best price?
+[0:02:09.50 --> 0:02:16.28]	  And the answer is we can use machine learning. So let's first think what do we know about cars already?
+[0:02:17.14 --> 0:02:23.94]	  So we know the price of these cars, right? So this is what users actually told us. So we know the price.
+[0:02:25.36 --> 0:02:33.44]	  Then we know the age of a car. So we know when a car was manufactured. The older the car, the cheaper it is.
+[0:02:34.02 --> 0:02:43.50]	  Then we also know the manufacturer of a car. So we know, let's say if it's a BMW, then it's more expensive than a Volkswagen, for example.
+[0:02:43.78 --> 0:02:47.82]	  So a manufacturer who made the car also influences the price of a car.
+[0:02:48.88 --> 0:02:55.50]	  Then we know mileage. This is how many kilometers the car drove so far.
+[0:02:56.52 --> 0:03:07.98]	  Then, yeah, we have all these kind of things that we know about the car, right? So also model, number of doors and everything else, right?
+[0:03:10.40 --> 0:03:21.86]	  And usually, using this information, an expert can determine the price. So let's say if you want to sell a car through a dealership, you go to this dealership and an expert looks at the car.
+[0:03:22.56 --> 0:03:36.28]	  And then knowing the year, the manufacturer, mileage and all these things, an expert can determine how much this car costs, because they typically know how much similar cars cost, right?
+[0:03:36.28 --> 0:03:49.24]	  So based on the knowledge, they can determine that this particular car that was manufactured on this year by this company with this mileage usually costs that much, right?
+[0:03:49.36 --> 0:04:01.24]	  So experts can do this. And the way experts do this is they learn this from data. They learn it from looking at prices for other dealerships, perhaps.
+[0:04:01.70 --> 0:04:13.30]	  So they basically needed to learn a lot for that. And then they extracted some patterns and they know that if a car is old, then it's less expensive.
+[0:04:13.48 --> 0:04:24.58]	  And the more car drove, the less expensive it becomes, right? And things like this. So they know this because they have their experts in this area.
+[0:04:25.38 --> 0:04:28.90]	  And if an expert can do this, so can a model, right?
+[0:04:30.26 --> 0:04:42.50]	  If we have a data set with all these characteristics of a car and through the prices, we can take a machine algorithm, put all this data there, and model will learn all these patterns itself.
+[0:04:43.08 --> 0:04:50.30]	  So this is the essence of machine learning. So we take data and the model extracts patterns from the data.
+[0:04:50.64 --> 0:04:57.44]	  And in this way, we can replicate what experts learn from data as well, right?
+[0:04:58.40 --> 0:05:07.28]	  The information we know about the cars is called features. So all this age, manufacture, mileage, and so on. It's features. It's everything we know about cars.
+[0:05:07.98 --> 0:05:18.38]	  And target is what we want to predict. So this is what we want our model to predict, just looking at all the features, right? So this is what we're interested in.
+[0:05:19.10 --> 0:05:30.68]	  So we take all our features and we extract them for all the cars we have. So we have a table, then also we have a column with prices.
+[0:05:31.10 --> 0:05:43.48]	  And what we do next is we take the features, the target, and train a model. So a model, it contains it kind of encapsulates all the patterns it learned from the data.
+[0:05:44.24 --> 0:05:58.48]	  And then we can use this model to make predictions for prices of cars for which we don't know price. So if we take just features, all the information about the car we know, except price, because this is what we want to predict.
+[0:05:59.02 --> 0:06:09.52]	  We take all this information, we take a model, we put in the model, all this data, and the model outputs the prediction, the price, right?
+[0:06:09.92 --> 0:0]	  And if we see, so the model is not always able to correctly predict the exact price of a very specific car, but the predictions are usually correct on average, right?
+[0:06:23.64 --> 0:06:34.20]	  So on average for a car of this year of this manufacturer with this mileage, this is an average how much this car costs, right? So for a specific car, it might not be correct.
+[0:06:34.64 --> 0:06:42.16]	  So it can predict smaller value or higher value, but on average, it's more or less correct.
+[0:06:43.42 --> 0:06:54.92]	  So once we have this model, we can actually use it to help our user. If we again talk about an example when we want to help our user determine the price of the car.
+[0:06:54.92 --> 0:07:02.64]	  So the user puts all the information about the car in our form. So all these things we talked about.
+[0:07:03.34 --> 0:07:15.78]	  Then we can extract this information as features, right? A year, make mileage and so on. And to put this in a model and what the model produces is the price.
+[0:0 --> 0:07:34.08]	  So we take the predictions of a model, the output of the model and put it in the form. And this way we help the user. So the user is happy because they don't need to go through this procedure of trying to figure out what is the right price to help them.
+[0:07:34.16 --> 0:07:40.60]	  And if they want, they can adjust the price, put it higher or lower, depending on what they want.
+[0:07:40.76 --> 0:07:48.06]	  So this way we can use machine learning to help the user determine the best price of the car, right?
+[0:07:49.18 --> 0:08:03.22]	  And in summary, so we have machine learning and machine learning is a process of extracting patterns from data. And data is usually of two types. So we have features. This is all the information about the object.
+[0:08:04.54 --> 0:08:14.38]	  And target is, this is what we want to predict about the object. And output is the model that encapsulates that contains all these patterns.
+[0:08:15.28 --> 0:08:25.56]	  Right? And in the example we talked about, the features are all these characteristics of a car and the target variable is the price. So we put this in machine learning.
+[0:08:25.70 --> 0:08:38.68]	  And the output of this is a model that we can use later. And the way we use it is we take the features. So all the data we have about the objects without the target variable, right?
+[0:08:39.44 --> 0:08:47.96]	  We put them in the model and the model outputs predictions. It tries to predict the target variable from the features that we provide.
+[0:08:48.02 --> 0:09:08.88]	  And in our example, we took the information about the car, here make my legends on and put this in the model and the model produced the predictions of the price. And this is what we can use later and in the application to help the user make to select the best price.
+[0:09:09.90 --> 0:09:25.18]	  So this is how you can use machine learning. And in the next lesson, we will talk about, we will compare machine learning with rule-based systems. And rule-based system is like a more traditional way of making predictions.
+[0:09:25.18 --> 0:09:37.02]	  And we will talk about a spam detection system and we will illustrate the differences between machine learning and rule-based systems on that example. So stay tuned.
