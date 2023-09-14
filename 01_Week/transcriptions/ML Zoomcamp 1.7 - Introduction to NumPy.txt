@@ -1,0 +1,202 @@
+[0:0 --> 0:00:06.28]	  Hello everyone, welcome back to lesson seven of machine learning ZoomCup session number one.
+[0:00:06.80 --> 0:00:13.38]	  And in this lesson, we will talk about NumPy. Previously, you configured the environment,
+[0:00:13.60 --> 0:00:22.44]	  you installed all the libraries we needed, installed Python, NumPy, Jupyter, Pandas and other things.
+[0:00:23.20 --> 0:00:37.96]	  And now in this lesson, we will do a quick introduction to NumPy. I'll show you the functions I use quite often from NumPy and things that will be quite useful in that course.
+[0:00:38.78 --> 0:00:39.44]	  So let's start.
+[0:00:41.08 --> 0:00:47.60]	  So we have now NumPy already. So now what we need to do is import it.
+[0:00:48.30 --> 0:00:54.76]	  So to import a packaging, we use import num import and name of the package import NumPy.
+[0:00:55.72 --> 0:00:59.32]	  But typically what we do is we don't just import NumPy, but we use an RS.
+[0:01:00.20 --> 0:01:06.26]	  This way it's shorter to write instead of writing NumPy, we can just write NP.
+[0:01:07.66 --> 0:01:13.64]	  So this is a convention. So usually in Python, at least in data science, this is how we do this.
+[0:01:13.94 --> 0:01:22.86]	  So we'll start with creating arrays and the simplest method for that is called zero's simplest function.
+[0:01:23.26 --> 0:01:26.84]	  So it takes one argument. This is the size of the array.
+[0:01:27.38 --> 0:01:33.60]	  And it just creates an array of the size of the specified size with zeros.
+[0:01:36.86 --> 0:01:45.02]	  There is a similar function to that one called once instead of filling the array with zeros, it fills it with ones.
+[0:01:45.90 --> 0:01:48.54]	  Then it creates an array of size 10.
+[0:0 --> 0:01:56.68]	  Then if you want to fill an array with some arbitrary number, so then you use a function called full.
+[0:01:56.78 --> 0:02:06.38]	  So first specify the size of the array and then you specify the element you want to fill the array with.
+[0:02:06.54 --> 0:02:10.42]	  So in this case, it's 2.5 and the array of size 10.
+[0:02:10.72 --> 0:02:15.14]	  So this is how you create arrays with NumPy.
+[0:02:19.26 --> 0:02:23.48]	  And if you want to convert, let's say you have a Python list.
+[0:02:24.30 --> 0:02:27.14]	  So one, two, three, five, seven, 12.
+[0:02:27.58 --> 0:02:31.22]	  So for example, we have this Python list.
+[0:02:31.34 --> 0:02:38.98]	  And if you want to create an array from this, use a function called array and then pass the list as the argument.
+[0:02:39.30 --> 0:02:41.90]	  And then the result is an array.
+[0:02:42.26 --> 0:02:44.92]	  So yeah, let's call this array a.
+[0:02:46.60 --> 0:02:48.06]	  So we have the array.
+[0:02:49.10 --> 0:02:59.40]	  And if we want to access an element of this array, then let's say if we want to access element three, which we have here.
+[0:03:00.52 --> 0:03:07.60]	  So what we need to do is we just write index two.
+[0:03:07.60 --> 0:03:10.36]	  So remember indexing in Python starts with zero.
+[0:03:11.06 --> 0:03:17.08]	  So then this is how we access the third, like in this case, element number three.
+[0:03:18.66 --> 0:03:26.72]	  And likewise, if we want to change this to something else, let's say we want to change it to replace three with 10.
+[0:0 --> 0:03:28.72]	  So we just use the assignment operator.
+[0:03:29.50 --> 0:03:36.40]	  And here, after executing this code, here we have 10 instead of three.
+[0:03:37.34 --> 0:03:44.42]	  Okay, a few other useful functions for creating a race is one range.
+[0:03:45.26 --> 0:03:53.22]	  So this creates a range from, let's say if we want to create a range from zero to nine, we use 10.
+[0:03:53.44 --> 0:03:58.10]	  So 10 is like the last element, not in the, it's exclusive.
+[0:03:58.60 --> 0:04:00.24]	  So basically up to 10.
+[0:04:01.38 --> 0:04:05.46]	  And by default, it's from zero to 10 exclusive.
+[0:04:06.06 --> 0:04:08.72]	  So in this case, it's from zero to nine.
+[0:04:09.16 --> 0:04:15.86]	  And let's say if we want to start with some other number, not with three, not with zero, but with three.
+[0:04:16.02 --> 0:04:24.98]	  So we just put another parameter here, and then it creates a range from three to nine.
+[0:04:25.04 --> 0:04:29.80]	  This is very similar to a Python function called range.
+[0:04:30.32 --> 0:04:37.08]	  Right, so it's doing the same thing, except instead of giving us an iterator from Python, it gives us an umpy array.
+[0:04:38.08 --> 0:04:53.26]	  Then another useful function in umpy is called linspace, which creates an array filled with numbers between the first parameter and the second parameter.
+[0:04:53.26 --> 0:04:58.52]	  So let's say you want to create an array with numbers from zero to one.
+[0:04:59.84 --> 0:05:14.58]	  So the first element of this array is zero, the last is one, and then it just creates an array of size 10, or size 11, like we specify here, and it fills everything between these, these two numbers.
+[0:05:14.80 --> 0:05:19.20]	  And of course, like instead of one, we can put anything you want here.
+[0:05:20.62 --> 0:05:24.80]	  And yeah, it will just figure out how exactly to fill it in.
+[0:05:25.34 --> 0:05:31.84]	  And so I put here 11, not 10, because if you put 10, then yeah, it will not be as nice.
+[0:05:32.36 --> 0:05:37.64]	  And if you put 11, it just looks kind of nicer, because the steps are rounder.
+[0:05:38.82 --> 0:05:44.38]	  And so far we created just one dimensional arrays. So usual arrays.
+[0:05:45.48 --> 0:05:51.90]	  If we want to create, in numpy, it's possible to create two dimensional and multi dimensional arrays.
+[0:05:52.60 --> 0:06:03.36]	  So let's say if we want to create a multi dimensional array, so we use the same function as previously zeros.
+[0:06:03.88 --> 0:06:21.76]	  But here we can specify the dimensions of the array. So I can say that we want to create an array with five rows and two columns. So the first number here is rows, the second is columns, and then it creates an array with five columns, two rows filled with zeros.
+[0:06:22.78 --> 0:06:23.34]	  Right.
+[0:06:23.80 --> 0:06:31.26]	  In the same way we can create an array from a Python list.
+[0:06:32.56 --> 0:06:34.64]	  So let's say we have an array.
+[0:06:35.44 --> 0:06:45.90]	  We have a list of lists in Python 123, then 456, then 789. So this is a list of lists in Python.
+[0:06:45.92 --> 0:06:52.28]	  We pass it to the array function, and it creates a two dimensional array for us.
+[0:06:53.62 --> 0:06:57.64]	  So let's call it N.
+[0:06:58.96 --> 0:07:04.22]	  And again, if we want to access elements of this array.
+[0:07:06.86 --> 0:07:14.90]	  So we, this is basically the same as with one dimensional, except we have now two indices.
+[0:07:15.68 --> 0:0]	  And it's indexed with, so it starts with zero, so zero, one, two, four rows, and zero, one, two, four columns.
+[0:07:30.66 --> 0:07:36.76]	  And if we want to now, let's say, access this element here.
+[0:07:37.82 --> 0:07:44.60]	  So element number from row number zero and column number one.
+[0:07:45.26 --> 0:07:51.64]	  So we use, so first we specify zero, and then one, so it gives us this element.
+[0:07:51.82 --> 0:0]	  Right. And then of course we can use the assignment operator.
+[0:07:56.32 --> 0:08:02.16]	  So if we want to replace this two with 20, so we just use the assignment operator.
+[0:08:02.56 --> 0:08:06.18]	  And then, yeah, we see that it changes.
+[0:08:06.88 --> 0:08:09.78]	  So now we change this element to 20.
+[0:08:10.48 --> 0:08:20.26]	  If we only want to access rows, then we instead of passing two indices here, we can pass one.
+[0:08:20.80 --> 0:08:30.56]	  And let's say if we want to get the zero row, we just say row number zero, row number one, or row number two.
+[0:08:31.48 --> 0:08:34.06]	  Right. So this is how we access the entire row.
+[0:08:34.62 --> 0:08:36.68]	  And again, we can use the assignment operator.
+[0:08:37.26 --> 0:08:46.52]	  Let's say if we want to rewrite the entire row, we can say, okay, the last row should be just once we can say that.
+[0:08:47.26 --> 0:08:51.84]	  So we can assign using Python list or NumPy array.
+[0:08:53.14 --> 0:08:57.52]	  Like the only condition that it should match the dimension here.
+[0:08:58.10 --> 0:08:59.26]	  So let's do that.
+[0:08:59.64 --> 0:09:04.98]	  And now we can see that the last row changes.
+[0:09:05.78 --> 0:09:12.14]	  And then the same way we can do with, if we want to access a column, we can get the entire column if we want.
+[0:09:13.40 --> 0:09:18.58]	  And for that, we need to use only the, to specify only the second argument.
+[0:09:19.48 --> 0:09:29.10]	  But, yeah, let's say if we want to get the second array, a second column, we use one, but we cannot leave it empty.
+[0:09:29.20 --> 0:09:40.66]	  So we need to put something and we put the column operator, meaning we want to get all the rows, but just keep the column indexed by number one.
+[0:09:41.34 --> 0:09:48.10]	  And we get this, we get this second column here, right?
+[0:09:48.80 --> 0:09:51.98]	  And actually this column operator means return all the rows.
+[0:09:52.22 --> 0:09:54.92]	  So we can just use that as it returns everything.
+[0:09:55.82 --> 0:10:00.02]	  And yeah, so let's say if we want to get the last column, this is what we get.
+[0:10:00.32 --> 0:10:04.60]	  And likewise, we can assign something else to this.
+[0:10:04.60 --> 0:10:09.86]	  Let's say if we want to reassign it to zero, one, two, we do that.
+[0:10:10.10 --> 0:10:20.48]	  And then when we look again at the array, we see that we managed to change it here, right?
+[0:10:20.66 --> 0:10:23.74]	  So this is the same array.
+[0:10:25.40 --> 0:10:28.14]	  So these are two dimensional arrays.
+[0:10:29.02 --> 0:10:37.04]	  So next, what we can do is we can generate arrays randomly using this random package in NumPy.
+[0:10:37.60 --> 0:10:47.58]	  So let's say if we want to generate a two dimensional array of size with five rows, two columns, this is what we do.
+[0:10:48.42 --> 0:10:56.92]	  So we just specify the number of rows, number of columns, and it gives us an array with random numbers between zero and one.
+[0:10:56.92 --> 0:11:01.06]	  So this is like a uniform distribution, standard uniform distribution.
+[0:11:01.74 --> 0:11:07.68]	  So every time we execute this cell, we get a different number.
+[0:11:08.52 --> 0:11:14.94]	  But if we want to make the results reproducible, and if you run this code, and if I run this code, we get the same numbers.
+[0:11:15.36 --> 0:11:20.76]	  It's possible to do this by fixing the random seed, because these numbers, they are not really random.
+[0:11:20.76 --> 0:11:22.54]	  They are pseudo random.
+[0:11:23.08 --> 0:11:23.98]	  So they are generated.
+[0:11:25.10 --> 0:11:30.48]	  They are generated, and we can set the seed of this generator.
+[0:11:31.20 --> 0:11:41.08]	  And if we do this, the sequence of random numbers that is produced on my computer and on your computer will be the same.
+[0:11:41.60 --> 0:11:48.86]	  So let's say if we set seed to two, then we get an array that looks random.
+[0:11:49.10 --> 0:11:50.10]	  So these numbers are random.
+[0:11:50.70 --> 0:11:54.84]	  But every time we execute this cell, the results are the same, right?
+[0:11:54.94 --> 0:12:02.26]	  Because we fixed the random seed, like the seed number here for the random generator.
+[0:12:03.42 --> 0:12:07.70]	  That's why if you execute, you probably will have the same one.
+[0:12:08.52 --> 0:12:19.48]	  It varies depending on the version of NumPy or operating system you have, but in general, the sequence you get, the matrix you get should be the same as I get.
+[0:12:20.08 --> 0:12:27.34]	  And then, so here we sample from the uniform distribution, standard to uniform distribution.
+[0:12:27.34 --> 0:12:31.04]	  There are many different distributions.
+[0:12:31.42 --> 0:12:38.80]	  So let's say if we want to draw numbers from the standard normal distribution, we just add nn here.
+[0:12:39.16 --> 0:12:46.34]	  So it's around n, meaning n normal, and then the distribution looks a bit different.
+[0:12:49.56 --> 0:12:57.60]	  And then for integers, like let's say if we want to have numbers between zero and 100.
+[0:12:57.86 --> 0:13:03.72]	  So one simple thing we can do is we can multiply every number here by 100.
+[0:13:04.24 --> 0:13:09.84]	  And actually, since this is NumPy arrays, we can just use that.
+[0:13:09.84 --> 0:13:17.34]	  And this is something I'll show you, explain later in this section, but yeah, you can just multiply every element by 100.
+[0:13:17.64 --> 0:13:24.80]	  And then you will get, instead of having numbers between zero and one, you will have numbers between zero and 100.
+[0:13:25.08 --> 0:1]	  But if you want, there is also a function that you can use for generating random integers.
+[0:13:30.80 --> 0:13:39.92]	  So you can specify here the lowest numbers, the highest numbers that is possible to get.
+[0:13:40.16 --> 0:13:47.46]	  I think it's, this one is included, this one is probably excluded, so it's between zero and 99.
+[0:13:48.02 --> 0:13:55.52]	  And then you can say that they want to have five rows into columns and it will generate your matrix.
+[0:13:57.28 --> 0:14:01.14]	  And two dimensional array like that with random integers.
+[0:14:02.14 --> 0:14:07.22]	  So yeah, here we did this multiplication, let me explain how it works.
+[0:14:08.04 --> 0:14:14.10]	  So, I'll just create an array first, a range of five.
+[0:14:14.54 --> 0:14:19.98]	  So it's numbers from between zero and five, four in this case.
+[0:14:22.42 --> 0:14:30.42]	  And we can do, let's say, what if we want to add a number to this array?
+[0:14:30.70 --> 0:14:35.48]	  So we want to add one to all the elements of this array.
+[0:14:35.90 --> 0:14:40.36]	  So what we can do is we can just write like that, instead of writing a for loop.
+[0:14:40.62 --> 0:14:51.78]	  So if it was a usual Python list, then we won't be able to do this, we would need to write a loop and then add number to each element.
+[0:14:52.22 --> 0:15:00.62]	  But NumPy makes it easier for us, we can just write plus one, one, and it adds an element to each number here.
+[0:1 --> 0:15:08.92]	  And let's say if we want to multiply it by two, then every element of this array, you can see so zero is multiplied by two.
+[0:15:08.92 --> 0:15:10.38]	  This one is multiplied by two.
+[0:15:10.86 --> 0:15:14.58]	  So basically every element is multiplied by this number.
+[0:15:15.08 --> 0:15:18.90]	  And this is what we used here, we just multiply it every hundred.
+[0:15:20.02 --> 0:15:27.14]	  And of course, we can divide, add, subtract, do everything we want.
+[0:15:27.72 --> 0:15:30.02]	  And not only that, we can also chain them.
+[0:15:30.24 --> 0:15:36.06]	  So let's say we can first divide, multiply by two and then add 10.
+[0:15:36.50 --> 0:15:38.32]	  And then this is what we'll have.
+[0:15:39.14 --> 0:15:46.26]	  And even let's say take the power of it.
+[0:15:46.66 --> 0:15:51.64]	  So yeah, we can chain this operation anyway we want.
+[0:15:52.60 --> 0:15:56.24]	  And yeah, we can do that.
+[0:15:56.54 --> 0:16:00.08]	  And yeah, like whatever we want.
+[0:16:02.14 --> 0:16:05.34]	  Let's save it to a different array.
+[0:16:05.70 --> 0:16:10.52]	  So now we have array one, array A and array B.
+[0:16:10.80 --> 0:16:16.14]	  What we can do also we can combine these two arrays.
+[0:16:16.28 --> 0:16:18.66]	  So we can do element wise sum.
+[0:16:19.14 --> 0:16:21.80]	  So we can take, let's see.
+[0:16:22.22 --> 0:16:26.80]	  So for B, yeah.
+[0:16:26.80 --> 0:16:33.16]	  So what we can do here is add element wise these two arrays.
+[0:16:33.68 --> 0:16:38.18]	  So for first element, we would compute the sum for second element, we would compute the sum.
+[0:16:38.88 --> 0:16:46.88]	  And you can see here that let's say the last element here is the sum of these two.
+[0:16:47.36 --> 0:16:50.60]	  Or the second is sum of these two.
+[0:16:50.88 --> 0:16:53.52]	  Basically does the sum element wise.
+[0:16:55.74 --> 0:16:58.08]	  And again, we can multiply.
+[0:16:58.84 --> 0:17:02.72]	  We can also divide.
+[0:17:03.02 --> 0:17:04.96]	  We can do anything we want here.
+[0:17:05.48 --> 0:17:05.50]	  Right.
+[0:17:05.58 --> 0:17:10.10]	  And then again, we can chain it with all these different operations.
+[0:17:12.38 --> 0:17:17.54]	  And then, yeah, so we can do that.
+[0:17:17.74 --> 0:17:20.72]	  We can also do compare numbers element wise.
+[0:17:20.72 --> 0:17:24.10]	  So comparison operations are also element wise operations.
+[0:17:24.46 --> 0:17:38.54]	  So let's say if we want to do element wise comparison with, so let's say we want to see if elements of this array, which elements of this array are higher or equal to two.
+[0:17:39.26 --> 0:17:41.32]	  And then, so let's print it.
+[0:17:41.82 --> 0:17:47.42]	  So we see that the first one is less than two second one is less than two.
+[0:17:47.78 --> 0:17:51.84]	  But this one is higher or equal to two because it's two.
+[0:17:52.20 --> 0:17:56.32]	  And then the same is true for for the rest.
+[0:17:56.82 --> 0:17:56.84]	  Right.
+[0:17:58.08 --> 0:18:03.54]	  So we can do this with elements with just numbers.
+[0:18:04.12 --> 0:18:04.18]	  Right.
+[0:18:04.28 --> 0:18:05.78]	  Or we can do it with other arrays.
+[0:18:06.02 --> 0:18:14.46]	  So let's say we can see which elements of array a are greater than the elements of a rabie.
+[0:18:14.46 --> 0:18:15.68]	  And then we see okay.
+[0:18:17.66 --> 0:18:19.36]	  Like this one is actually smaller.
+[0:18:19.68 --> 0:18:23.90]	  The second one is also smaller because zero is more than one.
+[0:18:24.58 --> 0:18:27.78]	  One is smaller than one point point 44.
+[0:18:28.46 --> 0:18:37.72]	  But this one, like for this one, actually two is bigger than three is bigger and four is bigger. Right. So that's why we have false false and then through through.
+[0:18:37.74 --> 0:18:44.48]	  So we can do it for compare elements of multiple arrays.
+[0:18:45.32 --> 0:18:55.42]	  And we can also see which elements of a are actually greater than a be if we write something like this.
+[0:18:56.24 --> 0:18:59.10]	  And let me execute it and then explain.
+[0:19:00.66 --> 0:19:02.86]	  So what happens here is.
+[0:1 --> 0:19:04.94]	  So this.
+[0:19:05.70 --> 0:19:10.38]	  This statement returns a bullion array like that. Right.
+[0:19:11.28 --> 0:19:13.68]	  So it returns an array with false false through through.
+[0:19:14.14 --> 0:19:17.04]	  And when we do this.
+[0:19:19.10 --> 0:19:30.92]	  It basically returns all the elements of array a for which this condition is true. Right. So we know what for this element is condition is true for this element and for this element.
+[0:19:30.94 --> 0:19:33.28]	  And these are elements.
+[0:19:34.46 --> 0:19:42.54]	  To three and four. Right. And this way we can look at all the elements that that satisfy this condition.
+[0:19:43.56 --> 0:19:47.78]	  So these were element wise operators operations.
+[0:19:49.10 --> 0:20:00.64]	  And there are different kinds of operations that I call summarizing operations because instead of returning another array like here.
+[0:20:01.02 --> 0:20:08.06]	  So when we do, let's say when we do this comparison operation, we compare a with two, we get another array.
+[0:20:08.22 --> 0:20:18.54]	  But there are some operations that instead of returning a new array return a single number. So an example of this is the mean operation.
+[0:20:19.54 --> 0:20:24.54]	  So mean returns the smallest number in this case it's zero.
+[0:20:25.16 --> 0:20:29.32]	  You can also return the maximum number, maximal, which is four.
+[0:20:29.52 --> 0:20:41.68]	  You can also compute the sum of all the race, which is 10 here. So it's like zero plus one plus two plus three plus four is zero, or you can compute the average number, which is mean.
+[0:20:42.34 --> 0:20:47.98]	  Right. So these are summarizing operators. There is also standard deviation. If you're interested.
+[0:20:48.40 --> 0:20:55.70]	  And this is how you do this and it of course works also for two dimensional.
+[0:20:57.02 --> 0:20:58.76]	  So which one is half.
+[0:21:00.06 --> 0:21:11.34]	  We have, let's say, and right so have this and so we can also compute the sum of all the elements of M and or find the minimal number and so on.
+[0:21:12.40 --> 0:21:25.14]	  So this is a quick introduction there are of course more a lot more useful functions in NumPy. So I'll include the link where you can read more about some of the things. So there are things like
+[0:21:26.76 --> 0:21:39.56]	  let's say if you want to find the minimal number in each row of your two dimensional array, what do you do, or what if you want to sort and things like this one so for that check the link.
+[0:21:40.76 --> 0:21:48.08]	  And in the next lesson, we will quickly go through the basics of linear algebra, and we will talk about the multiplication operations.

@@ -1,0 +1,436 @@
+[0:00:00.20 --> 0:00:03.66]	  Welcome back. This is lesson four of machine learning zoom
+[0:00:03.66 --> 0:00:07.26]	  camp session one, and we'll talk about linear algebra.
+[0:00:07.84 --> 0:00:14.14]	  So we'll talk about simple operations of linear algebra,
+[0:00:14.36 --> 0:00:15.38]	  like vector operations.
+[0:00:15.70 --> 0:00:18.30]	  We'll talk about multiplication and we talk about
+[0:00:18.30 --> 0:00:20.48]	  a special operation called my text universe.
+[0:00:21.12 --> 0:00:25.46]	  So we'll start with a simple vector operation,
+[0:00:25.82 --> 0:00:28.42]	  which is a multiplication.
+[0:00:28.42 --> 0:00:31.58]	  So if you want to multiply a vector by some number,
+[0:00:32.42 --> 0:00:35.70]	  so let's say we want to multiply vector by number two,
+[0:00:36.12 --> 0:00:40.94]	  what we do is we multiply every element of this vector
+[0:00:40.94 --> 0:00:41.48]	  by two.
+[0:00:42.06 --> 0:00:47.40]	  So in this case, it's four, eight, 10, 12.
+[0:00:48.44 --> 0:00:53.36]	  And you see that the way I write vector is,
+[0:00:53.64 --> 0:00:54.58]	  it's like a column.
+[0:00:54.58 --> 0:00:58.18]	  So it's a column vector.
+[0:0 --> 0:01:01.24]	  And this is just notation.
+[0:01:01.86 --> 0:01:05.18]	  This is how things are usually written in linear algebra.
+[0:01:05.44 --> 0:01:08.76]	  So in linear algebra, typically the vectors are columns,
+[0:01:09.04 --> 0:01:10.60]	  not rows.
+[0:01:11.22 --> 0:01:13.76]	  If you remember the way we did it in NumPy,
+[0:01:14.30 --> 0:01:16.02]	  so let me just quickly show you.
+[0:01:16.86 --> 0:01:20.20]	  So in NumPy actually the vectors are rows.
+[0:01:21.44 --> 0:01:24.48]	  So here we have it as a row, not as a column.
+[0:01:25.08 --> 0:01:26.26]	  So this is just the convention.
+[0:01:26.46 --> 0:01:29.06]	  So this is just how things are written
+[0:01:29.06 --> 0:01:31.72]	  usually in linear algebra, so they are columns.
+[0:01:32.40 --> 0:01:34.10]	  And if you want to add two vectors,
+[0:01:34.32 --> 0:01:37.46]	  let's say this is vector U, this is vector V.
+[0:01:37.92 --> 0:01:43.42]	  So what we do is, and if you want to add two vectors,
+[0:01:43.56 --> 0:01:47.58]	  what we do is we add each element of a vector
+[0:01:47.58 --> 0:01:53.38]	  and the result is so three, four, five, so.
+[0:01:53.78 --> 0:01:57.70]	  So this is pretty much the same as we saw
+[0:01:57.70 --> 0:01:59.34]	  in the previous lecture in NumPy.
+[0:01:59.78 --> 0:02:01.86]	  So we just add things element-wise.
+[0:02:02.50 --> 0:02:06.24]	  So if you see, so here I have these two vectors, U and V.
+[0:02:07.04 --> 0:02:12.26]	  And if we add U plus V, then we have element-wise addition.
+[0:02:12.90 --> 0:02:16.78]	  And here you remember from the previous lecture
+[0:02:16.78 --> 0:02:20.10]	  that we can multiply a NumPy array by two
+[0:02:20.10 --> 0:02:23.24]	  and then the result is multiplication element-wise.
+[0:02:23.90 --> 0:0]	  So this is basically the same happens in linear algebra.
+[0:02:29.14 --> 0:02:32.18]	  Now we'll talk a bit about more interesting things
+[0:02:32.18 --> 0:02:36.72]	  about how we can multiply vectors with vectors
+[0:02:36.72 --> 0:02:39.20]	  and how we can multiply a matrix by a vector
+[0:02:39.20 --> 0:02:42.26]	  and how we can multiply a matrix by a matrix.
+[0:02:42.48 --> 0:02:45.70]	  So let's start with vector vector multiplication.
+[0:02:45.88 --> 0:02:49.56]	  So it's also called dot product or sometimes inner product.
+[0:02:49.98 --> 0:02:53.62]	  So let's say we again, we have two vectors, U and V
+[0:02:53.62 --> 0:02:57.68]	  and we want to multiply vector U by vector V.
+[0:02:58.10 --> 0:03:00.38]	  And this is not element-wise multiplication
+[0:03:00.38 --> 0:03:02.20]	  like we do in NumPy.
+[0:03:02.42 --> 0:03:08.22]	  So remember in NumPy, if we do this U times V,
+[0:03:08.86 --> 0:03:15.44]	  so we have an array where we multiply elements element-wise
+[0:03:15.70 --> 0:03:17.42]	  we have element-wise multiplication.
+[0:03:18.12 --> 0:03:19.62]	  So actually in linear algebra,
+[0:03:19.78 --> 0:03:21.58]	  this dot product produces a number.
+[0:03:22.34 --> 0:03:27.54]	  So the way we compute it is we multiply again
+[0:03:27.54 --> 0:03:34.04]	  each number separately like for element,
+[0:03:34.56 --> 0:03:36.90]	  for the first element of U multiplied
+[0:03:36.90 --> 0:03:38.42]	  with the first element of V,
+[0:03:39.18 --> 0:03:40.98]	  for second element of U,
+[0:03:41.16 --> 0:03:43.64]	  we multiply it with second element of V and so on.
+[0:03:43.90 --> 0:03:47.82]	  And what we get is two times one.
+[0:03:48.98 --> 0:03:53.78]	  So here we have four times zero, five times zero,
+[0:03:54.16 --> 0:03:56.40]	  six times two, and then what we do,
+[0:0 --> 0:04:00.04]	  we sum the results.
+[0:04:01.64 --> 0:04:07.60]	  And what we have as a result is we have two plus 12 here
+[0:04:07.60 --> 0:04:09.70]	  and the result is 14.
+[0:04:11.12 --> 0:04:15.62]	  So basically the formula, if we want to write the formula,
+[0:04:15.96 --> 0:04:20.36]	  so we have a sum that goes over all elements
+[0:04:20.36 --> 0:04:25.08]	  of our vectors, right?
+[0:04:25.62 --> 0:04:30.60]	  So let's say it goes from one till n,
+[0:04:30.98 --> 0:04:33.34]	  where n is dimension of the vector
+[0:04:33.34 --> 0:04:38.94]	  and then we just multiply if element of U
+[0:04:39.12 --> 0:04:41.06]	  with the if element of V.
+[0:04:41.80 --> 0:04:43.80]	  And this is the result of a dot product.
+[0:04:44.02 --> 0:04:44.68]	  So we just saw it.
+[0:04:46.56 --> 0:04:50.34]	  However, the way we usually write it in linear algebra
+[0:04:50.34 --> 0:04:54.28]	  is maybe it's a bit counterintuitive at first.
+[0:04:54.60 --> 0:04:58.80]	  So the way we do it is, so this is remember,
+[0:04:59.08 --> 0:05:02.54]	  so this is U, which is a column vector,
+[0:05:05.32 --> 0:0]	  but this is V, which is a row vector.
+[0:05:12.06 --> 0:05:16.62]	  And if we want to turn a column vector into a row vector,
+[0:0 --> 0:05:19.14]	  we use a transpose operation.
+[0:05:19.56 --> 0:05:22.84]	  So transpose operation turns columns into rows.
+[0:05:23.58 --> 0:05:26.30]	  And so this is again, this is just notation.
+[0:05:26.60 --> 0:05:29.58]	  So if we want to, and you will see later
+[0:05:29.58 --> 0:05:32.06]	  when we multiply matrix with vectors,
+[0:05:32.06 --> 0:05:35.38]	  why it's the case, but this is just notation
+[0:05:35.38 --> 0:05:36.30]	  for dot product.
+[0:05:37.02 --> 0:05:41.82]	  So we, for multiplication, we will need to have a row vector
+[0:05:41.82 --> 0:05:45.88]	  and a column vector, and the result is a dot product.
+[0:05:46.40 --> 0:05:50.86]	  So this is how we usually write dot product.
+[0:05:51.02 --> 0:05:52.74]	  So this is notation for dot product.
+[0:05:53.16 --> 0:05:58.88]	  And as we already saw that the formula for computing
+[0:05:58.88 --> 0:06:01.22]	  the dot product is like this.
+[0:06:01.22 --> 0:06:06.06]	  So and E goes from first element to the last element.
+[0:06:06.46 --> 0:06:08.94]	  So this is the dot product.
+[0:06:09.32 --> 0:06:10.94]	  We can quickly implement it.
+[0:06:11.48 --> 0:06:15.84]	  So let's say, we want to write a function
+[0:06:15.84 --> 0:06:20.30]	  that does vector, vector multiplication.
+[0:06:22.26 --> 0:06:28.46]	  Deplication, and then we have two vectors here, U and V.
+[0:06:29.78 --> 0:06:32.46]	  So first what we need to do is make sure
+[0:06:32.46 --> 0:06:34.84]	  that these vectors have the same size.
+[0:06:35.60 --> 0:06:39.72]	  And we usually do this by checking the shape of the vectors.
+[0:06:41.32 --> 0:06:47.28]	  So if you remember, so let me just show you
+[0:06:47.28 --> 0:06:50.18]	  what shape's prints shape.
+[0:06:50.62 --> 0:06:56.34]	  So shape is the size of the array, right?
+[0:06:56.34 --> 0:07:01.36]	  And the first element of this table is four, right?
+[0:07:01.84 --> 0:07:04.88]	  And then V should also have four.
+[0:07:05.72 --> 0:07:07.10]	  And if they are different
+[0:07:07.10 --> 0:07:08.96]	  then multiplication doesn't make sense.
+[0:07:09.22 --> 0:07:11.18]	  So we need to have to make sure
+[0:07:11.18 --> 0:07:13.54]	  that the vectors have the same size.
+[0:07:13.74 --> 0:07:15.60]	  So that's why we have this assertion here.
+[0:07:16.28 --> 0:07:21.84]	  And then, yes, basically what we do next is,
+[0:07:22.66 --> 0:07:24.96]	  again, in our formula we have also N,
+[0:07:24.96 --> 0:07:28.90]	  which is the number of elements the vector have.
+[0:07:29.34 --> 0:07:34.86]	  So let's say we can write that N is this shape of U
+[0:07:34.86 --> 0:07:36.18]	  or shape of U, it doesn't matter
+[0:07:36.18 --> 0:07:37.52]	  because they have the same shape.
+[0:07:37.68 --> 0:07:39.66]	  And we just go over a loop,
+[0:07:41.10 --> 0:07:46.96]	  go over all the elements here of the arrays.
+[0:07:47.60 --> 0:07:50.92]	  So we say, okay, we first need to have a result.
+[0:07:51.34 --> 0:07:55.98]	  The result variable which contains our dot product, right?
+[0:07:56.08 --> 0:08:00.42]	  And then we say that result should contain.
+[0:08:01.02 --> 0:08:05.04]	  So first of all, so we do this product
+[0:08:05.04 --> 0:08:06.28]	  between each element.
+[0:08:06.94 --> 0:08:10.74]	  So let me just draw the formula here.
+[0:08:11.82 --> 0:08:17.96]	  So the formula is if element of U times if element of B, right?
+[0:08:17.96 --> 0:08:21.84]	  And then we go from one to N.
+[0:08:23.04 --> 0:08:25.84]	  So actually because we are in Numpy arrays
+[0:08:25.84 --> 0:08:32.14]	  and Numpy arrays are indexed from zero to N minus one.
+[0:08:32.60 --> 0:08:34.68]	  And then the size of the array is N.
+[0:08:34.94 --> 0:08:37.98]	  So instead of going from one to N,
+[0:08:38.04 --> 0:08:41.56]	  we go from zero to N minus one.
+[0:08:42.28 --> 0:08:46.66]	  And this is how we implement this, right?
+[0:08:46.66 --> 0:08:49.28]	  So we have this part here,
+[0:08:49.46 --> 0:08:54.68]	  which corresponds to the part inside the sum.
+[0:08:55.52 --> 0:08:57.62]	  And this for loop is actually the sum.
+[0:08:59.48 --> 0:09:02.02]	  And then what we need to do at the end
+[0:09:02.02 --> 0:09:03.32]	  is just return the result.
+[0:09:03.92 --> 0:09:08.38]	  So this is how we translate this formula into code.
+[0:09:09.20 --> 0:09:10.66]	  So now we can test it.
+[0:09:11.52 --> 0:09:15.92]	  The vector multiplication between U and V.
+[0:09:15.94 --> 0:09:17.76]	  So it should return 14.
+[0:09:18.78 --> 0:09:21.62]	  So yes, like we calculated,
+[0:09:22.30 --> 0:09:25.72]	  actually in Numpy,
+[0:09:26.38 --> 0:09:28.40]	  there is already a function that is doing this.
+[0:09:28.74 --> 0:09:30.46]	  It's called dot product.
+[0:09:31.52 --> 0:09:33.44]	  And this is how we use it.
+[0:09:33.54 --> 0:09:36.36]	  We just multiply vector U by vector V.
+[0:09:37.14 --> 0:09:38.76]	  And the result is also 14.
+[0:09:39.58 --> 0:09:43.02]	  So this is how we translate this formula into code.
+[0:09:43.18 --> 0:09:45.76]	  So we talked about vector, vector multiplication.
+[0:09:46.48 --> 0:09:49.62]	  Now let's talk about matrix vector multiplication.
+[0:09:50.92 --> 0:09:53.20]	  So in matrix vector multiplication,
+[0:09:53.64 --> 0:09:56.48]	  so let's say we have this matrix U
+[0:09:56.48 --> 0:10:00.04]	  that we want to multiply by a vector V.
+[0:10:00.26 --> 0:10:03.66]	  So this is capital and this is lowercase.
+[0:10:03.80 --> 0:10:07.34]	  So we want to actually compute U times V.
+[0:10:07.50 --> 0:10:10.14]	  So U is a matrix, V is a vector.
+[0:10:11.52 --> 0:1]	  And the way we do it is,
+[0:10:14.56 --> 0:10:20.92]	  so we take the first row of matrix U
+[0:10:20.92 --> 0:10:24.14]	  and multiply it with the vector V.
+[0:10:24.54 --> 0:10:29.30]	  So you see this is a row and we multiply it, maybe.
+[0:10:29.58 --> 0:10:31.38]	  So this is exactly like we have here.
+[0:10:31.70 --> 0:10:33.76]	  So we have a row vector and the column vector.
+[0:10:34.10 --> 0:10:36.70]	  And again, we have a row vector here.
+[0:10:36.70 --> 0:10:41.26]	  So this is, let's call it U zero.
+[0:10:41.58 --> 0:10:45.98]	  So we will just use the same notation as in NumPy.
+[0:10:46.22 --> 0:10:47.74]	  So we'll start with zero.
+[0:10:48.24 --> 0:10:50.60]	  So you want U first and U second.
+[0:10:52.18 --> 0:10:52.86]	  Right?
+[0:10:53.30 --> 0:10:56.02]	  So what we need to do now to calculate
+[0:10:56.02 --> 0:11:00.10]	  the multiplication between matrix and the vector,
+[0:11:00.50 --> 0:11:05.48]	  for each row of the matrix, we multiply it with V.
+[0:11:05.92 --> 0:11:10.48]	  So this is how we do this.
+[0:11:10.70 --> 0:11:18.04]	  So we take the zero row of U and multiply it with V.
+[0:11:18.50 --> 0:11:21.88]	  Then we take the first row of U and multiply it with V
+[0:11:21.88 --> 0:11:24.76]	  and the second row and multiply it with V.
+[0:1 --> 0:11:26.22]	  Right?
+[0:11:26.60 --> 0:11:28.36]	  So this is the result.
+[0:11:28.56 --> 0:11:32.06]	  So basically for each row, we do a matrix,
+[0:11:32.34 --> 0:11:34.32]	  sorry, for each row of U,
+[0:11:34.72 --> 0:11:37.74]	  we do a vector vector multiplication with V.
+[0:11:37.96 --> 0:11:41.52]	  So this is how we compute matrix vector multiplication.
+[0:11:41.98 --> 0:11:45.66]	  So let me just write it once again.
+[0:11:45.98 --> 0:11:51.68]	  So let's say we have this vector U, matrix U.
+[0:11:52.88 --> 0:12:00.20]	  And then we have, let's say we have K elements of here.
+[0:12:00.20 --> 0:12:08.28]	  So from U zero to U K minus one.
+[0:12:08.98 --> 0:12:12.90]	  So in total, there are K rows.
+[0:12:13.78 --> 0:12:17.18]	  And we want to multiply it with vector V.
+[0:12:18.20 --> 0:12:20.82]	  So this will be just a vector V.
+[0:12:21.60 --> 0:12:24.80]	  And of course, dimensionality here should match.
+[0:12:25.38 --> 0:12:29.82]	  So this vector here and this vector here
+[0:12:29.82 --> 0:12:30.58]	  should be the same.
+[0:12:31.14 --> 0:12:33.94]	  So let's say dimensionality can be N.
+[0:12:34.16 --> 0:12:35.44]	  So both have N elements.
+[0:1 --> 0:12:44.04]	  And the result is dot product between each row
+[0:12:44.04 --> 0:12:47.42]	  of the matrix U and the vector V.
+[0:12:48.58 --> 0:12:51.40]	  So this is how we do it.
+[0:12:51.60 --> 0:12:52.88]	  Let's implement this in NumPy.
+[0:12:53.78 --> 0:12:55.40]	  So let's implement it in Python.
+[0:12:56.68 --> 0:13:00.92]	  So we already have the matrix U here.
+[0:13:01.58 --> 0:13:02.16]	  This is it.
+[0:13:02.86 --> 0:13:09.26]	  And let's implement matrix vector multiplication.
+[0:13:11.08 --> 0:13:16.54]	  So I have big capital U and I use capital here
+[0:13:16.54 --> 0:1]	  to denote that this is matrix.
+[0:13:20.08 --> 0:13:24.14]	  So first we need to make sure that dimensionality match
+[0:13:24.62 --> 0:13:30.42]	  and if you remember, so here we will have the shape field here.
+[0:13:30.70 --> 0:13:35.14]	  And we are interested in the number of columns.
+[0:13:35.70 --> 0:13:37.90]	  So remember here, if I go back,
+[0:13:38.38 --> 0:13:41.74]	  so the number of columns in U should match
+[0:13:41.74 --> 0:13:44.46]	  the number of elements in V.
+[0:13:44.78 --> 0:13:47.50]	  So the number of columns in U is basically the dimensionality
+[0:13:47.50 --> 0:13:49.72]	  of each row vector of U.
+[0:13:50.26 --> 0:13:51.84]	  So if there are four columns,
+[0:13:51.84 --> 0:13:56.38]	  it means that the vector U zero has dimensionality of four.
+[0:13:56.52 --> 0:13:57.40]	  It has four elements.
+[0:13:58.08 --> 0:14:03.30]	  So it means that the second dimension,
+[0:14:03.54 --> 0:14:06.88]	  the number of columns should match the first dimension.
+[0:14:07.34 --> 0:14:08.84]	  So then we have the number of rows.
+[0:14:09.22 --> 0:14:13.70]	  We can use K or maybe we just call it number of rows,
+[0:14:14.44 --> 0:14:18.56]	  which is U shape zero.
+[0:14:18.74 --> 0:14:22.62]	  So this is the dimensionality of our resulting vector.
+[0:14:22.96 --> 0:14:24.28]	  So this is the results.
+[0:14:24.60 --> 0:14:26.02]	  So because we have three rows,
+[0:14:26.88 --> 0:14:31.10]	  so there are three rows in matrix U.
+[0:14:31.54 --> 0:14:33.50]	  That's why we have three elements
+[0:14:33.50 --> 0:14:35.54]	  in the result of the multiplication.
+[0:14:36.50 --> 0:14:39.96]	  So this is our result matrix.
+[0:14:40.58 --> 0:14:42.70]	  Let's initialize it with zeros
+[0:14:42.70 --> 0:14:48.28]	  and number of the dimensionality
+[0:14:48.28 --> 0:14:52.36]	  of this vector, the size of this array is number of rows.
+[0:14:52.92 --> 0:14:53.20]	  So K.
+[0:14:53.94 --> 0:14:55.30]	  And then we have a loop.
+[0:14:55.84 --> 0:15:01.60]	  So we want now to go through each row of the matrix U.
+[0:15:04.10 --> 0:15:07.72]	  So we do this loop.
+[0:15:09.32 --> 0:15:13.92]	  And now we need to access the ith row of U.
+[0:15:14.52 --> 0:15:16.26]	  This is how we do this.
+[0:15:16.66 --> 0:15:19.82]	  And we need to calculate a dot product.
+[0:15:20.56 --> 0:1]	  So this is vector, vector multiplication
+[0:1 --> 0:15:29.02]	  between the ith row of U and the vector V.
+[0:15:29.78 --> 0:15:31.80]	  And actually we write the result
+[0:15:31.80 --> 0:15:35.58]	  as the ith element of the result.
+[0:15:36.16 --> 0:15:38.90]	  And then what we do at the end is
+[0:15:38.90 --> 0:15:40.44]	  we just return the result.
+[0:15:41.06 --> 0:15:46.16]	  So this is how we translate this formula.
+[0:15:49.48 --> 0:15:51.42]	  Into a Python code, right?
+[0:15:51.78 --> 0:15:55.12]	  So again, we create a first,
+[0:15:55.68 --> 0:15:57.20]	  create an empty array.
+[0:15:57.54 --> 0:15:59.30]	  And then for each element of the array,
+[0:15:59.42 --> 0:16:02.28]	  we commute the vector, vector multiplication
+[0:16:02.28 --> 0:16:06.02]	  between each row of U and the vector V.
+[0:16:06.98 --> 0:16:12.06]	  So let's test it, matrix vector multiplication.
+[0:16:12.58 --> 0:16:14.12]	  So we do it within U and V.
+[0:16:14.46 --> 0:16:18.34]	  And we get a one-dimensional array.
+[0:16:18.68 --> 0:16:21.30]	  So in our case, this is a vector.
+[0:16:23.22 --> 0:16:27.78]	  And again, in NumPy, if we want to use NumPy for that,
+[0:16:27.86 --> 0:16:29.82]	  of course we don't want to write a function
+[0:16:29.82 --> 0:16:34.40]	  for computing this multiplication every time.
+[0:16:34.78 --> 0:16:37.24]	  We just use a function again, dot.
+[0:16:37.86 --> 0:16:41.70]	  So because we invoke this function on a two-dimensional array,
+[0:16:42.08 --> 0:16:45.48]	  NumPy knows how to actually multiply it,
+[0:16:45.56 --> 0:16:46.72]	  that it needs a dot product.
+[0:16:46.90 --> 0:16:49.44]	  And you see that the result is the same.
+[0:16:51.18 --> 0:16:54.46]	  So this is how we do matrix vector multiplication.
+[0:16:54.92 --> 0:16:57.84]	  Now let's talk about matrix multiplication.
+[0:16:58.76 --> 0:17:03.40]	  Let's say we have a matrix U, which is a capital U.
+[0:17:03.98 --> 0:17:05.96]	  And we have a matrix V, capital V.
+[0:17:06.40 --> 0:17:09.94]	  And what we want to compute is multiplication
+[0:17:09.94 --> 0:17:12.42]	  between matrix U and matrix V.
+[0:17:12.86 --> 0:17:16.36]	  What we do here is we look at,
+[0:17:17.10 --> 0:17:21.48]	  so we take a matrix V and we break it down
+[0:17:21.48 --> 0:17:23.50]	  into multiple columns.
+[0:1 --> 0:17:29.24]	  So we have a column V zero, V one and V two.
+[0:17:30.22 --> 0:17:34.20]	  And we look at the entire matrix U as is.
+[0:17:34.64 --> 0:17:39.64]	  And the result of this multiplication is a new matrix
+[0:17:39.64 --> 0:17:45.98]	  where for each column, so it will have three columns.
+[0:17:47.32 --> 0:17:51.32]	  For each column we have, so column first is
+[0:17:51.32 --> 0:17:56.72]	  a matrix U multiplied by vector V zero.
+[0:17:57.50 --> 0:18:01.66]	  Then it's matrix U multiplied by vector V one.
+[0:18:02.24 --> 0:18:06.44]	  And matrix U multiplied by vector V two.
+[0:18:07.10 --> 0:18:09.96]	  We represent matrix multiplication
+[0:18:09.96 --> 0:18:13.82]	  as a bunch of matrix vector multiplications.
+[0:18:14.78 --> 0:18:17.78]	  So let's implement this.
+[0:18:19.16 --> 0:18:22.64]	  So we already have a matrix V here.
+[0:18:23.94 --> 0:18:27.46]	  So we will do matrix,
+[0:18:30.32 --> 0:18:31.42]	  matrix multiplication.
+[0:18:32.08 --> 0:18:35.26]	  So we have two matrices here, U and V.
+[0:18:36.42 --> 0:18:39.12]	  So what we need to check here is the same
+[0:18:39.12 --> 0:18:44.40]	  so that here that actually this multiplication makes sense
+[0:18:44.40 --> 0:18:53.72]	  that we can multiply a row of U with a column of V.
+[0:18:53.80 --> 0:18:57.30]	  So we need to make sure that the dimensions match.
+[0:18:57.60 --> 0:19:01.52]	  So we basically can use the same thing here.
+[0:19:02.22 --> 0:19:04.54]	  So this is the check that makes sure
+[0:19:04.54 --> 0:19:07.20]	  that the multiplication makes sense.
+[0:19:08.84 --> 0:19:11.56]	  Then we need to create a new matrix.
+[0:19:11.98 --> 0:19:13.24]	  Let's call it result.
+[0:19:14.24 --> 0:19:18.16]	  And we use initialize it with zeros.
+[0:19:19.62 --> 0:19:23.74]	  So the size of this matrix will be the number
+[0:19:23.74 --> 0:19:29.32]	  of rows of this matrix will come from here.
+[0:19:29.90 --> 0:19:35.08]	  When we multiply U by V,
+[0:19:35.40 --> 0:19:41.24]	  we will have a new vector that has dimensionality three
+[0:19:41.24 --> 0:19:42.36]	  because there are three numbers.
+[0:19:43.20 --> 0:19:44.02]	  So it will be three.
+[0:19:44.28 --> 0:19:47.82]	  So U V will have three rows
+[0:19:47.82 --> 0:19:49.86]	  and it will have also three columns
+[0:19:49.86 --> 0:19:51.98]	  because there are three columns in V.
+[0:19:52.86 --> 0:19:55.60]	  So number of rows comes from U.
+[0:19:56.58 --> 0:19:59.54]	  So this is the number of rows of U
+[0:19:59.54 --> 0:20:07.26]	  and number of columns comes from the number of columns of V.
+[0:20:08.52 --> 0:20:12.02]	  And then we create a matrix
+[0:20:13.06 --> 0:2]	  with results, which with number of rows coming from U
+[0:2 --> 0:20:20.34]	  and number of columns coming from V.
+[0:20:20.56 --> 0:20:21.62]	  And then we do a loop.
+[0:20:22.74 --> 0:20:28.38]	  So here we loop over the rows of V.
+[0:20:28.58 --> 0:20:34.42]	  So we first do it for V zero, then V one and V second.
+[0:20:35.20 --> 0:20:39.98]	  So we do it over for each column.
+[0:20:41.24 --> 0:2]	  And then we let's take U,
+[0:20:45.16 --> 0:20:48.02]	  take the ETH column of U,
+[0:20:49.48 --> 0:20:52.86]	  which is, we use this notation.
+[0:20:53.12 --> 0:20:55.20]	  So we take all the rows and ETH column.
+[0:20:55.84 --> 0:20:58.38]	  So now we multiply this.
+[0:20:59.68 --> 0:21:03.16]	  So the result of multiplication will be
+[0:21:03.16 --> 0:21:07.72]	  matrix vector multiplication between,
+[0:21:08.70 --> 0:21:12.28]	  sorry, it should be E.
+[0:21:13.04 --> 0:21:21.54]	  And then we multiply U by this ETH column of V.
+[0:21:22.92 --> 0:21:27.60]	  And then we get some result, U V E.
+[0:21:28.26 --> 0:21:30.32]	  So this is the result of multiplication
+[0:21:30.32 --> 0:21:34.74]	  of our matrix U with vector V.
+[0:21:35.10 --> 0:21:38.56]	  And what we need to do now is put it to the result.
+[0:21:39.02 --> 0:21:41.82]	  So this is our matrix result.
+[0:21:43.20 --> 0:21:48.50]	  The result and it has, so let's say it's three by three matrix
+[0:21:48.50 --> 0:21:51.18]	  filled with zeros.
+[0:21:51.74 --> 0:21:53.86]	  Yeah, actually these are zero here.
+[0:21:54.30 --> 0:21:58.84]	  So what we want to do here is replace these zeros
+[0:21:58.84 --> 0:22:00.72]	  with some numbers.
+[0:22:00.86 --> 0:22:04.06]	  So we want to replace this with results of multiplication.
+[0:22:04.06 --> 0:22:09.36]	  So here it will be U times V first.
+[0:22:10.84 --> 0:22:18.42]	  And to reassign a column of a two dimensional array,
+[0:22:18.72 --> 0:22:20.44]	  this is the syntax we use.
+[0:22:20.72 --> 0:22:25.02]	  So we say that for ETH column of the result,
+[0:22:25.70 --> 0:22:29.20]	  the result is this multiplication.
+[0:22:30.32 --> 0:22:31.04]	  Right?
+[0:22:31.12 --> 0:22:35.36]	  So we do this for, we repeat this for every column of V
+[0:22:35.36 --> 0:22:37.38]	  and we return the result.
+[0:22:38.04 --> 0:22:40.88]	  And this is our multiplication.
+[0:22:41.52 --> 0:22:42.44]	  Then let's check it.
+[0:22:44.70 --> 0:22:48.12]	  So between U and V.
+[0:22:50.24 --> 0:2]	  And this is the result.
+[0:22:52.32 --> 0:22:55.60]	  And again, you probably figured out this pattern by now
+[0:22:55.60 --> 0:22:58.92]	  is that if we want to do it with plain numpy,
+[0:22:59.50 --> 0:23:02.60]	  if we want to multiply two matrices with plain numpy,
+[0:23:02.84 --> 0:23:05.44]	  we use the dot method.
+[0:23:06.24 --> 0:23:08.56]	  And you see it returns the same result.
+[0:23:08.86 --> 0:23:11.04]	  All right, so, which means that our
+[0:23:11.04 --> 0:23:13.98]	  matrix-matrix multiplication method works.
+[0:23:14.34 --> 0:23:19.54]	  And this way we managed to express matrix-matrix
+[0:23:19.54 --> 0:23:21.76]	  multiplication using matrix-mechtern multiplication.
+[0:23:22.22 --> 0:23:26.48]	  And then in turn, we expressed matrix-vector multiplication
+[0:23:26.48 --> 0:23:28.44]	  with vector-vector multiplication.
+[0:23:28.98 --> 0:23:30.86]	  There are still two topics we want to talk about.
+[0:23:31.34 --> 0:23:32.56]	  Let's talk about them.
+[0:23:33.26 --> 0:23:35.52]	  So first I want to talk about the identity matrix.
+[0:23:35.90 --> 0:23:40.38]	  We call identity matrix as capital capital I.
+[0:23:41.02 --> 0:23:42.36]	  So this is the identity matrix.
+[0:23:42.90 --> 0:23:45.64]	  And the identity matrix is a square matrix.
+[0:23:45.82 --> 0:23:48.52]	  We're on the diagonal.
+[0:23:48.94 --> 0:23:50.30]	  We have ones.
+[0:23:51.06 --> 0:23:52.60]	  And we have zeros everywhere.
+[0:23:53.04 --> 0:23:56.56]	  When we take any matrix, let's say we have matrix U
+[0:23:56.56 --> 0:23:58.98]	  and we multiply it by I.
+[0:2 --> 0:24:02.28]	  And of course, like dimensions should match here,
+[0:24:02.86 --> 0:24:04.46]	  we get U back.
+[0:24:05.04 --> 0:24:09.92]	  Or we can put it in front and we can again get U.
+[0:24:10.68 --> 0:24:14.74]	  So identity matrix is like a number one.
+[0:24:15.14 --> 0:24:19.04]	  So if we multiply number one by any number,
+[0:24:19.06 --> 0:24:20.60]	  we get the number back.
+[0:24:21.22 --> 0:24:25.20]	  And no matter on which side we have this one,
+[0:24:25.58 --> 0:24:26.68]	  we get the number back.
+[0:24:27.46 --> 0:24:31.64]	  So in principle, this is the same.
+[0:2 --> 0:24:33.86]	  So this is the same, but for,
+[0:24:34.16 --> 0:24:37.28]	  so this is like a number one, but for matrices.
+[0:24:37.72 --> 0:24:41.64]	  If we need to create this identity matrix,
+[0:24:41.96 --> 0:24:45.88]	  so in NumPy, we use the function I.
+[0:24:46.36 --> 0:24:47.58]	  I don't know why it's called I.
+[0:24:47.88 --> 0:24:50.24]	  But here we just specify the dimension,
+[0:24:50.52 --> 0:24:53.20]	  the identity matrix and it gives us a matrix
+[0:24:53.20 --> 0:24:56.52]	  where on the diagonal we have ones
+[0:24:56.52 --> 0:24:59.58]	  and we have zeros everywhere else.
+[0:25:00.06 --> 0:25:02.84]	  And we can see, let's say if we create
+[0:25:02.84 --> 0:25:06.58]	  this identity matrix of size three,
+[0:25:07.42 --> 0:25:11.08]	  then let's say we have V here.
+[0:25:11.94 --> 0:25:15.82]	  So we can test it.
+[0:25:15.82 --> 0:25:22.82]	  And we see that when we multiply V by I,
+[0:25:23.44 --> 0:25:26.18]	  we get the matrix V back.
+[0:25:26.80 --> 0:25:29.34]	  And here we have three columns.
+[0:25:29.68 --> 0:25:33.20]	  So that's why our I should be three dimensions.
+[0:25:33.62 --> 0:25:36.76]	  It should have like the size of three.
+[0:25:36.96 --> 0:25:38.36]	  So it should be a three by three matrix.
+[0:25:38.78 --> 0:25:41.02]	  So why we are talking about this I matrix?
+[0:25:41.50 --> 0:25:44.22]	  It's useful for explaining what a matrix inverse is.
+[0:25:44.22 --> 0:25:46.38]	  So let's say we have a matrix A
+[0:25:46.38 --> 0:25:52.80]	  and then the inverse of A, we usually call it A minus one,
+[0:25:52.90 --> 0:25:57.02]	  is a matrix such that when we multiply it by A,
+[0:25:57.58 --> 0:25:58.62]	  we get I.
+[0:25:59.20 --> 0:26:02.86]	  To compute the inverse, so first of all,
+[0:26:02.90 --> 0:26:05.50]	  only square matrices have inverse.
+[0:26:05.90 --> 0:26:09.12]	  So square matrix is a matrix for which the number of rows
+[0:26:09.12 --> 0:26:10.98]	  goes to the number of columns.
+[0:26:10.98 --> 0:26:14.74]	  So actually we need to have square matrix.
+[0:26:15.02 --> 0:26:20.40]	  So let's just take the first three rows of V.
+[0:26:22.94 --> 0:26:26.82]	  No, so this is our matrix, square matrix.
+[0:26:27.42 --> 0:26:29.58]	  And let's call it V square.
+[0:26:30.42 --> 0:26:30.64]	  Yes.
+[0:26:33.14 --> 0:26:34.94]	  This is our matrix.
+[0:26:35.34 --> 0:26:37.42]	  And to compute inverse of this matrix,
+[0:26:37.42 --> 0:26:42.36]	  we use a method from NumBuy called inf.
+[0:26:42.74 --> 0:26:45.10]	  It leaves in the lean ALG package,
+[0:26:45.34 --> 0:26:47.36]	  which stands for linear algebra, I assume.
+[0:26:48.30 --> 0:26:50.62]	  And so this is how we use it.
+[0:26:51.32 --> 0:26:53.30]	  And then the result is some matrix,
+[0:26:53.62 --> 0:26:56.60]	  which let's call it the V S inf.
+[0:26:56.90 --> 0:26:57.92]	  So this is the inverse.
+[0:26:58.62 --> 0:27:00.56]	  This and then again, let's print it.
+[0:27:01.46 --> 0:27:06.50]	  And when we multiply V S inverse,
+[0:27:06.54 --> 0:27:10.54]	  when we multiply these two matrices,
+[0:27:11.20 --> 0:27:14.36]	  what we get is an identity matrix.
+[0:27:14.86 --> 0:27:17.52]	  This will be quite useful for linear regression.
+[0:27:17.74 --> 0:27:20.94]	  We'll see that in the next session.
+[0:27:22.94 --> 0:27:25.14]	  And for this lesson, that's all.
+[0:27:25.96 --> 0:27:30.06]	  And next, we will have our last lesson of this section.
+[0:27:30.24 --> 0:27:31.84]	  We'll talk about pandas,
+[0:27:31.84 --> 0:27:35.64]	  which is a library for manipulating table data in Python.

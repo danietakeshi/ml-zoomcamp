@@ -1,0 +1,214 @@
+[0:00:01.22 --> 0:00:13.26]	  Welcome back. This is our fifth lesson of session number one of machine learning zoom camp. And we will talk about the modeling step and we'll talk about the process of selecting the best model, which is called the model selection process.
+[0:00:14.04 --> 0:00:22.58]	  In the previous lesson, we talked about this modeling step, right? This is the step where the actual machine learning happens.
+[0:00:22.94 --> 0:00:34.12]	  So in this step, we try different models. So we already have the data extracted on the previous steps. So we try different models. And our goal is to choose the best model.
+[0:00:34.68 --> 0:00:42.80]	  So here you don't need to worry what logistic regression decision tree neural network mean, we will cover them later in other in other sessions.
+[0:00:43.56 --> 0:00:50.94]	  But they are different models. Some of them might work well on this particular problem problem. Some of them might not work well.
+[0:00:51.56 --> 0:01:02.04]	  And what we need to do is try some of them and see what works best. And for that, we need to have a way of doing this. And this is called the model selection process that we will talk about.
+[0:01:03.22 --> 0:01:13.36]	  So if you think about the way we use a model for our spam example, so let's say now it's July.
+[0:01:14.52 --> 0:01:28.24]	  And we train a model. So we take our capital X, we take Y, we produce our model G, right? And then we deploy the model in August.
+[0:01:30.58 --> 0:01:37.26]	  And in August, we take the model G that we trained on the data from July and before that.
+[0:01:37.72 --> 0:01:52.22]	  And we apply this model to spam messages and it produces some score, for example, that this email, the probability that this email is spam is 70%.
+[0:01:53.46 --> 0:02:05.88]	  So this is how we use a model in practice. And when evaluating the model, we want to sort of mimic this way of using it.
+[0:02:06.20 --> 0:02:17.46]	  So we want to see how well our model will perform on data it hasn't seen. The model from July didn't see the data from August. It only saw the data from July.
+[0:02:19.06 --> 0:02:28.80]	  And in July, we don't know how well the model will perform. So what we want to do is we want to do something similar.
+[0:02:29.58 --> 0:02:34.50]	  Of course, we cannot go back in the future and take the data from August when we are in July.
+[0:02:35.16 --> 0:0]	  But we can do something that is quite close enough so we can take the entire data set that we have.
+[0:02:44.36 --> 0:02:49.84]	  And we can take a small part of this data set, let's say 20% of this.
+[0:02:50.44 --> 0:02:59.24]	  And we hide this. So we take this data, put it away and pretend this data doesn't exist.
+[0:02:59.82 --> 0:03:08.56]	  So we take the remaining 80% and we use this 20% for training only.
+[0:03:11.76 --> 0:03:18.98]	  And the 20% we don't use for training. So this is sort of the data from August and this is sort of the data from July.
+[0:03:19.52 --> 0:03:28.80]	  In a way, right? So we kind of hide this data. And this data set, we call it validation data set. So this data set is not used in training.
+[0:03:29.18 --> 0:03:32.86]	  So let's say we have this training data set, right?
+[0:03:34.90 --> 0:03:37.96]	  And we have the validation data set.
+[0:03:38.64 --> 0:03:47.80]	  So what we do is we need to extract this feature matrix, right? This capital X.
+[0:03:48.66 --> 0:03:53.48]	  And we do this from the training data. So we have the X.
+[0:03:53.74 --> 0:03:57.54]	  We also have the Y also coming from the training data.
+[0:03:58.18 --> 0:04:00.74]	  And we train our model G.
+[0:04:01.56 --> 0:04:05.16]	  Only using this X and Y, right? So we have a G.
+[0:04:06.10 --> 0:04:10.28]	  Then from the validation data set, we extract another X.
+[0:04:11.60 --> 0:04:18.80]	  The model didn't see it during training. And we can call this X validation, XV.
+[0:04:19.20 --> 0:04:28.64]	  And again, we can do this YV, right? So this is the target variable from the validation data set and the X variable from the validation data set.
+[0:04:28.98 --> 0:04:35.02]	  And we have our X, we have our G, the model that we trained on the training data set.
+[0:04:35.30 --> 0:04:43.82]	  So we take the G and we apply it to the validation data set and we get some predictions.
+[0:04:44.46 --> 0:04:48.32]	  We can call them just Y hat, right? So these are the predictions.
+[0:04:49.26 --> 0:05:00.26]	  What we do next is we need to compare these Y hat predictions with the actual values.
+[0:05:00.86 --> 0:05:08.74]	  So this is our spam. This is not spam. And the way it looks in practice is...
+[0:05:08.74 --> 0:05:11.74]	  So let me just insert a new page here.
+[0:05:12.46 --> 0:05:19.84]	  So the way it looks in practice is... So we have these predictions.
+[0:05:20.82 --> 0:05:26.02]	  Y hat, and we have the actual target variable, right?
+[0:05:26.30 --> 0:05:33.10]	  And for this... So actual could be 101010.
+[0:05:33.66 --> 0:05:35.64]	  So this is spam, not spam, spam, not spam.
+[0:05:37.18 --> 0:05:42.60]	  And for this, remember that the output of this thing is a probability.
+[0:05:43.26 --> 0:05:54.76]	  So it can be 0.8, 0.7, 0.6, 0.1, 0.9, 0.6.
+[0:05:55.12 --> 0:06:01.10]	  This is the probabilities that we later convert to predictions.
+[0:06:01.26 --> 0:06:08.30]	  So for this one, it's greater than 0.5. So for this, we predict one spam.
+[0:06:08.74 --> 0:06:11.98]	  For this one, we also predict spam. For this one, we predict spam.
+[0:06:12.22 --> 0:06:16.12]	  For this one, we predict not spam. This is spam and this is spam again.
+[0:06:16.96 --> 0:06:20.38]	  So now we can see... So these are our predictions.
+[0:06:21.50 --> 0:06:24.46]	  And this is our target variable.
+[0:06:25.64 --> 0:06:28.22]	  And we can see in how many cases this is correct.
+[0:06:28.66 --> 0:06:34.34]	  So this is correct. This is not correct. Correct. Correct. Not correct.
+[0:06:35.06 --> 0:06:40.06]	  So we actually in four, so six cases, it's correct.
+[0:06:41.02 --> 0:06:45.44]	  So this is 66%.
+[0:06:45.44 --> 0:06:53.48]	  Right, so in this case, the model we have is 66% accurate.
+[0:06:54.22 --> 0:06:58.62]	  So we can do this, let's say for logistic regression.
+[0:06:59.06 --> 0:07:03.20]	  We do this and we see that our model is correct.
+[0:07:04.12 --> 0:07:07.88]	  Let's say it was our logistic regression, so it has 66% accuracy.
+[0:07:09.20 --> 0:07:13.40]	  Then we take a decision tree, which is a different model family.
+[0:07:14.42 --> 0:07:21.22]	  It's like the G here and G here are different G's, like different functions.
+[0:07:22.18 --> 0:07:25.80]	  And for decision tree, maybe accuracy is 60%.
+[0:07:25.80 --> 0:07:29.96]	  So then we take another model, can be random first.
+[0:07:30.70 --> 0:07:35.34]	  We see that maybe it's 67% correct.
+[0:07:35.74 --> 0:07:40.32]	  And we take a neural network and neural network can be maybe 80% correct.
+[0:07:40.74 --> 0:07:43.48]	  For example, this I just made up this numbers.
+[0:07:43.98 --> 0:07:51.62]	  And we see that this model neural network has the best accuracy.
+[0:07:52.44 --> 0:07:56.78]	  So we select this model as our best model. So this is how it works.
+[0:07:57.56 --> 0:08:01.06]	  However, there could be a problem.
+[0:08:02.08 --> 0:08:03.84]	  I don't know what happened here.
+[0:08:04.58 --> 0:08:09.46]	  It's supposed to be like this one.
+[0:08:09.46 --> 0:08:13.34]	  So I can't even think with heart, this is spam.
+[0:08:14.18 --> 0:08:17.30]	  And this mail is like a usual mail.
+[0:08:18.06 --> 0:08:19.10]	  So let's remove this.
+[0:08:19.88 --> 0:08:21.82]	  So there is a problem with this approach.
+[0:08:22.70 --> 0:08:29.26]	  And I want to illustrate this problem with a made up example,
+[0:08:29.54 --> 0:08:30.96]	  but I think it's a good illustration.
+[0:08:31.72 --> 0:08:34.66]	  Let's say our model is not a logistic regression model.
+[0:08:34.88 --> 0:08:38.10]	  It's not a neural net.
+[0:08:38.14 --> 0:08:38.92]	  It's a coin.
+[0:08:39.46 --> 0:08:46.82]	  So we take our 20% of data, which happened to be this five emails.
+[0:08:49.94 --> 0:0]	  And what we do is now we flip a coin.
+[0:08:56.58 --> 0:09:01.64]	  And if a coin lands on hats, we say it's spam.
+[0:09:02.48 --> 0:09:03.38]	  It has some tails.
+[0:09:04.14 --> 0:09:06.46]	  If it lands on tails, then we say it's not spam.
+[0:09:06.74 --> 0:09:08.10]	  Very simple model.
+[0:09:08.96 --> 0:09:19.04]	  And we take one euro, the first model, and we make a prediction for our validation data set.
+[0:09:19.96 --> 0:09:28.64]	  So the prediction is, this is actually spam, not spam, spam, not spam, not spam.
+[0:09:30.22 --> 0:09:33.88]	  So the model says that the first one is spam.
+[0:09:33.88 --> 0:09:35.30]	  The second one is spam.
+[0:09:35.84 --> 0:09:38.56]	  The third one is not spam, not spam, and spam.
+[0:09:39.52 --> 0:09:44.96]	  So it's got only one rate.
+[0:09:45.86 --> 0:09:47.36]	  So it's 20% correct.
+[0:09:49.24 --> 0:09:52.48]	  Then we take one American dollar and we do the same.
+[0:09:52.84 --> 0:09:57.18]	  So it says spam, not spam, not spam, not spam, spam.
+[0:09:57.68 --> 0:10:03.80]	  And then it got one, two, right, so 40% correct.
+[0:10:05.18 --> 0:10:11.94]	  Then we take one Polish slot and one Polish slot gives the sequence.
+[0:10:12.34 --> 0:10:17.08]	  So G, G, good, good, spam, spam, spam.
+[0:10:18.04 --> 0:10:21.68]	  So one correct, yeah, 20% correct.
+[0:10:22.30 --> 0:10:23.68]	  Then we take one ruble.
+[0:10:24.22 --> 0:10:28.56]	  So it can be good, not good, good, not good.
+[0:10:29.12 --> 0:10:35.84]	  So then it's correcting, it got only one rate, right?
+[0:10:36.46 --> 0:10:44.22]	  And then we take Ukrainian Hryvna and then Hryvna just produces the exact sequence, right?
+[0:10:44.88 --> 0:10:46.18]	  It just got lucky, right?
+[0:10:46.94 --> 0:10:49.56]	  So and then it's 100% correct.
+[0:10:50.92 --> 0:10:57.76]	  And then, so Hryvna here got really lucky and we say, okay, like we see, we look at the numbers.
+[0:10:58.40 --> 0:11:08.78]	  So like the dollars are quite good, like euros, slot, taste and troubles are very bad at predicting spam.
+[0:11:09.30 --> 0:11:11.18]	  Hryvna is the best one.
+[0:11:11.44 --> 0:11:16.10]	  It has 100% accuracy for predicting our spam messages.
+[0:11:16.10 --> 0:11:20.80]	  But we all know that this is really random, right?
+[0:11:20.88 --> 0:11:22.92]	  So we cannot really control the sequence.
+[0:11:24.02 --> 0:11:32.72]	  This coin just got particularly lucky and it managed to produce the same sequence as we had in the validation dataset.
+[0:11:33.72 --> 0:11:39.26]	  And while this is a two-example, the exact same thing can happen with a real model.
+[0:11:39.60 --> 0:11:40.88]	  So a model can just get lucky.
+[0:11:40.88 --> 0:11:47.98]	  So maybe let's say this is a neural net and this is, I don't know, decision three.
+[0:11:48.12 --> 0:11:49.26]	  This is logistic regression.
+[0:11:49.58 --> 0:11:55.26]	  I don't know, this is random forest and this is gradient boosting, different kind of models.
+[0:11:56.40 --> 0:12:03.24]	  And neural net just got lucky at predicting this particular part of the dataset.
+[0:12:03.24 --> 0:12:14.52]	  So this particular subset of our data, it just happened to do really well on this, just by pure chance, right?
+[0:12:15.40 --> 0:12:24.42]	  And if we take another part, if we take another 20% and apply the same model, then the results would be totally different.
+[0:12:24.56 --> 0:12:33.22]	  So if we take Ukrainian Hryvna and apply to a different 20%, probably it's very unlikely that it again will manage to predict.
+[0:12:33.24 --> 0:12:35.06]	  It's predicted with 100% accuracy.
+[0:12:36.80 --> 0:12:44.82]	  So this in statistics, this is called multiple comparison problems when we perform the same comparison many, many times.
+[0:12:44.98 --> 0:12:57.12]	  So when we use many, many different models and evaluate them against the same validation dataset, one of the models can get particularly lucky for no reason just by chance.
+[0:12:57.20 --> 0:12:59.84]	  It gets lucky and it produces a good result.
+[0:13:00.96 --> 0:13:03.56]	  This can happen with machine learning a lot, right?
+[0:13:03.76 --> 0:13:07.30]	  So because at the end, these methods are probabilistic.
+[0:13:07.64 --> 0:1]	  So I think like this can happen that a model just gets lucky to guard against cases like this.
+[0:13:15.34 --> 0:13:21.90]	  What we do instead of holding out just one dataset, we actually hold out two dataset.
+[0:13:22.40 --> 0:13:24.24]	  So let's say this is our dataset.
+[0:13:24.58 --> 0:13:30.90]	  So we take 20% of this data for validation purposes.
+[0:13:31.94 --> 0:13:37.14]	  We take 20% more for testing purposes.
+[0:13:37.98 --> 0:13:45.20]	  And we take the remaining 60% and by the way, the 60-20-20, this is not set as stone.
+[0:13:45.30 --> 0:13:50.64]	  It can be any value and the remaining 60% would take for training.
+[0:13:53.68 --> 0:14:03.30]	  So what we have is we have three not overlapping subsets of our data, training data, validation data and test data.
+[0:14:03.48 --> 0:14:09.34]	  And what we do next is we hide this dataset.
+[0:14:09.68 --> 0:14:10.92]	  So we just put it away.
+[0:14:11.42 --> 0:14:12.54]	  We forget about this.
+[0:14:13.22 --> 0:14:17.70]	  And we do the model selection in the same way as I described previously.
+[0:14:17.74 --> 0:14:30.22]	  So we take our X, we take our Y, we train our model G, then we take our X validation, Y validation, we apply G and we calculate all this accuracy and so on.
+[0:14:32.06 --> 0:14:35.12]	  And here at this step, we select the best model, right?
+[0:14:35.68 --> 0:14:38.34]	  So could be let's say neural network.
+[0:14:39.08 --> 0:14:42.10]	  So we did all this exercise of selecting the best model.
+[0:14:42.92 --> 0:14:50.36]	  And then next to make sure that this model didn't get particularly lucky on this validation set.
+[0:14:50.58 --> 0:14:55.94]	  What we do next is we apply this neural network to the test dataset.
+[0:14:56.30 --> 0:15:03.68]	  So we take the test dataset, we again extract our feature matrix or target variable from the test dataset.
+[0:15:04.34 --> 0:15:08.24]	  And we again do an extra round of validation on the test dataset.
+[0:15:08.76 --> 0:15:17.16]	  We just want to make sure that our model, the model we think is best is actually the best one.
+[0:15:17.78 --> 0:15:19.26]	  And this is how it works.
+[0:15:19.80 --> 0:15:19.92]	  Okay.
+[0:15:19.96 --> 0:15:29.24]	  So let's say for our example, so we had logistic regression, we have decision tree, we have random forest and we have a neural net.
+[0:15:30.86 --> 0:15:34.68]	  So I think this one was 60, 6% correct.
+[0:15:34.98 --> 0:15:36.06]	  This may be 60.
+[0:15:36.32 --> 0:15:36.94]	  I don't remember.
+[0:15:37.22 --> 0:15:40.38]	  I think this was 67 and this was 80.
+[0:15:41.36 --> 0:15:45.64]	  So we see, okay, this neural network is the best one, right?
+[0:15:46.62 --> 0:15:49.74]	  So what we do next is we take the neural network only.
+[0:15:50.14 --> 0:15:54.24]	  We forget about this and we take our test dataset.
+[0:15:56.08 --> 0:16:00.50]	  And now we apply the neural network to the test dataset and get a number.
+[0:16:00.70 --> 0:16:05.28]	  And we see that say the number is, it says the accuracy is 79%.
+[0:16:05.28 --> 0:16:09.92]	  And then we say, okay, we have 80% here, we have 78% here.
+[0:16:10.24 --> 0:16:11.44]	  It's very close.
+[0:16:11.54 --> 0:16:12.38]	  It's reasonably close.
+[0:16:12.54 --> 0:16:16.96]	  And we conclude that this model behaves quite well.
+[0:16:17.40 --> 0:16:20.72]	  So this process is called the model selection process.
+[0:16:21.30 --> 0:16:27.58]	  And this is one of the most important things in machine learning to be able to actually set this up.
+[0:16:28.24 --> 0:16:29.86]	  And this is quite simple.
+[0:16:30.42 --> 0:16:34.76]	  Like as you see, all we need to do is we need to split our dataset into three parts.
+[0:16:35.70 --> 0:16:42.54]	  So let me just, so first one is split the dataset, split the dataset.
+[0:16:42.90 --> 0:16:45.26]	  So these are first step, right?
+[0:16:47.60 --> 0:16:51.26]	  Then what you do next is you train a model.
+[0:16:52.88 --> 0:16:58.24]	  Then you validate the model using the validation dataset.
+[0:16:58.70 --> 0:17:00.46]	  If you remember, we have three dataset.
+[0:17:01.18 --> 0:17:02.86]	  So the first one is train.
+[0:17:03.70 --> 0:17:06.72]	  Then we have validation and we have test dataset.
+[0:17:07.80 --> 0:17:10.48]	  So we split it into three parts.
+[0:17:10.84 --> 0:17:12.64]	  We train our model, training dataset.
+[0:17:13.12 --> 0:17:15.86]	  We apply the model to the validation dataset.
+[0:17:17.72 --> 0:17:24.42]	  And we see, we record what is the accuracy or how good it is.
+[0:17:24.62 --> 0:17:29.04]	  And we see that for logistic regression, it's 66%, right?
+[0:17:30.22 --> 0:17:37.66]	  And we repeat these two steps, three and four, two and three, how many times we need.
+[0:17:37.66 --> 0:17:40.92]	  So we can repeat it for many, many different models.
+[0:17:41.24 --> 0:17:49.34]	  And then we will have this table like on the previous slide for different models, different values, right?
+[0:17:50.10 --> 0:17:51.76]	  So then what happens next?
+[0:17:52.12 --> 0:17:57.96]	  We did this for many different models and we select the best one.
+[0:18:02.24 --> 0:18:03.44]	  Select the best.
+[0:18:04.66 --> 0:18:05.54]	  So we have that.
+[0:18:06.18 --> 0:18:17.82]	  And then we, using the best value, the best model we have from the previous step, we apply it to the test data.
+[0:18:18.28 --> 0:18:21.94]	  And this is our, like we check if everything is good.
+[0:18:24.14 --> 0:18:27.18]	  And this is the model selection process, right?
+[0:18:27.18 --> 0:18:47.62]	  So it's a six step process, split the data into three parts, do the model selection on the validation dataset, and then at the end, make sure that the model didn't get particularly lucky by testing it one more time.
+[0:18:48.58 --> 0:18:53.40]	  Usually, like here between four and five.
+[0:18:53.88 --> 0:18:56.52]	  So let me just create another slide.
+[0:18:57.40 --> 0:19:03.48]	  So we have this 100% of our data, right?
+[0:19:04.16 --> 0:19:11.72]	  So we have 20% for training and we have 20%.
+[0:19:15.54 --> 0:19:19.10]	  We have 20% for validation.
+[0:19:20.96 --> 0:19:25.18]	  So train validation test.
+[0:19:26.60 --> 0:19:29.20]	  So we train a model here, right?
+[0:19:29.30 --> 0:1]	  And we use only 60%.
+[0:1 --> 0:19:39.22]	  And we use 60% of training, we validate, and then we do the testing.
+[0:19:39.40 --> 0:19:44.30]	  And here, this dataset is kind of, this part of the data is kind of wasted.
+[0:19:44.52 --> 0:19:45.86]	  So we only use it for checking.
+[0:19:46.34 --> 0:19:57.94]	  So what we can actually do is instead of just throwing this away completely, what we can do is we first do the model selection processes usual.
+[0:19:58.42 --> 0:20:10.28]	  But then we take the training data, take the validation dataset and combine them into one big train data.
+[0:20:12.62 --> 0:20:19.24]	  Then we train a model, like model G, and then we apply it for testing data.
+[0:20:19.44 --> 0:20:27.82]	  So in this case, we will not just throw away with the validation data, we will use it for training in U model G, right?
+[0:20:28.40 --> 0:20:32.22]	  Which should be a bit better because it uses more data for training.
+[0:20:32.78 --> 0:20:42.70]	  And then we check it against the test dataset and see, okay, this model indeed didn't get just like on the validation set, it was actually good.
+[0:20:42.70 --> 0:20:48.74]	  And this way we don't throw away validation set, we still use it for our final model.
+[0:20:50.54 --> 0:20:54.40]	  So this was a bit theoretical introduction.
+[0:20:55.58 --> 0:21:02.40]	  And in the next section, we actually will use all these things in practice, we will code everything.
+[0:21:03.10 --> 0:21:07.06]	  But to be able to do this, we need to know some tools.
+[0:21:07.40 --> 0:21:08.66]	  So we use Python for that.
+[0:21:08.94 --> 0:21:15.12]	  And in Python, there are some libraries that we use, like NumPy, Pandas and other libraries.
+[0:21:15.92 --> 0:21:17.52]	  So they are pretty important.
+[0:21:17.70 --> 0:21:27.42]	  So before we move to the practical part of client machine learning, we will cover libraries like NumPy in the next lesson.
+[0:21:28.28 --> 0:21:31.80]	  And we will cover Pandas in the lesson after that.

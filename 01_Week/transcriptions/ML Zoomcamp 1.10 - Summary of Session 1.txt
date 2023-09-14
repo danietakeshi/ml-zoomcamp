@@ -1,0 +1,56 @@
+[0:0 --> 0:00:06.08]	  Welcome back. This is the last video for this session and we'll just do a short summary of what we learned.
+[0:00:07.34 --> 0:00:14.34]	  So in the first lesson we did a quick introduction into machine learning and we talked about
+[0:00:14.34 --> 0:00:22.04]	  the car price prediction example. So we wanted to predict the price of a car and we looked at
+[0:00:22.88 --> 0:00:30.84]	  what the features are. So the features are all the characteristics of a car that we have. So this
+[0:00:30.84 --> 0:00:37.74]	  is everything we know about the car and then we have the target variable. This is what we want to
+[0:00:37.74 --> 0:00:46.24]	  predict about the car. So these things go to a machine learning algorithm and the output is a
+[0:00:47.06 --> 0:00:54.70]	  model and model is something we can use later to predict the prices for cars for which we don't
+[0:00:54.70 --> 0:01:00.68]	  know prices. So if there are some cars, let's say for this Audi we don't know what the price is,
+[0:01:01.10 --> 0:01:08.58]	  we put it inside a model and the model tells us that the price for this car is 23,000. In the second
+[0:01:08.58 --> 0:01:14.86]	  lesson we compared the rule-based systems with machine learning. So in the rule-based system
+[0:01:15.32 --> 0:01:20.68]	  humans come up with rules and then convert these rules into a programming language
+[0:01:20.68 --> 0:01:28.42]	  like Python and we talked about an example of spam prediction. So in a rule-based system we would
+[0:01:28.42 --> 0:01:33.04]	  manually analyze the data, we'll try to extract patterns from this data, encode them as rules
+[0:01:33.04 --> 0:01:40.42]	  and it becomes quite messy over time and with machine learning we don't have this problem
+[0:01:40.42 --> 0:01:47.76]	  because we don't need to encode this manually and models extract patterns themselves. So they pick,
+[0:01:48.20 --> 0:01:56.20]	  they just look at the training data, at our features and they use statistics and mathematics
+[0:01:56.20 --> 0:02:04.74]	  to figure out what are the patterns present in these features and what we can use to actually
+[0:02:04.74 --> 0:02:12.52]	  make a decision if something is a spam or not. Then we talked about this concept of supervised
+[0:02:12.52 --> 0:02:18.74]	  learning because both these examples of price prediction and spam prediction is supervised
+[0:02:18.74 --> 0:02:25.40]	  learning because we have the target variable. So the y here is our target variable. So this is the
+[0:02:25.40 --> 0:02:31.98]	  information we want to predict. We know this and this is something we want to learn. So our model
+[0:02:32.72 --> 0:02:42.24]	  g, so this is a model. So the model extracts patterns from data and then for data for which we
+[0:02:42.24 --> 0:02:48.42]	  don't know the price, so this is our feature matrix capital X, we apply the model and we get
+[0:02:48.42 --> 0:02:57.98]	  something that is close as possible to target. Then we talked about the bigger picture, so modeling,
+[0:02:57.98 --> 0:03:07.26]	  so this machine learning, so this is like this g from x equals y. So this is only a part of the
+[0:03:07.26 --> 0:03:12.70]	  entire process and in addition to modeling there are many other things. So from business
+[0:03:12.70 --> 0:03:18.50]	  understanding when we need to understand the problem then all like about understanding data
+[0:03:18.50 --> 0:03:25.28]	  sources about preparing the data because this x needs to be prepared in the right form.
+[0:03:25.30 --> 0:03:31.44]	  Right, so we can actually put this in a model and then of course there is also a deployment
+[0:03:31.44 --> 0:03:38.82]	  step because without this deployment step even the best model is not useful. So and machine learning
+[0:03:38.82 --> 0:03:46.70]	  is just a part of the entire process. We talked then in more details about this, the modeling step
+[0:03:46.70 --> 0:03:55.02]	  and we talked about the process of selecting the best model and there we take the entire data set
+[0:03:55.28 --> 0:04:02.72]	  we split it into three parts and we use one part validation data set for finding the best model
+[0:04:02.72 --> 0:04:09.44]	  and then we use another part training testing data set to make sure that we don't accidentally
+[0:04:09.44 --> 0:04:20.12]	  pick a model that got good results just by chance. Then lesson six wasn't really a lesson so you just
+[0:04:20.12 --> 0:04:27.16]	  need to install all the environment. So for this course we need NumPy, Pandas, Second Learn,
+[0:04:27.30 --> 0:04:34.88]	  and Mattoop Sleep and the easiest option to get all of these is to install an Aconda and
+[0:04:34.88 --> 0:04:40.40]	  for those who are interested it's also possible to actually create a server to rent a server on
+[0:04:40.40 --> 0:04:47.76]	  AWS or other cloud providers and use it as well. Then in lesson seven we talked about NumPy so
+[0:04:47.76 --> 0:04:55.32]	  NumPy is a library in Python for manipulating numerical data, so numerical arrays, and we talked
+[0:04:55.32 --> 0:05:01.76]	  about different operations that are useful for data science and machine learning that are available
+[0:05:01.76 --> 0:05:09.48]	  in NumPy. Then in the lesson eight we talked about linear algebra, we talked about multiplication,
+[0:05:09.96 --> 0:05:16.42]	  so we talked about vector vector multiplication, so if you remember we had two vectors u and v
+[0:05:16.42 --> 0:05:21.64]	  and we talked about multiplication between them, then we talked about matrix vector multiplication
+[0:05:21.64 --> 0:05:30.76]	  when one is matrix, you know, this capital u and then rt is letter, small letter v, and then we
+[0:05:30.76 --> 0:05:36.36]	  talked about matrix-matrix multiplication. And in all these cases, so for matrix-matrix
+[0:05:36.36 --> 0:05:42.42]	  multiplication it's possible to express matrix-matrix multiplication as a set of matrix vector
+[0:05:42.94 --> 0:05:50.50]	  multiplications and also matrix vector multiplications possible to express as a bunch of vector vector
+[0:05:50.50 --> 0:05:57.52]	  multiplications. And we saw that actually if you implement everything in code the formulas no longer
+[0:05:57.52 --> 0:06:03.84]	  look scary. And then finally in lesson nine we talked about pandas which is a library in Python
+[0:06:04.86 --> 0:06:12.24]	  for processing tableware data, basically dealing with tables and the main abstraction there is a
+[0:06:12.24 --> 0:06:20.30]	  data frame and we talked about different operations that we can do with pandas. And that's it, that's
+[0:06:20.30 --> 0:06:27.72]	  what we covered. And in the next session we will do something practical, so in this this session
+[0:06:27.72 --> 0:06:34.52]	  was more abstract, it was about like more abstract things like okay what you can do with machine
+[0:06:34.52 --> 0:06:40.10]	  learning, what you can do with numpy, what you can do with pandas, but in the next session we will
+[0:06:40.10 --> 0:06:45.04]	  actually do a project, we will predict the price of a car. So stay tuned.
