@@ -1,6 +1,6 @@
 # Lessons in Machine Learning Project Organization
 
-In this transcription, we are introduced to a lesson on organizing machine learning projects, which is part of a broader course called "Machine Learning in ZoomCamp." The speaker discusses the importance of structuring machine learning projects effectively and introduces the CRISP-DM methodology as a framework for organizing these projects.
+In this transcription, we are introduced to a lesson on organizing machine learning projects, which is part of a broader course called "Machine Learning ZoomCamp." The speaker discusses the importance of structuring machine learning projects effectively and introduces the CRISP-DM methodology as a framework for organizing these projects.
 
 ## Introduction
 
