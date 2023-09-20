@@ -1,0 +1,125 @@
+[0:0 --> 0:00:03.86]	  In this lesson, we will build a baseline model
+[0:00:03.86 --> 0:00:05.92]	  for predicting the price of a car.
+[0:00:06.22 --> 0:00:11.70]	  In the previous lesson, we saw how to train a linear regression model.
+[0:00:12.32 --> 0:00:18.58]	  What we want to do is we will use this code that we wrote in the previous lesson.
+[0:00:19.12 --> 0:00:22.50]	  Now we will use it to build a baseline model.
+[0:00:23.20 --> 0:00:27.76]	  For that, what we need to do is take a look at our data frame.
+[0:00:28.46 --> 0:00:34.90]	  What we have here is a data frame from which we want for now for the baseline model
+[0:00:34.90 --> 0:00:39.52]	  extract use all the numerical columns.
+[0:00:39.96 --> 0:00:43.94]	  We can again take a look at the numerical columns we have.
+[0:00:44.38 --> 0:00:44.98]	  D-types.
+[0:00:46.48 --> 0:00:56.88]	  We have engine HP, engine horsepower, we have a number of cylinders.
+[0:00:57.76 --> 0:01:01.50]	  We have miles per gallon on highway.
+[0:01:02.08 --> 0:01:06.40]	  We have miles per gallon in city and we have popularity.
+[0:01:06.90 --> 0:01:09.18]	  We have this five.
+[0:01:10.18 --> 0:01:14.38]	  Let's build the model using this five.
+[0:01:15.54 --> 0:01:24.68]	  So for that, what we can do is first write a list with all these feature names.
+[0:01:25.20 --> 0:01:30.14]	  So let me just use columns here.
+[0:01:31.46 --> 0:01:37.96]	  So here we have engine horsepower, then we have engine cylinders,
+[0:01:40.30 --> 0:01:45.14]	  then we have these three.
+[0:01:54.60 --> 0:01:56.06]	  So we have five of them.
+[0:0 --> 0:02:05.46]	  Remember, if we want to get a subset of columns, we just use...
+[0:02:05.46 --> 0:02:09.54]	  So we put this subset of columns in the variable code base.
+[0:02:09.54 --> 0:02:13.46]	  Base just basic features.
+[0:02:14.10 --> 0:02:14.82]	  So we have them.
+[0:02:15.54 --> 0:02:22.28]	  And what we need to do now is to extract the values from here.
+[0:02:23.16 --> 0:02:24.58]	  So let's do that.
+[0:02:26.58 --> 0:02:31.54]	  Okay, so let's do...
+[0:02:31.54 --> 0:02:32.48]	  Let's call it X-Train.
+[0:02:32.84 --> 0:02:36.56]	  First, we have this D-F-Train base.
+[0:02:36.64 --> 0:02:40.22]	  And we use values to extract the dump array.
+[0:02:40.86 --> 0:02:46.24]	  So we can put this as our X-Train.
+[0:02:46.90 --> 0:02:51.74]	  And then we have Y-Train already.
+[0:02:53.46 --> 0:02:54.28]	  We have that.
+[0:0 --> 0:02:57.82]	  And what we want to do now is train a model.
+[0:02:58.92 --> 0:03:02.46]	  So we use train linear regression.
+[0:03:08.04 --> 0:03:08.52]	  Sorry.
+[0:03:08.62 --> 0:03:10.10]	  And we have a problem.
+[0:03:10.32 --> 0:03:11.22]	  So we have NANDs here.
+[0:03:11.92 --> 0:03:15.24]	  And the reason we have NANDs is if you remember...
+[0:03:15.24 --> 0:03:18.82]	  So let's just take a look at this.
+[0:03:19.26 --> 0:03:20.90]	  If you remember, we have some missing values.
+[0:03:21.98 --> 0:03:26.06]	  So we can just quickly check if there are any missing values.
+[0:03:26.26 --> 0:03:30.56]	  Yeah, so we have missing values in engine horsepower and then engine cylinders.
+[0:03:31.32 --> 0:03:34.04]	  So we need to do something with these missing values.
+[0:03:34.48 --> 0:03:38.76]	  So the easiest thing we can do with them is just fill them with zero.
+[0:03:40.06 --> 0:03:42.70]	  Fill NA0.
+[0:0 --> 0:03:50.68]	  And then now if you do this now again...
+[0:03:50.68 --> 0:03:51.54]	  And sum.
+[0:03:53.32 --> 0:03:54.50]	  That should be nothing.
+[0:03:55.40 --> 0:04:00.56]	  And by filling missing values with zero, we kind of...
+[0:04:00.56 --> 0:04:02.98]	  We make the model ignore these features.
+[0:04:02.98 --> 0:04:05.72]	  So let's say we have our model.
+[0:04:06.16 --> 0:04:12.60]	  Our model is again G4XE, which is...
+[0:04:12.60 --> 0:04:15.62]	  In our case, we have five features.
+[0:04:16.36 --> 0:04:24.80]	  So let's say we have this W0, then XI1W1.
+[0:04:25.58 --> 0:04:30.18]	  Then let's just use in our example...
+[0:04:30.18 --> 0:04:32.22]	  Two features.
+[0:04:34.76 --> 0:04:38.78]	  And let's say that this variable here...
+[0:04:38.78 --> 0:04:40.54]	  This value here is missing.
+[0:04:44.20 --> 0:04:50.30]	  So what we can do is we can just say, okay, let this value be zero.
+[0:04:50.86 --> 0:04:56.26]	  And when we do this, what we get in turn is
+[0:05:01.28 --> 0:05:04.62]	  W0 plus XI2 times W2.
+[0:05:05.48 --> 0:05:09.12]	  So effectively, we just ignore that these features exist.
+[0:05:09.88 --> 0:05:14.86]	  So zero is not always the best way to deal with missing variables.
+[0:05:16.12 --> 0:05:19.12]	  And if you think about this, let's say if...
+[0:05:19.12 --> 0:05:24.84]	  This is like, for example, could be engine horsepower.
+[0:05:26.26 --> 0:05:32.28]	  So it doesn't make much sense for a car to have zero horsepower.
+[0:05:33.36 --> 0:0]	  It's typically there are more or in case of cylinders.
+[0:05:37.88 --> 0:05:42.48]	  The engines with zero cylinders don't exist.
+[0:05:42.90 --> 0:05:45.76]	  So from common sense point of view, maybe replacing it with zero
+[0:05:45.76 --> 0:05:47.38]	  doesn't make much sense.
+[0:05:47.58 --> 0:05:50.12]	  But from practical point of view, when it comes to machine learning,
+[0:05:50.58 --> 0:05:52.38]	  sometimes zero works fine.
+[0:05:52.50 --> 0:05:58.60]	  And of course, in the previous lecture, we saw in homework as well,
+[0:05:58.78 --> 0:06:04.20]	  how to feel missing values with non-zeroes, with mean values.
+[0:06:04.90 --> 0:06:07.90]	  It just makes the process a bit complicated.
+[0:06:08.22 --> 0:06:11.14]	  That's why we'll just go with zeros.
+[0:06:11.66 --> 0:06:12.64]	  So let's do that.
+[0:06:13.80 --> 0:06:16.58]	  So we X train.
+[0:06:18.78 --> 0:06:23.54]	  And now our X train shouldn't have any missing values.
+[0:06:24.06 --> 0:06:26.02]	  And that's why training finishes.
+[0:06:26.28 --> 0:06:29.36]	  So let's just write like that.
+[0:06:29.68 --> 0:06:32.80]	  So we have our bias term and we have our W.
+[0:06:33.12 --> 0:06:35.96]	  Now we can use these weights to make predictions.
+[0:06:36.82 --> 0:06:41.76]	  So let's say we can now for now just apply the same model
+[0:06:41.76 --> 0:06:45.12]	  that we just trained to the same data set, to train data set.
+[0:06:45.40 --> 0:06:49.10]	  And for that, remember we use matrix multiplication.
+[0:06:49.92 --> 0:06:54.08]	  So we just multiply our training matrix,
+[0:06:54.98 --> 0:06:57.24]	  future matrix with our W.
+[0:06:57.74 --> 0:06:58.96]	  And we get the predictions.
+[0:06:59.60 --> 0:07:02.58]	  And we forgot the bias term.
+[0:07:03.56 --> 0:07:05.34]	  So we get the predictions.
+[0:07:05.92 --> 0:07:07.92]	  And let's call it Y underscore pret.
+[0:07:08.76 --> 0:07:10.30]	  So these are our predictions.
+[0:07:10.86 --> 0:07:14.50]	  Now we can plot these predictions to see if they look similar to the
+[0:07:15.12 --> 0:07:18.04]	  original to the target variable that we want to predict.
+[0:07:18.50 --> 0:07:22.96]	  And for that, we can use the same histogram
+[0:07:22.96 --> 0:07:28.10]	  function from C-Born that we used already.
+[0:07:28.48 --> 0:07:29.52]	  So it's his plot.
+[0:07:30.14 --> 0:07:33.94]	  And then the first one will plot predictions.
+[0:07:35.02 --> 0:07:41.02]	  And then the second one will plot the train variable.
+[0:07:43.32 --> 0:07:45.80]	  So they now they have the same color.
+[0:07:45.96 --> 0:07:47.66]	  So let's change it a little bit.
+[0:07:48.08 --> 0:07:56.68]	  The color could be, let's say first red, the second one blue.
+[0:07:58.62 --> 0:08:00.20]	  So now it's better.
+[0:08:00.64 --> 0:08:04.80]	  We can just have a little bit fewer bins.
+[0:08:05.34 --> 0:08:07.68]	  Let's go with 50.
+[0:08:10.78 --> 0:08:13.10]	  We can make them a bit more transparent.
+[0:08:14.74 --> 0:08:20.38]	  Alpha is the variable, it's the parameter that controls how transparent
+[0:08:20.38 --> 0:08:22.24]	  these colors are.
+[0:08:23.68 --> 0:08:25.32]	  So they are now more transparent.
+[0:08:26.38 --> 0:08:34.76]	  So here what we have, these are target variables, values, target.
+[0:08:35.38 --> 0:08:36.54]	  And these are predictions.
+[0:08:38.98 --> 0:08:43.54]	  So we see that the shape of predictions is like that.
+[0:08:43.72 --> 0:08:46.38]	  It's off, like it's always less.
+[0:08:46.96 --> 0:08:48.62]	  You see that the peak is here.
+[0:08:49.12 --> 0:08:52.10]	  So even peaks of the distributions don't match.
+[0:08:52.52 --> 0:08:53.78]	  So it always predicts.
+[0:08:53.80 --> 0:08:59.98]	  In many cases, it seems to predict smaller value than it actually is.
+[0:09:00.52 --> 0:09:06.58]	  Just by looking at this chart, at this plot, we see that our model might not be ideal.
+[0:09:07.06 --> 0:09:12.44]	  But we need to have an objective way of saying that is this model good or not good?
+[0:09:12.74 --> 0:09:17.54]	  And when we start improving our model, we want to make sure that we indeed improve
+[0:09:17.54 --> 0:09:19.92]	  our model, not just by looking at the charts.
+[0:09:20.88 --> 0:09:24.76]	  And for that, in the next session, we will talk about root mean square there,
+[0:09:24.94 --> 0:09:31.04]	  which is a way to objectively evaluate the performance of regression models.

@@ -1,0 +1,227 @@
+[0:0 --> 0:00:04.18]	  learning zoom comp session two, and we will talk about setting up the validation framework.
+[0:00:05.22 --> 0:00:17.44]	  And so if you remember, for from the last, from the last session, we talked about validating models, and we talked about this model selection process.
+[0:00:17.44 --> 0:00:25.02]	  And we talked that we need to take our data set for for validating the model, we need to take our data set.
+[0:00:26.30 --> 0:00:30.12]	  And split it into three parts. So the first part used for training.
+[0:00:30.74 --> 0:00:34.02]	  The second part we use for validation.
+[0:00:35.10 --> 0:00:37.08]	  And the last part we use for testing.
+[0:00:38.14 --> 0:00:51.32]	  So we train a model, we check it if it works fine on validation data set, and we leave this, we leave this test data set only at the end.
+[0:00:51.32 --> 0:00:56.58]	  So we use it only very, very occasionally, very infrequently, only to check if our model is doing good.
+[0:0 --> 0:01:01.50]	  So we need to take our data set and now split it into three parts.
+[0:01:03.22 --> 0:01:05.80]	  Train, validation and test.
+[0:01:06.66 --> 0:01:17.20]	  And then from each of these parts, we create, you know, this feature matrix, matrix six X and then target variable Y.
+[0:01:17.48 --> 0:01:18.78]	  So this is a train.
+[0:01:20.40 --> 0:01:22.06]	  So this one is validation.
+[0:01:23.16 --> 0:01:26.32]	  And also the one for test.
+[0:01:30.62 --> 0:01:33.44]	  So this is what we need to do right now.
+[0:01:33.68 --> 0:01:36.58]	  So this is what we'll do now with pandas.
+[0:01:38.12 --> 0:01:43.62]	  So first of all, we need to, we will do this 20% split.
+[0:01:44.56 --> 0:01:46.60]	  So it will be 20%.
+[0:01:46.60 --> 0:01:48.68]	  20%.
+[0:01:52.06 --> 0:01:51.34]	  And 60%.
+[0:01:51.34 --> 0:01:56.42]	  So we need to calculate how many 20% actually is.
+[0:01:57.02 --> 0:02:02.72]	  So the size of our data frame, actually, we should have looked at this at the very beginning when we just loaded.
+[0:02:03.16 --> 0:02:05.78]	  So it has almost 12,000 records.
+[0:02:06.94 --> 0:02:16.08]	  And 20% of that is approximately 2,400.
+[0:02:18.02 --> 0:02:23.86]	  So, and of course, we don't want to have a number that is a fraction.
+[0:02:24.64 --> 0:02:27.92]	  We want to have a number that is integer.
+[0:02:28.24 --> 0:02:30.66]	  So we round it using this int.
+[0:02:31.48 --> 0:02:34.58]	  So let's do this for all three.
+[0:02:35.44 --> 0:02:43.50]	  So this n variable will be the length of our data frame, then the size of validation.
+[0:02:44.50 --> 0:02:50.66]	  The other set will be 20% of n and then we round it.
+[0:02:51.96 --> 0:02:56.28]	  Then in test will be the same.
+[0:02:56.94 --> 0:03:01.16]	  This is the size of our test data set.
+[0:03:02.26 --> 0:03:09.36]	  And then in train, this will be the size of our train data set.
+[0:03:09.48 --> 0:03:17.60]	  So we can write here 0.6, but we can have a problem that now it can be different.
+[0:03:17.86 --> 0:03:20.66]	  So now let's check and test.
+[0:03:21.48 --> 0:03:24.72]	  So ideally, they should be the same.
+[0:03:25.50 --> 0:03:27.24]	  But you see because of rounding.
+[0:03:27.80 --> 0:03:30.32]	  So because here we probably we were rounding up.
+[0:03:30.64 --> 0:03:33.46]	  So that's why it's not the same.
+[0:03:33.46 --> 0:03:42.20]	  So like we cannot split it using these values because actually n here, the number of records
+[0:03:42.20 --> 0:03:47.58]	  in our data frame is actually bigger than the size of this.
+[0:03:48.32 --> 0:03:55.66]	  So for that, to make sure that we don't accidentally leave a few records, what we do is we instead
+[0:03:55.66 --> 0:04:09.30]	  of doing that, we just take this part out, take this part out and whatever is there after
+[0:04:09.30 --> 0:04:12.48]	  taking these two out, we take for training.
+[0:04:13.28 --> 0:04:18.86]	  For that, we just do n minus n validation, minus n test.
+[0:04:20.34 --> 0:04:22.48]	  And yeah, so this now they should add up.
+[0:04:22.76 --> 0:04:24.82]	  So now they they're the same.
+[0:04:26.44 --> 0:0]	  And then so now we know the size of which of which.
+[0:0 --> 0:04:34.30]	  So just look at the size.
+[0:04:34.98 --> 0:04:36.48]	  Which data set.
+[0:04:36.64 --> 0:04:40.66]	  So for training, it's 7000 for validation.
+[0:04:41.12 --> 0:04:44.56]	  It's 2000, almost 400.
+[0:04:45.12 --> 0:04:46.46]	  So this is what we use for.
+[0:04:48.12 --> 0:04:50.64]	  So these are the sizes of our data frames.
+[0:04:51.42 --> 0:04:58.10]	  So now we know the size and we need to take a part of the data frame out of this size.
+[0:04:58.58 --> 0:05:04.40]	  So for that, we can use this I lock thing that we talked about.
+[0:05:05.12 --> 0:05:16.02]	  And I lock instead of just the interaction to pandas, we talked about this I lock and
+[0:05:16.02 --> 0:05:24.46]	  we mentioned that it's possible to give it a list and it will return a data frame a subset
+[0:05:24.46 --> 0:05:25.26]	  of the data frame.
+[0:05:25.46 --> 0:05:27.82]	  It's actually possible to use a range.
+[0:05:28.16 --> 0:05:28.50]	  A range.
+[0:05:28.78 --> 0:05:33.20]	  So let's say if we want to get 10 first records, we can do something like this.
+[0:05:33.36 --> 0:05:36.06]	  So it means from the beginning till 10.
+[0:05:36.20 --> 0:05:38.90]	  So it's again not exclusive.
+[0:05:39.22 --> 0:05:41.32]	  So it's from zero to nine.
+[0:05:41.74 --> 0:0]	  And we get first records.
+[0:05:45.52 --> 0:05:50.12]	  And it also works like, let's say we wanted to get from 10 to 20.
+[0:05:50.86 --> 0:05:51.94]	  We do this.
+[0:05:52.46 --> 0:05:59.78]	  And let's say if we want to get something till the end, how many records are there?
+[0:06:03.50 --> 0:06:10.74]	  So let's say 10.
+[0:06:11.30 --> 0:06:13.10]	  Just want to get remaining four.
+[0:06:13.70 --> 0:06:14.76]	  So this is how we do it.
+[0:06:14.76 --> 0:06:20.84]	  So it just knows that if we use this notation, it treats from this one to the end.
+[0:06:21.44 --> 0:06:21.44]	 
+[0:06:23.04 --> 0:06:29.04]	  So this, so potentially what we can do is we can say, okay, let's give us just the first
+[0:06:29.04 --> 0:06:33.94]	  2,382 records and we will use them for validation.
+[0:06:34.84 --> 0:06:36.54]	  And then the next records.
+[0:06:37.22 --> 0:06:40.38]	  So let's say that will be the first one.
+[0:06:40.58 --> 0:06:42.98]	  Let's call it data frame validation.
+[0:06:45.04 --> 0:07:00.44]	  Then we can say everything that is after this one and to the next, whatever, 4,700 something
+[0:07:00.44 --> 0:07:03.32]	  will be test data set.
+[0:07:03.60 --> 0:0]	  So we actually need to sum them.
+[0:07:06.20 --> 0:07:10.76]	  So this is test.
+[0:07:12.58 --> 0:07:14.14]	  So now we have this 2.
+[0:07:14.34 --> 0:07:18.88]	  And then let's say data frame train will be everything that is left.
+[0:07:19.74 --> 0:07:26.46]	  So we just take this one and use till the end.
+[0:07:26.92 --> 0:07:29.16]	  And then now we have this.
+[0:07:30.10 --> 0:07:31.14]	  So here is a problem.
+[0:07:31.42 --> 0:07:33.84]	  We have a problem here that it's sequential.
+[0:07:34.30 --> 0:07:40.74]	  So let's say in our validation data set, now we have all the BM double BM double
+[0:07:42.16 --> 0:07:44.52]	  use and we don't have BM double is in train.
+[0:07:45.04 --> 0:07:45.04]	 
+[0:07:45.04 --> 0:07:49.22]	  So we see if there is some order in this, in this data set.
+[0:07:49.34 --> 0:07:55.66]	  So we need to shuffle these records to make sure that there are BM double use in all
+[0:07:55.66 --> 0:07:56.72]	  three data sets.
+[0:07:56.82 --> 0:0]	  Right.
+[0:07:57.22 --> 0:08:02.56]	  And in general, it's always a good idea to shuffle data to make sure if there is some
+[0:08:02.56 --> 0:08:06.94]	  accidental order in the data, we want to break it.
+[0:08:07.58 --> 0:08:18.08]	  So for that, what we can do is if you remember that we can in this I look, we can use, we
+[0:08:18.08 --> 0:08:24.90]	  can just specify an arbitrary sequence of numbers and it will return them in this order.
+[0:08:25.12 --> 0:08:34.68]	  So what we can do is we can take numbers from, can take numbers from zero to N, then we
+[0:08:34.68 --> 0:08:35.74]	  can reshuffle them.
+[0:08:36.94 --> 0:08:43.52]	  And we can, so these are numbers that say from zero to N minus one.
+[0:08:44.40 --> 0:08:44.44]	  Right.
+[0:08:44.62 --> 0:08:45.92]	  So we reshuffle them.
+[0:08:46.58 --> 0:08:54.66]	  So we have like 10 here, one, then 10,000 and so on here, zero, for example.
+[0:08:55.18 --> 0:08:56.08]	  So we reshuffle them.
+[0:08:56.08 --> 0:09:09.78]	  And then we take first 20% for validation and 20% for, for, for test and then remaining
+[0:09:09.78 --> 0:09:11.66]	  for train.
+[0:09:13.32 --> 0:09:16.10]	  Okay.
+[0:09:17.84 --> 0:09:20.16]	  So let's implement that.
+[0:09:21.06 --> 0:09:30.30]	  And actually, I think if we do it slightly differently, I think it might make more sense
+[0:09:30.30 --> 0:09:31.14]	  to start with train.
+[0:09:31.70 --> 0:09:39.84]	  So let's say we take data from train first and then from train and train plus plus
+[0:09:39.84 --> 0:09:43.02]	  and validation and then we take the rest.
+[0:09:44.34 --> 0:09:52.42]	  So, yeah, it gets a bit more logical to, to first, to basically follow the same distribution.
+[0:09:52.62 --> 0:09:56.84]	  So first we take this out and this one and then this out.
+[0:09:58.40 --> 0:09:59.30]	  Okay.
+[0:09:59.82 --> 0:10:02.72]	  So now what we want to do is this one.
+[0:10:02.84 --> 0:10:07.84]	  So we want to generate a sequence of numbers from one to N minus one.
+[0:10:07.84 --> 0:10:12.42]	  For that we use a function from NumPy called a range.
+[0:10:12.72 --> 0:10:14.82]	  So it's doing exactly that.
+[0:1 --> 0:1]	  So it generates a sequence numbers.
+[0:10:17.22 --> 0:1]	  So let's call it IDX.
+[0:10:19.24 --> 0:10:20.72]	  It's short for index.
+[0:10:21.44 --> 0:10:24.78]	  And then what we want to do now is we want to shuffle it.
+[0:10:25.36 --> 0:10:28.92]	  So for that, there is a function in random called shuffle.
+[0:10:29.24 --> 0:10:30.24]	  And we just do that.
+[0:10:30.88 --> 0:10:34.20]	  And now our index is shuffled.
+[0:10:36.50 --> 0:10:47.46]	  And now let's say if we take first 60% of that, we can use this for our train data set.
+[0:10:47.76 --> 0:10:47.82]	  Right.
+[0:10:47.94 --> 0:10:53.74]	  So let's now just replace this here with this.
+[0:10:54.48 --> 0:11:00.34]	  So we just need to add one more thing inside.
+[0:11:00.34 --> 0:11:10.74]	  So instead of just getting rows directly from this, I look, we get them through this index.
+[0:11:11.58 --> 0:11:13.38]	  So maybe let me just show you.
+[0:11:15.38 --> 0:11:20.62]	  I look, let's see what happens if we take first time.
+[0:11:22.62 --> 0:11:24.30]	  It should be shuffled.
+[0:11:25.52 --> 0:11:25.90]	  Yeah.
+[0:11:26.14 --> 0:11:27.12]	  So when it's shuffled.
+[0:11:28.56 --> 0:11:29.04]	  Yeah.
+[0:11:29.18 --> 0:11:32.50]	  So you see it takes first 10 in shuffled order.
+[0:11:33.08 --> 0:11:33.46]	  Right.
+[0:11:33.82 --> 0:11:41.88]	  So we want to do this, but not 10, but the number of records we have like 60% and 20% 20%.
+[0:11:41.88 --> 0:11:45.28]	  And this is what we have.
+[0:11:47.38 --> 0:11:49.40]	  Yeah.
+[0:11:49.74 --> 0:11:50.50]	  So we did the split.
+[0:11:51.28 --> 0:11:57.10]	  The problem with this, when you run it on your computer, you will have different records here.
+[0:11:57.10 --> 0:12:03.12]	  So the first one will not be Porsche, but will be something else or not GMC, but something else.
+[0:12:03.60 --> 0:12:05.38]	  To make sure it's reproducible.
+[0:12:06.30 --> 0:1]	  We usually set a random seat.
+[0:12:08.18 --> 0:12:11.58]	  We talked a bit about that in the introduction to NumPy.
+[0:1 --> 0:12:13.66]	  So we want to make results reproducible.
+[0:12:14.18 --> 0:12:17.50]	  So for that we use a seat.
+[0:12:18.38 --> 0:12:18.80]	  Right.
+[0:12:18.84 --> 0:12:21.08]	  And we set seat to some number, let's say two.
+[0:12:21.80 --> 0:12:26.06]	  And let's again generate this index, then shuffle it.
+[0:12:26.92 --> 0:12:28.08]	  Then take a subset.
+[0:12:28.86 --> 0:12:30.56]	  So now the first one is shuffled.
+[0:12:30.84 --> 0:12:38.26]	  And if we do it one more time, it's again shuffled.
+[0:12:38.84 --> 0:12:42.62]	  So and on your computer, when you do this, if you have the same version of NumPy,
+[0:12:43.40 --> 0:12:47.66]	  you will have the same, you will have the same subset.
+[0:12:50.10 --> 0:12:51.38]	  Yeah.
+[0:12:51.62 --> 0:12:54.72]	  That's actually what we need to do.
+[0:12:54.72 --> 0:12:56.50]	  So now we have three datasets.
+[0:12:56.98 --> 0:12:59.78]	  Let's check the length of these datasets.
+[0:13:00.28 --> 0:13:06.78]	  Train, validation and test.
+[0:13:08.08 --> 0:13:11.54]	  So the match, I think something is wrong.
+[0:13:15.74 --> 0:13:20.14]	  There should be seven thousand.
+[0:13:20.48 --> 0:13:22.78]	  So let's check one more time.
+[0:13:28.28 --> 0:13:28.92]	  Yeah.
+[0:13:28.96 --> 0:13:30.64]	  Because it should be this way.
+[0:13:31.12 --> 0:13:31.56]	  Right.
+[0:13:31.66 --> 0:13:35.60]	  So it should be from zero to seven hundred.
+[0:13:37.58 --> 0:13:38.48]	  Okay.
+[0:13:40.70 --> 0:13:44.32]	  Now it's correct.
+[0:13:46.46 --> 0:13:50.78]	  And a few things before we finish.
+[0:13:51.26 --> 0:13:53.50]	  So now we see that when we look at train,
+[0:13:53.66 --> 0:13:58.40]	  we see that this index is changes.
+[0:13:59.06 --> 0:14:01.92]	  So here we have numbers in this order.
+[0:14:03.28 --> 0:14:05.78]	  So sometimes it's just inconvenient.
+[0:14:06.24 --> 0:14:12.68]	  So we don't really need to know what was the original index of this record.
+[0:14:13.06 --> 0:14:15.98]	  So what we can do is reset the index.
+[0:14:16.68 --> 0:14:20.40]	  We talked about this operation in the introduction.
+[0:14:20.40 --> 0:14:22.50]	  So we don't need this index column.
+[0:14:22.68 --> 0:14:23.54]	  That's why we drop it.
+[0:14:24.50 --> 0:14:31.72]	  And we basically reassigned it back to this data frame.
+[0:14:32.10 --> 0:14:36.28]	  So you see now it's from zero to seven thousand.
+[0:14:37.66 --> 0:14:42.10]	  Finally the same for test.
+[0:14:46.26 --> 0:14:46.94]	  Okay.
+[0:14:48.58 --> 0:14:53.48]	  And then we need to do some transformation with our Y.
+[0:14:54.28 --> 0:14:58.24]	  So this Df train, this is something we'll use to make our feature matrix X.
+[0:14:59.18 --> 0:15:08.54]	  But if you remember that in our Df train, this MSRP, we actually need to turn it to apply the lock transformation to this.
+[0:15:09.28 --> 0:15:12.50]	  Lock one P, I think.
+[0:15:14.30 --> 0:15:14.50]	  Yeah.
+[0:15:14.56 --> 0:15:15.78]	  So this is the lock transformation.
+[0:15:16.84 --> 0:15:27.04]	  And instead of keeping the series, let's immediately get the pandas values.
+[0:15:27.80 --> 0:15:31.98]	  So instead of using pandas series, let's get numpy.
+[0:15:32.34 --> 0:15:38.52]	  Numpy array immediately to use it because we don't need all these indexes and other things.
+[0:15:38.98 --> 0:15:43.18]	  And that will be our Y variable for train.
+[0:15:43.18 --> 0:15:47.72]	  And we do the same for validation and test.
+[0:15:51.38 --> 0:15:54.48]	  Okay.
+[0:15:54.58 --> 0:15:55.52]	  Now we have these variables.
+[0:15:56.22 --> 0:16:03.06]	  And the last thing that we need to do is we need to remove this MSRP variable from our data frame.
+[0:16:03.26 --> 0:16:05.30]	  For that we use the Dell operator.
+[0:16:06.18 --> 0:16:09.94]	  And we need to delete it because we might accidentally use it.
+[0:16:10.28 --> 0:16:11.70]	  And we want to avoid this.
+[0:16:11.70 --> 0:16:18.80]	  And if we accidentally use this, and then we will use the price variable as a feature for predicting price.
+[0:16:19.26 --> 0:16:21.28]	  And of course, our model will be perfect.
+[0:16:21.74 --> 0:16:25.80]	  And we might spend a lot of time figuring out what's wrong.
+[0:16:26.58 --> 0:16:29.86]	  And it happened to me many times.
+[0:16:30.52 --> 0:16:34.02]	  Like this target variable accidentally got into the data frame.
+[0:16:34.60 --> 0:16:39.78]	  And that's why I always try to delete it from our...
+[0:16:39.78 --> 0:16:45.26]	  After splitting the data, I try to delete this data, remove it out in a separate variable
+[0:16:45.26 --> 0:16:47.70]	  and delete it from the data frame completely.
+[0:16:48.86 --> 0:16:53.10]	  To make sure that I don't accidentally use it for training purposes.
+[0:16:54.76 --> 0:16:54.94]	  Okay.
+[0:16:55.48 --> 0:16:57.46]	  So now we have our data.
+[0:16:59.06 --> 0:17:01.22]	  And let's check the length.
+[0:1 --> 0:17:02.52]	  Should be correct.
+[0:17:03.96 --> 0:17:04.42]	  Yeah.
+[0:17:04.42 --> 0:17:10.30]	  So what we did in this lesson was we implemented this...
+[0:17:10.30 --> 0:17:16.74]	  We implemented this framework for validation manually.
+[0:17:17.24 --> 0:17:18.78]	  So we didn't use library for that.
+[0:17:18.88 --> 0:17:21.10]	  We just used the plain pandas and numpy for that.
+[0:17:21.72 --> 0:17:26.40]	  And we saw how to do a split our data set into three parts.
+[0:17:28.98 --> 0:17:34.78]	  And now we actually are ready to move to the training part.
+[0:17:35.02 --> 0:17:38.48]	  So in the next lesson, we will talk about linear regression.

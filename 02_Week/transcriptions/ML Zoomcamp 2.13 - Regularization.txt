@@ -1,0 +1,206 @@
+[0:00:00.02 --> 0:00:02.82]	  Welcome back, this is lesson 13 of machine learning
+[0:00:02.82 --> 0:00:04.04]	  in ZoomCamp session two,
+[0:00:04.18 --> 0:00:06.40]	  and we will talk about regularization.
+[0:00:07.10 --> 0:00:10.80]	  In the previous lesson, we added categorical variables.
+[0:00:11.10 --> 0:00:12.78]	  So we implemented some code for handling
+[0:00:12.78 --> 0:00:14.08]	  these categorical variables,
+[0:00:14.26 --> 0:00:17.90]	  and we added them to our prepareX function.
+[0:00:18.90 --> 0:00:21.02]	  And actually this is not the same code I used
+[0:00:21.02 --> 0:00:22.14]	  for the previous lesson.
+[0:00:22.36 --> 0:00:24.28]	  I lost this code and I had to rewrite it,
+[0:00:24.34 --> 0:00:28.08]	  but I think this is very similar to what we had to do.
+[0:00:28.94 --> 0:00:32.42]	  And then we extracted the feature matrix X,
+[0:00:32.74 --> 0:00:35.86]	  and then we had a very, very high root-means character.
+[0:00:36.24 --> 0:00:37.62]	  So I think in the previous video,
+[0:00:37.86 --> 0:00:42.50]	  it was a little bit lower, but yeah, it was very high.
+[0:00:42.68 --> 0:00:45.98]	  And when we looked at weights, the weights were very high.
+[0:00:46.74 --> 0:00:50.30]	  In this lesson, we will look why it happens.
+[0:00:50.88 --> 0:00:53.94]	  Remember the formula for normal equation is this.
+[0:00:54.44 --> 0:00:55.94]	  So for training our model,
+[0:00:55.94 --> 0:00:57.30]	  so we have this gram matrix,
+[0:00:58.12 --> 0:01:01.08]	  and then we multiply it by X transpose,
+[0:01:01.68 --> 0:01:05.94]	  and then we multiply it by Y, and this is our W.
+[0:01:06.82 --> 0:01:10.36]	  So the issue, the problem we have here is this,
+[0:01:10.82 --> 0:01:11.58]	  with this part.
+[0:01:12.18 --> 0:01:15.70]	  So we need to take inverse of this gram matrix.
+[0:01:16.02 --> 0:01:17.56]	  Sometimes this inverse doesn't exist.
+[0:01:18.18 --> 0:01:21.56]	  So it usually happens when we have X,
+[0:0 --> 0:01:23.44]	  which is our matrix, right?
+[0:01:23.44 --> 0:01:26.80]	  So we have multiple columns, multiple rows.
+[0:01:27.62 --> 0:01:30.62]	  And sometimes in this matrix, feature matrix,
+[0:01:31.34 --> 0:01:33.46]	  some features are, could be, let's say,
+[0:01:33.54 --> 0:01:35.90]	  we have column two and column three,
+[0:01:36.12 --> 0:01:37.54]	  they could be duplicate features.
+[0:01:38.56 --> 0:01:43.24]	  And in this case, usually the inverse of X transpose X
+[0:01:43.24 --> 0:01:46.60]	  doesn't exist, so we can quickly check it.
+[0:01:46.76 --> 0:01:48.54]	  So I prepared the matrix here,
+[0:01:49.54 --> 0:01:54.30]	  that see that the first column is different,
+[0:01:54.40 --> 0:01:56.70]	  but second and third, they have the same values.
+[0:01:56.98 --> 0:01:59.70]	  So it's a duplicate column.
+[0:02:00.72 --> 0:02:04.66]	  So let's turn it into an umpire.
+[0:02:05.04 --> 0:02:10.06]	  So we have this matrix X with our features,
+[0:02:10.34 --> 0:02:14.22]	  and now we want to compute this gram matrix.
+[0:02:15.84 --> 0:02:18.58]	  Here what we see is this column
+[0:02:18.58 --> 0:02:21.14]	  and this column has the same values.
+[0:02:21.52 --> 0:02:24.12]	  So in this case, when something like that happens,
+[0:02:24.98 --> 0:02:26.62]	  in a matrix we want to invert,
+[0:02:27.56 --> 0:02:29.70]	  the inverse simply doesn't exist,
+[0:02:29.82 --> 0:02:33.10]	  because there is, in linear algebra,
+[0:02:33.24 --> 0:02:35.78]	  we say that one column is a linear combination
+[0:02:35.78 --> 0:02:38.98]	  of other columns, which means that it's possible
+[0:02:38.98 --> 0:02:41.08]	  to express the column number three
+[0:02:41.08 --> 0:02:43.30]	  with other columns of the matrix,
+[0:02:43.30 --> 0:02:47.86]	  which is basically just a duplicate of column two.
+[0:02:48.28 --> 0:02:52.24]	  So let's see what happens when we try to inverse it,
+[0:02:52.44 --> 0:02:56.36]	  and then we use this function for computing the inverse,
+[0:02:57.18 --> 0:03:01.36]	  and it now complains that this matrix is singular,
+[0:03:01.90 --> 0:03:04.02]	  I cannot compute the inverse of this.
+[0:03:05.04 --> 0:03:09.66]	  So the inverse of this X transpose X doesn't always exist.
+[0:03:10.52 --> 0:03:14.36]	  This is not the case though for our particular problem.
+[0:03:14.52 --> 0:03:16.02]	  So here we didn't have any,
+[0:03:16.48 --> 0:03:18.16]	  so we didn't see this error,
+[0:03:18.98 --> 0:03:21.60]	  that it's a singular matrix.
+[0:03:22.50 --> 0:03:27.04]	  And the reason for that, usually the data is not super clean,
+[0:03:27.40 --> 0:03:29.24]	  in a way that sometimes there is noise.
+[0:03:29.80 --> 0:03:34.90]	  So let's say when we record our observations,
+[0:03:35.10 --> 0:03:37.22]	  sometimes maybe instead of writing five,
+[0:03:37.42 --> 0:03:42.38]	  we just write 5.0001, right?
+[0:03:43.02 --> 0:03:46.26]	  So in this case, so it's still the same matrix,
+[0:03:46.32 --> 0:03:48.82]	  except we add a tiny number here
+[0:03:48.82 --> 0:03:52.44]	  to one of the values here.
+[0:03:53.48 --> 0:03:55.10]	  And then in this case,
+[0:03:55.38 --> 0:04:00.66]	  we can see that this is how this gram matrix looks like.
+[0:04:01.08 --> 0:04:05.42]	  Here, these two columns are no longer the same,
+[0:04:05.42 --> 0:04:07.02]	  so they are a little bit different.
+[0:04:07.62 --> 0:04:10.32]	  So this one has this 0.05,
+[0:04:11.18 --> 0:04:14.36]	  and this one has, so basically they have,
+[0:04:14.76 --> 0:04:16.58]	  they are slightly different now.
+[0:04:16.82 --> 0:04:20.38]	  So now this matrix is not exactly singular anymore.
+[0:04:20.78 --> 0:04:24.62]	  So this column, third column is not a duplicate
+[0:04:24.62 --> 0:04:27.08]	  of the third, second column anymore.
+[0:04:27.70 --> 0:04:31.50]	  And what happens is this matrix becomes actually invertible,
+[0:04:31.90 --> 0:04:34.06]	  at least numerically invertible.
+[0:04:34.32 --> 0:04:37.42]	  So we see these huge numbers here, right?
+[0:04:37.80 --> 0:04:42.02]	  So let's write it to inverse, right?
+[0:04:42.38 --> 0:04:44.22]	  So it tries to find the inverse,
+[0:04:44.32 --> 0:04:46.28]	  even though the inverse shouldn't exist,
+[0:04:46.54 --> 0:04:49.96]	  so it comes up with these huge numbers, right?
+[0:04:50.08 --> 0:04:52.34]	  So we have these very, very huge numbers.
+[0:04:52.90 --> 0:04:55.06]	  And when we multiply this,
+[0:04:55.28 --> 0:04:59.60]	  so when we multiply it by x transpose by y,
+[0:04:59.88 --> 0:05:01.88]	  I think we need the y as well.
+[0:05:03.32 --> 0:05:09.22]	  So y could be, you know, one, two, three, one, two, three, four.
+[0:05:10.02 --> 0:05:11.58]	  So we have, yeah, we actually have three.
+[0:05:12.84 --> 0:05:14.84]	  Yeah, we have three observations here.
+[0:05:15.08 --> 0:05:19.78]	  So if our y looks like that, then to compute the w,
+[0:05:21.44 --> 0:05:27.12]	  we, yeah, so what we end up finding is that
+[0:05:27.12 --> 0:05:30.78]	  for this feature, it's fine, and this is the unique feature,
+[0:05:31.06 --> 0:05:34.06]	  but for this, for the second and for the third one,
+[0:05:34.70 --> 0:05:37.66]	  it's basically just some large, large numbers.
+[0:05:38.08 --> 0:05:39.60]	  When we have a situation like that,
+[0:05:39.72 --> 0:05:42.96]	  and we have, let's say, duplicates in our feature matrix,
+[0:05:43.40 --> 0:05:44.54]	  then we have this problem.
+[0:05:46.28 --> 0:05:48.52]	  So to solve this problem, what we can do is
+[0:05:48.52 --> 0:05:52.92]	  we can add a small number to the diagonal of this matrix.
+[0:05:53.20 --> 0:05:55.34]	  So let's say if we add a small number,
+[0:05:56.06 --> 0:05:58.96]	  I'll call it alpha here on the diagonal,
+[0:05:59.30 --> 0:06:01.06]	  then it should solve our problem.
+[0:06:01.48 --> 0:06:05.76]	  So let me show you that on a smaller example.
+[0:06:07.18 --> 0:06:10.38]	  So let's take a smaller matrix
+[0:06:10.38 --> 0:06:14.78]	  that we can use to illustrate this.
+[0:06:15.70 --> 0:06:18.08]	  Use something like this.
+[0:06:18.86 --> 0:06:21.02]	  And so we again have a column
+[0:06:21.02 --> 0:06:23.04]	  that is a duplicate of another column.
+[0:06:23.64 --> 0:06:28.94]	  And so what we want to do is now put it into a array.
+[0:06:30.06 --> 0:06:32.50]	  And try to inverse it.
+[0:06:34.40 --> 0:06:37.90]	  And so it complains, of course,
+[0:06:38.10 --> 0:06:42.42]	  because we need to add a small number here, let's say,
+[0:06:42.70 --> 0:06:44.16]	  here.
+[0:06:46.54 --> 0:06:52.76]	  So now, yeah, you see that it actually is able to find an inverse,
+[0:06:53.16 --> 0:06:54.86]	  but the numbers are still quite big.
+[0:06:55.12 --> 0:06:58.74]	  So I think if we add a few numbers here,
+[0:06:58.74 --> 0:07:00.42]	  so they become a little larger.
+[0:07:02.02 --> 0:07:05.98]	  And as I said, one way of fixing this problem
+[0:07:05.98 --> 0:07:10.10]	  is to add a small number to the diagonal.
+[0:07:10.86 --> 0:07:14.48]	  So we add to the small number to the diagonal.
+[0:07:15.14 --> 0:07:18.26]	  And now this helps control.
+[0:07:19.44 --> 0:07:21.46]	  So now these numbers became smaller.
+[0:07:21.80 --> 0:07:25.40]	  And the larger the numbers we add to the diagonal,
+[0:07:26.32 --> 0:07:28.90]	  the more we have these weights under control.
+[0:07:29.42 --> 0:07:30.44]	  And the reason it works,
+[0:07:30.54 --> 0:07:32.48]	  because by adding something on the diagonal,
+[0:07:32.68 --> 0:07:36.38]	  we make sure that now it's less possible
+[0:07:36.38 --> 0:07:40.74]	  that this column number three is a duplicator
+[0:07:40.74 --> 0:07:43.80]	  of column number two to implement that.
+[0:07:44.06 --> 0:07:47.96]	  Let's say if we now undo everything.
+[0:07:48.50 --> 0:07:51.34]	  So let's make it, let's remove.
+[0:07:52.18 --> 0:07:54.76]	  So now, yeah, we again have this problem.
+[0:07:55.40 --> 0:08:01.32]	  And what we can do is to add the same number to the diagonal.
+[0:08:02.24 --> 0:08:03.78]	  Is remember, we have this,
+[0:08:04.94 --> 0:08:10.92]	  I matrix, say, off size three.
+[0:08:11.48 --> 0:08:13.38]	  So this is our identity matrix.
+[0:08:14.12 --> 0:08:19.18]	  When we add this X to X matrix to our identity matrix,
+[0:08:19.48 --> 0:08:21.62]	  it adds one on the diagonal.
+[0:08:22.46 --> 0:08:25.16]	  So here we used to have one, now we have two.
+[0:08:25.70 --> 0:08:27.78]	  Here we have two, here we have two.
+[0:08:28.24 --> 0:08:32.68]	  So now we can actually multiply this I by some small number.
+[0:08:33.52 --> 0:08:37.38]	  Let's say, and then this way we add only that small number
+[0:08:37.38 --> 0:08:38.18]	  to the diagonal.
+[0:08:38.60 --> 0:08:42.16]	  Let's call this also X transpose X.
+[0:08:42.98 --> 0:08:45.82]	  And when we try to invert it,
+[0:08:46.02 --> 0:08:47.72]	  now we don't have this problem anymore.
+[0:08:48.50 --> 0:08:50.56]	  So this is how we solve this problem.
+[0:08:50.66 --> 0:08:53.08]	  And this is called regularization.
+[0:08:53.44 --> 0:08:57.86]	  So we kind of regularization, I think means here controlling.
+[0:08:58.14 --> 0:09:00.64]	  So we're controlling the weights that they don't go,
+[0:09:01.26 --> 0:09:03.02]	  that they don't grow too much.
+[0:09:03.62 --> 0:09:08.10]	  And this thing here is actually a parameter, right?
+[0:09:08.22 --> 0:09:10.46]	  So the larger number we have on the diagonal,
+[0:09:11.14 --> 0:09:14.32]	  the smaller, actually the values here
+[0:09:14.32 --> 0:09:17.10]	  of this inverse of X to X.
+[0:09:17.38 --> 0:09:20.58]	  Let's say if we have something even bigger here,
+[0:09:21.08 --> 0:09:23.46]	  you see these numbers are very far
+[0:09:23.46 --> 0:09:25.26]	  from what we used to have previously.
+[0:09:26.42 --> 0:09:28.58]	  So in a way, this becomes a parameter,
+[0:09:29.10 --> 0:09:31.68]	  like how much regularization we add to our matrix.
+[0:09:32.62 --> 0:09:36.56]	  And with that, now we can pre-implement the function
+[0:09:36.56 --> 0:09:38.34]	  we have, yeah, this one.
+[0:09:40.52 --> 0:09:47.08]	  So let's take this and slightly change it.
+[0:0 --> 0:09:51.56]	  I'll just call it train linear regression regularized.
+[0:09:52.04 --> 0:09:54.38]	  And then we have one more parameter,
+[0:09:54.88 --> 0:09:58.16]	  which I will call R, which is short for regularization.
+[0:09:58.86 --> 0:10:02.84]	  And let's say we can have some default parameter for this,
+[0:10:02.98 --> 0:10:04.86]	  which is 0.01.
+[0:10:06.70 --> 0:10:11.82]	  And what we need to do here is we need to basically add that.
+[0:10:14.60 --> 0:10:18.34]	  So to add a small number to the diagonal.
+[0:10:19.08 --> 0:10:23.78]	  So we need to have to know the size of our X-tags,
+[0:10:24.22 --> 0:10:25.66]	  shape zero.
+[0:10:26.72 --> 0:10:31.22]	  So now it will create, it will add, we need to actually R.
+[0:10:31.56 --> 0:10:35.20]	  So we'll add this amount to the main diagonal
+[0:10:35.20 --> 0:10:37.96]	  and the rest stays the same, right?
+[0:10:38.70 --> 0:10:40.18]	  So let's execute it.
+[0:10:40.72 --> 0:10:45.02]	  And what we need to do is we can actually take this,
+[0:10:45.38 --> 0:10:46.26]	  what we have here,
+[0:10:46.92 --> 0:10:52.06]	  and just replace this function that we used previously
+[0:10:52.06 --> 0:10:54.66]	  by this new function.
+[0:10:55.06 --> 0:10:58.86]	  And let's use some value for R.
+[0:10:59.46 --> 0:11:01.46]	  Again, we see that this result is actually,
+[0:11:01.82 --> 0:11:04.76]	  not only it's much better one that we have
+[0:11:04.76 --> 0:11:06.44]	  with not regularized version,
+[0:11:06.70 --> 0:11:11.20]	  but it's also better than what we had before.
+[0:11:12.12 --> 0:11:15.50]	  So it's actually like 0.5.
+[0:11:16.18 --> 0:11:17.60]	  So this is what we had previously.
+[0:11:17.84 --> 0:11:20.80]	  So it's approximately 0.5 improvement,
+[0:11:21.16 --> 0:11:24.60]	  which is, I would say it's a considerable improvement.
+[0:11:25.98 --> 0:11:29.44]	  So yeah, so by adding a number to the diagonal,
+[0:11:29.58 --> 0:11:35.74]	  we were able to control our weights to regularize our model
+[0:11:35.86 --> 0:11:38.08]	  and this R is a parameter.
+[0:11:38.54 --> 0:11:40.08]	  So because if we set it too high,
+[0:11:40.56 --> 0:11:42.48]	  then maybe our model becomes worse, right?
+[0:11:42.70 --> 0:11:44.76]	  So maybe we'll set it too high.
+[0:11:44.92 --> 0:11:46.56]	  Yeah, you see like our model becomes,
+[0:11:46.90 --> 0:11:48.82]	  like it's very difficult for model to work.
+[0:11:49.48 --> 0:11:52.94]	  And if we set it too low, let's say if we use zero,
+[0:11:53.42 --> 0:11:56.08]	  then we're back to the usual linear regression.
+[0:11:56.24 --> 0:11:59.80]	  So now we actually need to find what is the best value for R.
+[0:12:00.12 --> 0:12:01.88]	  And this is what we will do in the next lesson.

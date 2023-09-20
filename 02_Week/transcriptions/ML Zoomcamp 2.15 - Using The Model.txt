@@ -1,0 +1,75 @@
+[0:0 --> 0:00:03.64]	  Welcome back. This is lesson 15 of machine learning ZoomCup session 2.
+[0:00:03.96 --> 0:00:07.74]	  The previous lesson we found the best parameter for our linear regression
+[0:00:07.74 --> 0:00:12.36]	  and in this lesson we will train the final model and use it.
+[0:00:13.30 --> 0:0]	  And by training the final model, I mean remember that we have a dataset that was
+[0:0 --> 0:00:26.20]	  printed into three parts. So we had a trained dataset, we have a validation dataset,
+[0:00:26.42 --> 0:00:33.74]	  and we have a test dataset. So far what we are doing is we are training our model
+[0:00:33.74 --> 0:00:42.32]	  on the training dataset, applying this to validation, and then getting our RMSE from that.
+[0:00:42.74 --> 0:00:50.20]	  What we want to do now is instead of that, we want to train a model on the entire
+[0:00:51.38 --> 0:00:57.16]	  part that we use for both training and validation, we can call it for example full
+[0:00:57.16 --> 0:01:05.12]	  train or something like this. So we train a model on this one, and then we make the final
+[0:01:05.12 --> 0:01:12.12]	  evaluation on the test dataset to make sure that our model works fine, and we check what is RMSE
+[0:01:12.12 --> 0:01:17.66]	  on that. So it shouldn't be too different from what we saw on the validation dataset.
+[0:01:18.92 --> 0:01:27.24]	  So let's do that. So first of all, what we need to do now is get our data.
+[0:01:28.40 --> 0:01:34.80]	  So what we have is remember we have this data frame train, and we have a data frame test.
+[0:01:35.34 --> 0:01:40.82]	  These are data frame validation. These are the two datasets we have. What we want to do is combine
+[0:01:40.82 --> 0:01:48.58]	  them now into one dataset. And for that we use a function called impundas called concat,
+[0:01:48.86 --> 0:01:54.42]	  that is short for concatenate. It takes a list of data frames, and what it does,
+[0:01:54.54 --> 0:02:00.20]	  it concatenates them together. So let's call it full train. Let's see.
+[0:02:05.72 --> 0:02:13.40]	  If we print the entire dataset, we see that even though there are 9500 rows,
+[0:02:14.06 --> 0:02:19.60]	  so we still have the index from the validation dataset, what we can do is just a set index.
+[0:02:22.82 --> 0:02:30.92]	  We write it back, and now we shouldn't have this problem. So now everything is sequential,
+[0:02:31.82 --> 0:02:40.12]	  and we can use that now to get our feature matrix. Let's call it full train as well.
+[0:02:41.22 --> 0:02:47.92]	  I remember we have this prepareX function that we just use here.
+[0:02:48.66 --> 0:02:51.86]	  So we have our feature matrix.
+[0:02:54.64 --> 0:03:01.96]	  We also need to train a model. We also need the y. And again, there is a function in NumPy
+[0:03:01.96 --> 0:03:09.42]	  also called concat. It's called concatenate. So there is a function NumPy called concatenate.
+[0:03:10.40 --> 0:03:17.84]	  That does exactly the same thing. So we just need to concatenate y train and one y validation.
+[0:03:18.38 --> 0:03:23.94]	  So there is no index here. That's why we don't need to reset anything. And let's call it also y
+[0:03:23.94 --> 0:03:40.10]	  full train. And now we take this code for training the model, and we replace this x train with x
+[0:03:40.10 --> 0:03:51.62]	  full train, y train with y full train. And then this R, it was 0.01. Yes.
+[0:03:53.52 --> 0:04:02.80]	  And we train our model. This is our final model. So these are the weights of the model.
+[0:04:04.50 --> 0:04:12.46]	  And so what we need to do now is prepare our training, our testing data set. And we will do it
+[0:04:12.46 --> 0:04:21.68]	  exactly in the same way as we do the validation data set, except we will just replace validation
+[0:04:21.68 --> 0:04:33.90]	  with train with test. Sorry. So we get test, then multiply here, then we get the score,
+[0:04:34.24 --> 0:04:41.24]	  and we need to check it with a y test. And we see that our model is not too different
+[0:04:41.24 --> 0:04:49.74]	  from what we had previously. In fact, it has almost the same RMSE, like up to third decimal point,
+[0:04:49.94 --> 0:04:58.18]	  which is a very good sign. It means that our model is, it can generalize well, so it didn't get this
+[0:04:58.18 --> 0:05:07.12]	  score just by chance. So it's good. So we have this final model. And now what we can do is we can
+[0:05:07.12 --> 0:05:13.16]	  use it. The way we want to use it is we actually want to use it to predict the price of a car.
+[0:05:13.16 --> 0:05:20.04]	  So imagine that there is a car, and we want to understand what's the price of this car.
+[0:05:20.60 --> 0:05:28.04]	  So we extract all the features. So we get this feature, feature vector from the car,
+[0:05:28.24 --> 0:05:35.12]	  and then we need to put it into our model. And then it should predict the price. So this is what
+[0:05:35.12 --> 0:05:40.56]	  we want to do now. So this is our final model. This is our final model, and we want to use it
+[0:05:40.56 --> 0:05:47.60]	  to predict the price of a car. Let's see how we can do this. So for that, we can take any car from
+[0:05:47.60 --> 0:05:55.44]	  our test data set and pretend it's a new car. And this is fine because we haven't seen this car
+[0:05:55.44 --> 0:06:03.70]	  during training. So we didn't train our model on this data. So here we have Toyota Sienna, and
+[0:06:03.70 --> 0:06:12.28]	  yes, we are missing values. So usually the way we do it, we don't get a data frame here.
+[0:06:12.76 --> 0:06:18.58]	  Like when we extract some features, it could be some Python dictionary with all the information
+[0:06:18.58 --> 0:06:26.20]	  about the car. So let's say in real life scenario, it could be a website or an app,
+[0:06:27.34 --> 0:06:40.62]	  where people enter all these values about the car, like Toyota, Sienna, and then the website
+[0:06:40.62 --> 0:06:48.94]	  sends a request, all this information to a model, and then model replies back with the price.
+[0:06:49.74 --> 0:06:57.62]	  And so this is what we want to do now. So for that, we need to turn this into a dictionary,
+[0:06:58.16 --> 0:07:06.28]	  because this is how usually the requests look like. Let's say car. So this is our request
+[0:07:06.28 --> 0:07:14.14]	  with a car, like we know all these values. So now we want to put it in a model. And for that,
+[0:07:14.14 --> 0:07:25.36]	  we need again to turn this, because remember our prepare X function, it expects a data frame. So
+[0:07:25.36 --> 0:07:31.78]	  we need to turn this dictionary. And remember, we pretend that this dictionary is coming from
+[0:07:31.78 --> 0:07:38.78]	  the user. We pretend that we didn't just extract it from a data frame. So we need to put a,
+[0:07:39.12 --> 0:07:46.22]	  this prepare X expects a data frame. So for that, we can just create a small data frame with a single
+[0:07:46.22 --> 0:07:54.40]	  row. And for that, we use this pandas data frame. And then we can pass the list of a list of objects,
+[0:07:54.56 --> 0:08:01.86]	  the list of dictionaries. And this list will just contain one single car, which will be the car
+[0:08:01.86 --> 0:08:09.42]	  we just received in our request. So we have this car. And then this car can go to our
+[0:08:09.42 --> 0:08:19.26]	  prepare X function. So we get a feature matrix with just one row. Let's call it x small again.
+[0:08:21.16 --> 0:08:27.94]	  And so we have that. And this is how we use, this is how we get predictions for that car.
+[0:08:29.16 --> 0:08:37.94]	  So here instead of X underscore test, we use this feature matrix. And let's see immediately what
+[0:08:37.94 --> 0:08:47.02]	  the results is. The results is 10.6. So that's actually what we need is we just need the first
+[0:08:47.02 --> 0:08:54.08]	  number. So for this car, there is just one single car, so we don't need an array, we just need one
+[0:08:54.96 --> 0:08:59.82]	  prediction. And what we need to do now, remember that this is the logarithm of the price. So what
+[0:08:59.82 --> 0:09:07.14]	  we need to do now is take the exponent. So this will undo the logarithm.
+[0:09:08.58 --> 0:09:13.62]	  And this is actually the prediction. So we think that the car with these characteristics
+[0:09:13.62 --> 0:09:18.74]	  should cost that much. And let's see how this car actually costs.
+[0:09:21.12 --> 0:09:31.24]	  So it's number 20. So we can see why test number 20. It's reasonably close. Let's see
+[0:09:31.24 --> 0:09:40.06]	  what happens when we undo the logarithm transformation. Yeah, so here we see that
+[0:09:40.06 --> 0:09:47.12]	  our prediction was a bit off by 5000. I think it's a relatively good prediction.
+[0:09:47.42 --> 0:09:55.30]	  Yep, so this is how we can first train a full model. And then this is how we apply this model to
+[0:09:55.30 --> 0:10:03.10]	  predict the price of a single car. That's all for this lesson. In the next one, we will have a summary.

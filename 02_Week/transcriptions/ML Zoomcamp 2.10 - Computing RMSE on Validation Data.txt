@@ -1,0 +1,26 @@
+[0:00:00.26 --> 0:0]	  Welcome back. This is lesson 10 of machine learning zoom camp session two, and we will talk in this lesson about validating the model.
+[0:00:07.58 --> 0:00:13.32]	  Two lessons ago we built our first baseline model using numerical features, five numerical features.
+[0:00:14.12 --> 0:00:21.06]	  And then we wrote a function for objectively measuring the quality of our model. So this was a RMS here which is a root mean square error.
+[0:00:21.06 --> 0:00:30.12]	  But the way we did it is remember the way we should do validation is we take data set was pitted into three parts.
+[0:00:30.44 --> 0:00:36.52]	  So we have training data set with validation data set, and we have test data set.
+[0:00:37.08 --> 0:00:51.04]	  So what we did is we took the training data set, we train our linear regression model, and then we again applied it to our training data set to calculate the root mean square error.
+[0:00:51.66 --> 0:01:02.10]	  Instead, what we should do instead of applying the training data, we should apply this to validation data, and then look at the root mean squared error on validation data.
+[0:01:03.04 --> 0:01:09.20]	  So let's do this. So first we will get the code we wrote earlier. So we have this.
+[0:01:11.30 --> 0:01:21.72]	  So this is the code for training the model. So this line here, this one we prepare our feature matrix X. A lot of things happening here.
+[0:01:21.72 --> 0:01:34.76]	  So let's write a special function for that. We'll call it prepare X, which takes in a data frame. And then let me just copy it here and decompose it into multiple things.
+[0:01:35.04 --> 0:01:51.04]	  So first of all, it creates a data frame with numbers. So we can call it data frame num. And this should be not just the training data frame or training data set or validation data set or the testing data set.
+[0:01:51.04 --> 0:02:04.04]	  It could be any data set. And the idea for this function is we have the same way of preparing the data set regardless of what its train validation or test. So we have the prepare X function that is doing that.
+[0:02:04.54 --> 0:02:19.66]	  And then we have the second step, which is the first is selecting the numerical columns, then the second step is filling the missing values. And then the last step is extracting the feature matrix.
+[0:02:19.68 --> 0:02:22.84]	  The numpy array and then returning it.
+[0:02:23.98 --> 0:02:29.82]	  So we have this function. So from one line now we have five, but at least it's easier to understand what's going on.
+[0:02:30.38 --> 0:02:32.82]	  So let's use it for training.
+[0:02:33.52 --> 0:02:34.94]	  Training matrix.
+[0:02:35.72 --> 0:02:39.60]	  We work this prepare X on training data set.
+[0:02:40.32 --> 0:02:43.80]	  Then let's train the model again.
+[0:02:44.38 --> 0:02:59.26]	  So we prepare the matrix with train the model, then we again prepare the matrix, but this time we prepare our validation data set. So we use the same function, accept that instead of using the train data set we use the validation data set.
+[0:02:59.74 --> 0:03:07.16]	  And then finally, we do predictions. So we apply this linear regression.
+[0:03:07.96 --> 0:03:17.12]	  The weights we have, but instead of applying them to the training data set, we apply them to the feature matrix, computed from the validation data set.
+[0:03:17.58 --> 0:03:28.16]	  And this is our prediction and then at the end what we can do is we can compute the root mean square error of this prediction, which is why validation why prediction.
+[0:03:29.62 --> 0:03:40.42]	  And it gives us the root mean square error. So if you see this is pretty similar to what we had. So here we can see that there are two parts. So this is the training part.
+[0:03:41.56 --> 0:0]	  So here we only touch the training data set and here is the validation part. So here we prepare the validation data set in the same way as the training data set and we apply the model, then we learned from the previous step, then we compute the root mean square error for that model.
+[0:04:03.54 --> 0:04:14.84]	  Okay, now we have a way of evaluating the quality of our model using root mean square error. We can do this on the validation data set. And now we can work on improving the model. And this is what we will do next.

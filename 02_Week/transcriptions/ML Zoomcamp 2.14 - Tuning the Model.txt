@@ -1,0 +1,25 @@
+[0:0 --> 0:00:03.92]	  Welcome back. This is lesson 14 of machine learning Zoom Comp session 2.
+[0:00:04.14 --> 0:0]	  And now we will talk about finding the best parameter, best regularization parameter for
+[0:0 --> 0:00:15.32]	  our linear regression model. So in the previous section, we talked about regularization and
+[0:00:15.32 --> 0:00:25.84]	  as a way to solve the problem of duplicated columns in our data. And here we noticed that
+[0:00:26.08 --> 0:00:33.72]	  this R affects the quality of our model. And what we want to do is we want to try to find the best
+[0:00:33.72 --> 0:00:41.80]	  value for this R. So what we will do now is we will use the validation set for finding the
+[0:00:41.80 --> 0:00:49.48]	  best value. And what we will do is we will just try a bunch of different values for R starting
+[0:00:49.48 --> 0:01:00.86]	  from zero. Then let's have something smaller. Then we'll just gradually increase this and we can
+[0:01:00.86 --> 0:01:06.42]	  maybe something like this. So maybe not too small.
+[0:01:08.22 --> 0:01:17.52]	  Yeah, and then maybe we even try one and 10. So what we do now is we just go through this R
+[0:01:17.64 --> 0:01:25.50]	  and we try it for every R from this list. We apply it to our model and we see what happens.
+[0:01:25.84 --> 0:01:34.12]	  And now we just need to print the results. So let's just print the regularization parameter.
+[0:01:34.64 --> 0:01:37.90]	  Then let's also print the bias term and we print the score.
+[0:01:40.38 --> 0:01:49.78]	  So what we see is for zero regularization, the bias term is huge and also RMSC is huge.
+[0:01:50.12 --> 0:01:56.58]	  But for even a little bit of regularization, it improves. So the score doesn't really change
+[0:01:56.58 --> 0:02:05.44]	  that much. It starts to become a bit worse as we increase the regularization. And then when it's
+[0:02:05.44 --> 0:02:12.44]	  10, it's even worse. And here the bias term also, the molecularization we add, the smaller
+[0:02:12.44 --> 0:02:21.40]	  the bias term is. It looks like maybe this is 0.01. It's a good one because the model hasn't
+[0:02:21.40 --> 0:02:31.20]	  started to degrade in performance. And then it's just not too large, not too big. I think this is
+[0:02:31.40 --> 0:02:36.26]	  a good enough. I don't think it actually matters here. It could be this one or could be this one.
+[0:02:36.54 --> 0:02:42.40]	  It doesn't matter. So we can just go with this one. And let's train our model
+[0:02:42.40 --> 0:02:50.90]	  once again. So we will just print the score.
+[0:02:52.86 --> 0:03:00.90]	  Yeah, so we trained, we just selected the best regularization parameter and we train our model
+[0:03:02.92 --> 0:03:08.32]	  with this regularization parameter. And we were able to see that it works on the validation set.
+[0:03:08.66 --> 0:03:15.30]	  Now what we need to do is check this on the test dataset as well. And this is what we will do in the next lecture.

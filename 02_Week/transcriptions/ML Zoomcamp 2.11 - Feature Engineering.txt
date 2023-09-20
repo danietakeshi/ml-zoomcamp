@@ -1,0 +1,103 @@
+[0:0 --> 0:00:04.16]	  In this lesson, we will add more features to our model.
+[0:00:04.64 --> 0:00:07.52]	  So let's take a look again on our training dataset.
+[0:00:08.24 --> 0:00:11.02]	  And what we see here is this variable year.
+[0:00:11.66 --> 0:00:15.50]	  And we know that this is one of the most important variables,
+[0:00:15.80 --> 0:00:17.96]	  was one of the most important columns
+[0:00:17.96 --> 0:00:19.64]	  for predicting the price of a car.
+[0:00:19.88 --> 0:00:22.98]	  Because if a car is old, then it's usually cheaper.
+[0:00:23.22 --> 0:00:25.98]	  If a car is new, then it's more expensive.
+[0:00:26.50 --> 0:00:28.64]	  So we want to use this variable.
+[0:00:28.68 --> 0:00:31.20]	  And instead of using it as a year, what we can do
+[0:00:31.20 --> 0:00:32.90]	  is we can compute the age of a car.
+[0:0 --> 0:00:37.86]	  For that, we need to know, I don't know
+[0:00:37.86 --> 0:0]	  when this data was collected.
+[0:00:39.70 --> 0:00:41.30]	  So we need to take a look.
+[0:00:41.46 --> 0:00:43.58]	  So this data was collected in 2017.
+[0:00:44.10 --> 0:00:46.60]	  So let's say now it's 2017.
+[0:00:47.18 --> 0:00:52.66]	  And we want to compute how old the cars are.
+[0:00:53.78 --> 0:00:56.72]	  So some of the cars are 0 years old,
+[0:00:56.72 --> 0:00:58.52]	  some of the cars are 9 years old.
+[0:00:59.22 --> 0:01:02.58]	  So this is age of a car.
+[0:01:02.92 --> 0:0]	  And we want to use this as a variable.
+[0:01:05.52 --> 0:01:09.06]	  So we want to take this, put this into our data frame.
+[0:01:09.48 --> 0:01:13.32]	  So we want to use this as one of the features in our model
+[0:01:13.32 --> 0:01:13.84]	  for that.
+[0:01:14.24 --> 0:01:15.26]	  So let's take a look.
+[0:01:16.12 --> 0:01:19.72]	  Let's use this function that we wrote earlier.
+[0:01:20.32 --> 0:01:21.72]	  So we already have this function.
+[0:01:21.98 --> 0:01:25.46]	  Let's modify it a little bit and add a new feature here.
+[0:01:25.46 --> 0:01:27.24]	  So this feature is called age.
+[0:01:27.48 --> 0:01:30.92]	  And we computed it in the same way as previously,
+[0:01:31.38 --> 0:01:34.04]	  except that instead of data frame train,
+[0:01:34.24 --> 0:01:36.10]	  we use just any data frame we pass here.
+[0:01:36.58 --> 0:01:38.70]	  And then here instead of base, we
+[0:01:38.70 --> 0:01:41.78]	  need to use base plus this new feature.
+[0:01:41.92 --> 0:01:45.04]	  So let's create a list that we will call features that
+[0:01:45.04 --> 0:01:49.78]	  contains the baseline numeric features
+[0:01:49.78 --> 0:01:52.10]	  plus the new feature age.
+[0:01:53.50 --> 0:01:55.88]	  And we will use it here.
+[0:01:57.18 --> 0:02:00.94]	  And let's try to do this with call prepare x.
+[0:02:01.80 --> 0:02:05.90]	  And so this is our train data set.
+[0:02:06.50 --> 0:02:08.62]	  And when we executed this, so you see here,
+[0:02:08.72 --> 0:02:11.80]	  this first line is adding a new column here.
+[0:02:11.98 --> 0:02:14.38]	  So when we executed that, what happened
+[0:02:14.38 --> 0:02:18.56]	  is we actually added a new column here.
+[0:02:18.56 --> 0:02:21.56]	  So you see in this data frame, a new column appeared.
+[0:02:22.06 --> 0:02:24.90]	  So we modified our data frame.
+[0:02:25.14 --> 0:02:27.22]	  And this is not something we should do in this function.
+[0:02:27.64 --> 0:02:30.50]	  As somebody who uses this function,
+[0:02:30.64 --> 0:02:32.78]	  I don't want it to change my data.
+[0:02:33.16 --> 0:02:36.52]	  So what if it does something that then cannot be undone?
+[0:02:37.06 --> 0:02:40.92]	  So I would prefer that this function doesn't modify
+[0:02:40.92 --> 0:02:43.28]	  the data frames I pass for that.
+[0:02:43.58 --> 0:02:46.64]	  We can just before doing all these things,
+[0:02:46.64 --> 0:02:49.74]	  before adding new columns, what we do is we just take a copy.
+[0:02:50.76 --> 0:02:56.22]	  And then we will work with a copy inside this function.
+[0:02:56.56 --> 0:02:59.50]	  And the original data frame will not change.
+[0:03:00.14 --> 0:03:06.36]	  So let's first remove this new variable.
+[0:03:08.30 --> 0:03:10.36]	  So we removed it, now we don't have it
+[0:03:10.36 --> 0:03:12.10]	  and execute it again.
+[0:03:12.48 --> 0:03:16.30]	  So now if we look at columns,
+[0:03:17.92 --> 0:03:19.68]	  so yeah, we don't have h anymore.
+[0:03:20.10 --> 0:03:24.92]	  So because what happened is we passed this train data frame
+[0:03:24.92 --> 0:03:27.40]	  and then it took a copy first
+[0:03:27.40 --> 0:03:28.96]	  and then it modified the copy.
+[0:03:29.30 --> 0:03:30.92]	  And then after leaving the function,
+[0:03:31.14 --> 0:03:33.06]	  you just forgot about the copy
+[0:03:33.06 --> 0:03:35.82]	  because all we care at the end, it was this x.
+[0:03:36.56 --> 0:03:39.72]	  And actually this x train,
+[0:03:41.44 --> 0:03:46.38]	  it has, there are one, two, three, four, five, six,
+[0:03:46.58 --> 0:03:48.84]	  six columns, six features.
+[0:03:49.04 --> 0:03:51.34]	  And this last feature now is h.
+[0:0 --> 0:03:54.72]	  And let's use it now.
+[0:03:55.40 --> 0:03:58.92]	  So I'll just copy this code now
+[0:03:58.92 --> 0:04:01.88]	  because we need exactly the same code.
+[0:04:02.12 --> 0:04:03.26]	  We modify this function
+[0:04:03.26 --> 0:04:05.86]	  and now our model should be better.
+[0:04:06.20 --> 0:04:08.94]	  Yeah, so we see that our model improved
+[0:04:09.04 --> 0:04:10.76]	  and it's quite an improvement.
+[0:04:11.04 --> 0:04:17.24]	  So it went down from 0.76 to 0.51.
+[0:04:17.72 --> 0:04:19.40]	  So it's a big improvement.
+[0:04:19.76 --> 0:04:22.08]	  And we can see that it's a big improvement
+[0:04:22.08 --> 0:04:24.86]	  by doing the same thing as we did previously.
+[0:04:25.08 --> 0:04:27.54]	  So we can again plot the predictions.
+[0:04:27.80 --> 0:04:29.80]	  We can plot the actual values and see.
+[0:04:31.54 --> 0:04:35.38]	  So we actually need to use now validation,
+[0:04:35.72 --> 0:04:36.16]	  why validation?
+[0:04:36.16 --> 0:04:37.18]	  Because these are,
+[0:04:40.02 --> 0:04:42.26]	  so because now we are actually predicting
+[0:04:42.26 --> 0:04:44.12]	  on the validation dataset,
+[0:04:44.42 --> 0:04:46.52]	  not on the train dataset as previously.
+[0:04:47.20 --> 0:04:50.40]	  So we see that now it's actually better.
+[0:04:50.64 --> 0:04:53.04]	  So at least this picks much.
+[0:04:53.66 --> 0:04:57.18]	  Of course, like here it's not doing it as well.
+[0:04:57.28 --> 0:05:01.88]	  And then it completely misses this bar here.
+[0:05:02.38 --> 0:05:05.74]	  But I think in general it's doing it much better
+[0:05:05.74 --> 0:05:07.58]	  at least in this area.
+[0:05:08.12 --> 0:05:10.22]	  Here there is a lot of room for improvement here,
+[0:05:10.64 --> 0:05:13.14]	  but in general it kind of,
+[0:05:13.72 --> 0:05:16.26]	  now the shape of the distribution is closer.
+[0:0 --> 0:05:18.52]	  We can actually add more features.
+[0:05:19.24 --> 0:05:20.36]	  And in the next lesson,
+[0:05:20.42 --> 0:05:22.64]	  we will talk about categorical variables.
+[0:05:23.14 --> 0:05:27.26]	  These are variables, columns like model make and so on.

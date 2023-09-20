@@ -1,0 +1,63 @@
+[0:00:00.22 --> 0:00:06.72]	  Welcome back. This is the last lesson of session two of machine learning for regression.
+[0:00:07.30 --> 0:00:11.72]	  So here we will summarize what we learned in the session.
+[0:00:12.36 --> 0:00:17.24]	  So here we did a project for predicting the price of a car.
+[0:00:17.82 --> 0:00:26.68]	  And we downloaded a dataset that had prices and different characteristics of a car.
+[0:00:27.18 --> 0:00:35.14]	  So we had things like model, make, year, engine fuel type, transmission type, all these things.
+[0:00:35.46 --> 0:00:42.14]	  And we wanted to predict this price MSRP, which stands for manufacturers just retail price.
+[0:00:43.60 --> 0:0]	  So first what we did is we cleaned the dataset, we prepared it so it looks a bit uniform, more uniform
+[0:0 --> 0:01:01.54]	  because here we have like spaces here, capital case, lower case, we made it uniform.
+[0:01:02.50 --> 0:01:10.32]	  So we don't have here. So we made it uniform. So it looks cleaner.
+[0:01:10.88 --> 0:01:20.52]	  Then we did exploratory data analysis and we here identified that we have this long tail distribution of price
+[0:01:20.52 --> 0:01:24.36]	  and we removed the long tail by applying the logarithmic transformation to data.
+[0:01:24.76 --> 0:01:32.96]	  And this is a good idea because with a long tail, when the distribution has long tail,
+[0:01:33.18 --> 0:01:35.20]	  usually machine learning models have problems.
+[0:01:36.14 --> 0:01:43.86]	  Then there are also missing data and this later we saw that with missing data, we cannot really train a model.
+[0:01:44.08 --> 0:01:45.46]	  So we need to do something with this.
+[0:01:45.64 --> 0:01:49.58]	  So we did then set a validation framework.
+[0:01:51.40 --> 0:01:55.80]	  Like we did the split between training validation and set and test.
+[0:01:56.64 --> 0:02:04.32]	  Then we looked at linear regression. So how does it work for a single example?
+[0:02:04.32 --> 0:0]	  So we implemented it as a simple formula using a for loop, which is later than we expanded to the vector form or matrix form using dot product.
+[0:02:17.62 --> 0:02:23.84]	  And then like we also expressed it as a matrix vector multiplication.
+[0:02:26.04 --> 0:02:32.78]	  And then we the result of linear regression, the output is the weights vector, the bias term and the weights.
+[0:02:33.38 --> 0:02:37.76]	  And then we looked at how to actually train a model, how to obtain these weights.
+[0:02:38.22 --> 0:02:43.42]	  And we saw that machine learning is not magic. So it's just a formula.
+[0:02:44.10 --> 0:0]	  This formula is called the normal equation.
+[0:02:46.22 --> 0:02:50.14]	  And we implemented this normal occasion in NumPy.
+[0:02:50.54 --> 0:02:53.18]	  So we have here the implementation.
+[0:02:53.80 --> 0:0]	  And with this implementation, we trained our first model, the baseline model that only use the basic numerical features.
+[0:03:03.38 --> 0:03:08.08]	  Baseline features, five of them. So the model didn't do really well.
+[0:03:08.88 --> 0:03:23.48]	  As we saw in the graph, but just judging from a graph is not always easy to understand what is the like, it's not easy to objectively measure the performance of a model.
+[0:03:23.78 --> 0:03:30.70]	  So that's why we talked about truth mean square terror, which is a metric for evaluating the quality of regression models.
+[0:03:30.70 --> 0:03:38.78]	  So we talked about that. And then we built this validation framework in a way.
+[0:03:38.90 --> 0:03:54.06]	  So we use this prepare X function that allowed us to have the same way of preparing this feature matrix for different data set for train and validation, which later allowed us to experiment a lot faster.
+[0:03:54.06 --> 0:04:01.04]	  So we just redefined this function and that let us simplify the process.
+[0:04:01.28 --> 0:04:07.40]	  So we were basically just copy, copy pasting the cell throughout the session.
+[0:04:09.12 --> 0:04:22.60]	  Yeah, so then, like after, you know, I think after that we did simple feature engineering, which engineering is a process of creating new features from existing ones.
+[0:04:23.04 --> 0:04:30.52]	  So we created a feature edge that improved the performance of our model drastically.
+[0:04:30.92 --> 0:04:40.42]	  As we see here, so the distributions now much the predicted distribution and the actual values, or not exactly, but at least a much better than previously.
+[0:04:41.28 --> 0:04:44.60]	  And then we looked at how to integrate categorical variables.
+[0:04:45.02 --> 0:04:52.54]	  And here we represented each categorical variable with a bunch of binary columns, binary features.
+[0:04:53.34 --> 0:05:05.14]	  And actually this way of encoding categorical variables is called one hot coding and we will talk about that in more details in the next session when we talk about classification.
+[0:05:05.70 --> 0:05:11.26]	  So we did that and then after that we found out that the performance of our model degraded significantly.
+[0:05:11.96 --> 0:05:15.36]	  So all of a sudden RMSE became very huge.
+[0:05:15.96 --> 0:05:22.74]	  And because luckily we had this validation framework, we had this validation data set of a good spot, the problem easily.
+[0:05:23.12 --> 0:05:27.58]	  And the reason for that was the numerical instability, which we discussed next.
+[0:05:28.36 --> 0:05:53.12]	  And as a way to solve this numerical instability we used trivialization, we added a small number to the diagonal of this matrix X transpose X before inverting it, which helped us and we noticed we saw that the performance of our model after including all these categorical features increased quite a lot compared to the previous version.
+[0:05:53.12 --> 0:06:01.10]	  And then we after that we tried different values of regularization per meter to find out what is the best one.
+[0:06:01.50 --> 0:06:11.84]	  And we concluded that this one 0.001, it seems like maybe it's not the best but it's on the same level as others.
+[0:06:12.10 --> 0:06:13.98]	  So we decided to go with this.
+[0:06:15.30 --> 0:06:25.40]	  So then we trained our final model, we combined training and validation data set into one full train data set.
+[0:06:25.96 --> 0:06:31.64]	  And we again use this prepare X function that is very convenient.
+[0:06:31.98 --> 0:06:33.98]	  And then we trained our final model.
+[0:06:34.76 --> 0:06:40.40]	  And we also saw how to apply this model to a car for which we don't know the price.
+[0:0 --> 0:06:46.12]	  So, well, actually we know because this is the test data set but we pretended we don't know the price for this car.
+[0:06:47.02 --> 0:06:53.68]	  So we predicted the price, which wasn't that off from the actual price.
+[0:06:54.70 --> 0:0]	  So in the next, I will not make a video for this one, it will be just text.
+[0:07:00.44 --> 0:07:01.84]	  So I read it through.
+[0:07:02.40 --> 0:07:03.26]	  So there are a lot.
+[0:07:03.56 --> 0:07:09.14]	  I'll talk about other things you can try to learn about the topic better.
+[0:07:09.60 --> 0:07:17.14]	  And of course, after that there will be homework where you'll try to do this, what we learned yourself.
+[0:07:17.70 --> 0:07:21.66]	  And then finally in the next section we'll talk about classification.
+[0:07:23.22 --> 0:07:31.46]	  And there instead of implementing things ourselves like we did here, we will use library, we will use scikit-learn for implementing all this thing.
+[0:07:31.82 --> 0:07:37.64]	  So we now saw how we can implement things ourselves and now we're ready to use library.
+[0:07:38.26 --> 0:07:38.82]	  So see you soon.

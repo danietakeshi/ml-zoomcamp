@@ -1,0 +1,262 @@
+[0:0 --> 0:00:03.32]	  Okay, welcome back.
+[0:00:03.66 --> 0:00:06.56]	  This is lesson seven of machine learning ZoomCAP session two.
+[0:00:07.04 --> 0:00:10.24]	  And we will talk about training the machine learning model.
+[0:00:10.66 --> 0:00:15.98]	  So in the previous lesson, we saw how to apply a model
+[0:00:15.98 --> 0:00:20.36]	  and we know how to, when we have a feature matrix
+[0:00:20.36 --> 0:00:23.04]	  and we have the weights, how to make predictions.
+[0:00:23.58 --> 0:00:26.42]	  Now we need to answer the question,
+[0:00:26.50 --> 0:00:28.12]	  how do we actually come with weights?
+[0:00:29.20 --> 0:00:31.04]	  And we will do this now.
+[0:00:32.76 --> 0:00:38.78]	  So remember that for us, this G of X,
+[0:00:39.22 --> 0:00:42.10]	  the function we have looks like that.
+[0:00:42.54 --> 0:00:48.28]	  So this is capital X, the feature matrix
+[0:00:48.28 --> 0:00:50.18]	  times the weights vector.
+[0:00:50.62 --> 0:00:52.38]	  So this is how it looks like.
+[0:00:54.38 --> 0:00:59.56]	  And what we want to do is we want this to be close to Y.
+[0:01:00.78 --> 0:01:04.92]	  So ideally we want this to be equal to Y,
+[0:01:05.74 --> 0:01:06.88]	  but often it's not possible.
+[0:01:08.62 --> 0:01:12.52]	  To find the closest solution to this,
+[0:01:14.02 --> 0:01:18.28]	  like I did, we need to solve this system.
+[0:01:18.38 --> 0:01:21.14]	  So this is a system, we need to solve it for W.
+[0:01:21.14 --> 0:01:25.94]	  So we need to find a way to find W.
+[0:01:26.72 --> 0:01:30.40]	  Let's say this X is invertible.
+[0:01:30.76 --> 0:01:35.76]	  So it means that there exists X minus one,
+[0:01:36.14 --> 0:01:39.70]	  not X, X to the power of minus one, which is an inverse
+[0:01:39.70 --> 0:01:45.20]	  and we need to multiply it from this side as well.
+[0:01:47.32 --> 0:01:48.86]	  So X minus one.
+[0:01:49.60 --> 0:01:54.02]	  So in this case, if this inverse existed,
+[0:01:54.52 --> 0:01:57.22]	  then this cancels, it becomes I,
+[0:01:57.46 --> 0:01:59.84]	  and what we have is this.
+[0:02:01.44 --> 0:02:04.84]	  So this is how you would solve this system
+[0:02:04.84 --> 0:02:08.12]	  if inverse existed for X.
+[0:02:08.80 --> 0:02:11.38]	  However, as we talked previously,
+[0:02:11.48 --> 0:02:15.80]	  this X is usually a rectangular matrix.
+[0:02:16.42 --> 0:02:20.32]	  So it has a lot of rows and a few columns perhaps.
+[0:02:20.76 --> 0:02:27.68]	  So this has a dimensionality of M times N minus plus one.
+[0:02:28.20 --> 0:02:31.04]	  And it's not square, definitely not square.
+[0:02:31.66 --> 0:02:34.56]	  So for this matrix, the inverse doesn't exist.
+[0:02:34.84 --> 0:02:37.96]	  So we cannot just go ahead and make an inverse.
+[0:02:38.98 --> 0:02:42.88]	  So for this system that we have,
+[0:02:42.88 --> 0:02:48.38]	  the solution doesn't exist.
+[0:02:48.84 --> 0:02:52.04]	  We can try to find an approximate solution to this
+[0:02:52.04 --> 0:02:57.88]	  by multiplying this by X transpose here.
+[0:02:58.30 --> 0:03:00.86]	  So this matrix is called the Gram matrix.
+[0:03:05.20 --> 0:03:06.98]	  And for this matrix, transpose,
+[0:03:07.58 --> 0:03:10.66]	  for this matrix, the inverse exists usually
+[0:03:10.66 --> 0:03:13.38]	  because it's squared.
+[0:03:13.70 --> 0:03:15.94]	  So it's always squared.
+[0:03:16.20 --> 0:03:20.86]	  So I think it's the dimension of this will be N plus one
+[0:03:20.86 --> 0:03:22.78]	  times N plus one.
+[0:03:22.78 --> 0:03:25.92]	  So for this one, inverse should exist.
+[0:03:26.22 --> 0:03:27.44]	  It doesn't always exist,
+[0:03:27.54 --> 0:03:29.98]	  but we will talk about this a bit later.
+[0:03:30.68 --> 0:03:31.88]	  But it's squared.
+[0:03:32.16 --> 0:03:35.10]	  So inverse can exist and we can try to invert this matrix.
+[0:03:35.58 --> 0:03:36.44]	  So let's do that.
+[0:03:37.14 --> 0:03:39.88]	  Let's move it a bit.
+[0:03:41.22 --> 0:0]	  So what we can do now is we can multiply this
+[0:0 --> 0:03:51.40]	  by the inverse of this Gram matrix
+[0:03:51.40 --> 0:03:56.30]	  and multiply it here by the inverse of this Gram matrix.
+[0:03:56.70 --> 0:03:58.58]	  So here this is inverse of this one.
+[0:03:58.58 --> 0:04:02.30]	  It means that this thing goes away.
+[0:04:03.14 --> 0:04:05.20]	  It becomes identity matrix,
+[0:04:05.44 --> 0:04:11.28]	  which means that we are left with this part.
+[0:04:12.96 --> 0:04:26.28]	  Now, so we used to have I here and I times W equals W.
+[0:04:26.28 --> 0:04:29.32]	  So this is gone.
+[0:04:31.42 --> 0:04:33.70]	  We can just remove it.
+[0:04:37.50 --> 0:04:43.24]	  So this actually gives us a way to find W.
+[0:04:43.94 --> 0:04:47.44]	  This W is not the solution to the system
+[0:04:47.44 --> 0:04:48.82]	  because the solution doesn't exist,
+[0:04:48.92 --> 0:04:52.32]	  but this W is the closest possible solution to that system.
+[0:04:53.54 --> 0:04:55.92]	  I'm not going to prove it now.
+[0:04:55.92 --> 0:04:59.26]	  So there are actually proofs for that, for this claim,
+[0:04:59.38 --> 0:05:02.04]	  and they involve a lot of mathematics.
+[0:05:02.96 --> 0:05:04.60]	  Now there is a good book about this called
+[0:05:04.60 --> 0:05:06.04]	  Elements of Statistical Learning.
+[0:05:06.52 --> 0:05:08.10]	  So you can refer to that book
+[0:05:08.10 --> 0:05:11.86]	  if you're really interested in the derivation of this,
+[0:05:12.10 --> 0:05:13.02]	  how to derive this.
+[0:05:13.44 --> 0:05:15.40]	  Because what I showed you now is more like
+[0:05:15.40 --> 0:05:16.42]	  on the intuitive level,
+[0:05:16.88 --> 0:05:22.48]	  but there is also a bit of theory behind that as well.
+[0:05:22.48 --> 0:05:25.68]	  That is quite interesting if you like these kinds of things
+[0:05:25.68 --> 0:05:28.22]	  and go check that I recommend it for that.
+[0:05:29.08 --> 0:05:30.90]	  So now we have this formula.
+[0:05:31.56 --> 0:05:34.32]	  Let me show you it one more time.
+[0:05:34.70 --> 0:05:35.72]	  Now we need to implement this.
+[0:05:36.36 --> 0:05:41.40]	  So let's call this train linear regression.
+[0:05:42.20 --> 0:05:46.64]	  And the input to this is we need the X,
+[0:05:47.18 --> 0:05:48.68]	  and we need the Y.
+[0:05:49.36 --> 0:05:50.84]	  So the input for this is X and Y.
+[0:05:52.68 --> 0:05:54.68]	  I will not implement it right now.
+[0:05:54.94 --> 0:05:59.20]	  Let's just try to go through this
+[0:05:59.20 --> 0:06:00.94]	  to understand what's going on here.
+[0:06:01.64 --> 0:06:02.66]	  So first we have this X.
+[0:06:03.08 --> 0:06:04.50]	  So we can use the same X.
+[0:06:05.96 --> 0:06:10.58]	  So this X is a bit problematic
+[0:06:10.58 --> 0:06:13.70]	  because it has more columns than rows.
+[0:06:14.24 --> 0:06:16.84]	  I think what we can do is maybe just come up with
+[0:06:16.84 --> 0:06:20.24]	  more examples.
+[0:06:22.32 --> 0:06:27.64]	  So it's problematic because for this kind of matrix,
+[0:06:27.98 --> 0:06:30.40]	  the solution, the inverse will not necessarily exist.
+[0:06:30.62 --> 0:06:32.56]	  Will probably not exist at all.
+[0:06:33.14 --> 0:06:36.14]	  So let's just come up with a matrix ourselves.
+[0:06:37.02 --> 0:06:38.42]	  So I'm doing that.
+[0:06:38.76 --> 0:06:40.82]	  I'm creating a list of lists.
+[0:06:48.32 --> 0:06:52.32]	  So the first column is, yeah, let's remove the ones.
+[0:06:52.64 --> 0:06:53.98]	  We'll see how to add them.
+[0:06:55.56 --> 0:06:59.16]	  And we need the commas.
+[0:06:59.88 --> 0:07:03.12]	  And I'll just copy this thing one more time.
+[0:07:04.04 --> 0:07:07.74]	  And change it to, let's say,
+[0:07:07.92 --> 0:07:10.80]	  to five, five, five, five, five.
+[0:07:14.38 --> 0:07:18.08]	  Just have a bit of variation.
+[0:07:23.90 --> 0:07:27.62]	  Yeah, I think this looks okay.
+[0:07:28.42 --> 0:07:30.34]	  I hope the inverse for this one will exist.
+[0:07:30.94 --> 0:07:32.72]	  Okay, so we have this matrix, right?
+[0:07:32.82 --> 0:07:35.76]	  And what we need to do next is do,
+[0:07:36.40 --> 0:07:38.02]	  so let me just have it here
+[0:07:38.02 --> 0:07:40.24]	  so we know what we are implementing.
+[0:07:40.82 --> 0:07:44.40]	  So we have this gram matrix, the inverse of this.
+[0:07:44.94 --> 0:07:48.10]	  Then we have X transpose and then Y.
+[0:07:48.52 --> 0:07:51.16]	  And this is our vector W.
+[0:07:52.12 --> 0:07:54.64]	  So we'll have it here on our screen.
+[0:07:55.26 --> 0:07:58.92]	  So first let's implement the gram matrix.
+[0:07:59.22 --> 0:08:01.78]	  Let's calculate it so that it's pretty simple.
+[0:0 --> 0:08:04.54]	  Yeah, of course it should be X.
+[0:08:05.74 --> 0:08:09.82]	  So we have the gram matrix, let's call it XTX.
+[0:08:10.82 --> 0:08:15.42]	  And then we need to find its inverse.
+[0:08:16.76 --> 0:08:20.34]	  And we talked about this in the previous lesson,
+[0:08:20.46 --> 0:08:22.10]	  how to find the inverse of this matrix.
+[0:08:22.70 --> 0:08:24.44]	  And then it gives us some inverse.
+[0:08:25.18 --> 0:08:30.92]	  So we can call it XTXINF, which is inverse.
+[0:08:31.38 --> 0:08:35.22]	  And we can quickly check that the actually,
+[0:08:35.46 --> 0:08:36.88]	  the dot product between them,
+[0:08:37.08 --> 0:08:39.60]	  the multiplication between them,
+[0:08:39.82 --> 0:08:40.66]	  gives us,
+[0:08:41.32 --> 0:08:45.92]	  yeah, it gives us an identity matrix.
+[0:08:45.92 --> 0:08:48.54]	  We'll have once on the diagonal.
+[0:08:48.94 --> 0:08:51.46]	  So it's not exactly identity matrix,
+[0:08:51.58 --> 0:08:53.70]	  but these numbers they are super tiny.
+[0:08:53.92 --> 0:08:55.22]	  So they are very small, they're just,
+[0:08:56.22 --> 0:08:58.74]	  yeah, we can safely ignore them.
+[0:08:58.84 --> 0:09:00.46]	  So we can treat this as zero.
+[0:09:02.20 --> 0:09:05.70]	  Okay, so this is the reason for that.
+[0:09:05.70 --> 0:09:09.90]	  It's like machine precision is not, it's finite.
+[0:09:10.44 --> 0:0]	  So like it cannot do things with infinite precision.
+[0:09:15.18 --> 0:09:17.86]	  And that's why, yeah, there are some leftovers.
+[0:09:18.56 --> 0:09:21.72]	  Anyways, so we have this one, right?
+[0:09:22.68 --> 0:09:26.46]	  And now we need to multiply it with X transpose
+[0:09:26.46 --> 0:09:28.30]	  and then multiply it with Y.
+[0:09:29.88 --> 0:09:32.46]	  And we don't have a Y, of course.
+[0:09:32.46 --> 0:09:35.96]	  So let's say half a Y can be, I don't know.
+[0:09:37.02 --> 0:09:40.90]	  I'm just coming with this on the spot.
+[0:09:41.66 --> 0:09:42.92]	  So how many we have?
+[0:09:44.30 --> 0:09:45.62]	  I need more.
+[0:09:46.54 --> 0:09:47.96]	  So let me just duplicate this
+[0:09:47.96 --> 0:09:49.22]	  and we need one more.
+[0:09:53.36 --> 0:09:55.22]	  Okay, yeah.
+[0:09:56.12 --> 0:10:02.34]	  So this is our, actually this is our W.
+[0:10:03.74 --> 0:10:05.42]	  And we forgot about one thing.
+[0:10:05.80 --> 0:10:08.42]	  So we forgot about this bias term, right?
+[0:10:08.54 --> 0:10:10.52]	  So what we just did, what I just did,
+[0:10:10.54 --> 0:1]	  because I forgot to add zeros, like sorry, ones here,
+[0:10:16.48 --> 0:10:18.40]	  that basically we trained the model
+[0:10:18.40 --> 0:10:20.36]	  but we didn't train the bias term.
+[0:10:21.54 --> 0:10:23.74]	  Sometimes it's possible also to sometimes
+[0:10:23.74 --> 0:10:25.72]	  these models like that make sense,
+[0:10:25.98 --> 0:10:27.96]	  but we want to include the bias term
+[0:10:27.96 --> 0:10:29.78]	  because as we talked previously,
+[0:10:30.74 --> 0:10:34.32]	  this bias term gives us the baseline.
+[0:10:34.66 --> 0:10:37.08]	  So this is how much a car should cost
+[0:10:37.08 --> 0:10:39.14]	  if we don't know anything about this car.
+[0:10:39.50 --> 0:10:40.42]	  So this is the baseline.
+[0:10:40.88 --> 0:10:43.64]	  And in case we don't include the bias term,
+[0:10:43.90 --> 0:10:51.12]	  then we don't know what should we base our prediction on.
+[0:10:51.98 --> 0:10:55.16]	  So let's add ones here.
+[0:10:55.36 --> 0:10:56.74]	  So we don't have ones here
+[0:10:56.74 --> 0:11:01.20]	  and what we need to do is add another column here
+[0:11:01.20 --> 0:11:01.94]	  at the beginning.
+[0:11:03.82 --> 0:11:06.88]	  And for that, we need to first,
+[0:11:07.30 --> 0:11:10.70]	  if you remember there is a function called ones.
+[0:11:11.60 --> 0:11:14.86]	  And we just need to append these ones
+[0:11:14.86 --> 0:11:17.40]	  into at the beginning of this matrix.
+[0:11:18.14 --> 0:11:20.12]	  I think it has nine rows.
+[0:11:20.54 --> 0:11:22.28]	  So just to be on the same side,
+[0:11:22.36 --> 0:11:25.52]	  let's just use this shape of X zero,
+[0:11:25.72 --> 0:11:28.44]	  which creates, which looks at the number of rows
+[0:11:28.44 --> 0:11:33.32]	  and creates this vector of ones.
+[0:11:33.72 --> 0:11:38.82]	  And then there is a function in the NumPy called column stack,
+[0:11:40.34 --> 0:11:45.14]	  which takes, let's say we can take two vectors
+[0:11:45.14 --> 0:11:46.76]	  and stack them together as columns,
+[0:11:47.22 --> 0:11:51.40]	  or yeah, we can just take a matrix and,
+[0:11:52.12 --> 0:11:55.22]	  so it's not here because of this scientific data.
+[0:11:55.28 --> 0:11:57.94]	  You cannot see this because of the scientific notation,
+[0:11:58.22 --> 0:12:00.44]	  but basically took ones two times
+[0:12:00.44 --> 0:12:04.44]	  and then added the content of the matrix.
+[0:12:04.68 --> 0:12:06.64]	  And the result is a two dimensional matrix.
+[0:12:07.10 --> 0:12:10.74]	  So we need just that and no fronting will help.
+[0:12:11.98 --> 0:12:13.10]	  Yeah, it doesn't help.
+[0:12:15.12 --> 0:12:18.44]	  So maybe I'll do that just to see the results.
+[0:12:20.90 --> 0:12:22.86]	  Okay, well, at least for these ones,
+[0:12:22.86 --> 0:12:26.08]	  we see that because these values are a bit larger,
+[0:12:26.30 --> 0:12:28.58]	  that's why NumPy is trying to be smart.
+[0:12:30.14 --> 0:12:35.62]	  So basically it adds one as the first column
+[0:12:35.62 --> 0:12:36.28]	  of this matrix.
+[0:12:37.40 --> 0:12:40.98]	  So this is our X now we overwrite it.
+[0:12:41.06 --> 0:12:44.02]	  And then we go through this same thing again,
+[0:12:44.02 --> 0:12:50.76]	  and let's call it to be full because it contains all the weights.
+[0:12:54.10 --> 0:12:56.52]	  So starting from the bias and then the rest.
+[0:12:57.38 --> 0:12:59.80]	  And we can decompose it with, can say that,
+[0:13:00.54 --> 0:13:03.66]	  so V zero is the first one.
+[0:13:04.52 --> 0:13:05.58]	  Right, so this is the biased.
+[0:13:06.28 --> 0:13:11.48]	  And the W the rest, for usual W,
+[0:13:11.56 --> 0:13:14.48]	  take the rest, so one and everything after one.
+[0:13:15.16 --> 0:13:19.12]	  And this is the coefficients that we have
+[0:13:19.12 --> 0:13:21.30]	  for our linear regression.
+[0:13:23.86 --> 0:13:29.06]	  So yeah, so this is the bias term,
+[0:13:29.40 --> 0:13:32.58]	  and this is W one, W two, and W three.
+[0:13:32.98 --> 0:13:34.94]	  You see that they actually are negative.
+[0:13:35.20 --> 0:13:37.22]	  So we didn't have negative in our example.
+[0:13:37.80 --> 0:13:39.80]	  I think because to here,
+[0:13:39.88 --> 0:13:42.26]	  maybe if I have larger values here,
+[0:13:42.90 --> 0:13:44.38]	  maybe it won't be negative.
+[0:13:51.18 --> 0:13:52.90]	  But basically it means that,
+[0:13:54.46 --> 0:13:58.56]	  it's still negative.
+[0:13:58.72 --> 0:14:03.14]	  So negative values here, I mean, that instead of adding
+[0:14:03.14 --> 0:14:05.36]	  to the price, so we have some price.
+[0:14:05.70 --> 0:14:09.32]	  So here it's not, if we can still call price,
+[0:14:09.86 --> 0:14:12.46]	  but basically, so in the example we had previously,
+[0:14:12.82 --> 0:14:14.36]	  we had positive weights, meaning negative values.
+[0:14:14.36 --> 0:14:14.36]	 
+[0:14:14.36 --> 0:14:17.76]	  Meaning that for extra horsepower that we have
+[0:14:17.76 --> 0:14:20.12]	  in our car, the price increases.
+[0:14:20.90 --> 0:14:23.34]	  But here for this particular, let's say,
+[0:14:23.60 --> 0:14:29.84]	  if this is, I don't know, H of a car, right?
+[0:14:30.54 --> 0:14:35.18]	  For each extra H, for each extra year for a car,
+[0:14:35.56 --> 0:14:36.40]	  the price decreases.
+[0:14:36.82 --> 0:14:39.80]	  So here we have this negative number,
+[0:14:39.88 --> 0:14:42.22]	  meaning that the price actually goes down.
+[0:14:43.56 --> 0:14:49.14]	  Okay, and we, I think what we need to do now,
+[0:14:49.36 --> 0:14:51.08]	  what we need to do now,
+[0:14:51.42 --> 0:14:53.62]	  something we didn't do is put this in a function.
+[0:14:54.08 --> 0:14:57.64]	  So let's just take this one,
+[0:14:58.98 --> 0:15:02.92]	  and just put everything that we did here.
+[0:15:03.04 --> 0:15:07.32]	  So first we have once here,
+[0:15:08.62 --> 0:15:13.34]	  then we have our X, modified X here.
+[0:15:14.40 --> 0:15:17.98]	  Then we do the normal equation.
+[0:15:20.68 --> 0:15:23.94]	  Just put them in one line.
+[0:15:24.58 --> 0:15:27.72]	  So this is the normal equation, right?
+[0:15:27.84 --> 0:15:31.80]	  And then at the end, we need to return the results
+[0:15:31.80 --> 0:15:34.68]	  and I'll do this as a table.
+[0:15:34.68 --> 0:15:41.02]	  So the first element of the table will be the bias term,
+[0:15:41.62 --> 0:15:46.84]	  and then the rest is, yeah, the weights.
+[0:15:48.80 --> 0:15:54.90]	  And yeah, if we do this once again, without the once,
+[0:15:55.48 --> 0:15:58.80]	  so we have the Y, and here we can quickly test it.
+[0:15:59.50 --> 0:16:02.78]	  A train, train linear regression.
+[0:16:03.44 --> 0:16:05.58]	  So it gives the same results.
+[0:16:06.30 --> 0:16:09.48]	  Okay, so the adding once happens inside.
+[0:16:09.72 --> 0:16:13.28]	  So we as users, we don't need to worry about adding once
+[0:16:13.28 --> 0:16:14.42]	  to our future metrics.
+[0:16:15.12 --> 0:16:16.84]	  Okay, so we implemented this function,
+[0:16:17.10 --> 0:16:21.56]	  and now let's use this for our problem.
+[0:16:21.80 --> 0:16:23.60]	  Let's use this for predicting the price of a car.

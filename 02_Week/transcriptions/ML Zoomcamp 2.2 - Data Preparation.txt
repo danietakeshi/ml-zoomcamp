@@ -1,0 +1,160 @@
+[0:0 --> 0:00:01.36]	  Hi everyone, welcome back.
+[0:00:01.78 --> 0:00:04.72]	  This is lesson two of session two of machine learning
+[0:00:04.72 --> 0:00:08.38]	  ZoomCamp and we will now prepare a data set
+[0:00:08.38 --> 0:00:09.94]	  for our price prediction project.
+[0:00:10.50 --> 0:00:12.78]	  So remember we already looked at the data set
+[0:00:12.78 --> 0:00:17.26]	  and the data set is on Kaggle, but they have a copy
+[0:00:17.26 --> 0:00:20.54]	  that we can use just to find it.
+[0:00:20.62 --> 0:00:24.12]	  So we can go to GitHub, my profile,
+[0:0 --> 0:00:29.08]	  then so this Cerepo MLCamp code,
+[0:00:29.22 --> 0:00:30.42]	  this is what we need.
+[0:0 --> 0:0]	  Then we have this chapter two car price
+[0:0 --> 0:00:37.58]	  and then two files that I showed you,
+[0:00:37.90 --> 0:00:40.06]	  one of them is the data.
+[0:00:40.88 --> 0:00:43.40]	  So we just see the file.
+[0:00:44.44 --> 0:00:47.50]	  And we need to get the URL of this file.
+[0:00:48.06 --> 0:00:50.48]	  So now let's download this URL.
+[0:00:52.24 --> 0:00:53.60]	  Let's download this data.
+[0:00:56.26 --> 0:01:00.12]	  Yeah, I think I already have it, that's why I added one.
+[0:01:00.84 --> 0:01:01.94]	  So what this is what you do.
+[0:01:02.14 --> 0:01:03.90]	  So you can use this big get,
+[0:01:04.08 --> 0:01:07.88]	  double you get for downloading data
+[0:01:07.88 --> 0:01:10.78]	  or you can just save as in your browser.
+[0:01:11.28 --> 0:01:12.32]	  So you have this data.
+[0:01:13.08 --> 0:01:17.72]	  Now what we need to do is first load it.
+[0:01:18.06 --> 0:01:22.88]	  For that we in pandas we use the CSV function.
+[0:01:23.60 --> 0:01:28.50]	  So it just loads data and we can see it immediately.
+[0:01:29.22 --> 0:01:32.70]	  So all the data we saw on Kaggle is all here.
+[0:01:33.70 --> 0:01:37.94]	  So let's write it to variable.
+[0:01:38.76 --> 0:0]	  And then usually what I do after that is I take a look
+[0:0 --> 0:01:45.64]	  at the first couple of rows, first five rows
+[0:01:45.64 --> 0:0]	  of the data set and see what we have here.
+[0:01:49.54 --> 0:01:53.08]	  So we see the manufacturer of a car, model year,
+[0:01:54.24 --> 0:02:00.56]	  a lot of different features,
+[0:02:01.32 --> 0:02:03.36]	  like a lot of different characteristics of a car.
+[0:02:04.12 --> 0:02:06.50]	  And this is what we actually want to predict.
+[0:02:06.72 --> 0:02:10.02]	  This MSRP manufacturers are just at retail price.
+[0:02:10.74 --> 0:02:16.66]	  So what we can see here is there is some inconsistency
+[0:02:16.66 --> 0:02:21.12]	  in the way the column names we have columns.
+[0:02:21.66 --> 0:02:24.70]	  So sometimes we have, let's say underscores here,
+[0:02:24.88 --> 0:02:28.44]	  sometimes we don't, then we have spaces here
+[0:02:28.44 --> 0:02:30.62]	  that and remember with space,
+[0:02:31.24 --> 0:02:34.16]	  like usually if we want to let's say access
+[0:02:34.16 --> 0:02:37.50]	  this transmission type variable,
+[0:02:38.32 --> 0:02:42.38]	  then we need to use this notation.
+[0:02:42.58 --> 0:02:44.76]	  We can do it with dot because with dot
+[0:02:44.82 --> 0:02:48.12]	  then it's not like we'll say, okay, I don't know what is that.
+[0:02:48.90 --> 0:02:52.50]	  So what we usually need to do is do a bit of cleaning.
+[0:02:52.86 --> 0:02:54.92]	  Like first make it consistent.
+[0:02:55.24 --> 0:02:56.98]	  Let's say make it lowercase everywhere.
+[0:02:57.60 --> 0:0]	  Cause you see this is lowercase, this is uppercase.
+[0:03:00.30 --> 0:03:03.26]	  Then sometimes there are underscores,
+[0:03:03.58 --> 0:03:05.06]	  sometimes there are no underscores.
+[0:03:05.30 --> 0:03:10.40]	  So what we want to do now is make it all consistent.
+[0:03:10.64 --> 0:03:14.74]	  So let's lowercase it and let's say place space
+[0:03:14.76 --> 0:03:15.52]	  is within this course.
+[0:03:16.62 --> 0:03:22.46]	  So for that in pandas, there is this field called columns
+[0:03:22.46 --> 0:03:26.74]	  like in each data frame and it contains the names
+[0:03:26.74 --> 0:03:28.92]	  of the columns and it's an index.
+[0:03:29.24 --> 0:03:32.34]	  And in the introduction to pandas, we talked about indices.
+[0:03:32.92 --> 0:03:37.74]	  So index is like a special data structure in pandas.
+[0:03:37.82 --> 0:03:38.98]	  It's very similar to series.
+[0:03:39.70 --> 0:03:43.12]	  And like series, it has this str method,
+[0:03:45.44 --> 0:03:48.60]	  str thing for doing string manipulations.
+[0:03:49.10 --> 0:03:53.80]	  So what we can do is we can apply the same string function
+[0:03:53.80 --> 0:03:56.32]	  to all the column names here.
+[0:03:56.50 --> 0:03:59.76]	  So let's say if we want to make everything lowercase,
+[0:04:00.26 --> 0:04:02.06]	  we just get, no, we just invoke this lower
+[0:04:02.06 --> 0:04:05.48]	  and you see that everything becomes lowercase.
+[0:04:05.98 --> 0:04:10.84]	  And we can also chain it with multiple string commands
+[0:04:10.88 --> 0:04:14.14]	  and the other one that we want to use is replace.
+[0:04:14.58 --> 0:04:20.28]	  So we want to replace spaces with underscores.
+[0:04:21.18 --> 0:04:22.24]	  And this is what we get.
+[0:04:22.70 --> 0:04:25.78]	  And now what we can do is we can write it back
+[0:04:25.78 --> 0:04:27.68]	  to this columns field.
+[0:04:27.94 --> 0:04:31.26]	  So if we do this now, so we write it back.
+[0:04:31.98 --> 0:04:35.70]	  And then now if we look at the head of this,
+[0:04:35.84 --> 0:04:39.86]	  at the top first records, we see that everything now
+[0:04:41.04 --> 0:04:42.78]	  is more uniform, right?
+[0:04:42.92 --> 0:04:43.94]	  So it's lowercase.
+[0:04:45.12 --> 0:04:46.06]	  It's consistent basically.
+[0:04:46.40 --> 0:04:47.44]	  And so it's cleaner.
+[0:04:48.44 --> 0:04:52.12]	  And actually we have the same problem with the values.
+[0:04:52.60 --> 0:04:55.82]	  So here sometimes you see it's all cups.
+[0:04:56.52 --> 0:04:58.36]	  Sometimes it's not all cups.
+[0:04:59.70 --> 0:05:04.54]	  And yeah, so it's also not nice.
+[0:05:04.74 --> 0:05:08.92]	  So let's make it, let's standardize it, normalize it as well.
+[0:05:09.86 --> 0:05:11.86]	  So for that we first need to find out
+[0:05:11.86 --> 0:05:16.72]	  what are all the string columns, right?
+[0:05:16.80 --> 0:05:21.10]	  So we cannot really apply string methods to this column,
+[0:05:21.24 --> 0:05:23.32]	  for example, because these numbers.
+[0:05:23.84 --> 0:05:26.68]	  So this STR thing works only for strings.
+[0:05:27.10 --> 0:05:28.56]	  So first of all, we need to find out,
+[0:05:28.86 --> 0:05:31.42]	  to find all the string columns.
+[0:05:31.90 --> 0:05:35.52]	  And for that we use this field called dtypes,
+[0:05:38.04 --> 0:05:41.42]	  which is just for all the columns,
+[0:0 --> 0:05:45.66]	  it tells us what is the type of this column.
+[0:05:46.10 --> 0:05:47.52]	  And we're interested in objects.
+[0:05:49.40 --> 0:05:53.36]	  So you see here, so this is integer.
+[0:05:53.72 --> 0:05:55.24]	  So this is not interesting for us.
+[0:05:55.64 --> 0:05:58.10]	  These are floats, these are also float.
+[0:05:58.56 --> 0:05:59.44]	  So these are integers.
+[0:05:59.88 --> 0:06:00.72]	  These are not interesting.
+[0:06:00.88 --> 0:06:02.70]	  The interesting one for us are objects.
+[0:06:02.70 --> 0:06:06.48]	  So objects here are strings.
+[0:06:07.26 --> 0:06:10.70]	  Can be other objects, but usually when we just read
+[0:06:10.70 --> 0:06:14.78]	  something from CSV file, it's nothing else,
+[0:06:14.94 --> 0:06:18.22]	  but it cannot be anything else but a string.
+[0:06:19.24 --> 0:06:24.14]	  So we are now interested in getting all the columns
+[0:06:24.14 --> 0:06:25.62]	  that are of type object.
+[0:06:26.12 --> 0:06:27.30]	  So we can do that.
+[0:0 --> 0:06:31.16]	  Remember this syntax basically tells us
+[0:06:31.16 --> 0:06:32.72]	  what is object and what is not.
+[0:06:32.98 --> 0:06:36.12]	  So we know that make is make model.
+[0:06:37.16 --> 0:06:39.38]	  So we know which are objects.
+[0:06:40.26 --> 0:06:45.42]	  So we can do that to select only those that are objects.
+[0:06:45.74 --> 0:06:47.78]	  So if something is true, we will keep it.
+[0:06:48.02 --> 0:06:49.76]	  If something is false, we will not keep it.
+[0:06:50.28 --> 0:06:53.28]	  And we get now this series.
+[0:06:54.20 --> 0:06:58.60]	  And if you remember from the introduction lecture
+[0:06:58.60 --> 0:07:03.34]	  about Python, so this is serious and these are the values.
+[0:07:05.36 --> 0:07:06.76]	  These are values.
+[0:07:07.68 --> 0:07:10.84]	  And this is the index of the series.
+[0:07:13.48 --> 0:07:16.48]	  So here we're actually not interested in values
+[0:07:16.48 --> 0:07:18.50]	  because values are all objects.
+[0:07:19.12 --> 0:07:20.42]	  What we're interested in,
+[0:07:20.70 --> 0:07:22.24]	  in we want to get these names.
+[0:07:23.74 --> 0:07:30.38]	  So for that, we need to use to get access to index.
+[0:07:30.60 --> 0:07:31.58]	  And this is how we do it.
+[0:07:32.20 --> 0:07:36.66]	  So when we do this, we get access to the index of that series.
+[0:07:37.10 --> 0:07:41.46]	  And these are all the names of the columns that we need.
+[0:07:41.64 --> 0:07:43.58]	  And we can just convert it to Python list.
+[0:07:44.44 --> 0:07:47.18]	  Just because, not particular reason,
+[0:07:47.30 --> 0:07:48.28]	  just because it looks nicer.
+[0:07:48.86 --> 0:07:50.62]	  And let's call it strings.
+[0:07:51.10 --> 0:07:56.10]	  So this is a Python list that contains all the string names.
+[0:07:57.08 --> 0:07:59.78]	  And now since we have all these names,
+[0:08:00.12 --> 0:08:03.64]	  what we can do is we can loop over them.
+[0:08:04.02 --> 0:08:08.70]	  So let's say for call strings, so call is column,
+[0:08:09.40 --> 0:08:10.62]	  and df call.
+[0:08:11.54 --> 0:08:13.16]	  So basically what we want to do
+[0:08:13.16 --> 0:08:17.90]	  is we want to do the same thing we did it here with columns.
+[0:08:18.18 --> 0:08:19.64]	  Let's say for make.
+[0:08:21.28 --> 0:08:24.36]	  What we want to do is do the same thing.
+[0:08:26.18 --> 0:08:29.48]	  And then write it back to make.
+[0:08:29.88 --> 0:08:32.58]	  And we don't do this just for make,
+[0:08:32.96 --> 0:0]	  we do it for everything.
+[0:08:34.50 --> 0:08:36.62]	  So, and this is how we can do this.
+[0:08:37.36 --> 0:08:42.34]	  So for column, one of those lower case,
+[0:08:42.48 --> 0:08:44.48]	  replace spaces with underscores
+[0:08:44.48 --> 0:0]	  and write it back to the data frame.
+[0:08:48.48 --> 0:0]	  Now we can see that it's cleaner.
+[0:08:54.56 --> 0:08:55.78]	  Now everything is lower case.
+[0:08:56.88 --> 0:09:00.18]	  Spices are replaced with underscores.
+[0:09:00.56 --> 0:09:02.62]	  So the data now looks a bit cleaner.
+[0:09:04.84 --> 0:09:08.56]	  And let's also take a look at what we actually have.
+[0:09:11.52 --> 0:09:14.94]	  I think, yeah, this is something we will actually do
+[0:09:15.24 --> 0:09:18.80]	  in the next lesson.
+[0:09:18.98 --> 0:09:21.86]	  So in the next lesson, we will take a look at the data
+[0:09:21.86 --> 0:09:23.80]	  and try to understand what is there.
+[0:09:24.50 --> 0:09:24.96]	  See you soon.

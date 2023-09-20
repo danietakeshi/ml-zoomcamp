@@ -1,0 +1,249 @@
+[0:00:00.14 --> 0:00:04.30]	  Welcome back. This is lesson five of machine learning in ZoomCamp, session two.
+[0:00:04.72 --> 0:00:06.76]	  And now we will talk about linear regression.
+[0:00:08.12 --> 0:00:12.96]	  So linear regression is a model that we use for solving regression problems,
+[0:00:13.38 --> 0:00:17.98]	  meaning that we use for predicting numbers.
+[0:00:18.54 --> 0:00:19.98]	  So the output of the model is a number.
+[0:00:21.52 --> 0:00:26.72]	  And you probably remember from the introduction there is regression, there is classification,
+[0:00:26.72 --> 0:00:29.52]	  and there is ranking. So we are now talking about regression.
+[0:00:30.06 --> 0:00:33.28]	  And linear regression is a model for solving this.
+[0:00:33.90 --> 0:00:40.72]	  And you probably also remember this formula that we used in the introduction lesson.
+[0:00:41.76 --> 0:00:47.72]	  So here G is our model.
+[0:00:49.96 --> 0:00:52.60]	  Then X is the feature matrix.
+[0:00:54.54 --> 0:00:59.94]	  And Y is our target.
+[0:01:02.70 --> 0:01:07.26]	  So in this case, Y is the price.
+[0:01:08.76 --> 0:01:13.44]	  And this model G will be linear regression.
+[0:01:22.48 --> 0:01:24.46]	  And we'll come back to this form.
+[0:01:24.78 --> 0:01:28.46]	  So here X is a matrix. We'll come back to this form.
+[0:01:28.78 --> 0:01:32.82]	  But before we do this, let's take a look at a simplified form.
+[0:0 --> 0:01:35.92]	  So let's look at the same one.
+[0:01:36.12 --> 0:01:42.58]	  But here instead of looking at capital X, which is the entire feature matrix,
+[0:0 --> 0:01:44.82]	  we will look at only one observation.
+[0:01:45.42 --> 0:01:54.72]	  So one observation will be, so this is just a car, some car.
+[0:01:55.56 --> 0:01:58.22]	  And this is its price.
+[0:02:00.18 --> 0:02:03.38]	  So we don't look at all the cars at the same time,
+[0:02:03.52 --> 0:02:05.18]	  all the prices at the same time.
+[0:02:05.32 --> 0:02:07.38]	  We just look at one car.
+[0:02:08.62 --> 0:02:09.62]	  So this car.
+[0:02:10.94 --> 0:02:17.54]	  So this is, it can be a row in our feature matrix.
+[0:02:17.90 --> 0:02:19.60]	  So we can think of it as a vector.
+[0:02:20.18 --> 0:02:22.38]	  It consists of multiple elements.
+[0:02:22.74 --> 0:02:25.54]	  So let's say it's an n dimensional vector.
+[0:02:26.04 --> 0:02:30.90]	  So the first element of this is XI1.
+[0:02:31.20 --> 0:02:35.32]	  Then we have XI2 and so on.
+[0:02:36.04 --> 0:02:37.14]	  XIN.
+[0:02:37.60 --> 0:02:40.62]	  So we have n elements here.
+[0:02:40.92 --> 0:02:43.80]	  So this is our vector.
+[0:02:44.54 --> 0:02:50.76]	  So what we actually want to have is a function
+[0:02:50.76 --> 0:03:00.68]	  that takes in all these features from X1 to XIN
+[0:03:00.68 --> 0:03:04.98]	  and then produces something that is close to the price.
+[0:03:05.14 --> 0:03:07.68]	  So this is what we want to do.
+[0:03:09.02 --> 0:03:12.54]	  And yeah, regarding this access,
+[0:03:13.30 --> 0:03:16.26]	  so these are different characteristics of cars,
+[0:03:16.48 --> 0:03:19.14]	  of cars that we have, of this specific car.
+[0:03:19.96 --> 0:03:23.24]	  So let's take a look at what we actually have.
+[0:03:24.42 --> 0:03:29.34]	  So in our data set, and we now will use training data set
+[0:03:29.34 --> 0:03:32.12]	  because this is what we will use for training the data.
+[0:03:32.84 --> 0:03:36.24]	  So remember this, this capital X,
+[0:03:37.04 --> 0:03:39.78]	  it's feature matrix training.
+[0:03:40.70 --> 0:03:43.26]	  So we don't look at validation.
+[0:03:43.56 --> 0:03:45.06]	  We don't look at testing.
+[0:03:45.24 --> 0:03:46.60]	  We only look at training here.
+[0:03:48.38 --> 0:03:52.12]	  And let's take a look at any,
+[0:03:52.54 --> 0:03:57.08]	  so we have quite a few, quite a few rows here.
+[0:03:57.08 --> 0:04:00.64]	  Let's take a look at row number 10.
+[0:04:01.38 --> 0:04:08.72]	  So this is Rolls-Royce of model phantom drophead coupe
+[0:04:08.72 --> 0:04:12.10]	  which was manufactured in 2015.
+[0:04:12.54 --> 0:04:14.02]	  So we have all these characteristics.
+[0:04:14.80 --> 0:04:19.28]	  So let's just take engine horsepower.
+[0:04:21.24 --> 0:04:25.18]	  We'll take CT miles per gallon
+[0:04:25.64 --> 0:0]	  and we take popularity.
+[0:04:27.82 --> 0:04:32.74]	  We'll take this three just to make it a bit shorter.
+[0:04:33.28 --> 0:04:35.98]	  We don't want to take more.
+[0:04:36.42 --> 0:04:38.56]	  It will be a bit more difficult to explain.
+[0:04:40.78 --> 0:04:42.22]	  And yeah, so we have that.
+[0:04:42.74 --> 0:04:46.22]	  So for this particular car,
+[0:04:47.56 --> 0:04:53.36]	  we have four engine horsepower.
+[0:04:53.36 --> 0:04:55.94]	  So we have four hundred fifty three.
+[0:04:56.68 --> 0:04:59.30]	  That's the horsepower.
+[0:04:59.68 --> 0:05:01.66]	  That's the power of our engine.
+[0:05:02.24 --> 0:05:05.38]	  Then four miles per gallon in the city.
+[0:05:05.54 --> 0:05:09.98]	  We have 11 and then popularity is 86.
+[0:05:10.70 --> 0:05:12.42]	  So this is our feature matrix.
+[0:05:12.88 --> 0:05:15.70]	  So let's go back here and let's write it.
+[0:05:16.14 --> 0:05:21.64]	  So this is X I where I is actually 10.
+[0:05:23.36 --> 0:05:26.04]	  So and for this X,
+[0:05:26.36 --> 0:05:29.96]	  so our first feature is engine horsepower.
+[0:05:30.94 --> 0:05:37.12]	  Then it's miles per gallon in the city and then popularity 86.
+[0:05:37.86 --> 0:05:43.96]	  So now we need to write a function that takes in this G I,
+[0:05:44.20 --> 0:05:50.88]	  it takes in this X I and then produce produces a prediction
+[0:05:50.98 --> 0:05:52.18]	  for this car.
+[0:05:53.54 --> 0:0]	  So in code, it looks something like this.
+[0:05:58.32 --> 0:05:59.68]	  So let's call it G.
+[0:06:01.40 --> 0:06:09.42]	  G and then it takes gets in this X I and then it does something.
+[0:06:10.16 --> 0:06:15.14]	  Do something and then return prediction.
+[0:06:15.44 --> 0:06:19.36]	  So let's say we predicted this car cost ten thousand.
+[0:06:20.24 --> 0:06:20.88]	  Right.
+[0:06:21.08 --> 0:06:25.96]	  So and then so this is our X I.
+[0:06:26.80 --> 0:06:31.18]	  So then we just our function gives us something right.
+[0:06:31.40 --> 0:06:33.22]	  And this is something we will need to implement.
+[0:06:33.42 --> 0:06:36.72]	  So of course we don't leave it like this.
+[0:06:36.98 --> 0:06:38.74]	  This is something we implement.
+[0:06:39.58 --> 0:06:45.76]	  So this will be our, our linear regression.
+[0:06:48.44 --> 0:06:51.22]	  So let's see how we can actually implement this.
+[0:06:52.98 --> 0:06:56.60]	  So this is the draw board.
+[0:06:58.76 --> 0:07:01.26]	  Yes, we have this.
+[0:07:01.74 --> 0:07:06.66]	  So the, and we need to combine this variable,
+[0:07:06.90 --> 0:07:10.60]	  these values in a way that we have something close to this.
+[0:07:12.72 --> 0:07:17.20]	  And for that, the formula for applying linear regression is this.
+[0:07:17.56 --> 0:07:24.58]	  So this G X I is first we have the bias term.
+[0:07:25.64 --> 0:07:26.98]	  So this is the bias term.
+[0:07:27.12 --> 0:07:33.02]	  This is the prediction that we make without knowing anything about the car,
+[0:07:33.40 --> 0:07:35.14]	  but we actually know something about the car.
+[0:07:35.18 --> 0:07:38.96]	  So we know this engine capacity.
+[0:07:38.96 --> 0:07:43.72]	  So it's in our case, it's X I one, right.
+[0:07:44.28 --> 0:07:49.80]	  And then for this agent horsepower, there is some weight w one.
+[0:07:50.18 --> 0:07:55.06]	  So we don't just take this feature is this we multiply it by some weight.
+[0:07:55.32 --> 0:08:00.08]	  Then we have another feature, which is miles per gallon in the city,
+[0:08:00.08 --> 0:08:02.66]	  which is X I two, right.
+[0:08:02.72 --> 0:08:05.40]	  And then we have weight for this feature as well.
+[0:08:07.32 --> 0:08:14.68]	  And then we also have the same one for, for the last one for popularity.
+[0:08:15.74 --> 0:08:17.52]	  So this is the formula.
+[0:08:19.02 --> 0:08:21.26]	  We have for linear regression.
+[0:08:21.70 --> 0:08:23.16]	  So let me, oops.
+[0:08:23.70 --> 0:08:27.46]	  So I want to copy it and move it to the next slide.
+[0:08:30.80 --> 0:08:35.16]	  So we see here that we can actually replace that part.
+[0:08:35.88 --> 0:08:39.30]	  We can replace this part.
+[0:08:41.44 --> 0:08:44.70]	  This part can replace with a sum.
+[0:08:45.08 --> 0:08:49.88]	  So then we can write it is the first we have the bias term.
+[0:08:50.48 --> 0:08:52.06]	  And then we have a sum.
+[0:08:54.24 --> 0:09:00.72]	  The sum goes from because we already use I here, we'll use J here.
+[0:09:00.94 --> 0:0]	  So it's from one to three, we have three elements here.
+[0:09:04.52 --> 0:09:10.24]	  So we have wg times X IG.
+[0:09:10.80 --> 0:09:14.70]	  So it's just a more compact form of writing this.
+[0:09:15.74 --> 0:09:18.28]	  So now let's, let's implement this.
+[0:09:18.48 --> 0:09:19.52]	  Let's write this in code.
+[0:09:20.36 --> 0:09:21.72]	  This is our G.
+[0:09:22.08 --> 0:09:26.94]	  We can just call it maybe linear regression, linear regression.
+[0:09:28.46 --> 0:09:30.82]	  And then to have our X I.
+[0:09:31.54 --> 0:09:42.08]	  And what we need to have is some w zero, which is our bias term to zero for now.
+[0:09:42.26 --> 0:09:44.76]	  And then we have this w, which is a vector.
+[0:09:45.24 --> 0:09:47.78]	  So we have the weight for each feature.
+[0:09:47.78 --> 0:09:51.14]	  So we'll have this one, this one, this one.
+[0:09:52.42 --> 0:09:58.30]	  So let's put them zeros for now.
+[0:09:58.30 --> 0:09:59.36]	  Or ones.
+[0:10:01.64 --> 0:10:02.82]	  And yeah, this could be zero.
+[0:10:03.32 --> 0:10:06.64]	  So what we do is we need to implement this formula now.
+[0:10:07.32 --> 0:10:11.02]	  So I'll just write it one more times.
+[0:10:11.22 --> 0:10:11.62]	  We have it.
+[0:10:11.86 --> 0:10:14.96]	  So we have w zero.
+[0:10:15.44 --> 0:10:22.46]	  And then we have a sum from one to three wg X IG.
+[0:10:23.98 --> 0:10:28.94]	  Because we use here, we use the Python.
+[0:10:29.40 --> 0:10:38.02]	  So here it should actually go not from one, but from zero to three minus one, like in this case too.
+[0:10:38.18 --> 0:10:43.32]	  So it's from zero to, we can make it generic.
+[0:10:43.86 --> 0:10:44.60]	  Let's make it n.
+[0:10:44.88 --> 0:10:48.08]	  So n is the number of features we have.
+[0:10:48.84 --> 0:10:49.04]	  Right.
+[0:10:49.10 --> 0:10:51.38]	  So it goes from zero to one.
+[0:10:51.90 --> 0:1]	  So let's implement this.
+[0:10:55.56 --> 0:11:05.28]	  So for us, n will be the length of this feature vector and also the length of this weights vector.
+[0:11:05.28 --> 0:11:06.72]	  So it should match, of course.
+[0:11:08.22 --> 0:11:09.98]	  And then here is our prediction.
+[0:11:10.44 --> 0:11:12.66]	  So we start with w zero.
+[0:11:13.44 --> 0:11:13.44]	 
+[0:11:13.94 --> 0:11:17.18]	  And then we have a loop for J in range.
+[0:11:17.72 --> 0:11:21.86]	  And so we would do it for every element.
+[0:11:22.14 --> 0:11:26.04]	  And we say then prediction should equal to prediction.
+[0:11:26.16 --> 0:11:28.28]	  So we basically add to prediction every time.
+[0:11:28.32 --> 0:11:34.58]	  And then we need to use wg times X IG.
+[0:11:35.62 --> 0:11:38.42]	  And then we return predictions.
+[0:11:39.80 --> 0:11:41.72]	  This is our simple linear regression.
+[0:11:43.20 --> 0:11:48.34]	  So it basically does a sum over.
+[0:11:50.58 --> 0:11:58.10]	  So for every element of our vector and feature vector, we multiply it by corresponding weight.
+[0:11:58.48 --> 0:12:01.18]	  And then everything goes to prediction.
+[0:12:01.64 --> 0:12:06.60]	  So at the end, what we have is this prediction has exactly the sum.
+[0:12:08.36 --> 0:12:10.94]	  And we can test it.
+[0:12:11.14 --> 0:12:14.62]	  It will not be really correct now.
+[0:12:17.24 --> 0:12:18.86]	  So did I not execute it?
+[0:12:20.94 --> 0:12:24.22]	  Let's use this XI example.
+[0:12:25.66 --> 0:12:26.98]	  Okay, execute this.
+[0:12:28.72 --> 0:12:30.26]	  So it gives us some predictions.
+[0:12:30.72 --> 0:12:38.54]	  So it doesn't make much sense for now because these values we just came up with them ourselves.
+[0:12:39.18 --> 0:12:40.62]	  So let's put something else.
+[0:12:40.84 --> 0:12:45.46]	  So for this one, we can use 7.17.
+[0:12:46.42 --> 0:12:48.52]	  Then for this one, 0.01.
+[0:12:49.34 --> 0:12:51.64]	  For this one, 0.04.
+[0:12:52.46 --> 0:12:55.14]	  And for this one, 0.002.
+[0:12:56.38 --> 0:13:01.36]	  So now we will talk of course about how do we come with these weights.
+[0:13:01.86 --> 0:13:03.64]	  But for now, so we have some weights.
+[0:13:04.12 --> 0:13:06.26]	  We have our feature vector, right?
+[0:13:06.38 --> 0:13:07.26]	  And we combine them.
+[0:13:08.04 --> 0:13:09.62]	  And we have a prediction.
+[0:13:10.68 --> 0:13:17.58]	  So we have our bias term, which is 7.17.
+[0:13:18.48 --> 0:13:30.86]	  Then what we do next is we multiply our feature, engine horsepower by its weight, 0.01.
+[0:13:31.22 --> 0:13:40.72]	  Then we get the next feature, which is Gaunt's per mile in the city with its weight.
+[0:13:41.12 --> 0:13:44.22]	  And then finally we have popularity, which is 86.
+[0:13:44.58 --> 0:13:48.72]	  And the weight for this popularity, this one.
+[0:13:50.50 --> 0:13:57.36]	  So we have now, this is what our prediction is made of.
+[0:13:57.36 --> 0:13:59.06]	  So multiple parts.
+[0:13:59.44 --> 0:14:04.56]	  And as we see at the end is 12.3.
+[0:14:08.44 --> 0:14:13.48]	  So let's think about this.
+[0:14:13.68 --> 0:14:14.70]	  So what does it actually mean?
+[0:14:16.36 --> 0:14:19.16]	  So we start with this.
+[0:14:19.52 --> 0:14:21.78]	  So this is our bias term.
+[0:14:22.82 --> 0:14:28.80]	  And this is what we predict about the car if we don't know anything about this.
+[0:14:29.36 --> 0:14:32.68]	  So let's say we don't know anything about the car.
+[0:14:32.82 --> 0:14:33.78]	  It's just an average car.
+[0:14:34.16 --> 0:14:36.94]	  So what would be the price we predict for this car?
+[0:14:37.52 --> 0:14:40.82]	  And for this car, we say it's logarithm of the price.
+[0:14:41.16 --> 0:14:43.64]	  It's 7.17.
+[0:14:44.62 --> 0:14:47.28]	  But we actually do know something about the car.
+[0:14:47.42 --> 0:14:48.76]	  It's not just the car, right?
+[0:14:49.58 --> 0:14:53.92]	  We know that it has that many horsepower.
+[0:14:54.84 --> 0:15:00.52]	  And then for each of the horsepower, so let's say if this car had only one horsepower,
+[0:15:01.36 --> 0:15:06.22]	  then the price would increase by 0.01.
+[0:15:07.10 --> 0:15:12.34]	  For let's say 100 times this, we will get one.
+[0:15:12.52 --> 0:15:17.06]	  And then so basically the more horsepower the engine has,
+[0:15:17.30 --> 0:15:19.06]	  the more expensive the car becomes.
+[0:15:19.72 --> 0:15:22.34]	  I think it's logical.
+[0:15:22.78 --> 0:15:28.34]	  Then for the next feature, it's miles per gallon in the city.
+[0:15:29.10 --> 0:15:37.82]	  So apparently the more car consumes in the city, the more expensive it is.
+[0:15:37.98 --> 0:15:45.86]	  So for any extra mile per gallon, the price is affected by this much.
+[0:1 --> 0:15:51.58]	  So let's say if we have a car that has 10 miles per gallon,
+[0:15:51.76 --> 0:15:57.48]	  then it would actually be less expensive than this by 0.04.
+[0:15:58.16 --> 0:16:04.10]	  And if we increase it by 11, we get more expensive cars.
+[0:16:04.10 --> 0:16:08.72]	  So for any extra mile per gallon, the car becomes more and more expensive.
+[0:16:09.54 --> 0:16:16.70]	  And I think it kind of makes sense because the cars that consume more fuel,
+[0:16:17.20 --> 0:16:19.40]	  they are fancier probably.
+[0:16:20.10 --> 0:16:22.38]	  That's why you have this relationship.
+[0:16:22.92 --> 0:16:28.10]	  And then finally you have this popularity, which is number of mentions in Twitter,
+[0:16:28.88 --> 0:16:31.54]	  which has a pretty low weight.
+[0:16:31.94 --> 0:16:34.80]	  So it doesn't seem like it's affecting the price too much.
+[0:16:35.08 --> 0:16:41.28]	  So like for every extra mention on Twitter, the car becomes just a little bit more expensive.
+[0:16:41.90 --> 0:16:45.66]	  Like you really need to mention, and it's not just one person.
+[0:16:45.88 --> 0:16:47.88]	  It's like how many people mention this car in general.
+[0:16:48.28 --> 0:16:55.16]	  So really a lot of people need to mention this car for this to be popular and expensive.
+[0:16:55.40 --> 0:16:57.46]	  Maybe like that slide, because it's popular.
+[0:16:58.62 --> 0:17:05.74]	  People talk about this in social media, then for them, maybe this number is very high.
+[0:17:06.48 --> 0:17:09.34]	  And for them, it really affects the price.
+[0:17:09.50 --> 0:17:11.16]	  But for usual cars, it doesn't.
+[0:17:13.14 --> 0:17:16.12]	  So this is how we can make sense from this.
+[0:17:16.92 --> 0:17:24.46]	  And remember actually, so this value, so this is the value we arrive at the end.
+[0:17:24.46 --> 0:17:30.92]	  So this is not the final price, because we did this logarithm of y minus one.
+[0:17:31.90 --> 0:17:38.84]	  So now we need to undo this logarithm and to undo the logarithm, we need to do exponent.
+[0:17:39.56 --> 0:17:43.84]	  So we need to do exponent.
+[0:17:45.56 --> 0:17:49.94]	  That's why now let's do this with NumPy.
+[0:17:49.94 --> 0:17:58.02]	  There is a function called logarithm, and we just do this here and exponent.
+[0:18:00.04 --> 0:18:09.86]	  And yeah, so for this car, the prediction is 22,222,000 dollars.
+[0:18:10.32 --> 0:18:11.40]	  So this is the prediction.
+[0:18:12.68 --> 0:18:16.32]	  And yeah, we forgot to do minus one.
+[0:18:16.56 --> 0:18:20.80]	  So this is the prediction. And actually there is a shortcut here.
+[0:18:21.18 --> 0:18:23.36]	  We don't need to write minus one every time.
+[0:1 --> 0:18:30.64]	  So we just use. So like we have a shortcut for logarithm is one P.
+[0:18:31.36 --> 0:18:37.10]	  So I think if we put this here, we should be back to this.
+[0:18:37.52 --> 0:18:39.82]	  So they kind of undo each other.
+[0:18:41.62 --> 0:18:44.22]	  So this is the prediction for this car.
+[0:18:44.54 --> 0:18:48.30]	  So we implemented a linear regression. So we saw how to do this.
+[0:18:49.08 --> 0:18:57.94]	  So remember the formula that we have. So we implemented this formula on a small feature vector with off-site three.
+[0:18:58.62 --> 0:19:01.48]	  And it was just one vector.
+[0:19:02.14 --> 0:19:07.12]	  And in the next video, we will try to generalize it to more examples.
+[0:19:07.96 --> 0:19:08.92]	  So see you soon.

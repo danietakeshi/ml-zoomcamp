@@ -1,0 +1,65 @@
+[0:00:00.20 --> 0:00:03.32]	  Hello everyone, welcome to session two of Machine Learning Zoom Camp.
+[0:00:03.64 --> 0:00:08.78]	  In this session, we will talk about a project for, we will do a project, hands-on project,
+[0:0 --> 0:00:11.80]	  and we will implement the car price prediction model.
+[0:00:12.40 --> 0:00:16.56]	  So remember in the introduction, we talked about the scenario where we wanted to help
+[0:00:16.56 --> 0:00:23.12]	  a user, a user of online classified websites for selling cars to come up with the best
+[0:00:23.12 --> 0:00:23.46]	  price.
+[0:00:23.46 --> 0:00:30.62]	  So a user wants to sell a car and they need help with coming up with the price.
+[0:00:30.92 --> 0:00:37.62]	  So they need to enter some price and if they don't know how much to put here.
+[0:00:38.06 --> 0:00:44.62]	  So we wanted to develop a model for that to help the user come up with the best price.
+[0:00:45.02 --> 0:00:48.56]	  And this is what we will actually do in this session.
+[0:00:48.86 --> 0:00:51.46]	  We will develop a model for doing that.
+[0:00:51.80 --> 0:00:56.86]	  So for that, we will use a data set with car prices from Kaggle.
+[0:00:57.42 --> 0:01:00.04]	  So it leaves here on this link.
+[0:01:00.78 --> 0:01:04.74]	  So let me go to the browser.
+[0:01:05.46 --> 0:01:06.64]	  So this is this website.
+[0:01:07.52 --> 0:01:08.54]	  So it's on Kaggle.
+[0:01:09.20 --> 0:01:16.32]	  And basically the data we have in this data set is different features, different characteristics
+[0:01:16.32 --> 0:01:23.64]	  of cars, like model, make, year, engine and other properties, and also the price.
+[0:01:24.16 --> 0:01:27.02]	  And we can already see what kind of data is there.
+[0:01:27.44 --> 0:01:29.74]	  So let's make the manufacturer of the model.
+[0:01:31.36 --> 0:01:39.44]	  So we can see all the kind of data we have, year, engine type, fuel type, et cetera.
+[0:01:39.98 --> 0:01:50.12]	  And we don't see here, but there is one category, one column that is interesting for us is the price.
+[0:01:50.48 --> 0:01:52.06]	  So I think it doesn't show everything.
+[0:01:52.72 --> 0:01:56.60]	  So we can see this MSRP.
+[0:01:57.12 --> 0:01:59.56]	  This is exactly the price of a car.
+[0:01:59.82 --> 0:02:01.72]	  So this is what we want to predict.
+[0:02:02.70 --> 0:02:12.80]	  And MSRP stands for manufacturer suggested retail price.
+[0:02:13.06 --> 0:02:16.38]	  So this is basically the price of a car.
+[0:02:18.28 --> 0:02:26.12]	  So we have this data set and we want to use it to get all this information, all these features
+[0:02:26.44 --> 0:02:27.50]	  about the car.
+[0:02:27.78 --> 0:02:31.60]	  And we want to use them to make the prediction about the price of a car.
+[0:02:32.96 --> 0:02:40.52]	  So the plan for the project is first we will get the data and do exploratory data analysis.
+[0:02:41.18 --> 0:02:45.72]	  We'll just look at the data and try to learn more about this.
+[0:02:46.12 --> 0:02:54.46]	  After doing that and after preparing the data set, we will train a linear regression on this data set
+[0:02:54.46 --> 0:02:55.80]	  to predict the price of a car.
+[0:02:56.92 --> 0:03:05.88]	  Then we will try to go a bit into the details of how linear regression is implemented.
+[0:03:06.40 --> 0:03:08.44]	  So we will actually implement it ourselves.
+[0:03:09.56 --> 0:03:14.64]	  And then we will evaluate the quality of our model using RMSE.
+[0:03:14.88 --> 0:03:16.90]	  RMSE stands for root mean square error.
+[0:03:17.12 --> 0:03:22.74]	  And this is a special metric that we can use for evaluating the quality of models.
+[0:03:23.96 --> 0:03:25.88]	  Then we will do a bit of feature engineering.
+[0:03:26.02 --> 0:03:33.56]	  And feature engineering is the process of creating new features, new characteristics that we can use for our model.
+[0:03:35.08 --> 0:03:39.02]	  And then finally, we will have some problems with our model.
+[0:03:39.24 --> 0:03:41.76]	  And we will see how we can solve these problems.
+[0:03:42.72 --> 0:03:45.38]	  These will be numerical stability problems.
+[0:03:45.52 --> 0:03:48.20]	  And we will see how to solve them with regularization.
+[0:03:48.48 --> 0:03:51.34]	  We'll talk about this concept of regularization a bit.
+[0:03:51.68 --> 0:03:54.18]	  And finally, yes, we will use the model.
+[0:03:54.92 --> 0:04:04.10]	  So all the code for this lesson is available in GitHub repo for the book.
+[0:04:04.84 --> 0:04:09.18]	  And it's actually here.
+[0:04:09.88 --> 0:04:13.72]	  So it's chapter 2 car price.
+[0:04:14.34 --> 0:04:15.44]	  So all the code is there.
+[0:04:15.90 --> 0:04:23.96]	  And of course, we will do live coding and of course, we'll make all the notebook available for you.
+[0:04:24.12 --> 0:04:25.32]	  So let's look at the code.
+[0:04:25.80 --> 0:04:33.22]	  So there is the first of all, it's in the XML book come code, which is the repo for the book.
+[0:04:33.46 --> 0:04:37.06]	  And then there is chapter 2 car price and there are two files.
+[0:04:37.30 --> 0:04:39.88]	  So first file is the notebook.
+[0:04:42.84 --> 0:04:49.36]	  With all the code, so you can take a look and basically it has everything that we will do today.
+[0:04:50.24 --> 0:04:58.06]	  And then the second file is the CC file, the actual data set.
+[0:04:59.18 --> 0:0]	  So this is a CC file that we will use for training our model.
+[0:05:12.10 --> 0:05:12.62]	  Okay.
+[0:05:12.72 --> 0:05:15.98]	  And what we will do next is actually not exploratory data analysis.
+[0:05:16.16 --> 0:05:20.70]	  We will look at the data and we will do a bit of data preparation.
+[0:05:24.62 --> 0:05:29.22]	  So this is what we will do next.
+[0:05:29.70 --> 0:05:34.54]	  We will take the CC file and we will try to prepare it.
