@@ -1,0 +1,50 @@
+[0:0 --> 0:00:06.68]	  Hi everyone, welcome back. This is the last video of this session, so we will do a summary of what
+[0:00:06.68 --> 0:00:14.84]	  we learned in this session. So remember, in this project we wanted to build a model for predicted
+[0:00:14.84 --> 0:00:21.74]	  churn and we wanted to use this model to score all the customers we have in our telecom company
+[0:00:21.74 --> 0:00:27.90]	  and identify those that are about to churn and we want to stop them from doing that
+[0:00:28.56 --> 0:00:37.30]	  and if our model that we developed in this session says that, okay, this customer is going to churn,
+[0:00:37.72 --> 0:00:42.34]	  we want to send them a promotional email to help them change their mind.
+[0:00:43.52 --> 0:00:50.54]	  So for that we found a dataset, so there is a dataset on Kaggle that we used for that,
+[0:00:50.92 --> 0:00:57.46]	  that has all the information about the customers, they call them demographic information,
+[0:00:57.80 --> 0:01:03.48]	  all the information about the services they have, how they pay, the contract and so on.
+[0:01:04.40 --> 0:01:12.60]	  And so what we did is we first prepared the dataset, like the usual stuff that we did
+[0:01:12.60 --> 0:01:17.74]	  also in the previous lesson, there were some issues that we needed to solve,
+[0:01:19.02 --> 0:01:24.44]	  some issues with some data cleaning, then we set up the validation framework,
+[0:01:24.88 --> 0:01:29.30]	  it was a little bit different, so instead of implementing it ourselves, like we did in the
+[0:01:29.30 --> 0:01:35.64]	  previous session, we did, we used scikit-learn for that and that's why we needed to split the data
+[0:01:35.64 --> 0:01:41.18]	  frame, the dataset that we have two times instead of doing the three ways split immediately.
+[0:01:42.86 --> 0:01:50.30]	  Then we did some exploratory data analysis and in particular what we did, we spent quite a lot
+[0:01:50.30 --> 0:01:55.42]	  of time talking about feature importance, so first we talked about churn-rain and risk ratio,
+[0:01:56.04 --> 0:02:03.70]	  so risk ratio for a critical variable tells us how likely customers within this group
+[0:02:04.02 --> 0:02:10.92]	  are to churn compared to the overall population and this gives us quite a few insights,
+[0:02:11.56 --> 0:02:19.12]	  like which variables or which subsets of our users are more prone to churning or less prone to churning.
+[0:02:19.46 --> 0:02:29.24]	  Then we looked at mutual information, mutual information is a way to have one number that
+[0:02:38.74 --> 0:02:45.14]	  gives us a way to understand the importance of different variables, so we know using mutual
+[0:02:45.14 --> 0:02:52.30]	  information, we know that contract is more important than partner and partner as a variable is more
+[0:02:52.30 --> 0:02:59.22]	  important than gender, so gender is quite useless as it turned out, like in the previous session,
+[0:02:59.22 --> 0:03:05.94]	  it's the least useful variable. Then we also talked about correlation as a way of measuring the
+[0:03:05.94 --> 0:03:13.58]	  importance of numerical variables and remember that positive correlation means that if a variable
+[0:03:13.58 --> 0:03:20.24]	  increases, it leads to increase in churn rate as well and if we have a negative correlation increase
+[0:03:20.24 --> 0:03:27.90]	  in the value leads to decrease in churn rate, so both kind of correlations are useful,
+[0:03:28.18 --> 0:0]	  especially if they are like medium or strong correlations, then they are useful for our models.
+[0:03:35.74 --> 0:03:41.88]	  Then we talked about one encoding which is a way of encoding categorical features and we use dictionary
+[0:03:41.88 --> 0:03:47.06]	  vectorizer from Psykit-learn for implementing that. Then we talked about logistic regression,
+[0:03:47.26 --> 0:03:54.56]	  which is a model for the binary classification problem and our problem is a binary classification,
+[0:03:54.70 --> 0:04:00.88]	  so we have positive classes, people who churn, negative classes, people who didn't churn and
+[0:04:00.88 --> 0:04:08.62]	  we want to build a model for predicting that existing customers are going to churn and for that
+[0:04:08.62 --> 0:04:16.04]	  so we saw that logistic regression is very similar to linear regression except it adds this sigmoid
+[0:04:16.04 --> 0:04:22.56]	  before computing the output and sigmoid is a function that converts any number,
+[0:04:23.08 --> 0:04:30.86]	  it brings it to a range between 0 and 1 and we treat this number as probability.
+[0:04:31.72 --> 0:04:35.12]	  Then we saw how to train logistic regression model with Psykit-learn,
+[0:04:35.78 --> 0:04:42.82]	  so all we need to do is just use this dot fit function and then the rest,
+[0:04:43.40 --> 0:04:49.70]	  like Psykit-learn takes care of the rest. Now we spent some time talking about how we can interpret
+[0:04:49.70 --> 0:04:56.76]	  the coefficients from logistic regression, so we trained a smaller model that contained only
+[0:04:56.76 --> 0:05:04.28]	  three features, contact tenure and monthly charges and yeah, so this is what we did
+[0:05:04.28 --> 0:05:12.42]	  and finally we trained a bigger model and then tested it on a few users. So this is what we did
+[0:05:12.42 --> 0:05:21.10]	  for this lesson, for this session and actually in the next session what we will do is we will
+[0:05:21.10 --> 0:05:27.76]	  continue working on this problem, we will continue working on the churn prediction model and we will
+[0:05:27.76 --> 0:05:33.50]	  look at different ways of evaluating the performance of binary classification models. So far we looked
+[0:05:33.50 --> 0:05:41.90]	  only at accuracy and so we saw that our model is 80% accurate, in the next session we will answer
+[0:05:41.90 --> 0:05:48.96]	  if we will find out if 80% is actually good, what does it mean to be 80% accurate and what are the
+[0:05:48.96 --> 0:06:00.82]	  other ways of evaluating binary classification models and of course check this 3.14 lesson if you
+[0:06:00.82 --> 0:06:05.20]	  want to explore more about this topic. See you.

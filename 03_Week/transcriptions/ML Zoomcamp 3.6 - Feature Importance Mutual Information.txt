@@ -1,0 +1,78 @@
+[0:0 --> 0:00:04.08]	  Welcome back. This is lesson six of machine learning zoom comp session three.
+[0:00:04.32 --> 0:00:12.08]	  And we will talk about mutual information, which is a way to measure the importance of categorical variables.
+[0:00:12.46 --> 0:00:23.16]	  So in the previous lecture, we looked at risk ratio as a way to measure the importance of different categorical variables.
+[0:00:24.20 --> 0:00:29.06]	  And it applies to each value within a variable.
+[0:00:29.44 --> 0:00:42.34]	  So let's say if we have a variable contract and then it has values like month to month, one year and two years within each sub group that this contract variable defines,
+[0:00:42.56 --> 0:00:50.90]	  we can see that people who are on month to month contract, they're more likely to turn than people who have two year contracts.
+[0:00:51.44 --> 0:01:05.54]	  It tells us that probably contract variable is important, but we have no way of saying that contract is perhaps more important than other variables or not, or the gender is less important than others.
+[0:01:06.42 --> 0:01:14.56]	  So mutual information is a concept from information theory that actually it can tell us tell us how important each variable is.
+[0:01:14.56 --> 0:01:22.24]	  So there's a link on Wikipedia, it says that mutual information of two random variables is a measure of mutual dependence between two variables.
+[0:01:23.38 --> 0:01:35.12]	  So it, like if we read later it says it quantifies the amount of information that we get about one variable by observing another variable.
+[0:01:35.80 --> 0:01:44.40]	  So the way we can think of this is how much do we learn about churn if they observe the value of contract.
+[0:01:44.84 --> 0:01:56.12]	  If we know that this particular customer has a month to month contract, how much do we know about churn. So this is exactly the kind of relationship we are interested in.
+[0:01:56.12 --> 0:02:01.34]	  And mutual information, which is defined as a formula somewhere here.
+[0:02:02.10 --> 0:02:08.10]	  Yeah, that is quite complex, we will not go into details. We just need the intuition.
+[0:02:08.76 --> 0:02:18.10]	  And the intuition is the higher mutual information is the more we learn about the churn by observing the value of another variable.
+[0:02:18.94 --> 0:02:25.14]	  So we can again use scikit-learn. So scikit-learn implements mutual information.
+[0:02:25.14 --> 0:02:31.20]	  We don't need to write to implement this formula ourselves. So we can just import it from scikit-learn.
+[0:02:31.64 --> 0:02:41.18]	  And it leaves in the metrics package. Mutual information score.
+[0:02:41.52 --> 0:02:44.44]	  So this is what we need to use and the way it works.
+[0:02:44.68 --> 0:02:50.80]	  So we need to first say what is the label we're interested in.
+[0:02:50.80 --> 0:02:56.26]	  So for us, it's our target variable. So labels are true.
+[0:02:57.50 --> 0:03:05.76]	  The target variable is churn and another variable that we know like a feature, let's say contract.
+[0:03:06.70 --> 0:03:13.38]	  So we provide these two values and actually I don't think it matters in which order we pass.
+[0:03:13.58 --> 0:03:18.42]	  Yeah, you see, so it's actually the same regardless of the order.
+[0:03:20.56 --> 0:03:36.46]	  It doesn't matter in which order we pass and it tells us how much do we learn about churn by observing the contract, the value of a contract variable and likewise, and likewise how much do we know about the contract variable by observing the churn.
+[0:03:36.92 --> 0:03:46.76]	  We can see, let's say if we now compare it with gender, we see that gender is super not informative.
+[0:03:47.40 --> 0:03:55.32]	  So if somebody tells us if this customer is female, we learn nothing about whether they're going to churn a lot.
+[0:03:55.50 --> 0:04:00.56]	  But if somebody tells us that this person has a month to month contract, we learn quite a lot.
+[0:04:00.92 --> 0:04:04.82]	  We know that this person is actually at high risk of churning.
+[0:04:05.32 --> 0:04:13.52]	  So for us, this information we get from learning about the contract is far more important than we get from learning about gender.
+[0:04:14.16 --> 0:04:16.72]	  We can also check other variables. For example, partner.
+[0:04:18.06 --> 0:04:25.78]	  And for partner, we see that it's definitely more important than gender, but far less important than contract.
+[0:04:25.92 --> 0:04:35.92]	  Let's see, maybe interpretation of this as a number of bits that we learn is tricky.
+[0:04:36.32 --> 0:04:42.16]	  So we cannot really quantify, okay, like it's 0.009 bits.
+[0:04:42.60 --> 0:04:44.52]	  It's very difficult to interpret.
+[0:04:44.74 --> 0:04:49.84]	  But what we can definitely learn from these numbers is what is the relative importance of which we feature.
+[0:04:49.84 --> 0:04:56.44]	  So we see that contract is definitely more important than partner and partner is definitely more important to know than gender.
+[0:04:56.88 --> 0:05:08.34]	  What we can do is we can apply this metric to all the variables, all the critical variables we have and see which of them has the highest mutual information, which of them has the lowest future information.
+[0:05:09.10 --> 0:05:13.88]	  So for that, we'll use this function called apply.
+[0:05:14.68 --> 0:05:20.34]	  And apply takes in a function with one argument.
+[0:05:20.92 --> 0:05:22.80]	  And this mutual information has two arguments.
+[0:05:23.10 --> 0:05:26.70]	  So we actually need to wrap it into a function with just one argument.
+[0:05:26.90 --> 0:05:32.42]	  So let's call it mutual in four, turn score.
+[0:05:33.30 --> 0:05:35.28]	  And then here we pass the series.
+[0:05:36.60 --> 0:05:37.50]	  And we return.
+[0:05:39.30 --> 0:05:43.88]	  So we apply the series, we pass it to mutual information score function.
+[0:05:44.44 --> 0:05:47.18]	  And here we keep the second argument as shown.
+[0:05:48.14 --> 0:05:55.26]	  So we have this function now takes only one argument, and we can apply this function to the data frame.
+[0:05:55.40 --> 0:05:58.34]	  So it will apply this function column wise for each column.
+[0:05:59.24 --> 0:06:04.92]	  We probably actually to only apply to categorical columns.
+[0:06:05.22 --> 0:06:06.28]	  So we apply this function.
+[0:06:07.50 --> 0:06:09.42]	  And yeah, so this is what we get.
+[0:06:09.94 --> 0:06:16.26]	  So for each column from this list, it applies mutual information score and returns the result.
+[0:06:16.52 --> 0:06:22.72]	  What we want to do now is we want to order this to sort it such that the most important ones come first.
+[0:06:22.92 --> 0:06:27.66]	  So let's call this series M I, which is mutual information.
+[0:06:28.44 --> 0:06:35.76]	  And we can now sort this concerted by using sort values function.
+[0:06:36.84 --> 0:06:40.54]	  Yeah, we see that now it sorts everything.
+[0:06:41.18 --> 0:0]	  And now we see that maybe let's sort it using this ascending false.
+[0:06:49.52 --> 0:06:50.44]	  We need ascending false.
+[0:06:50.44 --> 0:06:53.38]	  We want the most important ones to come first.
+[0:06:53.70 --> 0:06:55.48]	  The least important ones to come fast.
+[0:06:55.96 --> 0:07:03.70]	  So what we can see here is that the contract is the most important variable and gender is the least important one.
+[0:07:04.18 --> 0:07:08.74]	  And then variables like online security tech support internet service, they're quite important.
+[0:07:09.08 --> 0:07:10.84]	  So they're relatively important.
+[0:07:11.14 --> 0:07:17.72]	  And it goes all the way down to not important ones like gender foreign service multiple lines.
+[0:07:18.26 --> 0:07:22.98]	  Seniority we see that there is a jump from multiple lines to senior center citizen.
+[0:07:23.20 --> 0:07:33.96]	  It's like one order of magnitude jump and we see that partner seems quite important, but in relative terms, it's not one of the most important ones.
+[0:07:34.76 --> 0:07:34.76]	 
+[0:07:35.36 --> 0:07:46.94]	  So now we actually understand which variables are very useful for us, which are less useful by looking at this mutual information score and actually variables like that.
+[0:07:48.04 --> 0:07:50.50]	  Variables like that, they're very important.
+[0:07:51.42 --> 0:07:55.82]	  So they have very high score and we're really interested in these variables.
+[0:07:56.32 --> 0:08:00.90]	  So these variables is why machine learning actually works.
+[0:08:01.22 --> 0:08:12.78]	  So by learning that a customer has a month to month contract or it has no online security and let's say they don't use tech support already can learn quite a lot about this customer.
+[0:08:13.04 --> 0:08:24.54]	  And all these features, all these values that we learn, they are pretty good indicators that maybe this customer is not likely to stick around with us for for a long while.
+[0:08:24.80 --> 0:08:31.56]	  These are actually the kind of signals that machine learning models pick when training and so it learns these kind of patterns.
+[0:08:31.76 --> 0:08:40.04]	  And this is what allows the model to actually make predictions later when we don't know what the turn value is for these particular customers.
+[0:08:40.04 --> 0:08:49.66]	  So here in this lesson we looked at the mutual information as a way to measure importance, relative importance of categorical variables, but we talked about categorical ones.
+[0:08:50.08 --> 0:08:56.06]	  And in the next one, we will talk about measuring the importance of numerical variables.

@@ -1,0 +1,84 @@
+[0:0 --> 0:00:05.08]	  Hey everyone, welcome back. This is week three of machine learning zoom camp and this week we'll
+[0:00:05.08 --> 0:00:10.26]	  talk about machine learning for classification. The project we will work with this week is
+[0:00:10.26 --> 0:00:15.18]	  charm prediction. Imagine that we work at the telecom company. So this is the company where we
+[0:00:15.18 --> 0:00:25.38]	  work and we have some customers. So these are our clients. So these are just usual people who use
+[0:00:25.38 --> 0:00:34.04]	  our services. We use our phone lines, internet, TV and so on. So we have quite a few of them.
+[0:00:36.32 --> 0:00:42.48]	  And naturally, some of these clients might not be happy with the services that we provide or maybe
+[0:00:42.48 --> 0:00:48.74]	  they see better alternatives somewhere and some of them might think of stopping the contract with us
+[0:00:48.74 --> 0:00:55.38]	  and leaving to some other company. So for example, there could be some other telecom company,
+[0:00:55.86 --> 0:01:03.06]	  say telco two, and then some of the customers we have might be thinking, okay, what if I left to
+[0:01:03.06 --> 0:01:09.86]	  this other company telco two. So what we want to do is we want to identify clients like that,
+[0:01:10.04 --> 0:01:17.02]	  clients that want to leave our company or churn. So churn means stopping using the services of our
+[0:01:17.02 --> 0:01:24.86]	  company and leaving somewhere could be a different to it to a competitor or just stopping using our
+[0:01:24.86 --> 0:01:30.54]	  services altogether. So what we want to do is to identify which customers are about to churn and
+[0:01:30.54 --> 0:01:37.80]	  assign everyone some score in zero and one that tells how likely this customer is going to leave.
+[0:01:37.98 --> 0:01:45.02]	  So for example, for this customer, the likely code of churning could be just 20%. So this is not
+[0:01:45.02 --> 0:01:56.56]	  very likely that this customer will churn. So for this, maybe 30%, 35%, 45%. And for this customer,
+[0:01:56.88 --> 0:02:02.26]	  the last one that we said that thinking of leaving, so maybe for this customer,
+[0:02:02.64 --> 0:02:08.98]	  the probability of churning is like 85%. So what we want to do is we want to score each customer
+[0:02:09.06 --> 0:02:16.24]	  and to understand what is the likelihood that they churn. And then if we see that customer is likely
+[0:02:16.24 --> 0:02:20.98]	  to churn, what we want to do is we want to send them email, like some promotional message,
+[0:02:21.24 --> 0:02:28.26]	  give in, for example, discount like 25% off or something like this. And when they receive such
+[0:02:28.26 --> 0:02:33.90]	  a promotional email, they may think, okay, like, this is actually a good deal. So maybe I don't
+[0:02:33.90 --> 0:02:39.50]	  need to leave the company, I can stay with this telecom operator and do not leave to another
+[0:02:39.50 --> 0:02:46.02]	  telecom operator. So this is what we want to do. So we want to stop people from churning by
+[0:02:46.02 --> 0:02:53.30]	  suggesting them discounts. And here, of course, we need to be accurate. So we don't want to offer
+[0:02:53.30 --> 0:02:58.78]	  discounts to people who are not going to churn because we would be losing money. So if we,
+[0:02:59.12 --> 0:03:05.34]	  for example, send, give 25% discount to this person, they're going to stay with the company
+[0:03:05.34 --> 0:03:11.16]	  for sure. So we would just earn less money, right? So they are going to stay anyways. And we also
+[0:03:11.16 --> 0:03:16.72]	  don't want to accidentally miss people like this. So people who are going to churn. So we want to make
+[0:03:16.72 --> 0:03:22.40]	  sure that we target them with this promotion. And the way we approach this with machine learning
+[0:03:22.40 --> 0:03:28.34]	  is by classification. Remember, we talked already about this. So there are many different supervised
+[0:03:28.78 --> 0:03:32.88]	  machine learning algorithms, supervised machine learning problems. We have regression, we have
+[0:03:32.88 --> 0:03:38.04]	  classification and classification can be binary and multiclass classification. So in this particular
+[0:03:38.04 --> 0:03:48.74]	  case, we are dealing with our target variable, this Y E. And so this is the formula for one single
+[0:03:48.94 --> 0:04:00.48]	  observation. So this X could be a feature vector describing customer number I. And this Y is a
+[0:04:00.48 --> 0:04:06.28]	  variable that tells us whether this customer left or not. So why in this case can take two values?
+[0:04:06.60 --> 0:0]	  So it can take zero and it can take one zero in this case means, so let's start with one. So one
+[0:0 --> 0:04:22.84]	  means that it's a positive example. So this customer did leave the turn to this like things like
+[0:04:22.84 --> 0:04:29.82]	  turn or when we talked about spam, so positive example would be a message with spam, right?
+[0:04:29.92 --> 0:04:39.42]	  And zero is negative example. So it could be like no turn or no spam and things like this.
+[0:04:39.44 --> 0:04:46.40]	  So here zero means that there is something present like the effect we want to predict is present.
+[0:04:46.54 --> 0:04:52.26]	  So it could be turn, it could be spam, it could be something else. And zero means that it's not
+[0:04:52.26 --> 0:04:59.40]	  present. So and in our case, we want to identify users who turn. So we want to actually identify
+[0:04:59.40 --> 0:05:08.50]	  these people who have the Y as one. And the output of this model is this again, G from XI.
+[0:05:08.50 --> 0:05:14.30]	  The output of our model is a score between zero and one, zero and one,
+[0:05:14.46 --> 0:05:20.14]	  which is the likelihood that this particular customer number I is going to turn.
+[0:05:23.86 --> 0:05:30.74]	  So the way we do it, so again, we let's take all the customers we have.
+[0:05:34.74 --> 0:05:41.24]	  So we have these customers. And let's say we take customers from last month. And then for each
+[0:05:41.24 --> 0:0]	  customer, we know who actually left. So we know, for example, that this person left,
+[0:05:46.22 --> 0:05:51.30]	  and this customer decided to stop the contract with us. So for this, for these customers,
+[0:05:51.88 --> 0:05:59.04]	  our target label is one, they did leave. And for these people, they stayed with the company,
+[0:05:59.04 --> 0:06:04.98]	  so they didn't leave, they have a label of zero. So this becomes our Y. And the information that
+[0:06:04.98 --> 0:06:10.94]	  we have about the customers becomes our X. So this information can be some demographic information,
+[0:06:11.52 --> 0:06:16.92]	  where they leave, how much they pay, what kind of services they have, what kind of contract they have,
+[0:0 --> 0:06:22.62]	  and things like this. We can use this information to determine which things lead to actually turn.
+[0:06:23.08 --> 0:06:28.12]	  And this is the main idea behind this project. We want to build a model using the historical data
+[0:06:28.22 --> 0:06:33.84]	  like that. We want to build a model that would look at existing customers that we have right now,
+[0:06:34.14 --> 0:06:40.26]	  and score every one of them. Assign some probability, likelihood of churn, and then target those with
+[0:06:40.26 --> 0:06:46.40]	  high score of churning, target those with promotional emails. And for that, we will use a
+[0:06:46.40 --> 0:06:53.66]	  dataset from Kaggle. So this is this dataset, telco customer churn. So this is a dataset about
+[0:06:53.66 --> 0:07:01.14]	  customer churn. And so it's basically from a telecom operator. So we have different things
+[0:07:01.14 --> 0:07:09.58]	  like customer ID, gender, whether they have partners, dependence, how long in months they are
+[0:07:09.58 --> 0:07:15.74]	  with the company, all these things. And one of the columns that is quite interesting for us
+[0:07:15.90 --> 0:07:24.52]	  is churn. So it's not showing here, but this is the last column. It says whether this customer
+[0:07:24.52 --> 0:07:31.16]	  actually left the company and stopped the contract with them. So we will use this data
+[0:07:31.16 --> 0:07:42.38]	  for this project. And what we will do first is we will download the data. We will do some
+[0:07:42.40 --> 0:07:46.50]	  preparation for this data. And then we will set up a validation framework like previously.
+[0:07:47.10 --> 0:07:51.16]	  But this time, instead of implementing this manually using plain pandas and numpy,
+[0:07:51.42 --> 0:07:57.82]	  we'll use iKid Learner. Then we will do exploratory data analysis, similar to what we did. But we
+[0:07:57.82 --> 0:08:03.58]	  will also look at the target variable, which is different from, so previously it was a price of a
+[0:08:03.58 --> 0:08:08.64]	  car in the previous project. In this project, it will be churn, which is a categorical variable.
+[0:08:08.74 --> 0:08:14.12]	  So we'll take a look at that. And we will look at different feature importance characteristics.
+[0:08:14.40 --> 0:08:18.24]	  So we will do some analysis to understand which features are important and the
+[0:08:18.24 --> 0:08:24.08]	  customers with these characteristics, they are more likely to churn than with others. So in
+[0:08:24.08 --> 0:08:29.18]	  particular, we'll look at churn rate and risk ratio. Then we will talk about other
+[0:08:29.18 --> 0:08:37.16]	  feature importance metrics like mutual information and correlation. Then we will talk about
+[0:08:37.64 --> 0:08:42.32]	  encoding categorical variables. So this time we will, instead of implementing it ourselves,
+[0:08:42.58 --> 0:08:47.94]	  we will use iKid Learner. Then we will talk about logistic regression, which is a model for solving
+[0:08:47.94 --> 0:08:52.22]	  these kinds of classification problems. And we will compare this logistic regression with
+[0:08:52.22 --> 0:08:57.76]	  linear regression. We will not implement ourselves. We will use a library for that. So this is what
+[0:08:57.76 --> 0:09:05.46]	  we'll do here. So we'll use iKid Learner for that and see how well it does. And we will then look
+[0:09:05.46 --> 0:09:12.18]	  under the hood and understand what the coefficients of this model mean and how we can interpret it.
+[0:09:12.76 --> 0:09:19.30]	  And then we will see how to use this. So that's approximately the plan for this session.
+[0:09:19.62 --> 0:09:25.48]	  In the next lesson, we will download the data and do data preparation. See you soon.

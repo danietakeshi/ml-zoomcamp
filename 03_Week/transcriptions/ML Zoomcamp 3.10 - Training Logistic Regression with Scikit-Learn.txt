@@ -1,0 +1,61 @@
+[0:00:00.04 --> 0:00:04.08]	  Welcome back. This is lesson 10 of machine learning zoom comp session three.
+[0:00:04.72 --> 0:00:09.60]	  And in this lesson, we will talk about training logistic regression with cycle.
+[0:00:09.84 --> 0:00:17.76]	  So in the previous lesson, we talked about, we talked already about the logistic regression and we compare it with linear regression.
+[0:00:17.90 --> 0:00:29.98]	  And we saw that the difference between them. So they are quite similar. The difference between them that at the end for logistic regression, we convert the score that we get into a number between zero and zero.
+[0:00:29.98 --> 0:00:38.84]	  And one, but otherwise they are pretty similar. So they have logistic regression also has bias and the weights vector.
+[0:00:39.16 --> 0:00:49.48]	  So in this lesson, we will see how to actually get these parameters how to learn these parameters. And for that we will use library. So we will not implement this ourselves in this lesson.
+[0:00:49.58 --> 0:00:59.04]	  So for that. So from second learn logistic regression is in the linear models package because we discussed it's a linear model.
+[0:00:59.34 --> 0:0]	  And by the way, so we have linear regression here, or rich regression, which is this rich, which is a regularized linear regression. So what we need is actually logistic regression.
+[0:01:13.38 --> 0:01:40.26]	  So we import that. And now we just create this model logistic regression. And for training the model, we use the fit method. So we just use fit. And we already have our X train that we created in a few years here in lesson eight, already have the X the feature matrix for train and validation data sets.
+[0:01:40.26 --> 0:02:00.90]	  So now let's use them. So we have X train and we have white train. Let's train a model. So now it is quite fast, and we can look at what's inside. So we are interested in cof. So these are the weights, the w.
+[0:02:01.18 --> 0:02:09.06]	  So we, you see it's actually a two dimensional array with just one row. So we just want to get the w. Yeah, yeah, so that's it.
+[0:02:09.96 --> 0:02:12.26]	  Maybe if I round it, it looks nicer.
+[0:02:13.72 --> 0:02:31.20]	  So this, these are the weights. Also have biases called intercept. So the bias intercept are synonyms. Again, it's an array. So we're interested in one in the first element of this array. So it's here.
+[0:02:31.50 --> 0:02:47.62]	  Yes, these are the coefficients. So do you actually use the model. So we can use the function. So first, we can use the function called predict. And we use it. Let's use it first on our train data set.
+[0:02:47.72 --> 0:03:03.20]	  We see that it predicts already numbers predict zero and once in this case zero is not your one is turn. So what we are interested in are not predictions. So these are, I would call hard predictions.
+[0:03:05.60 --> 0:03:22.92]	  So they are called hard predictions because they already have the exact label. This is this is turn. This is turn. And these are also turn. So this is like we don't know the certainty of these predictions.
+[0:03:22.92 --> 0:03:37.02]	  We don't know. So we don't know the probability for that. And actually learn the probability. We use the function called predict proba, which stands for predict probability. So these are soft predictions.
+[0:03:38.34 --> 0:03:49.84]	  By soft, we mean here that it's not just a number zero or one, but score. So let's actually first make sense from what it means. So why there are two columns.
+[0:03:53.06 --> 0:04:09.60]	  So this is a two dimensional matrix with two columns. So in the first one. So this is the probability of being negative, negative class. And this one is the probability of belonging to positive class.
+[0:04:09.84 --> 0:04:29.24]	  So actually, this, this part here, this is what we are interested in. So this is the probability of turning. And so for example, for this person, we know that the probability of turning is 50%.
+[0:04:29.40 --> 0:04:48.46]	  And the probability of non churning. So this is the opposite is 46%. So we are only interested in this. So we don't really need that part. So what we can do now is we can just take the first column of these predictions.
+[0:04:48.52 --> 0:05:02.44]	  And these would be soft predictions. Because it's not like a hard decision. We now can use this to decide above each threshold, we treat people as turning. So it's up to us to make the final decision.
+[0:05:03.10 --> 0:05:15.50]	  And yeah, actually, let's do the same for validation. So that's not your strain. So use validation data set. And we see that, you know, we get this, we get this array with predictions.
+[0:05:16.18 --> 0:05:25.72]	  And now we can make this so called hard decision, right, so we can decide that for people above a certain threshold and for us it can be 0.5.
+[0:05:25.82 --> 0:05:47.32]	  And I think the default threshold here when we do predict is 0.5. So this is what the model is used by default. So if we do that, we get binary array with predictions. So false here means we think that this user, this customer is not turning and true means that we think that this customer is turning.
+[0:05:47.48 --> 0:06:11.42]	  So, yeah, so this let's call it turn decision. And this is the decisions that we can use. So remember that we talked about sending promotional emails. So for these people and let's look at this data frame that we have another frame validation.
+[0:06:13.12 --> 0:06:20.38]	  So this way we can select all the customers that we think are going to turn. For example, get the customer ID.
+[0:06:21.26 --> 0:06:34.06]	  So these are the people. These are the people that will receive a promotional email with some discount. Our model thinks that they will turn. So let's send them some discount.
+[0:06:34.26 --> 0:06:44.62]	  Okay, and yeah, and if you remember how it works, so it selects all the rows for which this one is true.
+[0:06:45.60 --> 0:07:02.66]	  Okay, so we have this and let's actually let's see how accurate our predictions are. Remember for regression we used RMSE as a way to measure the performance of our model to see how good it is.
+[0:07:02.66 --> 0:07:13.10]	  So here we can use something similar. It's called accuracy, which tells us how many correct predictions we made. So and this is fairly easy to implement.
+[0:07:13.46 --> 0:07:29.02]	  So first we have our Y validation, right, and we have our turn decisions. So let's make them integers as well. And we can just see how many of them match. So we already see this too much.
+[0:07:29.74 --> 0:07:42.62]	  And this three much. We're interested how many in total how many of them are actually matching. And for that, what we can do is we can just use this equals equals operator.
+[0:07:43.40 --> 0:07:55.54]	  Which we will return true if numbers match and false if they don't, then we just use mean to see how many of them actually match. So we see that 80% of our predictions match.
+[0:07:56.02 --> 0:08:11.34]	  So this may be, let's take a look at how this what is actually happening inside. I think this could be a difficult line to understand. So first of all, so let's create a data frame just to see what's happening inside.
+[0:08:11.34 --> 0:08:40.06]	  So data frame with data frame predictions. So in this data frame, what we'll have, let's say probability. This is our soft predictions. So this is the probability that this particular customer is going to turn.
+[0:08:40.48 --> 0:0]	  Let's turn it into integer.
+[0:08:44.16 --> 0:08:46.64]	  And let's write the actual value here.
+[0:08:47.72 --> 0:08:48.38]	  It's actual.
+[0:08:49.28 --> 0:08:57.30]	  It's our I. Well, why validation. So and this is how our data frame looks like.
+[0:08:58.40 --> 0:09:08.96]	  So here we have the probability for each customer, we have the predictions, and we have the actual value. And now we can see for each of them, we can see how many of them are correct.
+[0:09:09.34 --> 0:09:17.32]	  This one is correct. This one is correct. Yeah, these two are correct. So I think all of them that we see here.
+[0:09:18.02 --> 0:09:21.90]	  Yeah, so this one isn't correct. So this one is wrong.
+[0:09:23.92 --> 0:09:32.04]	  Yeah, so let's see how many of them are correct. For that, we just do this data frame prediction.
+[0:09:33.02 --> 0:09:35.16]	  Ecos equals data frame actual.
+[0:09:36.44 --> 0:09:50.74]	  And let's see again. Let's take a look at this data frame. Yeah, so we have another column that says correct. And each, each time it matches, each time it's the same. It's true.
+[0:09:51.12 --> 0:10:01.78]	  And when it's not correct, and actually for this person, we thought that probability is super tiny. It's like 34%. But this person still left. So this we got.
+[0:10:02.90 --> 0:10:12.66]	  We didn't get right. And this one. And then now we what we need to see is what's the fraction of correct ones here. And we can do this.
+[0:10:12.92 --> 0:10:13.64]	  Correct.
+[0:10:14.28 --> 0:10:27.72]	  And remember, here, this is basically so this since this is a binary array, what happens inside is what we do mean is just to calculate the fractions of ones there.
+[0:10:27.96 --> 0:10:38.98]	  And since it's, it's a Boolean array, not a one zero. So these two turns into one and fosters into zero.
+[0:10:39.32 --> 0:10:40.54]	  So this happens.
+[0:10:41.18 --> 0:10:46.08]	  We don't need to explicitly say, ask it to convert like we did here.
+[0:10:46.88 --> 0:10:56.92]	  Actually, the same happens when we explicitly convert, but if you don't explicitly convert the conversion happens automatically. So we don't need to worry about that.
+[0:10:57.08 --> 0:11:06.72]	  And when we write this. So this is like a shortcut for doing everything that we did here.
+[0:11:06.72 --> 0:11:11.10]	  So this one produces a Boolean array.
+[0:11:11.68 --> 0:11:19.26]	  Right. And then when we do mean, just shows the fraction of, of truth of ones in this way.
+[0:11:20.32 --> 0:11:30.44]	  So we see that our model is actually 80% correct, which means that in 80% of the cases, when the model says a person is going to turn or not going to turn.
+[0:11:31.34 --> 0:11:45.56]	  This is actually true. So the model is correct in these cases and for the remaining 20% the model is saying that a kid's person is not going to turn, but they are or it says the model is the person is going to turn, but they are not going to.
+[0:11:45.94 --> 0:11:57.88]	  Okay. And this model has, like we saw the coefficients. So we saw the bias term or intercept. We saw the weights, what we call w vector w.
+[0:11:58.78 --> 0:12:10.72]	  So let's try to make sense what this actually means. So this is what we'll do in our next video in our next lesson. We'll try to look at the coefficients and understand what they mean.

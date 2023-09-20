@@ -1,0 +1,197 @@
+[0:0 --> 0:00:06.74]	  Welcome back. This is lesson five of machine learning Zoom come session three and we'll talk about feature importance.
+[0:00:07.16 --> 0:00:12.04]	  So we'll look at turn rate within each group and we'll talk about the thing called Tricks creation.
+[0:00:12.40 --> 0:00:17.26]	  So in the previous lesson, we did a bit of exploratory data analysis.
+[0:00:17.64 --> 0:00:24.42]	  So we looked at global turn rate, which was around 27%.
+[0:00:24.46 --> 0:00:30.48]	  And what we can do now, instead of just looking at global turn rate, we can look at turn rate within different groups.
+[0:00:30.94 --> 0:00:37.40]	  So for example, let's say we have, let's take a look at our, our data.
+[0:00:37.80 --> 0:00:43.66]	  So we have different variables here, like we have gender, we have partner dependence, senior citizen.
+[0:00:44.04 --> 0:00:47.80]	  So what we can do is, for example, we can look at the turn rate within each group.
+[0:00:47.94 --> 0:00:51.22]	  So let's take, for example, gender, we can see that.
+[0:00:54.12 --> 0:00:57.32]	  So let's take all female customers.
+[0:00:57.70 --> 0:01:05.80]	  So this way we select a subset of customers who are females and we can take it, take a look at turn nature.
+[0:01:06.42 --> 0:01:09.86]	  And for example, we can look at the main turn.
+[0:01:10.36 --> 0:01:18.20]	  So this, let's say, and we can do the same with males, male customers.
+[0:01:22.54 --> 0:01:26.64]	  So this way we look at turn rate within each group.
+[0:0 --> 0:01:38.70]	  And remember that our global, global turn is, our global turn is almost 27%.
+[0:01:38.70 --> 0:01:46.86]	  So we see that turn among females and turn among males is not so different from the global chart.
+[0:01:46.86 --> 0:01:49.82]	  Yeah, we can do the same for different categories.
+[0:01:50.08 --> 0:01:54.10]	  So for example, instead of looking at gender, we can look at partner.
+[0:01:54.94 --> 0:01:58.16]	  So for partner, let's quickly check.
+[0:02:00.48 --> 0:02:02.76]	  We can see what kind of values are there.
+[0:02:03.08 --> 0:02:06.46]	  So we have customers who live with partners and customers who live without partners.
+[0:0 --> 0:02:13.28]	  So we can, what we can do is we can do the same thing, but instead of looking at the gender variable, we will look at the partner variable.
+[0:02:13.50 --> 0:02:17.60]	  So let's first look at people who live with partners.
+[0:02:18.34 --> 0:02:20.36]	  So for them, the turn rate is 20%.
+[0:02:20.36 --> 0:02:26.72]	  And this is actually, if you remember that the global turn rate is 27.
+[0:02:26.96 --> 0:02:31.36]	  So this looks like it's significantly less than the global rate.
+[0:02:31.64 --> 0:02:41.26]	  So let's say turn the partner and we can do the same turn with partner, of course, turn partner.
+[0:02:41.54 --> 0:02:45.68]	  And we can do the same with customers without partner.
+[0:02:46.70 --> 0:02:57.24]	  And we see that actually the turn rate is approximately 5% more for people without partner than global turn rate.
+[0:02:57.44 --> 0:03:00.24]	  And here we have something similar.
+[0:03:00.40 --> 0:03:04.08]	  It's like 6%, 7% less than the global turn rate.
+[0:03:04.08 --> 0:03:15.06]	  So for each of these variables, for example, for partner, we can see the difference between global turn and turn within people who have a partner.
+[0:03:15.44 --> 0:03:19.68]	  And we see that the difference is actually 6.5%.
+[0:03:19.68 --> 0:03:27.68]	  And the same, if we do the same for no partner, we see that the difference is negative.
+[0:03:27.96 --> 0:03:28.92]	  It's almost 6%.
+[0:03:28.92 --> 0:03:39.44]	  So this kind of gives us an intuition that for gender, it doesn't really matter if the customer is male or female, turn rate is approximately the same.
+[0:03:39.74 --> 0:03:47.56]	  So if we do the same exercise here, global turn, it's female.
+[0:03:48.40 --> 0:03:50.48]	  So the difference is tiny, right?
+[0:03:50.56 --> 0:03:53.46]	  It's less than 1% and the same with male.
+[0:03:54.26 --> 0:03:56.20]	  So the difference is again tiny.
+[0:03:57.14 --> 0:03:59.68]	  But for partner, the difference is big.
+[0:04:00.10 --> 0:04:08.34]	  So this gives us some idea that perhaps the partner variable is more important for predicting turn than the gender variable.
+[0:04:08.66 --> 0:04:12.52]	  This gives us one way of measuring which importance.
+[0:04:12.86 --> 0:04:14.26]	  So we can look at the difference.
+[0:04:16.36 --> 0:04:23.38]	  So in this case, we look at the global turn rate and we look at turn rate within group.
+[0:04:25.48 --> 0:04:37.44]	  If this difference is higher than zero, it means that the global turn rate is greater than the group turn rate and it means that this group is less likely to turn.
+[0:04:39.90 --> 0:04:51.46]	  On the other hand, if the difference is negative, it means that the group turn is higher than the global turn rate and it means that for this group, they are more likely to turn.
+[0:04:53.70 --> 0:05:05.32]	  And of course, here, what is interesting is not just the sign of this, because we saw that for gender and for the gender variable, it can be positive and negative, but it's very tiny.
+[0:05:05.76 --> 0:05:09.48]	  So we are more interested in differences that are larger.
+[0:05:10.14 --> 0:05:15.28]	  What is also interesting to see is instead of, so here we are looking at the difference.
+[0:05:15.52 --> 0:05:20.86]	  Instead of looking at the difference, we can also divide one by another.
+[0:05:21.48 --> 0:05:25.76]	  So for example, let's take customers without partners.
+[0:05:26.96 --> 0:05:40.92]	  So we calculate the, we divide one by another and we see that if we divide the turn rate for no partners on global turn rate, we see a number that is higher than one.
+[0:05:41.24 --> 0:05:46.50]	  And for people with partner, the turn rate is smaller than one.
+[0:05:47.02 --> 0:05:50.78]	  So people without a partner, they seem more likely to turn.
+[0:05:51.02 --> 0:05:53.64]	  This ratio is greater than one.
+[0:05:54.12 --> 0:05:58.34]	  So this is another feature importance metric is a risk ratio.
+[0:05:59.60 --> 0:06:08.86]	  So risk in this case is we divide the group turn rate, we divide by the global turn rate.
+[0:06:10.74 --> 0:06:15.76]	  And if it's greater than one, they're more likely to turn.
+[0:06:16.56 --> 0:06:22.88]	  If it's less than one, they're less likely to turn.
+[0:06:24.48 --> 0:06:29.68]	  These two things, the difference and risk ratio, they are very similar.
+[0:06:29.98 --> 0:06:35.02]	  So they're kind of telling us the same information, but they're telling us it in a different way.
+[0:06:35.02 --> 0:06:39.86]	  So in case of a difference, we don't see how much higher.
+[0:06:40.24 --> 0:06:46.62]	  So we see this in more like an absolute terms, but risk ratio tells us that in relative terms.
+[0:06:46.84 --> 0:06:53.08]	  So for example, for people without a partner, so the turn rate is 22% higher.
+[0:06:53.20 --> 0:06:58.58]	  And for people with partner, the turn rate is 25% lower.
+[0:06:59.28 --> 0:07:01.24]	  So 24% approximately.
+[0:07:01.70 --> 0:07:02.76]	  We can visualize that.
+[0:07:02.76 --> 0:07:11.20]	  So for example, let's look at the turn rate, global turn rate is approximately 27%.
+[0:07:11.20 --> 0:07:13.70]	  So let's say this is 27%.
+[0:07:13.70 --> 0:07:26.58]	  So if our group is for our group, the risk, the turn rate is 28%, then the turn rate is just slightly above one.
+[0:0 --> 0:07:31.04]	  So this is, let's say, 01.
+[0:07:32.52 --> 0:07:34.60]	  And this group has no risk.
+[0:07:35.30 --> 0:07:44.28]	  So the risk of turning for this group is, so maybe not no risk, but the same risk as for the global population.
+[0:07:45.14 --> 0:07:51.10]	  So they are as likely to turn as any average customer of the company.
+[0:07:51.10 --> 0:08:04.28]	  But if we take another, let's say if we take people with partners, so for them, risk of turning, I don't know, was it 20%, let's say this is 20%.
+[0:08:04.28 --> 0:08:07.40]	  And we again compare it with 27%.
+[0:08:07.40 --> 0:08:13.26]	  So for this, it was 75, right, 0.75.
+[0:08:14.10 --> 0:08:15.44]	  So this is low risk.
+[0:08:16.14 --> 0:08:22.50]	  So this group of people, they're less likely to turn than the average population.
+[0:08:22.84 --> 0:08:26.26]	  So this could be people with partner.
+[0:08:27.06 --> 0:08:39.40]	  And then let's say we have another group that the risk of turning for this group, let's say 33%, right, which if we compare with global population.
+[0:08:39.42 --> 0:08:46.20]	  So for them, the turn, the risk ratio is 22%.
+[0:08:46.20 --> 0:08:51.18]	  So this is actually high risk.
+[0:08:52.52 --> 0:08:59.04]	  So for this group, the risk of turning is higher than for the average population.
+[0:08:59.40 --> 0:09:02.90]	  So this could be people without partner.
+[0:09:03.50 --> 0:09:08.22]	  And this, for example, gender, any gender.
+[0:09:08.40 --> 0:09:10.36]	  So let's say gender milk.
+[0:09:10.82 --> 0:09:20.18]	  Yeah, so risk ratio gives us intuition how important each variable is and each subgroup that this variable define.
+[0:09:20.36 --> 0:09:25.60]	  By analyzing this data, we can already understand which variables can be important.
+[0:09:25.62 --> 0:09:40.38]	  Of course, we cannot do this for every variable like that to look first at all the values that this variable has and then calculate the turn rate manually.
+[0:09:40.72 --> 0:09:44.04]	  So what we could do is we can implement something like this.
+[0:09:44.66 --> 0:09:53.84]	  So in SQL, if you know SQL, so basically it says let's group by, let's take our data.
+[0:09:54.16 --> 0:10:02.06]	  Let's group by gender and for each value of the gender variable, let's calculate the average turn rate within this group.
+[0:10:02.18 --> 0:10:07.32]	  Then let's take the difference between this average turn rate and global turn rate.
+[0:10:07.46 --> 0:10:09.86]	  And let's also calculate this risk.
+[0:10:11.12 --> 0:10:17.02]	  And we can do this for all the variables, not just gender, but for partner and so on.
+[0:10:17.38 --> 0:10:23.98]	  So what we want to do now is take this SQL query and translate it to pandas.
+[0:10:23.98 --> 0:10:30.14]	  So in pandas, this query would look like, we have this group by statement.
+[0:10:30.36 --> 0:10:32.24]	  So what we want to do is to group by gender.
+[0:10:32.54 --> 0:10:36.84]	  And then we want to calculate the average turn.
+[0:10:37.26 --> 0:10:39.64]	  So this is how we get the average turn.
+[0:10:39.86 --> 0:10:43.58]	  So here we actually instead of just returning a series.
+[0:10:43.58 --> 0:10:46.06]	  So this is a series we want to return data frame.
+[0:10:46.22 --> 0:10:50.16]	  And the reason for that, because we want to add these two columns there as well.
+[0:10:50.56 --> 0:10:54.34]	  So there is no simple expression in pandas that would just add these two columns.
+[0:10:54.44 --> 0:11:00.30]	  We will need to add them manually to get a data frame instead of a series.
+[0:11:00.54 --> 0:11:04.08]	  We can use this ag method, which is short for aggregating.
+[0:11:04.82 --> 0:11:09.34]	  And so it takes a list of different aggregations that we can perform.
+[0:11:09.84 --> 0:11:13.04]	  So for example, mean and we can also add count here.
+[0:11:13.04 --> 0:11:19.50]	  So we can also see how many different values for this variable gender are there.
+[0:11:19.82 --> 0:11:24.96]	  So we see that it's approximately the same for females and males.
+[0:11:25.80 --> 0:11:28.88]	  So we get this, this is a data frame.
+[0:11:29.40 --> 0:11:31.72]	  So let's call it data frame group.
+[0:11:32.10 --> 0:11:35.78]	  Now we add a column the way we would usually do this.
+[0:11:36.82 --> 0:11:41.58]	  So let's take, we take the group turn.
+[0:11:41.96 --> 0:11:46.12]	  And subtract the global turn from here.
+[0:11:46.32 --> 0:11:46.96]	  I switched the order.
+[0:11:47.26 --> 0:11:54.96]	  So remember previously, like a word from global subtract group here, we subtract from group subtract global.
+[0:11:55.36 --> 0:11:57.04]	  It doesn't really matter.
+[0:11:57.30 --> 0:11:59.02]	  So just switches the sign.
+[0:11:59.76 --> 0:12:00.76]	  Frisk here.
+[0:12:01.36 --> 0:12:05.22]	  So then again, we have to mean divided by global turn.
+[0:12:05.74 --> 0:12:08.02]	  And let's let's do this.
+[0:12:08.02 --> 0:12:09.66]	  Let's execute this and we see that.
+[0:12:09.78 --> 0:12:11.36]	  Yeah, we get all these files.
+[0:12:11.58 --> 0:12:18.62]	  So for gender, we see for females and for males, what is the turn rate?
+[0:12:18.80 --> 0:12:21.10]	  What is the difference between this and global turn rate?
+[0:12:21.16 --> 0:12:21.84]	  And what is the risk?
+[0:12:22.08 --> 0:12:26.58]	  And we can repeat this for, for all the variables we have.
+[0:12:26.70 --> 0:12:30.94]	  Remember, we have this list of categorical variables that we created in the previous lesson.
+[0:12:31.28 --> 0:12:31.86]	  So here it is.
+[0:12:32.44 --> 0:12:37.34]	  So what we want to do is now for each column in this list.
+[0:12:37.34 --> 0:12:41.68]	  We want to do this aggregation for C in categorical.
+[0:12:42.70 --> 0:12:49.22]	  So now instead of gender, we replace it with C and the rest stays the same.
+[0:12:49.42 --> 0:12:54.54]	  And now when we execute it, so because this thing is in the loop, we don't see it.
+[0:12:54.82 --> 0:13:02.66]	  So usually what Jupyter notebooks do is if something is the last expression in the cell, so it displaced the output.
+[0:13:02.86 --> 0:13:06.06]	  But here, because it's within the loop, it doesn't display.
+[0:13:06.24 --> 0:13:11.74]	  What we need to do is we need to use a function, special function for displaying things.
+[0:13:12.04 --> 0:13:18.48]	  It lives in I Python and Jupyter used to be I Python notebooks.
+[0:13:18.98 --> 0:13:20.56]	  That's why the name is still there.
+[0:13:20.88 --> 0:13:24.62]	  So from I Python display in per display.
+[0:13:25.08 --> 0:13:30.98]	  And here we just this function here and it would display it.
+[0:13:31.66 --> 0:13:38.44]	  Let's also print the name of the variable and add a few line breaks.
+[0:13:40.06 --> 0:13:41.90]	  And yeah, so this is what it does now.
+[0:13:42.18 --> 0:13:44.72]	  So for each variable, it does this analysis.
+[0:13:45.22 --> 0:13:50.82]	  So we see that for gender, so the risk is not really significant.
+[0:13:51.20 --> 0:1]	  It's pretty small for senior citizens, for people who are senior, they're more likely to turn for some reasons.
+[0:13:59.12 --> 0:14:06.22]	  Then people who have no partner, they are more likely to turn people who have a partner.
+[0:14:06.54 --> 0:14:07.72]	  So they are less likely to turn.
+[0:14:07.92 --> 0:14:13.92]	  So this actually seems like a very good variable in a sense that it has predictive power.
+[0:14:14.26 --> 0:14:18.34]	  We see that for this group of people, perhaps people who have no partner.
+[0:14:18.70 --> 0:14:21.76]	  Yeah, maybe we should target them with these promotional emails.
+[0:14:22.04 --> 0:14:25.48]	  Again, people who have dependents, just kids.
+[0:14:25.66 --> 0:14:32.78]	  So they are less likely to turn and people who do not have dependents, they are more likely to turn.
+[0:14:32.92 --> 0:14:35.16]	  I think this is similar to partner.
+[0:14:35.72 --> 0:14:36.46]	  Then phone service.
+[0:14:37.18 --> 0:14:41.70]	  Yeah, so people who have phone service, like it's approximately the same turn rate.
+[0:14:42.24 --> 0:14:45.96]	  So here this is quite interesting.
+[0:14:46.44 --> 0:14:48.38]	  So we see that multiple lines.
+[0:14:48.58 --> 0:14:50.60]	  I think this is a multiple phone lines.
+[0:14:51.22 --> 0:14:54.54]	  So if people have multiple phone lines, they are less likely to turn.
+[0:14:54.54 --> 0:14:56.56]	  But again, this doesn't seem very significant.
+[0:14:57.64 --> 0:15:05.12]	  But people who have no phone service at all, yeah, you see this, they become less and less likely to turn.
+[0:15:05.72 --> 0:15:06.26]	  Internet service.
+[0:15:06.84 --> 0:15:13.14]	  Yeah, so people who have no internet service at all, they are probably likely to stay forever with this company.
+[0:15:13.50 --> 0:15:14.64]	  So risk is super low.
+[0:15:15.16 --> 0:15:17.10]	  And you see this internet service now.
+[0:15:17.44 --> 0:15:23.24]	  So this online security, online backup, all they have this no internet service variable.
+[0:15:24.10 --> 0:15:30.90]	  Because like for online security, you need to have internet service actually to have online security.
+[0:15:31.38 --> 0:15:34.08]	  And I think, yeah, you can take a look.
+[0:15:34.18 --> 0:15:35.50]	  There is a lot of interesting information.
+[0:15:35.74 --> 0:15:39.78]	  You can see that without tech support, people are more likely to turn.
+[0:15:40.50 --> 0:15:43.24]	  And then there is one that is interesting one is this contract.
+[0:15:43.70 --> 0:15:46.48]	  So contract says what type of contract people have.
+[0:15:46.48 --> 0:15:52.88]	  So month to month, it means that they basically can cancel the contract at the end of every month.
+[0:15:53.56 --> 0:15:58.62]	  And you see that people with this type of contract actually tend to cancel the contracts.
+[0:15:58.62 --> 0:16:01.04]	  I was a lot more frequently than others.
+[0:16:01.50 --> 0:16:04.74]	  And people who are on very long contracts with two years.
+[0:16:05.26 --> 0:16:10.68]	  Yeah, the likelihood of turning is super small, like it's tiny.
+[0:16:11.88 --> 0:16:22.96]	  So the risk of turning is like the ratio of people who turn in this category is like almost 3% and they have super low risk of turning.
+[0:16:23.38 --> 0:16:25.52]	  So this variable is super important.
+[0:16:25.62 --> 0:16:35.88]	  So let's say if we see a customer who has no partner, who has no kids and who has a month to month contract, they're super likely to turn.
+[0:16:35.88 --> 0:16:45.48]	  But on the other hand, if we see somebody who lives with a partner has kids and who has a two year contract, we're pretty sure that we they are going to stay with us.
+[0:16:45.82 --> 0:16:45.86]	  Right.
+[0:16:45.98 --> 0:16:55.82]	  So we this way just looking at these simple numbers, we can already get a lot of insights into which variables are important, which are variables or not.
+[0:16:55.94 --> 0:17:05.58]	  Because if we see things like this, we see indeed there are some categories in which people tend to turn more or less often than in.
+[0:17:05.88 --> 0:17:07.26]	  Compared to the global average.
+[0:17:07.74 --> 0:17:13.42]	  So this is the kind of variables we actually want to see and we want to use in our machine learning algorithms.
+[0:17:14.38 --> 0:17:25.78]	  And, yeah, so here it's actually like we can see this for individual values, like for each for each variable for each value within this variable.
+[0:17:26.08 --> 0:17:34.50]	  What is the risk for this group, but it's nice to have it would be nice to have a number that describes the importance of the variable overall.
+[0:17:34.54 --> 0:17:40.40]	  Like how can we say if contract is less important than streaming movies, right?
+[0:17:40.52 --> 0:17:50.32]	  Or if it's more important, because based on this, we get an intuition that contract might be more significant variable when we want to predict customers are going to turn or not.
+[0:17:50.40 --> 0:17:51.86]	  But we only have an intuition.
+[0:17:52.26 --> 0:17:59.98]	  It would be nice to have just one number that describes the importance of a variable that we can use to understand which variables are more important than others.
+[0:1 --> 0:18:02.30]	  And this is what we actually will do next.
+[0:18:02.82 --> 0:18:07.42]	  We will look at mutual information that answers exactly that question.

@@ -1,0 +1,60 @@
+[0:0 --> 0:00:04.64]	  Welcome back, this is lesson four of machine learning in ZoomCamp session three,
+[0:00:05.08 --> 0:00:12.02]	  and we will do exploratory data analysis. So for exploratory data analysis, we will use our
+[0:00:12.02 --> 0:00:20.84]	  full train data set, which we prepared here. So yeah, we actually still have the old indices
+[0:00:20.86 --> 0:00:24.02]	  that are not reset. Maybe let's quickly do it here.
+[0:00:25.74 --> 0:00:36.44]	  So now we have this data frame, right? And we want to do a bit of exploration here. So first
+[0:00:36.44 --> 0:00:43.54]	  of all, let's look at missing values. So for that, we use the isNull function. And again,
+[0:00:43.70 --> 0:00:49.90]	  we'll look at the sum. So we don't have any missing values. So we only had missing values here
+[0:00:50.10 --> 0:00:56.16]	  for total charges, but we fixed that in the lesson about data preparation. So this is fixed,
+[0:00:56.50 --> 0:01:01.94]	  and it seems like we don't need to do any additional data preparation here. And yeah,
+[0:01:02.12 --> 0:01:07.18]	  that's why now let's look at the target variable. So we have our target variable churn.
+[0:01:08.14 --> 0:01:13.34]	  So this is our target variable. And what we can do next is look at the distribution of this variable,
+[0:01:13.60 --> 0:01:19.48]	  like how many users are churning users, how many are non-churning users. So for that, we can use
+[0:01:19.48 --> 0:01:26.72]	  this value counts function, which simply counts like for each value, looks how many times this
+[0:01:26.72 --> 0:01:32.98]	  value occurs. So for value number zero occurs 4,000 something times and value number one occurs
+[0:01:32.98 --> 0:01:41.84]	  1,400, 500 something times. So we can already see that the number of churned users is like
+[0:01:41.84 --> 0:01:48.42]	  three times less approximately than the number of non-churned users. And we can actually look at
+[0:01:48.42 --> 0:01:56.28]	  the percentage using this normalize true keyword. So it divides the number we have by the total
+[0:01:56.28 --> 0:02:06.14]	  value, but the total count of elements in this series. So we see that 26% of users are churning
+[0:02:06.14 --> 0:02:15.38]	  users. So this thing here is actually called churn rate. So churn rate is the rate at which
+[0:02:15.74 --> 0:02:23.72]	  users churn. So in our case, 26, 27, almost 27%. This is our global churn rate. And actually,
+[0:02:23.84 --> 0:02:29.08]	  we don't need to use these value counts to calculate it. So what we can do is we can
+[0:02:29.08 --> 0:02:38.82]	  simply compute the mean of the churn column. So mean. And it gives us the same number as previously.
+[0:02:38.98 --> 0:02:45.76]	  So the reason mean works here, the reason computing mean gives us churn rate is because
+[0:02:45.76 --> 0:02:58.78]	  let's say we have a binary variable that has 1s and 0s. So 1, 0, 0, 1, 0, 1, 1. So this is a
+[0:02:58.78 --> 0:03:04.16]	  binary variable that we have. And if we compute the mean of this variable, so the formula for
+[0:03:04.16 --> 0:03:11.36]	  computing mean is sum over all values divided by n, where n is number, total number of observations.
+[0:03:11.72 --> 0:03:20.96]	  Since this thing can only take values from 0 or 1, so this sum is actually equal to
+[0:03:20.96 --> 0:03:28.90]	  number of 1s. So what it actually means is this formula is number of 1s divided by n.
+[0:03:29.54 --> 0:03:39.30]	  And this is churn rate or fraction of 1s in our dataset. So that's why when we just do take a
+[0:03:39.30 --> 0:03:47.34]	  binary dataset and do mean of this, we get the fraction of 1s in this dataset, which is in our
+[0:03:47.34 --> 0:03:53.02]	  case, this churn rate. So we have this churn rate. This is the global, we can call it global,
+[0:03:53.20 --> 0:04:01.80]	  global churn rate. So this is the churn rate in the entire dataset, which is approximately 27%.
+[0:04:01.80 --> 0:04:09.66]	  So if we round it a little bit, let's say to two and decimal points. So yeah, it's 27%. So 27%
+[0:04:09.66 --> 0:04:16.20]	  of our users are churning. So now we a little bit understand how our target variable looks like.
+[0:04:16.32 --> 0:04:22.80]	  So now also look at the other variables. So we'll look at categorical variables and
+[0:04:22.80 --> 0:0]	  the numerical variables. So to see which categorical variables we have is again, let's take
+[0:0 --> 0:04:39.70]	  full train and look at d-types. So here we have a senior citizen is not really, so it says int 64,
+[0:04:39.96 --> 0:04:44.42]	  but it's not really an integer. It's a categorical variable whether this person is a senior citizen
+[0:04:44.42 --> 0:04:51.76]	  or not. So we're interested in there are actually three categorical variables here. The first one
+[0:04:51.76 --> 0:04:59.26]	  is tenure. The second one is monthly charges. And the third one is total charges. So just these
+[0:04:59.26 --> 0:05:08.48]	  three. So let's create a list. We'll call it numeric, numerical, which will contain,
+[0:05:08.78 --> 0:05:17.04]	  which will contain this three variables. So tenure, then monthly charges,
+[0:05:20.18 --> 0:05:21.92]	  and then total charges.
+[0:05:25.06 --> 0:05:31.04]	  All right. And then the rest is our categorical. So let's create a categorical.
+[0:05:31.82 --> 0:05:40.04]	  And for that, what we can do is just look at all columns. So we have all these columns.
+[0:05:40.72 --> 0:05:45.88]	  And what I want to do is take that and simply remove the numerical ones.
+[0:05:47.80 --> 0:05:54.90]	  So customer ID is not really categorical variable. It's more like a identifier of
+[0:05:55.70 --> 0:06:02.74]	  a user. So we take it off, take it out. So then we remove tenure, we remove monthly charges,
+[0:06:02.92 --> 0:06:08.44]	  total charges, and churn. So now we have a list of categorical variables. And yeah,
+[0:06:08.50 --> 0:06:14.16]	  the simple thing we can do is just take a look at the number of unique values for all the
+[0:06:14.16 --> 0:06:20.50]	  categorical variables. So for that, yeah, so this is how we select a subset from the data frame. So
+[0:06:20.50 --> 0:06:26.92]	  this will return all the, all the categorical variables. And then there is a function called
+[0:06:26.92 --> 0:06:35.94]	  n unique, which will calculate the number of unique values for each, each column. And we'll tell us,
+[0:06:36.08 --> 0:06:42.24]	  as we see that, like, most of them are binary. So some of them, not most of them, like five of them
+[0:06:42.24 --> 0:06:49.26]	  are binary. Most of them have three values. Yeah, that's another binary and the payment methods
+[0:06:49.62 --> 0:06:57.66]	  method has four values. That's probably enough for us for now, for initial exploratory data analysis,
+[0:06:57.98 --> 0:07:04.10]	  but we will continue our exploratory data analysis in the next lesson. So in the next lesson, we will
+[0:07:04.10 --> 0:07:09.14]	  look at important features, important categorical features, and we will look at things like churn
+[0:07:09.14 --> 0:07:14.38]	  rate and within for each, for each variable, for each categorical variable, and we will look at
+[0:07:14.38 --> 0:07:20.46]	  risk ratio. So these two things tell us how important these categorical variables are.

@@ -1,0 +1,192 @@
+[0:00:00.22 --> 0:00:03.50]	  Hi everyone, welcome back. This is lesson 11 of machine learning
+[0:00:03.50 --> 0:00:07.10]	  ZoomCamp session 3. And in this lesson, we will talk about
+[0:00:07.10 --> 0:00:10.88]	  modeling interpretation. So previously, in this lesson, we
+[0:00:10.88 --> 0:00:15.06]	  trained a logistic regression model. We briefly looked at the
+[0:00:15.06 --> 0:00:19.04]	  coefficients that it learned. And in this lesson, we want to
+[0:00:19.04 --> 0:00:22.40]	  understand what these coefficients mean. So again, let's
+[0:00:22.40 --> 0:00:26.28]	  take a look at the coefficients that we have here. So we have
+[0:00:26.28 --> 0:00:30.58]	  these coefficients. And remember that we also have our
+[0:00:30.58 --> 0:00:35.46]	  dictionary vectorizer, which contains the names of the
+[0:00:35.46 --> 0:00:39.52]	  features. So if we now take these ones and join them with
+[0:00:39.52 --> 0:00:42.52]	  these ones, we will see what is the weight for each feature.
+[0:00:44.06 --> 0:00:49.88]	  Let's take that and we can use the zip function to put them
+[0:00:49.88 --> 0:00:53.88]	  together. What zip does, let's quickly take a look at what it
+[0:00:53.88 --> 0:00:59.08]	  does. So let's say we have two lists, a list A that contains
+[0:00:59.08 --> 0:01:03.64]	  these elements, and this B that can be just a string. So it
+[0:01:03.64 --> 0:01:07.12]	  doesn't have to be list but some sequence A, B, C, D. And what
+[0:01:07.12 --> 0:01:11.56]	  zip is doing for each element of list A, it joins them with
+[0:01:11.56 --> 0:01:15.94]	  element of the second sequence. So for A1, it will join it
+[0:01:15.94 --> 0:01:22.44]	  with A. For two, it will join it with B, and so on. C, so zip
+[0:01:22.44 --> 0:01:26.92]	  A, B. And we don't see it because this is an sort of
+[0:01:26.92 --> 0:01:30.28]	  iterator, it doesn't show the result immediately. So we need
+[0:01:30.28 --> 0:01:34.80]	  to put it in a list to see the result. So put it in the list
+[0:01:34.80 --> 0:01:38.74]	  and we see that C joins for each element. So it creates a
+[0:01:38.74 --> 0:01:43.32]	  tuple where we have this first element from A, first element
+[0:01:43.32 --> 0:01:47.52]	  from B, second element from A, second element from B, and so on.
+[0:01:47.70 --> 0:01:51.52]	  And we can also turn this into a dictionary if we do that. So
+[0:01:51.76 --> 0:01:56.64]	  then all the elements from list A become keys, and all the
+[0:01:56.64 --> 0:02:00.34]	  elements from list B become values. So this is what we want
+[0:02:00.34 --> 0:02:03.04]	  to do now. So we want to actually turn this into a
+[0:02:03.04 --> 0:02:07.66]	  dictionary. And yes, this way we can see what are the values for
+[0:02:07.66 --> 0:02:11.60]	  each of the variables. So we see that these are the values for
+[0:02:11.60 --> 0:0]	  contract. These are the values for dependent. These are the
+[0:0 --> 0:02:20.24]	  values for device protection, for gender, and so on. So we have
+[0:02:20.48 --> 0:02:25.36]	  this one is numerical. So this is the way it for monthly
+[0:02:25.36 --> 0:02:30.08]	  charges and so on. So actually, like this is quite a long list.
+[0:02:30.28 --> 0:02:33.72]	  So we have quite a few things here. It's very difficult to
+[0:02:33.72 --> 0:02:37.96]	  make sense. From this, what we can do here is train a smaller
+[0:02:37.96 --> 0:02:43.38]	  model. So let's take only a subset of features. So let's say
+[0:02:43.38 --> 0:02:49.68]	  we'll take three features. So it can be contract, for example,
+[0:02:49.96 --> 0:02:58.12]	  tenure, and monthly charges. So this is our small data set.
+[0:02:58.40 --> 0:03:02.10]	  These are the features that we will use for our smaller model.
+[0:03:02.94 --> 0:03:08.94]	  So we're just this how we can select them. So we get this
+[0:03:08.94 --> 0:03:15.50]	  small subset. And yeah, so if we just quickly take a look at
+[0:03:15.50 --> 0:03:24.10]	  top, like top 10. So we can turn this into a dictionary again.
+[0:03:26.10 --> 0:03:31.46]	  Records. So this is how it looks like. And this is what we can
+[0:03:31.46 --> 0:03:38.04]	  now use for our vectorizer. So let's, let's do that. So we will
+[0:03:38.04 --> 0:03:46.88]	  create a strict small, which you don't need to take first 10
+[0:03:46.88 --> 0:03:52.84]	  only, we'll take off them. And we also need the list of dictionaries
+[0:03:52.84 --> 0:03:58.32]	  for validation. So validation. Now we have this dictionary
+[0:03:58.32 --> 0:04:04.60]	  vectorizer is again called small one, the vectorizer, it's
+[0:04:04.60 --> 0:04:13.84]	  pars matrices. And we fit it on this list of dictionaries on
+[0:04:13.84 --> 0:04:19.40]	  the training one. So okay, we have it. And let's quickly take
+[0:04:19.40 --> 0:04:24.50]	  a look at the list of features we have get feature names. So
+[0:04:24.50 --> 0:04:27.62]	  yeah, we have only five features. So we have three binary
+[0:04:27.62 --> 0:04:30.84]	  features for the contract variable. And we have two in
+[0:04:30.84 --> 0:04:34.32]	  medical features for monthly charges and tenure. Okay, so
+[0:04:34.32 --> 0:04:45.78]	  let's get our access train small feature matrix. So transform.
+[0:04:47.22 --> 0:04:51.86]	  So again, the same list of dictionaries. And yeah, we can
+[0:04:51.86 --> 0:04:56.42]	  do the same at the same time for validation. And actually, we
+[0:04:56.42 --> 0:05:00.28]	  don't really need validation here. So we only want to look at
+[0:05:00.28 --> 0:05:03.50]	  the coefficients. We don't need to don't necessarily need to
+[0:05:03.50 --> 0:05:07.62]	  check the accuracy of this model here. So so now we need to
+[0:05:07.62 --> 0:05:14.20]	  train a model. So model small, but just a regression. And let's
+[0:05:14.20 --> 0:05:25.02]	  fit it. Small fit. Have this train small. And we have a Y Y
+[0:05:25.02 --> 0:05:25.38]	  train.
+[0:05:27.16 --> 0:05:31.80]	  We have our model. Let's look at the key coefficients. So first
+[0:05:31.80 --> 0:05:38.80]	  we'll look at the bias term or intercept. So then let's take a
+[0:05:38.80 --> 0:05:48.48]	  look at the coefficients. So this is our w zero or bias term. And
+[0:05:48.48 --> 0:05:51.58]	  this is our w vectors.
+[0:05:52.76 --> 0:06:01.94]	  Let's round it. So these are our coefficients. And now we can do
+[0:06:01.94 --> 0:06:13.82]	  the same thing here, we can join them together. So small one and
+[0:06:16.74 --> 0:06:21.92]	  then w. Yeah. So this is what we have. These are the weights.
+[0:06:22.40 --> 0:06:31.68]	  So we have our bias. And this is our w. So now let's try to
+[0:06:31.68 --> 0:06:37.22]	  make sense from these values. So first, yeah, let's let's write
+[0:06:38.08 --> 0:06:44.54]	  them. So we have the bias term, which is minus 2.47. Right. So
+[0:06:44.54 --> 0:06:48.76]	  this is our bias term. Then we have some here cross all the
+[0:06:48.76 --> 0:06:54.44]	  weights. Then we have here we have a part with our contract. So
+[0:06:54.44 --> 0:06:58.46]	  we have three weights here. So the first one is for monthly
+[0:06:58.46 --> 0:07:08.26]	  contract, which is 0.97. Then the other one is minus 0.025 and
+[0:07:08.26 --> 0:07:20.24]	  minus 0.94. So let's move them a little bit. So these are the
+[0:07:20.24 --> 0:07:24.48]	  weights for our contract. Then we have the weight for monthly
+[0:07:24.48 --> 0:0]	  charges, which is 0.027. And then we have weight for tenure,
+[0:07:32.38 --> 0:07:39.90]	  which is negative 0.036 is tenure. And this is monthly charges.
+[0:07:40.78 --> 0:07:46.38]	  So these are our coefficients bias term, the coefficients. And
+[0:07:46.38 --> 0:07:49.24]	  now let's say we have a customer, we want to score this
+[0:07:49.24 --> 0:07:53.60]	  customer. And let's say this customer has a monthly contract,
+[0:07:53.60 --> 0:07:58.78]	  this coefficient is for monthly, this is one year, two year. So
+[0:07:58.78 --> 0:08:02.80]	  let's say if we have a customer with a monthly contract, it
+[0:08:02.80 --> 0:08:08.74]	  means we get one here, zero here, and zero here. And this
+[0:08:08.74 --> 0:08:14.08]	  customer has been with our company for, let's say five
+[0:08:14.08 --> 0:08:21.76]	  months. And they pay $50 per month. So this is the customer
+[0:08:21.76 --> 0:08:27.96]	  we have. And you see that we immediately see for this part. So
+[0:08:27.96 --> 0:08:34.16]	  this part is kind of get canceled, because we just multiply
+[0:08:34.16 --> 0:08:37.74]	  this weight for one year contract by zero, we multiply
+[0:08:37.74 --> 0:08:41.50]	  this part for two year contract by zero. So effectively what
+[0:08:41.50 --> 0:08:45.52]	  happens here, we just throw it away. So here, we only look at
+[0:08:45.52 --> 0:08:49.96]	  this part. So let's see what happens here. So first, we want
+[0:08:49.96 --> 0:08:53.24]	  to score a customer. So we know this is what we know about the
+[0:08:53.24 --> 0:08:57.50]	  customer. And first, we start with our bias term. So our bias
+[0:08:57.50 --> 0:09:04.42]	  term is minus 2.47. So here it means that minus two. And if
+[0:09:04.42 --> 0:09:09.92]	  you remember sigmoid, let's look at our sigmoid for minus 2.7.
+[0:09:10.64 --> 0:09:14.54]	  So this is a pretty low probability. So by default, and
+[0:09:14.54 --> 0:09:17.94]	  remember, the bias term is what we assume about the customer
+[0:09:17.94 --> 0:09:21.62]	  without knowing anything about them. So by default, we assume
+[0:09:21.62 --> 0:09:26.14]	  that the probability of somebody leaving the company is quite
+[0:09:26.14 --> 0:09:30.68]	  small. So the score for them is minus 2.7, which if we put this
+[0:09:30.68 --> 0:09:35.44]	  on a sigmoid is only 6% of the probability of leaving. So the
+[0:09:35.44 --> 0:09:39.62]	  next what we learn next is that this person has a monthly
+[0:09:39.62 --> 0:09:44.18]	  contract. So this makes our score a little bit smaller. So
+[0:09:44.18 --> 0:09:51.76]	  instead of 2.47, it becomes almost one. So yeah, let's just
+[0:09:51.76 --> 0:09:59.76]	  do that. So 0.97. So you see, when we learn that the customer
+[0:09:59.76 --> 0:10:04.04]	  is monthly, has a monthly contract, the probability of
+[0:10:04.04 --> 0:10:12.48]	  churning for this customer just got bigger. And 47. Then what
+[0:10:12.58 --> 0:10:20.10]	  else we know is that they pay $50 per month. So it again, so
+[0:10:20.10 --> 0:10:24.24]	  this one is positive. So for each extra dollar per month that
+[0:10:24.24 --> 0:10:29.32]	  they pay, the score becomes bigger by this amount. So here
+[0:10:29.32 --> 0:10:33.84]	  now when we learn that they have to pay 50 bucks, so now the
+[0:10:33.84 --> 0:10:39.34]	  probability is almost 46%. Then the last thing we know about
+[0:10:39.34 --> 0:10:46.72]	  this customer is that they have five months of tenure. So what
+[0:10:46.72 --> 0:10:51.80]	  we do is we now add five times and this one is actually negative.
+[0:10:52.44 --> 0:1]	  This in brackets. So for each extra month, a person spends it
+[0:1 --> 0:11:03.42]	  with us, they get the score becomes smaller, like we
+[0:11:03.42 --> 0:11:06.84]	  subtract actually from the score. It means the more they
+[0:11:06.84 --> 0:11:10.36]	  spend with us, the less likely they churn. So this is how we
+[0:11:10.36 --> 0:11:15.20]	  can interpret negative sign here. So this feature indicates
+[0:11:15.20 --> 0:11:18.48]	  that there is a negative correlation. Remember, we talked
+[0:11:18.48 --> 0:11:21.30]	  about correlation. So the correlation between this variable
+[0:11:21.30 --> 0:11:25.14]	  and churn rate is negative. And actually the same, if we look
+[0:11:25.14 --> 0:11:28.98]	  at this contract two years and contract one year, it's also
+[0:11:28.98 --> 0:11:33.26]	  negative. It means if somebody is on the two year contract,
+[0:11:33.52 --> 0:11:36.04]	  they are less likely to churn somebody on one year contract,
+[0:11:36.04 --> 0:11:39.58]	  they are also less likely to churn. But two years is a
+[0:11:39.58 --> 0:11:42.82]	  probability of churning becomes significantly less, like a lot
+[0:11:42.82 --> 0:11:48.86]	  a lot less. Okay, so we have that. And so our score, let's
+[0:11:48.86 --> 0:11:53.08]	  look at the row score. So for this specific customer, the row
+[0:11:53.08 --> 0:12:02.38]	  score is minus 33. And so this one will be minus 0.33. And when
+[0:12:02.38 --> 0:12:09.18]	  we convert it to when we put it to sigmoid, the score is the
+[0:12:09.18 --> 0:12:13.56]	  probability is 41. And here, I noticed that I used this
+[0:12:13.56 --> 0:12:17.76]	  underscore here. So underscore here means that take whatever
+[0:12:17.76 --> 0:12:23.32]	  output of the previous cell was and put it as a parameter. So
+[0:12:23.32 --> 0:12:27.28]	  underscore like a magic is a magic variable in Jupiter. Yeah,
+[0:12:27.30 --> 0:12:30.58]	  so we see that for this particular customer, the
+[0:12:31.16 --> 0:12:35.90]	  probability of churning is 41%. So what if we knew that this
+[0:12:35.90 --> 0:12:40.28]	  customer has been only one month with us, and they have to pay
+[0:12:40.28 --> 0:12:44.42]	  $60 per month, and they're on monthly contract. So for that,
+[0:12:44.70 --> 0:12:49.10]	  you see that the score becomes positive. And remember that for
+[0:12:49.10 --> 0:12:55.48]	  sigmoid of zero, we get sigmoid of zero is sigmoid of zero is
+[0:12:55.48 --> 0:13:00.56]	  0.5. So whatever is above zero, whatever is positive, it
+[0:13:00.56 --> 0:13:05.50]	  means that it's above 0.5. For us, 0.5 is the decision
+[0:13:05.50 --> 0:13:11.08]	  threshold. So this is when we decided the customer is going
+[0:13:11.08 --> 0:13:17.40]	  to turn. So for us, we see that, yeah, this is positive. So it
+[0:13:17.40 --> 0:13:20.08]	  means that this customer is going to turn and the probability
+[0:13:20.08 --> 0:13:25.76]	  of churning is 52%. So this is not super high, but we would
+[0:13:25.76 --> 0:13:28.94]	  treat this user already as churning. And let's say if
+[0:13:28.94 --> 0:13:33.48]	  somebody is on a two year contract, and they have been
+[0:13:33.48 --> 0:13:39.62]	  I don't know, 24 months with the company, and they have to
+[0:13:39.62 --> 0:13:48.60]	  pay $30 per month. So for two year contract, we need to
+[0:13:48.60 --> 0:13:53.66]	  replace this one with this one. So for them, the probability
+[0:13:53.66 --> 0:13:58.42]	  of the score is very negative. So it's like we started
+[0:13:58.42 --> 0:14:03.36]	  already our bias is quite negative. And it's it becomes
+[0:14:03.36 --> 0:14:06.30]	  more and more negative each month they spent with us, it
+[0:14:06.30 --> 0:14:09.04]	  becomes negative. The two year contract is a super negative
+[0:14:09.04 --> 0:14:12.94]	  score. So then the probability of this customer churning is
+[0:14:12.94 --> 0:14:17.44]	  very tiny, like only 3%. Let's take a look at this one. Remember,
+[0:14:17.58 --> 0:14:21.22]	  we had these contract variables. So if let's say somebody is
+[0:14:21.34 --> 0:14:27.50]	  is on a two year contract, then this, so this one goes away. So
+[0:14:27.50 --> 0:14:31.44]	  here we actually have a zero here, and the one here. And what
+[0:14:31.44 --> 0:14:36.62]	  effectively happens is this part goes away, right? And only
+[0:14:36.62 --> 0:14:40.34]	  this part stays. Every time we do this with one hot encoding,
+[0:14:40.66 --> 0:14:44.12]	  only the variable that is hot gets the weight. So it gets the
+[0:14:44.12 --> 0:14:46.90]	  weight that contributes to the total score, but the cold
+[0:14:46.90 --> 0:14:50.74]	  variable, so the ways for them, they don't contribute to the
+[0:14:50.74 --> 0:14:53.56]	  score for this particular customer. And this is how you
+[0:14:53.56 --> 0:14:57.68]	  can interpret the weights for this one hot encoded virus. And
+[0:14:57.68 --> 0:15:01.62]	  I think we briefly, I think we briefly talked about this. So
+[0:15:01.62 --> 0:15:05.98]	  let's just take a closer closer look at them again, these three
+[0:15:05.98 --> 0:15:11.22]	  values. So these two, these two, they are negative. This one is
+[0:15:11.22 --> 0:15:14.36]	  positive. So for negative ones, when we look at a variable that
+[0:15:14.36 --> 0:15:19.26]	  has negative weight, it means that people who have these kind
+[0:15:19.26 --> 0:15:23.98]	  of contracts, they tend to turn less. While people who have
+[0:15:23.98 --> 0:15:28.78]	  monthly contracts, they tend to turn more. We saw this when we
+[0:15:28.78 --> 0:15:33.28]	  looked at the risk ratio for this, the risk was very low. So for
+[0:15:33.28 --> 0:15:38.32]	  this was also low, like moderately low. And for monthly,
+[0:15:38.90 --> 0:15:45.16]	  the risk was very high. So and we see that this is actually is
+[0:15:45.16 --> 0:15:48.96]	  reflected in this course in the weights from the logistic
+[0:15:48.96 --> 0:15:53.62]	  regression model. So this way, we can also see, let's say if we
+[0:15:53.62 --> 0:15:57.46]	  look at all the weights we have for all the one hot encoding
+[0:15:57.46 --> 0:16:01.42]	  variables, we can see which one of them is more important. Okay,
+[0:16:01.48 --> 0:16:05.68]	  that's it for the interpretation of the model. So what we did
+[0:16:05.68 --> 0:16:09.92]	  here is we trained a smaller model. And we look at we tried to
+[0:16:09.92 --> 0:16:15.20]	  make sense from the weights. And in the next lesson, we will see
+[0:16:15.20 --> 0:16:16.20]	  how we can use the model.

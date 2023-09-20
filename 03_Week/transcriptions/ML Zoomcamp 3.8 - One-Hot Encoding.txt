@@ -1,0 +1,119 @@
+[0:0 --> 0:00:04.60]	  Hey everyone, welcome back. This is lesson 8 of machine learning in Zumbacom session 3.
+[0:00:05.02 --> 0:00:09.98]	  And in this lesson we will talk about encoding categorical variables with one code encoding.
+[0:00:10.74 --> 0:00:18.20]	  So if you remember in the previous session in regression, when we were predicting the price of a car,
+[0:00:18.48 --> 0:00:23.70]	  we already looked at a way to encode categorical variables.
+[0:00:23.82 --> 0:00:31.90]	  And it was by converting one categorical variable in a bunch of binary variables.
+[0:00:32.64 --> 0:00:37.70]	  So this way of encoding variables is actually called one code, one hot encoding.
+[0:0 --> 0:00:43.94]	  And this is what we will use in this lesson as well, except instead of implementing it ourselves,
+[0:00:44.48 --> 0:00:49.94]	  we will use scikit-learn for that. Just a quick reminder, one hot encoding.
+[0:00:49.94 --> 0:00:56.82]	  So let's say you have a variable contract. Let's say you will have two variables.
+[0:00:57.78 --> 0:01:06.12]	  So we have a variable. So one is, could be let's say gender. And another one is contract.
+[0:01:06.38 --> 0:01:15.82]	  And we have some observations. So for example, the first client could be a female on a two-year contract.
+[0:01:16.22 --> 0:01:22.86]	  Then the second one is female on one-year contract. Then we have male on monthly contract.
+[0:01:23.08 --> 0:01:31.36]	  Then we have male on yearly contract. Then let's say female on yearly contract.
+[0:01:31.82 --> 0:0]	  Then male again on monthly contract. And then male on two-yearly contract.
+[0:0 --> 0:01:47.94]	  So we have these two categories, two categories gender and contract. So what we want to do
+[0:01:47.94 --> 0:01:56.62]	  is use one hot encoding to encode these variables. Here for gender, we have two variables, female
+[0:01:56.62 --> 0:02:06.22]	  and male. And for contract, we have monthly one year and two year. So in total, we have five
+[0:02:07.82 --> 0:02:15.76]	  different values. So let's create a matrix with five columns.
+[0:02:20.08 --> 0:02:31.98]	  First two for gender. And second, the last three for contract. For gender, we have
+[0:02:33.42 --> 0:02:41.56]	  a female male. And for contract, we have monthly contract, a yearly contract and two years contract.
+[0:02:43.08 --> 0:02:53.62]	  So we have this table. And now the way we encode this categorical variable is, let's say, if our
+[0:02:53.78 --> 0:03:02.38]	  customer is a female, then for gender female, we put one. And so here, let's put one for all
+[0:03:02.38 --> 0:03:14.08]	  the females. And likewise, if gender is male, then we put one here. And then let's do the same for
+[0:03:14.08 --> 0:03:23.36]	  contract. So for monthly contracts, this person is on a monthly contract. This person is on a monthly
+[0:03:23.36 --> 0:03:33.52]	  contract. So this person, so the second row there on yearly contract. So this one is also on
+[0:03:33.52 --> 0:03:53.34]	  yearly contract, yearly contract. And the rest are on two years contract. So this way, so we put
+[0:03:53.34 --> 0:03:59.66]	  one there in where the name comes from. So hot here means that the value that is activated. So for
+[0:03:59.66 --> 0:04:08.82]	  example, so for this column for gender equals male, this value once are hot, they kind of get
+[0:04:08.82 --> 0:04:17.06]	  activated and we activate them by placing one there. And these values are deactivated. They are
+[0:04:17.06 --> 0:04:22.68]	  called, we place zero there. So I think it originally comes from the name comes from
+[0:04:22.68 --> 0:04:27.90]	  electronics. So there is if there is currency flowing through a connector, then it's kind of
+[0:04:27.90 --> 0:04:34.56]	  hot, then it's encoded as one. This way of encoding categorical variables is called one hot encoding.
+[0:04:34.94 --> 0:04:40.36]	  In the previous lecture, we implemented this manually, but we don't need to do this manually. So
+[0:04:40.36 --> 0:04:49.66]	  we can just use scikit-learn for that. So in scikit-learn, we use, so there's a feature
+[0:04:49.66 --> 0:04:58.72]	  extraction package. And there are many ways of implementing one hot encoding. So you use
+[0:04:58.72 --> 0:05:05.62]	  dict vectorizer. So dict vectorizer, vectorizer is dictionaries. So what we actually need to do is
+[0:05:06.14 --> 0:05:12.88]	  let's use a train data set and take a look at these two variables that we have, gender and
+[0:05:12.88 --> 0:05:23.56]	  contract. So let's take a look at the first 10. So we have this small data frame with
+[0:05:23.56 --> 0:05:31.64]	  e-mail, mails and types of contracts. And yeah, so what we can do now is turn it into a dictionary.
+[0:05:31.74 --> 0:05:39.12]	  So using this to dict method, and then we need to say that we want each row to turn into a
+[0:05:39.12 --> 0:05:46.36]	  dictionary for that, because if we don't specify anything, then what we do it, we'll turn each
+[0:05:46.36 --> 0:05:54.34]	  column into a dictionary. So we want to do it row-wise. So that's why we say orient records.
+[0:05:54.70 --> 0:05:59.66]	  So each record, we want to turn into a dictionary. And let me just
+[0:05:59.66 --> 0:06:08.64]	  do it one more time. So you see, so for this one, so it just encodes gender, female, contract,
+[0:06:08.90 --> 0:06:23.66]	  two year. So basically each record turns into a dictionary. So let me call it dicts.
+[0:06:23.66 --> 0:06:32.86]	  We first create a new instance of this class. And what we need here is a method fit. So first we
+[0:06:32.86 --> 0:06:40.52]	  train our dict vectorizer, but training, I mean, we show it. So this is how our data looks like.
+[0:06:40.62 --> 0:06:47.78]	  And then from that, the vectorizer, in first, there are these columns, these values,
+[0:06:48.64 --> 0:06:55.46]	  that's why at the end, after the conversion, the data will look this way. And it's called vectorizer
+[0:06:55.46 --> 0:06:59.94]	  because we take a dictionary and turn it into a vector. That's why it's called vectorizer.
+[0:07:00.42 --> 0:07:07.94]	  So we feed it. And then what we do next. So now it learns what kind of data is there. So yeah,
+[0:07:07.94 --> 0:07:15.02]	  let's first transform and then we'll look at, so we can transform. So here it actually produces
+[0:07:15.02 --> 0:07:21.88]	  a sparse matrix. So sparse matrix is a special way of encoding data when there are many zeros.
+[0:07:22.70 --> 0:07:29.20]	  So if you can, if you see that there are a lot of zeros, so most of these values here in this
+[0:07:29.20 --> 0:07:34.24]	  matrix are actually zeros. And if you imagine that if we have a lot of categorical variables,
+[0:07:34.90 --> 0:07:41.18]	  most of them, like for one code, one code encoding, most of them will be zeros. So that's why this
+[0:07:41.18 --> 0:07:48.02]	  sparse matrix is used. So this is a compressed sparse row format. If you're interested to learn
+[0:07:48.02 --> 0:07:56.16]	  more about this, you can just look it up. So it's, it's, it comes from scipy. You can learn about
+[0:07:56.16 --> 0:08:05.10]	  like what it is actually and how it's implemented inside. So we will not use sparse matrices here.
+[0:08:05.10 --> 0:08:12.24]	  So we will say sparse false. So this will return a usual numbering. And we see here that
+[0:08:12.24 --> 0:08:21.58]	  probably we only have two, two year months to months. So we don't have a yearly here. So maybe
+[0:08:21.58 --> 0:08:30.22]	  we should take a bit larger example. Yeah, so here we have one year. So let me take a larger
+[0:08:30.54 --> 0:08:35.38]	  data frame, a subset of data frame, and we see that it actually created three,
+[0:08:35.94 --> 0:08:44.12]	  sorry, five columns. So two for gender and three for contract. So I think it's first contract and
+[0:08:44.12 --> 0:08:50.52]	  then gender. So we can actually look, check the names to get feature names. So there is this
+[0:08:50.52 --> 0:08:57.86]	  method in the vectorizer that returns the feature names. So here what it means that for this,
+[0:08:58.70 --> 0:09:06.18]	  for the first column, this is for the first element here, this is the column for the second,
+[0:09:07.18 --> 0:09:16.78]	  that's that one, then for the third one, and then so on. So here the first three are for contract
+[0:09:16.78 --> 0:09:26.50]	  and last two are for gender. So here, this value gets activated and this value gets activated
+[0:09:26.60 --> 0:09:33.06]	  and the rest are zeros. And likewise, so it here, it means that contract is two years
+[0:09:33.06 --> 0:09:40.02]	  and gender is female. And then for this one, it means that contract is month to month
+[0:09:40.02 --> 0:09:47.24]	  and gender is male. So this is how we can use the dict vectorizer. So first we turn our
+[0:09:47.24 --> 0:09:55.98]	  data frame into a bunch of dictionaries, and then we fit our dict vectorizer by showing it
+[0:09:55.98 --> 0:10:00.28]	  basically showing all the dictionaries and then it infers what are the column names,
+[0:10:00.54 --> 0:10:04.28]	  what are the values, what are the variable names, what are the values there. And based on that,
+[0:10:04.38 --> 0:10:11.32]	  it creates this one hot encoding feature matrix. And dict vectorizer is quite smart
+[0:10:11.32 --> 0:10:18.94]	  in a way that if we, let's say if we have also tenure here, let's say we have a data frame with
+[0:10:18.94 --> 0:10:25.96]	  two categorical variable and one numerical variable. So let's add it here. So this is how
+[0:10:28.70 --> 0:10:33.22]	  now records in our dictionary look like. So gender female contract two years,
+[0:10:33.54 --> 0:10:41.62]	  tenure 72 months. So now if we again run this, so dict vectorizer is smart enough to see that
+[0:10:41.62 --> 0:10:48.30]	  this is actually a numerical variable. And for numerical variables, it leaves it intact. So it
+[0:10:48.30 --> 0:10:54.76]	  doesn't do any, it doesn't perform any transformation to this last column. And this last column is
+[0:10:54.76 --> 0:11:00.54]	  exactly this new categorical variable that we just added. Right. And the rest is again, so this is
+[0:11:00.54 --> 0:11:11.40]	  contract, contract, this is gender, and this one is tenure. Okay. And we instead of just giving it
+[0:11:11.40 --> 0:11:21.94]	  three values, we can actually get home. So let's do that. So we can create train, train dictionaries.
+[0:11:21.94 --> 0:11:28.06]	  So this will be dictionaries coming from the train data set. So let's take all the categorical
+[0:11:28.06 --> 0:11:34.64]	  variables and numerical ones. And of course, we will take all of them, not just first hundred.
+[0:11:36.48 --> 0:11:44.34]	  And you can see that this is how it looks like. So we have all the values here from gender to
+[0:11:44.34 --> 0:11:51.10]	  total charges. So all the values from the data frame that we have to teach a record in our
+[0:11:51.30 --> 0:11:57.22]	  list of dictionaries looks like that. And so we have a bunch of records. And then what we do,
+[0:11:57.44 --> 0:12:06.50]	  we fit our dict vectorizer. And then so for our special trained, I should have fitted on train
+[0:12:06.50 --> 0:12:16.56]	  dictionaries. And then our feature names becomes a quite large list. So basically, for each,
+[0:12:16.68 --> 0:12:24.62]	  for each variable, it has here a group, you see, so monthly charges, monthly charges is numerical.
+[0:12:25.50 --> 0:12:33.82]	  Then for each categorical variable, there is a group of binary variables. These are the feature
+[0:12:33.82 --> 0:12:41.46]	  names. And yeah, so let's take a look at what happens, let's say when we transform first five,
+[0:12:41.72 --> 0:12:50.46]	  we should take the train dictionary. So maybe round it a little bit. It doesn't help.
+[0:12:52.02 --> 0:12:59.84]	  Yeah, it's rounding doesn't help. Let's take a look at the first row and maybe convert it to a list.
+[0:13:01.34 --> 0:13:07.94]	  It's long, but yeah, you get the idea. So it's a bunch of one-hot encoded variables, then
+[0:13:07.94 --> 0:13:13.62]	  a numerical one, then again, a bunch of one-hot encoded ones, and then again, two numerical ones.
+[0:13:14.48 --> 0:13:22.04]	  So this is how our feature matrix looks like. And we can actually, so let me remove that.
+[0:13:23.02 --> 0:13:30.38]	  And yeah, we can actually chain this. So we can just immediately say we create an instance of
+[0:13:30.38 --> 0:13:35.66]	  a dictionary vectorizer and then fit it immediately. Or maybe what is more interesting to do,
+[0:13:36.28 --> 0:13:44.86]	  we can fit the training dictionary and immediately transform it. And then it will be our X train.
+[0:1 --> 0:13:53.60]	  Transform. So it will be our X train. So here what it does, it's basically writing this is writing,
+[0:13:54.04 --> 0:14:00.70]	  it's the same as writing the first fit doing the fit and then doing the transform.
+[0:14:03.82 --> 0:14:10.74]	  So these two expressions here are actually identical. So we can see it in the shapes here.
+[0:14:11.88 --> 0:14:18.22]	  And here if we executed with the different ones, we get actually the same one. So this is just a
+[0:14:18.22 --> 0:14:25.52]	  shorter way of writing this. So because we fit first the train dictionaries and then transform
+[0:14:25.52 --> 0:14:32.74]	  train dictionaries again. And yeah, so let's keep the shorter one. And we can do the same thing for
+[0:14:32.74 --> 0:14:38.48]	  our validation dataset. So let's go with validation digs.
+[0:14:39.60 --> 0:14:49.88]	  That's a frame validation. Okay. And now we, instead of fit transform, we use only transform.
+[0:14:50.28 --> 0:14:52.70]	  So we don't fit on the validation data set.
+[0:14:54.62 --> 0:15:02.68]	  Okay. So we have that. So again, so what we do is we take all our variables, categorical numerical,
+[0:15:03.18 --> 0:15:08.62]	  put them into a dictionary, then we fit a dictionary vectorizer to teach the vectorizer
+[0:15:08.62 --> 0:15:13.62]	  what kind of values are there. Then we get these dictionaries and transform them into a
+[0:15:13.62 --> 0:15:18.26]	  feature matrix that we will use for training. And we'll do the same with validation data set only
+[0:15:18.26 --> 0:15:23.96]	  this time we apply the transform function to get the feature matrix for the validation dataset.
+[0:15:24.58 --> 0:15:30.82]	  So now we have the feature matrices for training validation and we are ready to train our model.
+[0:15:31.32 --> 0:15:32.58]	  And this is what we will do next.

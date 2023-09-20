@@ -1,0 +1,95 @@
+[0:0 --> 0:00:05.58]	  Welcome back. This is lesson seven of machine learnings in come session three and we will talk about
+[0:00:05.58 --> 0:00:11.96]	  correlation, which is a way to measure feature importance for numerical variables.
+[0:00:12.48 --> 0:00:16.62]	  In the previous lesson, we talked about mutual information, which is a way to measure the
+[0:00:16.62 --> 0:00:21.48]	  importance of categorical features. And here we will talk about numerical. So for that,
+[0:00:21.62 --> 0:00:29.02]	  so correlation or also known as Pearson's correlation. This is a correlation coefficient.
+[0:00:30.24 --> 0:00:37.44]	  So this is here's a formula, by the way, and correlation coefficient is Pearson's correlation.
+[0:00:37.92 --> 0:00:46.50]	  So this is a way to measure dependency between two variables. So let me just copy it here.
+[0:00:46.86 --> 0:00:52.08]	  This is a way to of measuring the degree of dependency between two variables. So let's say
+[0:00:52.08 --> 0:01:00.42]	  we have a variable X and a variable Y. So both these variables are numbers, the correlation coefficient,
+[0:01:00.94 --> 0:01:10.06]	  usually it's denoted by a letter R, is a number between minus one and one. So for negative correlation,
+[0:01:11.68 --> 0:01:19.96]	  when correlation is negative, when values of X grow, usually what happens is the values of Y,
+[0:01:20.16 --> 0:01:25.30]	  they go down. So in this case, we say the correlation is negative, increasing one variable
+[0:01:25.30 --> 0:01:31.88]	  leads to decreasing another variable. And when correlation is positive, what happens is that
+[0:01:31.88 --> 0:01:39.30]	  when one variable grows, the other grows as well. So in this case, an increase in one variable leads
+[0:01:39.30 --> 0:01:45.82]	  to an increase in another variable. So it can take any value between minus one and one. So when
+[0:01:45.82 --> 0:01:54.34]	  correlation coefficient is somewhere between zero and 0.1, or likewise, for negative correlation
+[0:01:54.34 --> 0:02:02.90]	  between zero and minus 0.1, so the correlation is almost non-existent. So let's say it's low,
+[0:02:02.90 --> 0:02:09.64]	  very low. It means that for positive correlation, when one variable increases, very rarely it leads
+[0:02:09.64 --> 0:02:20.34]	  to an increase in the other variable. For values between, let's say 0.1 and 0.5, or maybe we can
+[0:02:20.34 --> 0:02:29.66]	  even say 0.2 and 0.5 here. Or again, if we talk about negative correlation, numbers between minus
+[0:02:29.66 --> 0:02:39.32]	  0.2 and 0.5. So here, it's moderate correlation. So values increase in one variable, sometimes
+[0:02:39.32 --> 0:02:51.32]	  lead to increasing other variable. And then values between, let's say, 0.5 or even 0.6, maybe
+[0:02:51.48 --> 0:02:58.78]	  2.1. So this is negative and positive 0.6 and 1. So this is very strong correlation.
+[0:02:59.66 --> 0:03:06.90]	  So almost always increasing one lead to increase another in the other, or increasing one lead
+[0:03:06.90 --> 0:03:16.26]	  to decreasing the other. So let's say often, or like when it's close to one, when it's higher than
+[0:03:17.70 --> 0:03:29.32]	  0.9, then it's almost always. So these are for cases when both our variables x and y are real
+[0:03:29.32 --> 0:03:36.98]	  numbers. So it can be any numbers. However, in our case, y is a binary variable. It means it can
+[0:03:36.98 --> 0:03:44.44]	  take only values between 0 and 1, and x can be any number. So for any number, we use this notation.
+[0:03:44.44 --> 0:03:51.64]	  So x is a real number, meaning it can be anything between minus infinity and plus infinity to make
+[0:03:51.64 --> 0:04:00.04]	  it more concrete. So let's say x be tenor, which is the number of months clients spend with us,
+[0:04:00.54 --> 0:04:09.50]	  and y is charm. Tenor is a variable, let's say, that takes values between 0 to, I don't know,
+[0:04:09.50 --> 0:04:22.74]	  let's say 200. So we can quickly check it. All three tenor marks is 72. Okay, between 0 and 72.
+[0:04:23.10 --> 0:04:29.24]	  Right, and charm can only take values between 0 and 1. So in this case, positive correlation
+[0:04:29.24 --> 0:04:35.72]	  between x and y means that when x increases more tenor,
+[0:04:36.50 --> 0:04:46.56]	  then more charm. In this case, it means for the larger the value of x are, the higher the charm rate.
+[0:04:48.50 --> 0:04:57.10]	  And likewise, negative correlation means more tenor, less charm.
+[0:05:00.82 --> 0:05:09.66]	  And zero correlation or low correlation like we saw here means that variable doesn't really affect
+[0:05:09.66 --> 0:05:11.88]	  charm rate at all.
+[0:05:13.78 --> 0:05:21.42]	  And yeah, we can quickly check what's actually the correlation between our numerical variables and
+[0:05:22.36 --> 0:05:30.46]	  charm. So let's quickly do this. First, we select our numerical values. So these are the three columns
+[0:05:30.46 --> 0:05:37.34]	  that we have, tenor, monthly charges and total charges. And then we have this correlation
+[0:05:37.34 --> 0:05:48.14]	  coefficient, we want to correlate it with charm. And we get these, we get these values. So here,
+[0:05:48.28 --> 0:05:54.70]	  tenor is negative and total charges is negative. So the way we can interpret negative
+[0:05:54.70 --> 0:06:02.74]	  coefficient here is that when tenor increases, when tenor increases, so the longer
+[0:06:02.74 --> 0:06:09.40]	  customer stays with us, the less likely they charm. So with the increase of tenor,
+[0:06:09.80 --> 0:06:18.08]	  charm rate goes down. And to the same with total charges. So total charges, the more
+[0:06:18.14 --> 0:06:25.74]	  people pay, the less likely they leave. This might sound counterintuitive, but this,
+[0:06:25.80 --> 0:06:31.62]	  so this tenor and total charges, they correlate. So the longer people stay with the company,
+[0:06:31.82 --> 0:06:40.10]	  the higher the total bill is. That's why we see that correlation is negative here. And when we
+[0:06:40.10 --> 0:06:45.52]	  talk about monthly charges, so the way we can interpret it, so here the, the coefficient
+[0:06:45.52 --> 0:06:50.46]	  is positive. So the way we can interpret it, the higher the monthly charges are,
+[0:06:50.88 --> 0:06:58.94]	  the most likely people are to leave. So the increase in monthly charges,
+[0:06:59.30 --> 0:07:04.62]	  so increase in monthly charges will lead to increase in the charm rate. And we can actually
+[0:07:04.62 --> 0:07:15.50]	  check this in the code. So for example, let's take a look at tenor, tenor, let's take a look
+[0:07:16.22 --> 0:07:24.56]	  let's say people who are with our company only for two months or less and look at the charm rate.
+[0:0 --> 0:07:33.24]	  So for them, the charm rate is 59% pretty high. So if somebody stayed with the company
+[0:07:33.24 --> 0:07:39.38]	  zero, one or two months, the charm rate in this group is pretty high. But let's say if we want to
+[0:07:39.38 --> 0:07:45.98]	  take a look at the people who spent more than two months in the company, yeah, the charm rate is
+[0:07:45.98 --> 0:07:52.62]	  pretty low. So probably what is more interesting for us to check is to look at the number of people
+[0:07:52.62 --> 0:08:01.10]	  who stay with the company between two and let's say 12 months, so less than a year. So for them,
+[0:08:01.22 --> 0:08:06.48]	  the charm rate is still pretty high, almost 40%. And then finally, we can take a look at
+[0:08:06.90 --> 0:08:12.42]	  people who stayed with the company longer than one year. So for them, charm rate is even lower,
+[0:08:12.72 --> 0:08:19.94]	  it's only 17%. So we can see here, so let's say this is our charm rate.
+[0:08:21.84 --> 0:08:32.92]	  And let's say this is our tenor. So for tenor between zero and two months, we have a charm rate
+[0:08:34.90 --> 0:08:46.26]	  almost 60%. This is 60%. So this is between zero and two months. And for tenor between two months
+[0:08:46.26 --> 0:08:58.58]	  and 12 months, we have charm rate of 40%. So it's 40%. This is between two and 12. And then finally,
+[0:08:58.68 --> 0:09:05.98]	  for people who are longer than one year, it is 17%. So it's more than two times.
+[0:09:07.34 --> 0:09:18.14]	  So we see here this trend that like it really goes down with tenor increases, so it's 12 plus.
+[0:09:18.78 --> 0:09:25.76]	  When it increases, the charm rate really goes down. Let's take a look at the other value we
+[0:09:25.76 --> 0:0]	  have, this monthly charges. So let me just copy this. So if we look at monthly charges,
+[0:09:35.42 --> 0:09:44.78]	  let's say less than $20 per month, then the charm rate is slightly less than 9%.
+[0:09:45.16 --> 0:09:50.12]	  So for monthly charges between $20 and $50,
+[0:09:50.26 --> 0:10:00.86]	  so the charm rate is 18%. And then for monthly charges, more than $50 per month,
+[0:10:01.26 --> 0:10:10.42]	  the charm rate is 32%. So we can again draw it here, charm rate here, and now it's monthly charges.
+[0:10:13.08 --> 0:10:22.24]	  So for less than $20, we have 8% charm rate. So low value. So this is less than 20.
+[0:10:23.04 --> 0:10:41.24]	  Okay. Then between $20 and $50, we have 18%. So this is between $20 and $50. And then last,
+[0:10:41.36 --> 0:10:50.14]	  we have 30%. This charm rate for more than 50 plus.
+[0:10:52.34 --> 0:11:02.46]	  And we again see that there is here, so this is for tenor, this is negative correlation.
+[0:11:03.76 --> 0:11:07.50]	  And for monthly charges, this positive correlation.
+[0:11:10.18 --> 0:11:18.18]	  So when correlation is positive, increase in charges lead to increase in charm rate.
+[0:11:18.50 --> 0:11:24.34]	  And when correlation is negative, increase in tenor leads to decrease in charm rate.
+[0:11:24.78 --> 0:11:30.14]	  The strength of correlation, so this is what our correlation coefficient tells us.
+[0:11:31.18 --> 0:11:40.50]	  So it tells us how often increase in tenor leads to decrease in charm rate and increase in
+[0:11:40.50 --> 0:11:47.90]	  in monthly charges leads to increase in charm rate. So this is what correlation coefficient
+[0:11:47.90 --> 0:11:54.08]	  tells us. And actually, if we only care about the importance, so not about the direction,
+[0:11:54.08 --> 0:12:00.84]	  we can look at the absolute value. So here, and we can again sort. So we don't need to order it
+[0:12:00.84 --> 0:12:05.74]	  here because it's kind of ordered already. So tenor is already the most important one,
+[0:12:05.98 --> 0:12:10.22]	  the most important numerical variable, then monthly charges is the next important and then
+[0:12:10.22 --> 0:12:16.24]	  total charges is the least important one. So this way we can understand how numerical
+[0:12:16.46 --> 0:12:26.32]	  variables affect our target variable charm. Yeah, so we now look at that. We look at other ways of
+[0:12:26.32 --> 0:12:31.66]	  measuring importance, like of measuring importance of categorical variables, measuring importance of
+[0:12:31.66 --> 0:12:37.30]	  numerical variable. I think we are more or less done with the exploratory data analysis step
+[0:12:37.30 --> 0:12:45.08]	  and understanding the data to initial analysis. And what we will do next is we will
+[0:12:45.16 --> 0:12:53.06]	  see how we can encode categorical features before we can put them in the model. And instead
+[0:12:53.06 --> 0:12:56.90]	  of implementing this manually, this time we will use cycle learn for doing that.

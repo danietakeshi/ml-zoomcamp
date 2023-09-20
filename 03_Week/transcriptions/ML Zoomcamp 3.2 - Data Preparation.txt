@@ -1,0 +1,138 @@
+[0:0 --> 0:00:02.02]	  Okay, welcome back. This is lesson two.
+[0:00:02.52 --> 0:00:11.52]	  And now we will look at the data and download it first and then read it to pandas and do
+[0:00:11.52 --> 0:00:13.22]	  some preprocessing.
+[0:00:13.74 --> 0:00:18.02]	  I already have in-person pandas and here this is the data is located.
+[0:00:18.24 --> 0:0]	  So we will need to download it again.
+[0:00:20.36 --> 0:00:22.62]	  I will use VWGIR for that.
+[0:00:23.02 --> 0:00:26.14]	  Here this is a dollar sign data.
+[0:00:26.14 --> 0:00:31.02]	  This is how you refer to variables that you have in your Jupyter.
+[0:00:31.52 --> 0:00:34.16]	  So this actually gets replaced by that.
+[0:00:34.96 --> 0:00:41.62]	  And let's save it in that week three file.
+[0:00:42.46 --> 0:00:45.04]	  So now we use VWGIR for that.
+[0:00:45.38 --> 0:00:46.46]	  You don't have to use VWGIR.
+[0:00:46.62 --> 0:00:48.38]	  I saw this question a couple of times.
+[0:00:49.34 --> 0:00:51.30]	  Now, like how does this actually work?
+[0:00:51.30 --> 0:00:55.62]	  So this exclamation mark means that we're executing a shell command.
+[0:00:56.20 --> 0:00:57.12]	  Here it runs on Linux.
+[0:00:57.84 --> 0:01:01.30]	  So in Linux there is this utility WGIR and you can use that.
+[0:01:01.50 --> 0:01:07.98]	  Or if you don't have it, you can just click on this safe link S and then you can just
+[0:01:07.98 --> 0:01:08.76]	  save it with the browser.
+[0:01:08.98 --> 0:01:10.16]	  Okay, so we get the data.
+[0:01:10.60 --> 0:01:11.84]	  Now we need to read it.
+[0:01:12.32 --> 0:01:16.40]	  And for that we use pandar.readcsv function.
+[0:01:17.20 --> 0:01:20.78]	  I saved it in this data week three file.
+[0:01:21.38 --> 0:01:27.32]	  So let's put it into a data frame variable and take a look at it.
+[0:01:27.32 --> 0:01:29.56]	  So we already saw it.
+[0:01:29.76 --> 0:01:35.72]	  So we have all this variable and there are quite a few columns here, like 21 column.
+[0:01:36.94 --> 0:01:43.42]	  And it's quite difficult to see, to look at all of them, especially since we have this
+[0:01:43.42 --> 0:0]	  dot dot dot here, so not all columns are displayed.
+[0:01:46.40 --> 0:01:52.92]	  To take a look at all the columns at the same time, what I usually do is I transpose the
+[0:01:52.92 --> 0:01:53.28]	  data frame.
+[0:01:53.56 --> 0:02:00.68]	  So I take the head, like the first five rows, and then I do this dot t, which is, which
+[0:02:00.68 --> 0:02:04.34]	  like similar to NumPy, it transposes the data frame.
+[0:02:04.50 --> 0:02:06.18]	  So rows become columns.
+[0:02:06.18 --> 0:02:14.06]	  And here, like this row number zero here is, this is the row number zero in not transpose
+[0:02:14.06 --> 0:02:14.58]	  data sets.
+[0:02:14.64 --> 0:02:20.34]	  So this is basically the customer number zero in our case, this customer number one and
+[0:02:20.34 --> 0:02:20.76]	  so on.
+[0:02:21.02 --> 0:02:27.90]	  And we can see this way, like we can see actually all the variables, all the original columns
+[0:02:27.90 --> 0:0]	  of our data set.
+[0:02:29.16 --> 0:02:35.58]	  So we can see that, yeah, so we have things like senior citizen partner, whether they
+[0:02:35.58 --> 0:02:41.86]	  live with partners or not, dependence, if they have dependence, the customer's tenure
+[0:02:41.86 --> 0:02:46.84]	  is how many months they are with the company, like all these things.
+[0:02:47.96 --> 0:02:51.34]	  And the most interesting one is this churn.
+[0:02:51.76 --> 0:02:53.34]	  So this is actually what we want to predict.
+[0:02:54.26 --> 0:03:00.22]	  And again, we see that, like here, we have sometimes a slower case, sometimes capital
+[0:03:00.22 --> 0:03:03.84]	  case, the same with variables.
+[0:03:04.24 --> 0:03:05.50]	  So it's not consistent.
+[0:03:05.72 --> 0:03:06.30]	  It's not uniform.
+[0:03:06.58 --> 0:03:11.82]	  And what we want to do is do the same thing as we did in the previous session.
+[0:03:12.28 --> 0:03:19.54]	  So when we were preparing the data frame with car prices, so we want to do the same thing
+[0:03:19.54 --> 0:03:19.92]	  here.
+[0:03:20.20 --> 0:03:21.48]	  So let me just type it.
+[0:03:26.48 --> 0:03:29.30]	  Okay.
+[0:03:29.62 --> 0:03:30.78]	  So I finished typing this code.
+[0:03:30.78 --> 0:03:35.88]	  It's doing the same thing as we did in the previous week.
+[0:03:36.30 --> 0:03:41.90]	  So if you're not sure what this code does, check the data preparation lesson from previous
+[0:03:41.90 --> 0:03:42.20]	  week.
+[0:03:42.58 --> 0:03:48.26]	  And now we can see, let me type it again, we can see now it's more uniform.
+[0:03:48.60 --> 0:03:52.08]	  So all the column names are lower case.
+[0:03:52.44 --> 0:03:56.48]	  And we replace all spaces with underscores.
+[0:03:57.74 --> 0:03:58.14]	  Yes.
+[0:03:58.34 --> 0:04:00.72]	  And now it looks a bit more uniform.
+[0:04:01.26 --> 0:04:05.36]	  Now let's take a look at the data types that we have, d types.
+[0:04:06.22 --> 0:04:07.88]	  You can see a few interesting things here.
+[0:04:08.18 --> 0:0]	  So first of all, this senior citizen is actually a number.
+[0:04:12.62 --> 0:04:17.12]	  So it's not a string, like not yes or no, like in other cases, it's an integer.
+[0:04:17.38 --> 0:04:19.58]	  So it has values zero, one.
+[0:04:20.12 --> 0:04:22.52]	  So this total charges, it's an object.
+[0:04:22.76 --> 0:04:23.20]	  Right.
+[0:04:23.40 --> 0:04:25.94]	  So it should be a number, but it's not.
+[0:04:26.32 --> 0:04:28.90]	  Let's take a look at this, this total charges.
+[0:04:29.40 --> 0:04:32.46]	  So yeah, it looks like a number, but it's an object.
+[0:04:32.64 --> 0:04:39.38]	  So for some reasons, something is, maybe some of the values are not numbers.
+[0:04:40.06 --> 0:04:41.02]	  So let's check.
+[0:04:41.22 --> 0:04:47.52]	  So for that, what we can do is now take this and convert it, try to convert it to a number.
+[0:04:47.78 --> 0:04:54.38]	  So that is a function of fundas called to numeric, which takes in a series and produces,
+[0:04:54.62 --> 0:04:55.82]	  it tries to convert it.
+[0:04:56.46 --> 0:05:03.02]	  And you see that it complains that it enables to parse string underscore at this position.
+[0:05:03.24 --> 0:05:06.66]	  So here it means that it doesn't just contain numbers.
+[0:05:07.12 --> 0:05:10.54]	  It also contains things that aren't numbers.
+[0:05:10.94 --> 0:05:15.06]	  And the reason for that is in this data set, space means not available.
+[0:05:15.30 --> 0:05:16.42]	  So the date is missing.
+[0:05:16.42 --> 0:05:20.48]	  They denote it with a space and we replace spaces with underscores.
+[0:05:21.38 --> 0:05:25.50]	  And that was treated as a string as an object.
+[0:05:25.84 --> 0:05:29.24]	  That's why it replaced all the spaces with underscores.
+[0:05:29.68 --> 0:05:34.62]	  What we can do is we can just say, okay, if fundas, if you don't know how to parse this
+[0:05:34.62 --> 0:05:37.04]	  string, just replace it with not a number.
+[0:05:37.40 --> 0:05:46.02]	  For this, there is a parameter called errors that you say errors means ignore them and write them
+[0:05:46.02 --> 0:0]	  as not a number.
+[0:05:47.34 --> 0:05:49.90]	  So for example, we can call it total charges.
+[0:05:51.02 --> 0:05:56.42]	  And we can see, so here probably some of the values are null here.
+[0:05:56.86 --> 0:05:58.84]	  Yeah, indeed 11 values are missing.
+[0:05:59.12 --> 0:06:01.80]	  And we can take a look at what's going on here.
+[0:06:02.52 --> 0:06:04.72]	  So yeah, so this way it's difficult to see.
+[0:06:05.24 --> 0:06:09.74]	  Let's just look at customer ID and total charges.
+[0:06:10.26 --> 0:06:15.78]	  We see that indeed for all these customers, this total charges value is missing.
+[0:06:16.02 --> 0:06:20.84]	  So what we want to do is now we just want to replace this.
+[0:06:21.44 --> 0:06:28.22]	  So this column total charges with converted value.
+[0:06:28.84 --> 0:06:30.32]	  So let's replace it.
+[0:06:30.96 --> 0:06:35.80]	  And what we can do immediately is we know that there are missing values.
+[0:06:36.20 --> 0:06:37.72]	  We can just fill them with zeros.
+[0:06:38.24 --> 0:06:41.54]	  UNA0, just write it back.
+[0:06:42.12 --> 0:06:49.32]	  So now all the missing values are zero, which maybe is not the best approach because maybe
+[0:06:49.32 --> 0:06:52.98]	  they actually did spend some money, but it's missing.
+[0:06:53.16 --> 0:06:53.58]	  We don't know.
+[0:06:54.56 --> 0:07:00.52]	  Zero, as we discussed previously, is not always the best approach in terms of common sense,
+[0:07:00.76 --> 0:07:03.38]	  but often in practice it's okay.
+[0:07:04.02 --> 0:07:06.76]	  So one last thing that we wanted to do was,
+[0:07:07.38 --> 0:07:11.22]	  yeah, we checked if all the columns read correctly.
+[0:07:11.74 --> 0:07:14.64]	  Now let's look at the churn variable.
+[0:07:15.98 --> 0:07:20.28]	  So we have this churn variable, which is yes or no.
+[0:07:20.72 --> 0:07:25.04]	  For machine learning, for classification, we are actually interested in not yes or no values.
+[0:07:25.34 --> 0:07:26.44]	  We're interested in numbers.
+[0:07:26.80 --> 0:07:31.66]	  We don't care about yes or no, but we need here is zero or one.
+[0:07:31.94 --> 0:07:33.24]	  So one is churn.
+[0:07:33.48 --> 0:07:35.78]	  Positive example and zero is not churn.
+[0:07:36.16 --> 0:07:36.82]	  Negative example.
+[0:07:37.22 --> 0:07:41.50]	  So for that, we can find all the values that are yes using this.
+[0:07:42.28 --> 0:07:45.02]	  So first, let's just make it smaller.
+[0:07:45.48 --> 0:07:48.92]	  So instead of looking at the entire series, we will look at first five.
+[0:07:49.46 --> 0:07:50.52]	  So the first five.
+[0:07:50.80 --> 0:07:53.90]	  So we see that if something is yes, then it gets true.
+[0:07:54.06 --> 0:07:56.44]	  If something is no, it gets false.
+[0:07:56.68 --> 0:08:01.86]	  And then now what we can do here is we can replace it with a number.
+[0:08:01.86 --> 0:08:05.20]	  Like as we did previously in the previous week.
+[0:08:06.04 --> 0:08:11.86]	  So yeah, so this is how we replace yes and no with zero and one.
+[0:08:11.98 --> 0:08:13.58]	  Because we know for a yes, it's one.
+[0:08:14.14 --> 0:08:17.10]	  The customer churn and no customer churn.
+[0:08:17.54 --> 0:08:17.96]	  So it's no.
+[0:08:18.50 --> 0:08:23.42]	  So what we need to do now is we just need to write it back to churn.
+[0:08:25.38 --> 0:08:29.40]	  Okay, this is probably sufficient for now.
+[0:08:29.40 --> 0:08:35.12]	  So now we what we did is we looked at the download the data,
+[0:08:35.56 --> 0:08:39.28]	  prepared it, looked at this a little bit.
+[0:08:39.50 --> 0:08:41.86]	  Then we spot an error with total charges.
+[0:08:42.06 --> 0:08:47.80]	  We fix this error and we converted our churn variable into a binary column
+[0:08:47.80 --> 0:08:49.38]	  with just zeros and ones.
+[0:08:49.74 --> 0:0]	  And in the next lesson, we'll set up the validation framework
+[0:0 --> 0:08:54.98]	  and we will split our data set in three parts.

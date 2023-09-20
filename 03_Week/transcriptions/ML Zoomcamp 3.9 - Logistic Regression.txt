@@ -1,0 +1,79 @@
+[0:0 --> 0:00:04.38]	  Welcome back. This is lesson 9 of machine learning ZoomCamp session 3,
+[0:00:04.52 --> 0:00:08.40]	  and we will talk about logistic regression. In the previous lesson, we talked about one
+[0:00:08.40 --> 0:00:16.04]	  hot encoding, and we used that to get our feature matrix, both for training and validation datasets.
+[0:00:16.54 --> 0:00:21.54]	  And then at the end, I said that in the next lesson, we will train a model. We will not train yet.
+[0:00:21.78 --> 0:00:26.60]	  This is something we will do in the next lesson, but in this lesson, we will look at what logistic
+[0:00:26.60 --> 0:00:35.02]	  regression is, and we will compare it with linear regression. This is the formula you all remember.
+[0:00:35.48 --> 0:00:44.52]	  So G is the model, Y is the target, and depending on the type of Y, we have different
+[0:00:44.52 --> 0:00:50.48]	  types of supervised machine learning. So we can have either regression
+[0:00:51.86 --> 0:01:00.26]	  or classification. And classification can be binary or multi-class.
+[0:01:02.10 --> 0:01:09.02]	  There are other types of classification, but for us, this is enough, and we will look at this
+[0:01:09.02 --> 0:01:13.74]	  binary classification. This is a problem that logistic regression is solving.
+[0:01:16.22 --> 0:01:23.62]	  So for binary classification, our target values can be only zeros and ones.
+[0:01:23.80 --> 0:01:31.04]	  Ones are positive examples, and zero are negative examples. Positive is, for example,
+[0:01:31.20 --> 0:0]	  churn, and negative, not churn. Spam is positive, no spam is negative, for example.
+[0:01:40.20 --> 0:0]	  And then you can think of many, many different other examples of where this makes sense,
+[0:01:46.32 --> 0:01:52.60]	  like default, not default, and so on. So now let's take a look at function g that we have.
+[0:01:53.16 --> 0:02:00.46]	  So g in this case, output a number between zero and one. So this number, we can treat it as probability.
+[0:02:01.66 --> 0:02:06.76]	  Probability of xi belonging to the positive class.
+[0:0 --> 0:02:17.98]	  This is the probability that for this observation number i, yi is one. So this is
+[0:02:17.98 --> 0:02:25.88]	  this function g should do. So it should output this. And the way it does it, so the way it's
+[0:02:25.88 --> 0:02:31.90]	  implemented, it's very similar to linear regression. So that's why let's first take a look at
+[0:02:31.90 --> 0:02:37.52]	  linear regression. So remember that the formula for linear regression is we have this bias term,
+[0:02:37.52 --> 0:02:43.58]	  and then we have the weights vector, and we multiply it with the features. So we have the
+[0:02:43.58 --> 0:02:48.14]	  dot product here. So this is the formula for linear regression. The output of this expression
+[0:02:48.14 --> 0:02:53.56]	  can be any number between minus infinity and infinity. So it can be pretty much everything.
+[0:02:53.82 --> 0:03:01.22]	  So it can be any real number. Logistic regression works similar. So inside, it also has this
+[0:03:01.22 --> 0:03:07.26]	  expression. So we also inside logistic regression, we have the bias term and the weights, except that
+[0:03:07.52 --> 0:03:13.06]	  instead of outputting a number between minus infinity and infinity, it outputs a number between
+[0:03:13.06 --> 0:03:18.08]	  one and zero. And it's doing this by using a special function called sigmoid.
+[0:03:20.38 --> 0:03:28.26]	  So it takes the same expression, and then it puts it inside sigmoid, and then the result
+[0:03:28.26 --> 0:03:34.06]	  is a number between zero and one. This is how sigmoid looks like. So let's say we have some
+[0:03:34.06 --> 0:03:39.58]	  numbers. So here, we can call this score z. So z is what we have inside.
+[0:03:41.24 --> 0:03:52.06]	  And then the way sigmoid looks like. So it's 0.5 in the middle. So for when it gets zero as input,
+[0:03:52.22 --> 0:04:00.22]	  the value is 0.5. And it goes like that. So first, for negative values, it's below 0.5
+[0:04:00.22 --> 0:04:06.56]	  for positive values. So this is like, let's say here is minus one. Here we have plus one.
+[0:04:06.88 --> 0:04:15.12]	  So this we have zero, and this is sigmoid. The maximum value it can get is one. So this is one.
+[0:04:15.48 --> 0:04:23.08]	  The minimum one is zero. So it kind of always approaches. It tries to approach one from the
+[0:04:23.08 --> 0:04:28.56]	  bottom. And it's always around zero. And the same here, the same happens here. So it always
+[0:04:29.54 --> 0:04:34.70]	  goes to zero. Yeah, so it never becomes less than zero. So this is sigmoid. So again, the way
+[0:04:34.70 --> 0:04:39.84]	  logistic regression works is inside. We have the same expression as for linear regression,
+[0:04:40.16 --> 0:04:47.60]	  except we put it into this between zero and one range using this function sigmoid.
+[0:04:47.86 --> 0:04:51.34]	  Let's quickly take a look at how this sigmoid looks like.
+[0:04:52.64 --> 0:04:57.98]	  We can implement this. Let's call it z. So z would be the output, like I have here,
+[0:04:58.54 --> 0:05:04.88]	  the output to sigmoid. And the formula for sigmoid is like it's a bit complicated.
+[0:05:05.56 --> 0:05:08.74]	  Maybe let me draw it first.
+[0:05:10.62 --> 0:05:21.10]	  So sigmoid is one divided by one plus exponent of minus z. So this is sigmoid.
+[0:05:22.32 --> 0:05:31.30]	  Here one plus exponent minus z. So this is our sigmoid. And we can draw it to see how it looks
+[0:05:31.30 --> 0:05:38.08]	  like. So let's say we want to get numbers between, I don't know, minus five and five. And for that,
+[0:05:38.12 --> 0:05:44.42]	  we use the lean space function five. And let's say we want to have a 31 number. So z then looks
+[0:05:44.42 --> 0:05:51.60]	  like that. So it goes from minus five to five. And there are 51 numbers here in this range. So we
+[0:05:51.60 --> 0:05:59.80]	  have this z. And now we apply sigmoid to the z. And we get numbers that are between zero and one.
+[0:06:00.04 --> 0:06:08.60]	  Right. And if we plot it now, so we can plot z and then sigmoid from z. Yeah. So this is how it
+[0:06:08.60 --> 0:06:19.48]	  looks like. Maybe instead of using minus five, let's use minus seven, perhaps. And yeah, so this
+[0:06:19.48 --> 0:06:30.28]	  is how it looks like. And if you see around zero, so in when zero, it's 0.5, then it goes up. So here
+[0:06:30.28 --> 0:06:35.84]	  we have one. In this part, in the positive part, it always tries to reach one. And in the negative
+[0:06:35.84 --> 0:06:43.90]	  part, it always tries to reach zero here. So this is sigmoid. And this is how we can bring any number
+[0:06:43.90 --> 0:06:50.66]	  we have. So it actually, like for all the numbers, it continues like that. And here it always continues
+[0:06:50.66 --> 0:06:57.20]	  like that. So no matter how large the number you put there, no matter how large the number is that
+[0:06:57.20 --> 0:07:06.74]	  you want to put there, sigmoid, it always will be between zero and one. Yeah, let's see. Let's see.
+[0:0 --> 0:07:17.46]	  For minus 100, it's, you see a tiny, tiny number. And then for plus 100, it's almost one. For 1000,
+[0:07:17.74 --> 0:07:27.18]	  for 10,000. Yeah, so you see it's like it always goes to one and never increases. So this is sigmoid.
+[0:07:27.32 --> 0:07:36.16]	  And this is the function that we use to convert a score into a probability. So this thing here,
+[0:07:37.04 --> 0:07:38.74]	  inside, it's a score.
+[0:07:40.56 --> 0:07:50.98]	  And with sigmoid, we get probability. We can quickly implement that now. So remember that for linear
+[0:07:51.44 --> 0:07:59.94]	  regression, so we get x i first result is first we have this bias term, then we will go over all
+[0:07:59.94 --> 0:08:07.84]	  elements of our x i, x i or w. So they have to be the same dimension. So what we have here is,
+[0:08:08.38 --> 0:0]	  yeah, we just sum x i j times w j. And then the result is, and then the result is the final result.
+[0:0 --> 0:08:24.84]	  So this is the output of linear regression. While in logistic regression, it's very similar.
+[0:08:25.90 --> 0:08:30.74]	  logistic regression. So it's very similar. We also start with a bias term, except here it's not the
+[0:08:30.74 --> 0:08:37.64]	  final result, it's core, intermediate score that we call the z here. And then to get the final result,
+[0:08:38.14 --> 0:08:44.54]	  what we need to do is we need to apply sigmoid. And this is, this will give us the final predictions.
+[0:08:44.54 --> 0:08:50.92]	  This is how it works inside. And otherwise, it's, these are pretty similar models. And that's why,
+[0:08:51.24 --> 0:08:56.38]	  so both linear and logistic regression, they are called linear models. And the reason they are
+[0:08:56.38 --> 0:09:02.34]	  called linear is because we have that, this thing here. So in both cases, they use dot products,
+[0:09:02.58 --> 0:09:08.22]	  and dot product is so called a linear operator in linear algebra. So that's why these models are
+[0:09:08.22 --> 0:09:15.38]	  called linear. And linear models have good qualities. They're quite fast. They're fast to use,
+[0:09:15.54 --> 0:09:21.22]	  fast to train. So they have a lot of good properties. Okay, so this is how logistic regression looks like.
+[0:09:21.84 --> 0:09:28.26]	  We apply sigmoid to bring the score into a probability. And in the next lesson,
+[0:09:28.30 --> 0:09:31.64]	  we will see how to train logistic regression model with scikit-learn.

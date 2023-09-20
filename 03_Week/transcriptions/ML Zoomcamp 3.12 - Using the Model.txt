@@ -1,0 +1,140 @@
+[0:00:00.08 --> 0:00:03.86]	  Welcome back. This is lesson 12 of machine learning in ZoomCamp session three.
+[0:00:04.22 --> 0:00:07.76]	  And in this lesson, this is the last lesson of this week.
+[0:00:07.94 --> 0:00:12.06]	  And in this lesson, we will see how we can use the model.
+[0:00:13.28 --> 0:00:17.40]	  Where we can actually use it, we want to train a final model, the final model.
+[0:00:17.72 --> 0:00:20.62]	  So remember that we use this, we actually trained two models.
+[0:00:20.90 --> 0:00:23.64]	  We trained the model using all the features.
+[0:00:23.92 --> 0:00:29.26]	  It has accuracy 80% and then we trained a smaller model using only three features.
+[0:00:29.26 --> 0:00:31.06]	  We didn't check the accuracy of this model.
+[0:00:32.30 --> 0:00:37.88]	  But yes, what we will do now is we will get the big model with all the features
+[0:00:37.88 --> 0:00:43.94]	  and we'll train this model on our full train.
+[0:00:44.14 --> 0:00:46.72]	  This is full train data.
+[0:00:47.28 --> 0:00:50.90]	  So we will train a model using all this data.
+[0:00:51.50 --> 0:00:54.70]	  And for that, so first what we need to do is we need to get the dictionaries.
+[0:00:55.06 --> 0:00:57.46]	  And then from this dictionaries, we get the feature matrix.
+[0:00:57.48 --> 0:00:59.74]	  And then we train a model on this feature matrix.
+[0:01:00.24 --> 0:01:03.58]	  And then we do the same thing for the test data set.
+[0:01:03.72 --> 0:01:05.08]	  And this is how we get the predictions.
+[0:01:05.26 --> 0:01:06.80]	  And then at the end we will compute accuracy.
+[0:01:07.46 --> 0:01:10.42]	  So let's quickly do this full train.
+[0:0 --> 0:01:15.60]	  So we need here, categorical variables and medical variables.
+[0:01:16.26 --> 0:01:21.36]	  And then we used to tick the method into our interest in records.
+[0:01:22.14 --> 0:01:25.56]	  So we get the dictionaries.
+[0:01:26.08 --> 0:01:30.14]	  Let's take a quick look at the first three.
+[0:01:30.74 --> 0:01:32.36]	  So it looks correct.
+[0:01:32.70 --> 0:01:36.26]	  Now we need to create this dict vectorizer.
+[0:01:36.72 --> 0:01:41.46]	  Just dict vectorizer sparse false.
+[0:01:42.54 --> 0:01:48.66]	  And we can immediately train and fit and transform it.
+[0:01:48.90 --> 0:01:55.54]	  So X full train will be dict vectorizer fit transform.
+[0:01:56.40 --> 0:01:58.64]	  This list of dictionaries.
+[0:02:00.26 --> 0:02:02.58]	  So we get that.
+[0:02:03.04 --> 0:02:05.72]	  Now we train a model, logistic regression.
+[0:02:06.58 --> 0:02:13.18]	  And we can actually, instead of doing this in two lines, we can do this in one.
+[0:02:13.76 --> 0:02:15.04]	  So let's do that.
+[0:02:15.20 --> 0:02:19.96]	  I think what we don't have yet for that we actually need to do the Y here.
+[0:02:20.34 --> 0:02:22.06]	  I don't think we have Y.
+[0:02:22.74 --> 0:02:30.86]	  So we need to have Y full train, which comes from this full train turn values.
+[0:02:31.58 --> 0:02:32.48]	  So we have that.
+[0:02:34.02 --> 0:02:35.96]	  And now let's fit our model.
+[0:02:37.28 --> 0:02:39.98]	  Actually, I'm not a fan of this chaining.
+[0:02:40.26 --> 0:02:44.18]	  So I usually prefer doing it like this in two rows.
+[0:02:44.36 --> 0:02:45.82]	  So we have our model.
+[0:02:46.10 --> 0:02:47.26]	  This is our final model.
+[0:02:47.86 --> 0:02:54.22]	  And now what we can do is we can repeat the process for our test data set.
+[0:02:54.50 --> 0:02:56.86]	  So we have dictionaries test.
+[0:02:58.58 --> 0:03:01.92]	  And oops, the frame test.
+[0:03:03.34 --> 0:03:05.02]	  We execute that.
+[0:03:05.54 --> 0:03:10.68]	  Then now we need to apply our dict vectorizer to this.
+[0:03:10.68 --> 0:03:13.86]	  So X test.
+[0:03:15.12 --> 0:03:17.36]	  Then here we only need transform.
+[0:03:17.78 --> 0:03:18.54]	  We don't use fit.
+[0:03:19.12 --> 0:03:22.32]	  And we apply this to this list of dictionaries.
+[0:03:22.78 --> 0:03:23.96]	  So we get that.
+[0:03:24.42 --> 0:03:30.40]	  Now we apply the model, model predict probability on test.
+[0:03:30.64 --> 0:03:32.88]	  And we need the first column.
+[0:03:33.84 --> 0:03:35.38]	  So these are our predictions.
+[0:03:39.44 --> 0:03:40.06]	  Predictions.
+[0:03:40.20 --> 0:03:43.24]	  And yeah, so now we need to make decisions.
+[0:03:44.42 --> 0:03:56.64]	  Let's say we want to, for all the clients with score higher with probability higher than 0.5, we want to predict that they are going to turn.
+[0:03:57.20 --> 0:03:59.54]	  So this will be our turn decision.
+[0:04:00.86 --> 0:04:06.94]	  And now what we can do is we can see if this turn decision is actually correct.
+[0:04:07.66 --> 0:04:15.06]	  So from that, we need to compare it with our Y test and then compute the score.
+[0:04:15.42 --> 0:04:16.88]	  So this is how we compute accuracy.
+[0:04:17.34 --> 0:04:18.78]	  So it's 81%.
+[0:04:18.78 --> 0:04:24.10]	  It's slightly more accurate than what we have in the validation data set, which is fine.
+[0:04:26.60 --> 0:04:29.96]	  Maybe the data set is slightly different that has data set that we have.
+[0:04:30.34 --> 0:04:31.96]	  So they have different customers.
+[0:04:32.20 --> 0:04:35.68]	  And also here we actually used a little bit more data.
+[0:04:35.90 --> 0:04:39.90]	  So if we use more data, the model can become a little bit more accurate.
+[0:04:40.16 --> 0:04:42.68]	  If it was a little bit less accurate, it was also fine.
+[0:04:42.98 --> 0:04:44.04]	  It would also be fine.
+[0:04:44.30 --> 0:04:49.60]	  So what we here want to avoid is when the difference is too large.
+[0:04:49.60 --> 0:05:02.38]	  So for example, when accuracy on our validation is like 90% or 95%, but on test data set, it's 80, then we clearly have a problem.
+[0:05:02.88 --> 0:05:06.30]	  So in this case, it's only like 1% difference.
+[0:05:06.76 --> 0:05:07.74]	  It's not a big deal.
+[0:05:07.96 --> 0:05:11.50]	  And we can conclude that this model is good enough and we can actually use this model.
+[0:05:12.98 --> 0:05:17.08]	  So we train this model and yeah, let's see how we can use this.
+[0:05:17.48 --> 0:05:20.80]	  And remember how we wanted to use this.
+[0:05:21.54 --> 0:05:22.96]	  So we wanted to use it.
+[0:05:23.66 --> 0:05:30.56]	  Let's say we have a customer and we want to know if this customer wants to leave or not.
+[0:05:31.06 --> 0:05:39.54]	  So we, and if we think that this customer is going to leave, we want to send them a promotional email asking them not to leave.
+[0:05:41.50 --> 0:05:45.76]	  So let's take any customer from our dataset.
+[0:05:46.20 --> 0:05:47.18]	  Number 10.
+[0:05:47.64 --> 0:05:53.90]	  Number 10 is a male who's a senior who lives with a partner who has dependents.
+[0:05:54.62 --> 0:05:57.52]	  So they have a streaming TV.
+[0:05:57.70 --> 0:05:58.62]	  They don't have support.
+[0:05:59.40 --> 0:06:01.72]	  They are on monthly contract.
+[0:06:01.98 --> 0:06:03.76]	  They have tenure of 32 months.
+[0:06:04.70 --> 0:06:06.94]	  They pay quite a lot actually.
+[0:06:08.28 --> 0:06:12.26]	  Yeah, so let's see if they are going to turn on.
+[0:06:12.44 --> 0:06:13.60]	  So we do.
+[0:06:14.70 --> 0:06:16.28]	  So let's call it customer.
+[0:06:17.34 --> 0:06:20.82]	  So this customer.
+[0:06:22.82 --> 0:06:25.28]	  So this is our person here.
+[0:06:26.20 --> 0:06:33.04]	  So what we want to do now is we want to put this in a score of like computer score for that.
+[0:06:34.72 --> 0:06:40.30]	  And the way we can do this actually, so let's imagine that we have a web service for our model.
+[0:06:41.14 --> 0:06:48.14]	  And the information or this dictionary gets transferred over the network to our model.
+[0:06:48.50 --> 0:06:52.62]	  So the model computes something and then returns the probability.
+[0:06:53.40 --> 0:06:53.90]	  Probability.
+[0:06:54.24 --> 0:06:56.40]	  So let's imagine a scenario like that.
+[0:06:56.74 --> 0:06:59.92]	  So we get a request with all this information about the customer.
+[0:07:00.10 --> 0:07:03.60]	  So what we want to do now is we have our dictionary vectorizer.
+[0:07:03.80 --> 0:07:05.48]	  So we want to transform this.
+[0:07:06.04 --> 0:07:07.14]	  So we want to get.
+[0:07:07.56 --> 0:07:13.30]	  Now we want to get a feature matrix for this customer.
+[0:07:13.84 --> 0:07:18.06]	  We actually don't need to convert it first to a data frame like we did previously.
+[0:07:20.24 --> 0:07:30.34]	  Because we already have a dictionary and we have a dictionary vectorizer that gets in a dictionary and creates a NumPy array.
+[0:07:30.82 --> 0:0]	  So we can just use that.
+[0:07:33.18 --> 0:07:34.96]	  So let's do that.
+[0:07:35.46 --> 0:07:37.78]	  So we need to list with just one customer.
+[0:07:38.48 --> 0:07:41.22]	  And as a result, we see.
+[0:07:41.90 --> 0:07:43.74]	  So this is our customer.
+[0:07:44.26 --> 0:07:45.64]	  Let's call it x small.
+[0:07:46.12 --> 0:07:52.50]	  Just the shape of this should be small shape.
+[0:07:52.94 --> 0:07:57.20]	  So this one is because there is only one customer and there are 45 features.
+[0:07:58.98 --> 0:08:01.34]	  And now let's put this into a model.
+[0:08:01.82 --> 0:08:04.70]	  So predict probability x small.
+[0:08:05.90 --> 0:08:11.08]	  And the model says the model tells us that this customer is not likely to turn.
+[0:08:13.92 --> 0:08:15.80]	  So this senior male.
+[0:08:17.60 --> 0:08:23.46]	  Yes, he has only 40% probability of turning.
+[0:08:24.44 --> 0:08:27.58]	  So which we think that he's probably not going to turn.
+[0:08:27.98 --> 0:08:31.62]	  So we will not send a promotional email.
+[0:08:32.10 --> 0:08:36.64]	  So let's see if he's actually, if he's actually planning to turn.
+[0:08:37.80 --> 0:08:39.20]	  Just was it 10.
+[0:08:40.20 --> 0:08:43.18]	  He was done. So he was actually not going to turn.
+[0:08:43.50 --> 0:08:47.72]	  So in this case, our decision not to send a promotional email is correct.
+[0:08:48.72 --> 0:08:52.18]	  Let's see, maybe if somebody's going to turn here.
+[0:08:53.70 --> 0:08:55.50]	  Why test.
+[0:08:56.02 --> 0:09:02.20]	  So the last one is going to turn and actually for selecting the last one, I don't know if I.
+[0:09:03.14 --> 0:09:07.08]	  We talked about this. So for selecting the last one, we can just use minus one.
+[0:09:07.64 --> 0:09:19.80]	  Select the last customer here. So we have a female who is not senior who lives with a partner on a monthly contract for she's been with the company for 17 months.
+[0:09:20.76 --> 0:09:24.68]	  So let's see if she what our model thinks about here.
+[0:09:25.40 --> 0:09:31.82]	  So our model thinks that she's going to turn with probability of almost 60%.
+[0:09:31.82 --> 0:09:38.88]	  Which is actually, if you remember is correct. So we want to send a promotional email to her.
+[0:09:39.64 --> 0:09:45.70]	  So we want to send a like email and offer her some discount.
+[0:09:46.16 --> 0:0]	  And then maybe she will, she will change her mind and will stay with us.
+[0:09:53.24 --> 0:09:54.96]	  So this is how we use the model.
+[0:09:56.28 --> 0:10:03.10]	  And yeah, so in the next next video will be a summary.
+[0:10:03.56 --> 0:10:07.38]	  So as I said, this video is the last one, but there will be another.
+[0:10:07.92 --> 0:10:10.60]	  So this lesson is the last one, but there will be a final video.
+[0:10:10.94 --> 0:10:14.18]	  We'll just go through the entire notebook and summarize everything.

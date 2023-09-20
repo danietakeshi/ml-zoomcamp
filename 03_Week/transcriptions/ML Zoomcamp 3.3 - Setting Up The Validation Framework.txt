@@ -1,0 +1,108 @@
+[0:0 --> 0:00:02.66]	  Welcome back. This is lesson three of machine learning
+[0:00:02.66 --> 0:00:05.74]	  in CompSession three, and we will talk about setting up
+[0:00:05.74 --> 0:00:06.72]	  the validation framework.
+[0:00:07.34 --> 0:00:10.76]	  You probably saw this picture already many times.
+[0:00:11.08 --> 0:00:12.30]	  So we have the entire data set.
+[0:00:12.62 --> 0:00:15.88]	  And what we want to do is split it into three parts,
+[0:00:16.24 --> 0:00:19.54]	  train, validation, and test.
+[0:00:20.18 --> 0:00:26.18]	  And we already implemented this using NumPy and pandas
+[0:00:26.18 --> 0:0]	  previously, like for the previous project.
+[0:00:29.04 --> 0:0]	  Typically we have this 60, 20, 20 distribution.
+[0:00:35.80 --> 0:00:39.46]	  Now we want to do the same, but with scikit-learn.
+[0:00:39.58 --> 0:00:42.10]	  So scikit-learn is a library, a Python library
+[0:00:42.10 --> 0:00:45.90]	  that has implementation of the most popular
+[0:00:45.90 --> 0:00:47.74]	  and common machine learning algorithms.
+[0:00:48.30 --> 0:00:51.68]	  And in addition, it has some utilities, helpful utilities.
+[0:00:52.40 --> 0:00:55.10]	  And one of them is trained as split, which we will use now.
+[0:00:55.40 --> 0:00:58.28]	  So for that you need to have scikit-learn installed.
+[0:00:58.70 --> 0:01:03.56]	  And for scikit-learn, we need this model selection package.
+[0:01:04.10 --> 0:01:08.42]	  And then we have a train, test split function there.
+[0:01:08.82 --> 0:01:10.26]	  So this is the function we want to use.
+[0:01:11.08 --> 0:01:15.50]	  If we want to see how the documentation
+[0:01:15.50 --> 0:01:19.56]	  for this function, there is a nice thing that you can do
+[0:01:19.56 --> 0:01:23.50]	  is add a question mark at the end and then execute this cell.
+[0:01:23.50 --> 0:01:25.18]	  And you will see the docs here.
+[0:01:25.44 --> 0:01:29.84]	  So we are interested in specifying this test size parameter.
+[0:01:30.58 --> 0:01:36.40]	  So this says how large the test set should be.
+[0:01:37.02 --> 0:01:40.82]	  And for us, the test set is 20%.
+[0:01:40.82 --> 0:01:43.24]	  So we need to use 0.2 here.
+[0:01:43.68 --> 0:01:48.96]	  So we get our data frame and we say that our test size
+[0:01:48.96 --> 0:01:50.86]	  is 20%.
+[0:01:51.06 --> 0:01:54.72]	  And yeah, so we also need to fix the random seed
+[0:01:54.72 --> 0:01:58.32]	  to make sure that the results are reproducible.
+[0:01:58.90 --> 0:02:01.48]	  So when you execute this code on your computer,
+[0:02:01.62 --> 0:02:02.66]	  you get the same results.
+[0:02:03.48 --> 0:02:06.74]	  The thing here with this train, test split function,
+[0:02:06.92 --> 0:02:10.92]	  splits the data into two parts, training and testing, right?
+[0:02:11.24 --> 0:02:12.16]	  So only two.
+[0:02:12.50 --> 0:02:15.28]	  So when we do this, what we will have is,
+[0:02:15.72 --> 0:02:18.96]	  like when we split using 20%,
+[0:02:19.02 --> 0:02:25.30]	  so we'll have a test data set, which is 20%, right?
+[0:02:25.98 --> 0:02:31.58]	  And the remaining 80% will be the other part.
+[0:02:32.06 --> 0:02:34.76]	  So we can call it full train like we did previously.
+[0:02:35.40 --> 0:02:38.98]	  And yeah, so it will contain 80% of the data.
+[0:02:39.30 --> 0:02:43.50]	  What we will do now to actually to have three data sets,
+[0:0 --> 0:02:45.10]	  train, validation and test,
+[0:02:45.42 --> 0:02:48.28]	  we will need to split it one more time.
+[0:02:48.96 --> 0:02:52.94]	  Here we will have train and validation.
+[0:02:54.40 --> 0:02:56.94]	  And so let's do that.
+[0:02:57.24 --> 0:03:02.04]	  So first we split it into data frame full train
+[0:03:02.04 --> 0:03:04.60]	  and data frame test, right?
+[0:03:04.70 --> 0:03:09.04]	  So we set the test size 20% and the random state is one.
+[0:03:09.40 --> 0:03:12.58]	  So now we have these two data frame test.
+[0:03:12.92 --> 0:03:14.44]	  We can look at their sizes.
+[0:03:15.72 --> 0:03:17.88]	  So yeah, so for the test data set,
+[0:03:17.88 --> 0:03:20.74]	  we have 1400 records.
+[0:03:21.28 --> 0:03:26.54]	  And now what we want to do is split this full train once again.
+[0:03:27.16 --> 0:03:31.32]	  We will split it into train and validation.
+[0:03:32.56 --> 0:03:33.68]	  But here we have a problem
+[0:03:33.68 --> 0:03:37.64]	  because we have to specify here test size 20%
+[0:03:37.64 --> 0:03:42.82]	  and this will be 20% of the data frame full train,
+[0:03:42.86 --> 0:03:44.68]	  not from the original data set, right?
+[0:03:44.82 --> 0:03:47.54]	  So here we need to make it slightly bigger
+[0:03:47.62 --> 0:03:48.80]	  and to make it bigger.
+[0:03:49.34 --> 0:03:53.36]	  So let's say here we want to have 60%,
+[0:03:53.36 --> 0:03:55.66]	  here we want to have 20%.
+[0:03:55.66 --> 0:04:02.40]	  So for us, we need to know how much 20% out of 80% is
+[0:04:02.40 --> 0:04:06.34]	  and this is actually one four or 25%.
+[0:04:06.34 --> 0:04:10.98]	  So for us, if we want to get 20% of the original data frame,
+[0:04:11.08 --> 0:04:16.46]	  we need to get 25% of the full train data set, right?
+[0:04:16.46 --> 0:04:19.12]	  So now let's do that.
+[0:04:19.76 --> 0:04:23.56]	  So we get 25% and we can see,
+[0:04:24.30 --> 0:04:26.32]	  move it down.
+[0:04:27.18 --> 0:0]	  So let's take a look at the length of,
+[0:04:32.40 --> 0:04:34.82]	  so first data frame train,
+[0:04:35.38 --> 0:04:38.70]	  data frame validation and data frame test.
+[0:04:39.22 --> 0:04:41.60]	  And we can see that the validation
+[0:04:41.60 --> 0:04:44.62]	  does have the same size and train data set
+[0:04:44.62 --> 0:04:47.26]	  that is three, it was 4,200.
+[0:04:47.98 --> 0:04:53.22]	  So what we need to do now is we need to get our Y variables.
+[0:04:54.04 --> 0:04:56.52]	  So that even before that, I think,
+[0:04:57.10 --> 0:04:59.56]	  we don't have to do this.
+[0:04:59.76 --> 0:05:03.64]	  I just think it's nicer when you see these indices are shuffled.
+[0:05:04.12 --> 0:05:06.14]	  So I like them not to be shuffled.
+[0:05:06.62 --> 0:05:09.46]	  Like again, it doesn't really have any effect on your models.
+[0:05:10.34 --> 0:05:12.28]	  I'm just like when it's sequential.
+[0:05:12.28 --> 0:05:20.38]	  So let's do that and do that for validation and test as well.
+[0:05:22.38 --> 0:05:26.48]	  We do this reset index.
+[0:05:26.82 --> 0:05:33.14]	  And now we get our turn variable and write it into the variable.
+[0:05:33.32 --> 0:05:36.16]	  So we again use underline numbery.
+[0:05:37.02 --> 0:05:40.66]	  So here Y validation, Y test.
+[0:05:40.66 --> 0:05:45.34]	  And here we use data frame validation and data frame test.
+[0:05:45.98 --> 0:05:50.82]	  And we can already delete this turn variables
+[0:05:50.82 --> 0:05:52.12]	  from our data frames.
+[0:05:53.16 --> 0:05:56.90]	  Let me copy this.
+[0:05:58.90 --> 0:06:02.40]	  This is the frame validation and data frame test.
+[0:06:02.70 --> 0:06:05.06]	  So now we deleted this variable.
+[0:06:05.60 --> 0:06:07.80]	  So it's not, we don't have it here anymore.
+[0:06:07.80 --> 0:06:11.24]	  And I usually do this to await accidentally
+[0:06:11.24 --> 0:06:14.50]	  using this variable when building a model.
+[0:06:14.88 --> 0:06:15.48]	  So we have that.
+[0:06:15.88 --> 0:06:19.74]	  So until you notice that I didn't delete this turn variable
+[0:06:19.74 --> 0:06:22.94]	  from data frame full train dataset.
+[0:06:23.72 --> 0:06:26.20]	  And the reason for that is we will actually look
+[0:06:26.20 --> 0:06:29.42]	  at this target variable a little bit in the next lesson.
+[0:06:29.70 --> 0:06:33.76]	  So in the next lesson, we will perform exploratory data analysis.
+[0:06:34.16 --> 0:06:36.82]	  Check missing values, look at the target variable
+[0:06:36.82 --> 0:0]	  and things like this.
+[0:06:38.76 --> 0:06:39.80]	  And see you soon.
