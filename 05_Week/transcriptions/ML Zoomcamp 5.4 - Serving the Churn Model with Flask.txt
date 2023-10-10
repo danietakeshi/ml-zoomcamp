@@ -1,0 +1,146 @@
+[0:0 --> 0:00:03.36]	  Welcome back. This is lesson four of machine learning ZoomComp session five.
+[0:00:03.70 --> 0:00:07.30]	  And in this lesson, we'll talk about serving the churn model with Flask. Previously,
+[0:00:07.54 --> 0:00:12.72]	  we created a script for saving a model, for training a model and saving it to a pickle file.
+[0:00:12.86 --> 0:00:17.86]	  And we also talked, already talked about Flask and creating a simple web service with Flask.
+[0:00:18.06 --> 0:00:23.22]	  So in this lesson, we will put this together and we will take our predict script that we have
+[0:00:23.22 --> 0:00:28.94]	  and turn it into a web service. So let's start. What we want to do is we want to create
+[0:00:28.94 --> 0:0]	  a web service. Let's call it churn service. So this service has our model.
+[0:00:36.84 --> 0:00:44.60]	  And we want this model to be available at slash predict route. And then let's say we have our
+[0:00:44.60 --> 0:00:51.52]	  marketing service here. So they will send us some information about customers. So it will
+[0:00:51.52 --> 0:00:58.90]	  look exactly like that. All the information we know about the customers. And then we'll reply
+[0:00:59.06 --> 0:01:05.58]	  them with basically this probability of churning. This is what we want to do. We want to create a
+[0:01:05.58 --> 0:01:14.22]	  predict method and then put it to the slash predict address. So let's do that. So we have
+[0:01:14.22 --> 0:01:21.06]	  this function we'll call predict. So this function meets a customer. And then we simply return
+[0:01:21.06 --> 0:01:28.64]	  the predictions. And so this is what we want to now turn into web service. So let me remove the
+[0:01:28.64 --> 0:01:33.90]	  customer for a while. We'll just create a different file. So what we need here now is
+[0:01:33.90 --> 0:01:43.04]	  remove that. So let me open this other file with our web service and just copy everything.
+[0:01:43.44 --> 0:01:52.44]	  Put it here. So let's add flask. Let's put the import here at the top. And then we create a flask
+[0:01:52.44 --> 0:02:03.72]	  app. So here we can call the app churn. And we want to put it to the root predict. And instead
+[0:02:03.72 --> 0:02:09.70]	  of using the cat method, we'll use here post. So the reason for that is because we want to send
+[0:02:09.70 --> 0:02:15.50]	  some information about the customer. We cannot easily do it with a cat method. So let me remove
+[0:02:15.50 --> 0:02:22.24]	  this pink method here, pink function. When we send this information, this information will be sent
+[0:02:22.24 --> 0:02:28.92]	  in JSON format. So the request, the body of the request will contain the features, the information
+[0:02:28.92 --> 0:02:34.70]	  about the customer in JSON format. And the response will also be JSON. And JSON looks exactly like
+[0:02:34.70 --> 0:02:42.62]	  Python dictionaries, except here instead of single quotes, we use usual quotes. So we just quickly
+[0:02:42.62 --> 0:02:50.60]	  replace it. So now this is, this is a JSON document that contains fields. So for each field, it
+[0:02:50.60 --> 0:02:56.46]	  contains values. This is JSON. And this is what we want to send to our web service. And unfortunately,
+[0:02:56.80 --> 0:03:02.66]	  in flask, it's not as easy as that. So here we need to tell flask that we are getting JSON,
+[0:03:03.02 --> 0:03:09.72]	  we want to extract the body of the request as JSON. So for that we use, we need to import
+[0:03:09.72 --> 0:03:18.52]	  special helper function from flask called special helper utility from flask called request. And
+[0:03:18.52 --> 0:03:23.94]	  this request contains the information about the request. So for example, we can do this,
+[0:03:24.16 --> 0:03:29.92]	  get JSON, and it will return the body of the request as Python dictionary. So it will take the
+[0:03:29.92 --> 0:03:35.08]	  body of the request, it will assume that it's JSON, it will parse it, and it will turn it into
+[0:03:35.08 --> 0:03:42.96]	  Python dictionary. And so it will now return it as a customer. Our response is also JSON. So we
+[0:03:42.96 --> 0:03:51.06]	  need to prepare our response. So it will be like say, turn probability and our wire bread. And maybe
+[0:03:51.06 --> 0:03:57.08]	  also because this web service will now need to make a decision whether they want to send a
+[0:03:57.08 --> 0:04:03.88]	  promotional email or not marketing service doesn't really know if we should use 0.5 a threshold or
+[0:04:03.88 --> 0:04:11.54]	  0.75 or 0.9. It doesn't know. So we don't want marketing service to decide that. So we want to
+[0:04:11.54 --> 0:04:18.68]	  make this decision here in our turn service. Let's make this decision. Turn and we'll use the
+[0:04:18.68 --> 0:04:29.02]	  0.5 threshold. So it will be true if it's above 0.5 and false or otherwise. So I want to return
+[0:04:29.02 --> 0:04:35.08]	  that. So now this is a Python dictionary and we want to turn this into JSON. For that, there's
+[0:04:36.10 --> 0:04:46.32]	  another helpful function in Flask called JSONify. We now just invoke this function and return the
+[0:04:46.32 --> 0:0]	  result. Yeah, so it's a little bit more complex than the pink function we had here. So this is our
+[0:0 --> 0:04:58.80]	  core logic, turning the customer into a feature matrix, then invoking a model and then deciding if
+[0:04:58.80 --> 0:05:04.30]	  this customer is going to turn it off. We actually probably want to put this logic in a separate
+[0:05:04.30 --> 0:05:09.82]	  function. I will not do it here, but for a real project, I would put this away inside a separate
+[0:05:09.82 --> 0:05:15.58]	  function. So here we have on this weatherplate code like getting the customer from JSON and then
+[0:05:15.58 --> 0:05:20.44]	  JSONify the result and the core logic will be inside a different function. I'll keep it here
+[0:05:20.44 --> 0:05:27.18]	  like that. Now if I missed anything, let's just test it. Think here we will now have an error and
+[0:05:27.18 --> 0:05:34.34]	  I just want you to see this error before we fix it. So let's run it. So we have this Python predict.
+[0:05:35.60 --> 0:05:43.08]	  So it run our application and this is available. So now we want to communicate with this
+[0:05:43.08 --> 0:05:48.84]	  web service. So now let's pretend we're this marketing service and we will pretend from a
+[0:05:48.84 --> 0:05:59.94]	  Jupyter notebook. Just create a new notebook. I'll call it zero five predict test. So from this
+[0:05:59.94 --> 0:06:05.24]	  notebook, we want to communicate with our term prediction service. And remember previously with
+[0:06:05.24 --> 0:06:10.94]	  this ping pong service could just do this from our browser. Here it's not the case because in the
+[0:06:10.94 --> 0:06:18.34]	  browser when you enter like 696 predict, it will now say method is not allowed because a browser
+[0:06:18.34 --> 0:06:24.84]	  is sending a cat request. It's in the logs. So the browser tried to send a cat request, but it says
+[0:06:24.84 --> 0:06:31.56]	  405 meaning the method is not allowed. The only allowed method here is post. So we need to send
+[0:06:31.56 --> 0:06:36.26]	  a post request and from the browser, it's not easy. So what we want to do is we want to do it from
+[0:06:36.26 --> 0:06:42.36]	  Python. And for that, there is a great library called requests. So we'll use that to our URL is
+[0:06:45.40 --> 0:06:51.32]	  HTTP localhost 9696 predict. Let's take our customer customer we want to send. I think I
+[0:06:51.32 --> 0:07:00.58]	  saved this customer here. So this is our customer. By the way, as you see Jason here turned out to
+[0:07:00.58 --> 0:07:05.86]	  be a valid Python dictionary. So we have this customer here. So what we want to do now is we
+[0:07:05.86 --> 0:07:11.92]	  want to send this customer in a post request. So for that, we use the requests and then there is
+[0:07:11.92 --> 0:07:18.30]	  a function called posts. And then it needs a URL, this URL. And we say that we want to send this
+[0:07:18.30 --> 0:07:26.30]	  dictionary as Jason. Now I see the response with 500. So this is an error. So and remember, I told
+[0:07:26.30 --> 0:07:31.40]	  you that there will be an error and I want you to see this error. So it says object of type bool is
+[0:07:31.40 --> 0:07:36.66]	  not json serializable. It could be quite confusing. And the reason for that is this bool underscore
+[0:07:36.66 --> 0:07:43.32]	  is something that is coming from NumPy. But the JSON class in Python, so see this Jason doesn't
+[0:07:43.32 --> 0:07:49.92]	  know how to turn this, the objects of this class into text, but it knows how to turn
+[0:07:49.92 --> 0:07:57.74]	  usual Python booleans into text. So we need to do now is wrap this turn into boolean. So this
+[0:07:57.74 --> 0:08:04.64]	  will turn the NumPy boolean into a usual Python boolean. And this white bread is also a thing from
+[0:08:04.64 --> 0:08:11.34]	  NumPy. So this is a float 64, I think. So we need to turn it into a Python float. So we saved now
+[0:08:11.34 --> 0:08:17.92]	  and because we run our flask in debug mode, it detected the change in this file and it reloaded
+[0:08:17.92 --> 0:08:23.04]	  the app service. So now we don't need to stop it, we don't need to start it again, it automatically
+[0:08:23.04 --> 0:08:29.56]	  restarted it. Now let's say in WCAD again, and now the response is 200, meaning that it was successful.
+[0:08:29.60 --> 0:08:33.68]	  And we see this in the logs as well. So there was a post request to slash predict,
+[0:08:33.90 --> 0:08:39.06]	  it ended up being successful 200. Don't see the content, the body of the response here. We know
+[0:08:39.06 --> 0:08:45.68]	  that this is JSON. So we can just use this dot JSON thing that will take the content of the request
+[0:08:45.68 --> 0:08:51.46]	  and turn it into a Python dictionary. And this is what we have. So this is what we send back from
+[0:08:51.46 --> 0:08:56.62]	  the service. This is our response. And we are able to get this response from the service.
+[0:08:58.40 --> 0:09:05.96]	  Let's say if we're at the marketing service, we can do something like if response is true,
+[0:09:06.26 --> 0:09:15.14]	  then sending from email to customer ID. I don't think we have a customer ID. Let's x, y, z,
+[0:09:15.60 --> 0:09:21.78]	  one, two, three. Of course, I just know what is that, but this is customer ID. And if here we
+[0:09:21.78 --> 0:09:27.80]	  have 10 or 24 months, then the response, yeah, I think we also need to adjust that total charges
+[0:09:27.80 --> 0:09:35.14]	  because it would be 24 times more. Yeah, so you see that the customer is not churning. So we are
+[0:09:35.14 --> 0:09:40.74]	  not sending a promotional email to this customer. This is how we turned our predict script into a
+[0:09:40.74 --> 0:09:46.44]	  web service. So let me just stop it and start it again. When we do this, we see that warning,
+[0:09:46.70 --> 0:09:52.56]	  this is a development service, do not use it in production deployment, use it production VSGI
+[0:09:52.56 --> 0:09:58.60]	  server instead. If you were wondering what to do in this case, so what we need to do here is instead
+[0:09:58.60 --> 0:1]	  of using plain flask, we need to use basically it says what we need to use VSGI server instead.
+[0:10:04.26 --> 0:10:09.96]	  There are many different VSGI servers available in Python. I usually use gunicorn, we need to
+[0:10:09.96 --> 0:10:16.04]	  install it first. I installed it previously. So that's why it uses a cached version. So you
+[0:10:16.04 --> 0:10:23.42]	  need to download it. But yeah, now it's installed it again. The way we use gunicorn is we use a gunicorn.
+[0:10:23.86 --> 0:10:31.24]	  So we need to tell gunicorn where our flask up is. Our flask up is in the predict up. So this thing
+[0:10:31.24 --> 0:10:38.60]	  here means that our app is here. So use that the Python file where it needs to go is predict.py. So
+[0:10:38.60 --> 0:10:43.08]	  we write predict and the variable it is interested in is pop. And then we also need to specify.
+[0:10:44.26 --> 0:10:50.56]	  So we don't need run here. Yeah, we just need to predict up. And we also need to specify the
+[0:10:50.56 --> 0:10:55.96]	  address where this thing will live here. This thing here will not be executed because we put
+[0:10:55.96 --> 0:11:03.10]	  it inside this if statement. So that's why here we have debug true. But it doesn't matter for gunicorn
+[0:11:03.10 --> 0:11:09.30]	  because this line will not be executed when we run it from gunicorn. So this is what we do.
+[0:11:09.44 --> 0:11:17.08]	  gunicorn bind the address and then the location for up and we run it this way. So here you don't
+[0:11:17.08 --> 0:11:23.86]	  see any warnings because gunicorn is designed for production and we can test it. So it returns
+[0:11:23.86 --> 0:11:30.62]	  the same thing. So this is how you turn a flask up into something production ready. And this is
+[0:11:30.62 --> 0:11:36.06]	  what we will next use for deploying our services. And you know that many of you are using Windows.
+[0:11:36.06 --> 0:11:42.60]	  I actually also use Windows as you can see this is Linux subsystem. If you're using plain Windows
+[0:11:42.60 --> 0:11:50.54]	  gunicorn will not work. So gunicorn uses some Linux or Unix specific features. So it works on
+[0:11:50.54 --> 0:11:57.02]	  macOS. It works on Linux, but it doesn't work on Windows. So if you try to run it, just try to
+[0:11:57.02 --> 0:12:02.94]	  install it as well. People install I don't know if I have flask on Windows flask gunicorn.
+[0:12:04.64 --> 0:12:12.32]	  So now I have flask I have gunicorn. So let me go to this some directory. So this is the same
+[0:12:12.32 --> 0:12:21.66]	  directory we used in this in this step. It's the same one. So now if I let me just copy this.
+[0:12:23.82 --> 0:12:31.78]	  If I run that, it will say no module name if CNTL. I have no idea what is that. If you try to google
+[0:12:31.78 --> 0:12:37.08]	  this, you will find out that the reason for that is because gunicorn does not support Windows. So
+[0:12:37.08 --> 0:12:43.20]	  if you're on Windows and you don't want to install the subsystem for Linux, which I recommend doing,
+[0:12:43.46 --> 0:12:47.74]	  you should definitely do this if you're Windows. But if for some reasons you do not want to do this,
+[0:12:47.74 --> 0:12:56.28]	  you can use an alternative. It's called waitress. It's very similar to gunicorn. Let's install it.
+[0:12:56.58 --> 0:13:04.16]	  And then you use it very similarly to gunicorn. Just gunicorn, place it with waitress. Instead
+[0:13:04.16 --> 0:13:13.46]	  of bint, I think we need to use something else. Let me go to google it. Instead of writing gunicorn,
+[0:13:13.46 --> 0:13:18.82]	  we write waitress serve and then we write listen instead of bind. So waitress
+[0:13:18.82 --> 0:13:27.88]	  show list 0 0 0 96 96 and then again predict up.
+[0:13:29.86 --> 0:13:37.12]	  Yeah, so I have this weird warnings. So the windows I have here is a bit special because
+[0:13:37.12 --> 0:13:42.40]	  it's actually a tablet. It's not real Windows computer. That's why I have these weird warnings.
+[0:13:42.44 --> 0:13:49.28]	  I'm not really sure why I have this. That's why please ignore them. But there is not actually
+[0:13:49.28 --> 0:13:54.24]	  a weird warning. There is a more important warning says that it's trying to unpeak an
+[0:13:54.24 --> 0:14:02.58]	  estimator logistic regression from version 0.24.2 using version of scikit-learn 1.0. And the reason
+[0:14:02.58 --> 0:14:09.60]	  for that is because I installed scikit-learn on my windows system just yesterday when scikit-learn
+[0:14:09.92 --> 0:14:17.76]	  was already at 0.1 version. But for my Linux, I installed it a month ago or something like this.
+[0:14:17.86 --> 0:14:23.72]	  So it's the version before and scikit-learn complains about that. So it says, hey, be careful. The
+[0:14:23.72 --> 0:14:29.18]	  version of scikit-learn that I use here is different. That's why use your estimators at your own risk
+[0:14:29.18 --> 0:14:34.10]	  because the code for the estimators might have changed between versions. It's not actually safe.
+[0:14:34.10 --> 0:14:40.72]	  That's why there is this warning. Okay, so I cannot really now use this notebook to test this
+[0:14:40.72 --> 0:14:46.80]	  because this notebook lives in my Linux and this service is running on Windows. So what I'm going
+[0:14:46.80 --> 0:14:57.54]	  to do is I will save this again as a Python file. Let me go and I will put this file into our folder.
+[0:14:57.54 --> 0:15:04.04]	  We rename it as predict test. It's probably a name. I will just remove 0.5 at the beginning.
+[0:15:04.60 --> 0:15:12.16]	  And let me open it with VS code. So I'll do a bit of cleaning here. Here we have the customer here
+[0:15:12.16 --> 0:15:18.88]	  and we have the response. So what I want to do is I just want to print the response.
+[0:15:20.30 --> 0:15:29.04]	  I also print the not sending a promotion. And customer ID, let's just try it here. Customer ID
+[0:15:29.04 --> 0:15:42.58]	  it's x, y, z, 1, 2, 3. Okay, so we have this code now and cleaned it a little bit. So now let's run
+[0:15:42.58 --> 0:15:49.92]	  this. So we have another command prompt. So I'm in the same directory. So I need to run predict test.
+[0:15:50.64 --> 0:15:57.44]	  And yeah, so now it was able to communicate with waitress with this process and get back the predictions.
+[0:15:57.86 --> 0:16:04.46]	  Okay, I think that's it for this lesson. This lesson we turned our predict.by script into a
+[0:16:04.46 --> 0:16:10.70]	  flash application. And then we saw how to query it with requests. Then we put it in a production
+[0:16:11.24 --> 0:1]	  ready VSGI server, which is G unicorn. And then we saw how to also do this on Windows using
+[0:1 --> 0:16:22.78]	  waitress. So now we have our service ready. And in the next lesson, we will talk about dependency
+[0:16:22.78 --> 0:16:27.76]	  in environment management. If one project uses a second version of one version, and another project
+[0:16:27.76 --> 0:16:32.06]	  uses a second version of a different version, they need to live together on one computer.
+[0:16:32.56 --> 0:16:36.44]	  So in the next lesson, we will see how to achieve that. So see you soon.

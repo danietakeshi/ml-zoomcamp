@@ -1,0 +1,308 @@
+[0:00:00.26 --> 0:00:04.40]	  Welcome back. This is lesson six of machine learning zoom comes session five.
+[0:00:04.96 --> 0:00:10.24]	  And in this lesson, we'll talk about Docker, which is a way of managing environments.
+[0:00:10.70 --> 0:00:16.38]	  In the previous lesson, we talked about deep and in general about virtual environments in Python.
+[0:00:17.36 --> 0:00:20.44]	  And Docker takes it one step further.
+[0:00:20.94 --> 0:00:27.56]	  And let's us isolate the entire application from the rest of the things that are running on our computer.
+[0:00:27.56 --> 0:00:29.80]	  This is what we talked about in the previous lesson.
+[0:00:30.22 --> 0:00:36.68]	  So remember, we discussed that we have our host machine, which is laptop, let's say with Ubuntu or some other operating system.
+[0:00:37.16 --> 0:00:41.72]	  And then on this laptop, on this computer, we have multiple different virtual environments.
+[0:00:42.02 --> 0:00:49.64]	  So let's say we have virtual environment for one service, channel service, and then we have a virtual environment for a different service that we call lead scoring service.
+[0:00:49.90 --> 0:00:55.08]	  And they have different pythons and different dependencies.
+[0:00:55.08 --> 0:01:04.68]	  With Docker, we can get even more isolation because with Docker, every service, let's say we have a service that we call churn service.
+[0:01:04.94 --> 0:01:08.18]	  And then we have again, our lead scoring service.
+[0:01:08.82 --> 0:01:14.88]	  And instead of creating virtual environment, what we can do is put each thing in a separate container.
+[0:01:15.48 --> 0:01:20.54]	  So we'll have one container for this service, one other container for this service.
+[0:01:20.78 --> 0:01:24.46]	  And these services will not know anything about each other.
+[0:01:24.68 --> 0:01:27.04]	  So they will live in complete isolation.
+[0:01:27.64 --> 0:01:34.50]	  From the point of view of our churn service, it will see, it will think that it's the only thing that is running on this computer.
+[0:01:34.72 --> 0:01:40.38]	  So this is like a special box where we put our service and it only uses the things it needs.
+[0:01:40.52 --> 0:01:44.58]	  And there is nothing else running that is not needed for this particular service.
+[0:01:44.76 --> 0:01:47.36]	  We can specify any kind of environment we need.
+[0:01:47.36 --> 0:01:53.92]	  So for example, let's say if we need Ubuntu of some specific version, let's say 18.04, then we have that.
+[0:01:54.32 --> 0:02:01.98]	  And if for lead scoring project, we need a new version of Ubuntu, perhaps like 20.04, then it's also fine.
+[0:02:02.12 --> 0:02:10.84]	  And then we can have some other service, maybe email service, a service that marketing service can use for sending emails.
+[0:02:10.90 --> 0:02:16.88]	  So maybe this email service is running on Pearl and uses Amazon Linux.
+[0:02:17.40 --> 0:02:22.50]	  And then so we have all these different services that have different requirements, different system requirements.
+[0:02:22.74 --> 0:02:25.78]	  They might use different versions of Ubuntu, different libraries.
+[0:02:26.08 --> 0:02:33.88]	  So for example, maybe here we need to have this special version of C++ compiler because it uses some library, like I don't know,
+[0:02:33.88 --> 0:02:35.40]	  like the boost that we need to compile.
+[0:02:35.80 --> 0:02:41.66]	  So then here we install like this D++ but here for the turn service we don't.
+[0:02:41.84 --> 0:02:44.16]	  So they use the environment that they need.
+[0:02:44.42 --> 0:02:52.96]	  And then of course each of them has its own Python to here, Python here, but these pythons are completely isolated from each other.
+[0:02:53.04 --> 0:02:55.32]	  And then of course everything leaves on a host machine.
+[0:02:55.70 --> 0:02:57.40]	  So let's say this is our host machine.
+[0:02:57.66 --> 0:03:02.56]	  And this host machine can be Mac Windows or some Linux doesn't matter.
+[0:03:02.78 --> 0:03:06.74]	  So let's say it's Ubuntu 18.04.
+[0:03:07.48 --> 0:03:14.72]	  And then this host can have as many different containers with different types of Linux's different types of operating systems.
+[0:03:15.02 --> 0:03:18.34]	  They're all living together, all in isolation from each other.
+[0:03:18.44 --> 0:0]	  And then of course, each of them will have their own dependencies like here, we will have scikit-learn of version like 0.20 something.
+[0:03:27.14 --> 0:03:31.94]	  And for example, for lead scoring, the version of scikit-learn will be 1.0.
+[0:03:31.94 --> 0:03:35.92]	  So this is why we need Docker and the main advantage of Docker.
+[0:03:36.22 --> 0:03:48.68]	  So let's say this is our host, but what we can do is we can take our service like our turn service and we can just take it and easily deploy it to the cloud.
+[0:03:49.20 --> 0:03:50.74]	  So just take it as is.
+[0:03:50.92 --> 0:03:55.98]	  So we put everything that is needed inside this Docker container and we just put this in the cloud.
+[0:03:55.98 --> 0:03:58.30]	  The container already contains everything we need.
+[0:03:58.56 --> 0:04:02.48]	  So that's why for us it's easy to just go ahead and deploy things.
+[0:04:03.30 --> 0:04:09.86]	  So what we want to cover in this lesson is we want to first play be with Docker, then come up with Docker file,
+[0:04:09.96 --> 0:04:13.28]	  which describes what exactly should be in the container for our turn service.
+[0:04:13.44 --> 0:04:17.34]	  Then we will build this Docker container and then we will run this Docker container locally.
+[0:04:18.04 --> 0:04:22.12]	  So for that, let's first start with running a Python image with Docker.
+[0:04:22.12 --> 0:04:27.30]	  So it will be just a Docker image with Python, nothing else for that.
+[0:04:27.72 --> 0:04:30.10]	  Let's look at the Docker Python image.
+[0:04:30.72 --> 0:04:35.56]	  So we go to Docker Hub, which contains all the images of Python.
+[0:04:36.16 --> 0:04:37.50]	  Let me enlarge it a little bit.
+[0:04:38.18 --> 0:04:41.92]	  And it shows now all the tags and here tags.
+[0:04:42.24 --> 0:04:44.80]	  So the first is the version of Python.
+[0:04:45.80 --> 0:04:47.86]	  And then the type of image.
+[0:04:48.64 --> 0:04:52.34]	  Let's say we use Python 3.8.
+[0:04:52.54 --> 0:04:55.36]	  We will use Python 3.8 slim.
+[0:04:55.90 --> 0:04:58.86]	  So slim means that this image is optimized.
+[0:04:59.24 --> 0:04:59.88]	  It's very small.
+[0:05:00.32 --> 0:05:02.42]	  I think it still uses something Debian based.
+[0:05:02.72 --> 0:05:08.70]	  So this is like, yeah, so it uses a bit and so we can use up to get and the usual things we do in Ubuntu.
+[0:05:08.92 --> 0:05:10.98]	  So we are interested in this.
+[0:05:11.24 --> 0:05:12.88]	  So this is the tag we want.
+[0:05:13.18 --> 0:05:16.08]	  What we will do now is we will actually try to run this image.
+[0:05:16.08 --> 0:05:21.60]	  So for that we use Docker run command and then we specify the image we want to run.
+[0:05:21.88 --> 0:05:27.76]	  And if we also need to know to tell Docker that we want to actually to have access to the terminal.
+[0:05:28.04 --> 0:05:29.20]	  So that's why we need this idea.
+[0:05:29.44 --> 0:05:34.06]	  And after playing with this image, we want to remove it from our system.
+[0:05:34.18 --> 0:0]	  We don't want to keep it.
+[0:05:35.10 --> 0:05:36.58]	  That's why I have this minus minus.
+[0:05:37.04 --> 0:05:39.54]	  When I do this, it says I cannot find it.
+[0:05:39.78 --> 0:05:42.20]	  Of course, I need to write Python here.
+[0:05:42.94 --> 0:05:44.98]	  So Python and then version.
+[0:05:45.16 --> 0:05:48.58]	  I think I happen to already run it.
+[0:05:48.70 --> 0:05:50.28]	  That's why I have it locally.
+[0:05:50.50 --> 0:05:54.30]	  So maybe let me show you how it would look like for a different version of Python.
+[0:05:54.58 --> 0:06:00.20]	  So if I use a different version of Python, it says I am unable to find this image locally.
+[0:06:00.38 --> 0:06:03.78]	  Let me download it from the internet and it just downloads it.
+[0:06:04.06 --> 0:06:08.34]	  And we, when we run it, we get to the Python terminal.
+[0:06:08.58 --> 0:06:10.86]	  And here we can do like print.
+[0:06:12.92 --> 0:06:14.68]	  So here we have our Python.
+[0:06:15.24 --> 0:06:16.48]	  This is not super exciting.
+[0:06:17.20 --> 0:06:18.84]	  So let's use this one.
+[0:06:18.98 --> 0:06:24.90]	  So what we can also get, do is we can get into this image inside this image.
+[0:06:25.06 --> 0:06:30.18]	  So not just by running Python here, but by accessing its terminal.
+[0:06:30.54 --> 0:06:33.22]	  So for this, we need to override the entry point.
+[0:06:33.72 --> 0:06:37.84]	  Entry point is the default command that is executed when we do Docker run.
+[0:06:38.14 --> 0:06:41.48]	  So here, when we do run, right?
+[0:06:41.56 --> 0:06:45.06]	  So here, when we do run, so the default command is Python.
+[0:06:45.22 --> 0:06:51.92]	  So that's why when we run, we get Python, but we can override it and let's say entry point.
+[0:06:52.22 --> 0:06:54.78]	  And we can say we want this entry point to be bash.
+[0:06:55.18 --> 0:06:56.62]	  And then we get the terminal.
+[0:06:56.96 --> 0:06:58.44]	  And this is our usual terminal.
+[0:06:58.76 --> 0:07:01.88]	  So this is a usual Linux and we can do whatever we want here.
+[0:07:02.26 --> 0:07:05.54]	  We can do, let's say, up to get install, double yet.
+[0:07:05.64 --> 0:07:11.24]	  And then, yeah, we need to update first, and then install.
+[0:07:11.80 --> 0:07:14.48]	  Then we can do whatever we want here.
+[0:07:14.70 --> 0:07:16.70]	  And whatever we do here stays here.
+[0:07:17.24 --> 0:07:17.38]	  Right?
+[0:07:17.52 --> 0:07:23.22]	  So if we touch something, let's say here, we are now, let's create a directory test.
+[0:07:23.52 --> 0:07:24.52]	  So we go to test.
+[0:07:25.14 --> 0:0]	  So we're now in the test directory.
+[0:07:28.26 --> 0:07:34.54]	  And whatever we do here has no effect on the outside system on the host that we have.
+[0:07:34.54 --> 0:07:34.96]	  Right?
+[0:07:35.08 --> 0:07:36.76]	  So we can do whatever we want here.
+[0:07:36.88 --> 0:07:41.14]	  And it happens in isolation from the rest of the, from other systems.
+[0:07:41.38 --> 0:07:47.20]	  So this is good if, let's say, our service is doing something funny, like, I don't know,
+[0:07:47.24 --> 0:07:54.12]	  rmrf slash then only the main docker, only the docker container will be affected and
+[0:07:54.12 --> 0:07:55.44]	  the rest of the system will not be.
+[0:07:55.78 --> 0:07:56.02]	  Yeah.
+[0:07:56.06 --> 0:08:01.12]	  And of course here we can, yes, let's say we have Python, right?
+[0:08:01.12 --> 0:08:02.14]	  Then we have pip.
+[0:08:02.90 --> 0:08:07.58]	  We can use this pip to install everything we need, like pip install pip.
+[0:08:08.12 --> 0:08:17.24]	  And for example, and everything that we want to do inside this docker image we can define
+[0:08:17.24 --> 0:08:18.04]	  in the docker file.
+[0:08:18.46 --> 0:08:21.72]	  So let's say, just save it as docker file.
+[0:08:22.64 --> 0:08:27.54]	  In docker file, the first thing we want to specify is the base image.
+[0:08:27.70 --> 0:08:31.72]	  So here the base image will be, let me just exit.
+[0:08:32.16 --> 0:08:33.82]	  So this will be the base image.
+[0:08:34.06 --> 0:08:36.72]	  So this is what we want to base our image on.
+[0:08:37.10 --> 0:08:39.76]	  So we use from and then the name of the image.
+[0:08:39.98 --> 0:08:43.86]	  So we'll take this image and then add things on top of this image.
+[0:08:44.16 --> 0:08:47.30]	  The next thing we want to do is to install pipenv.
+[0:08:47.58 --> 0:08:49.74]	  Keep install pipenv.
+[0:08:49.94 --> 0:08:50.40]	  Right?
+[0:08:50.68 --> 0:08:57.44]	  Because our project uses pipenv, we want to, to include our pip file and pip file local.
+[0:08:57.48 --> 0:08:59.64]	  And we want to install libraries from there.
+[0:08:59.78 --> 0:09:04.70]	  So that's why we want to copy these files and then, and then install dependencies from there.
+[0:09:04.88 --> 0:09:06.82]	  So for that we use the copy command.
+[0:09:07.02 --> 0:09:09.38]	  We want to copy two files at the same time.
+[0:09:09.76 --> 0:09:13.56]	  So pip file and pip file log.
+[0:09:13.96 --> 0:09:17.48]	  I think I forgot to specify the work directory here.
+[0:09:17.90 --> 0:09:20.72]	  Work directory, let's say it will be a slash up.
+[0:09:20.88 --> 0:09:27.02]	  So what this line is doing here, work directory slash up is it creates a directory if it doesn't exist.
+[0:09:27.02 --> 0:09:28.90]	  And it does CD there.
+[0:09:29.20 --> 0:09:30.66]	  So let me just quickly show you.
+[0:09:31.94 --> 0:09:35.46]	  So it's the app directory here doesn't exist.
+[0:09:35.72 --> 0:09:37.38]	  So let's create it.
+[0:09:37.74 --> 0:09:40.58]	  Make there up then CD there.
+[0:09:40.88 --> 0:09:42.28]	  And now we're in this directory.
+[0:09:43.04 --> 0:09:43.04]	 
+[0:09:43.12 --> 0:09:46.14]	  So this is effectively what work there is doing here.
+[0:09:46.62 --> 0:09:47.38]	  So we're copying.
+[0:09:48.12 --> 0:09:49.72]	  So first we're installing pipenv.
+[0:09:49.82 --> 0:09:52.82]	  Then we are CD to slash up.
+[0:09:52.82 --> 0:09:57.06]	  And then we are copying our pip file to the current directory.
+[0:09:57.34 --> 0:10:01.68]	  So when we say this, we mean the current directory, which in our case is slash up.
+[0:10:01.94 --> 0:10:03.86]	  This is not it yet.
+[0:10:03.94 --> 0:10:09.02]	  But what we can do now is we can run this run this Docker file, build this Docker image and see what happens.
+[0:10:09.44 --> 0:10:12.36]	  So let me exit it.
+[0:10:12.70 --> 0:10:16.98]	  So we need to do Docker build then specify the tech.
+[0:10:17.20 --> 0:10:19.70]	  I'll call it zoom test.
+[0:10:19.86 --> 0:10:24.44]	  And then we say that we want to use the Docker file from the current directory.
+[0:10:24.70 --> 0:10:27.88]	  That's why we have thought and now it is running all these commands.
+[0:10:28.14 --> 0:10:31.58]	  So right now you see it's running pip install pipenv.
+[0:10:31.88 --> 0:10:37.48]	  Then it's running this command work there up and then it's running this.
+[0:10:37.68 --> 0:10:39.10]	  It says, okay, I finished building.
+[0:10:39.38 --> 0:10:44.10]	  So now what we can do is we can actually run this image like we did previously.
+[0:10:44.16 --> 0:10:49.68]	  So instead of doing Python something, we use this and then the tag is laid.
+[0:10:50.06 --> 0:10:51.94]	  We can do it without the tag.
+[0:10:52.18 --> 0:10:53.34]	  Then we keep the entry point.
+[0:10:53.58 --> 0:11:02.08]	  So we will be able to use terminal here and you see when we run it, we're inside up because our work is up.
+[0:11:02.66 --> 0:11:02.92]	  Working directory.
+[0:11:03.46 --> 0:11:06.82]	  And then inside what we have is we have pip file and pip file lock.
+[0:11:07.20 --> 0:11:10.58]	  And here we can do pipenv install.
+[0:11:12.30 --> 0:11:15.32]	  And now it's installing all the dependencies.
+[0:11:15.44 --> 0:11:20.22]	  Of course, we don't want to run this and do this manually.
+[0:11:20.68 --> 0:11:21.60]	  So let me just stop it.
+[0:11:21.74 --> 0:11:25.92]	  So what we want to do is actually do this from the Docker file.
+[0:11:26.24 --> 0:11:27.88]	  So run pipenv install.
+[0:11:28.38 --> 0:11:35.36]	  And actually here, if we just do pipenv install, what we do is it will create a virtual environment inside Docker.
+[0:11:35.60 --> 0:11:37.52]	  But inside Docker, we don't need this.
+[0:11:37.86 --> 0:11:40.24]	  So remember, Docker is already isolated.
+[0:11:40.84 --> 0:11:44.88]	  So in Docker, in this Docker container, there is nothing else but this charm service.
+[0:11:44.92 --> 0:11:47.30]	  So we don't really need this virtual environment here.
+[0:11:47.50 --> 0:11:53.90]	  So what we want to do now is use this pipenv lock file to install it to the, to install the libraries to the system Python.
+[0:11:54.16 --> 0:11:56.26]	  We want to skip creating the virtual environment.
+[0:11:56.44 --> 0:11:59.56]	  And for that, we use a special key here.
+[0:11:59.76 --> 0:12:04.36]	  We do it system and it uses instead of creating the virtual environment that uses a system.
+[0:12:04.44 --> 0:12:06.54]	  And then we also want to use deploy.
+[0:12:07.02 --> 0:12:10.76]	  So we just doing, I think, pretty much the same thing.
+[0:12:10.84 --> 0:12:16.12]	  So both these things are needed to skip creating virtual environment and installing things we need.
+[0:12:16.76 --> 0:12:22.54]	  And yeah, so we added this line and we can rerun this, rebuild this image again.
+[0:12:22.72 --> 0:12:24.38]	  So when we do this, it is okay.
+[0:12:24.48 --> 0:12:26.62]	  There is something new previously it uses cache.
+[0:12:26.98 --> 0:12:33.04]	  So it doesn't use, doesn't install pipenv again, because it uses like a cached layer.
+[0:12:33.26 --> 0:12:33.80]	  It's called layers.
+[0:12:34.06 --> 0:12:35.14]	  So it used the cached version.
+[0:12:35.24 --> 0:12:39.52]	  So it doesn't need to install pipenv again, but it hasn't done this step yet.
+[0:12:39.52 --> 0:12:41.30]	  So that's why now it's just okay.
+[0:12:41.46 --> 0:12:42.72]	  This is a step I haven't done yet.
+[0:12:42.90 --> 0:12:43.58]	  Let's run it.
+[0:12:43.84 --> 0:12:47.38]	  And right now it's installing dependencies for my pip file lock.
+[0:12:47.64 --> 0:12:48.72]	  Okay, it's done.
+[0:12:48.96 --> 0:12:50.96]	  And let's run it again.
+[0:12:51.42 --> 0:12:53.96]	  And here, so I think we installed unicorn.
+[0:12:54.44 --> 0:12:58.56]	  So now we already have unicorn, but there is nothing else here yet.
+[0:12:58.72 --> 0:13:01.30]	  So we haven't copied our actual services here.
+[0:13:01.64 --> 0:13:04.02]	  We haven't copied the model files here yet.
+[0:13:04.16 --> 0:13:06.06]	  So this is what we will need to do now.
+[0:13:06.44 --> 0:13:06.88]	  Let's do that.
+[0:13:08.36 --> 0:13:09.40]	  So let's copy.
+[0:13:10.08 --> 0:13:11.22]	  So what do we have here?
+[0:13:11.56 --> 0:13:15.58]	  We want to copy our predict.py file.
+[0:13:15.82 --> 0:13:18.74]	  And then again, let's copy it in our current directory.
+[0:13:19.10 --> 0:13:21.62]	  Yeah, also the model file.
+[0:13:22.42 --> 0:13:23.70]	  Copy relative path.
+[0:13:25.26 --> 0:13:29.08]	  So yeah, I want to copy the predict.py file and the model file.
+[0:13:30.06 --> 0:1]	  Okay, what else do we need?
+[0:13:32.22 --> 0:13:36.36]	  I think this is more or less, we're more or less rating.
+[0:13:36.40 --> 0:13:41.58]	  So now if we can build it, so now we just execute the last step very fast.
+[0:13:41.80 --> 0:13:43.12]	  We just copy the file.
+[0:13:43.72 --> 0:13:47.24]	  Let's run it and we see that here now we have all the files.
+[0:13:47.46 --> 0:13:49.44]	  If we can run genucorn, what was that?
+[0:13:49.70 --> 0:13:53.26]	  Bind 00009696.
+[0:13:53.80 --> 0:13:55.02]	  Predict up.
+[0:13:56.70 --> 0:13:57.90]	  And now it's running.
+[0:13:58.10 --> 0:14:00.16]	  So now it's listening in this port.
+[0:14:00.42 --> 0:14:05.04]	  We cannot yet access this port because what we need to do is we need to expose this port.
+[0:14:05.10 --> 0:14:06.10]	  By exposing.
+[0:14:06.60 --> 0:14:09.30]	  So what I mean is we have this service.
+[0:14:09.80 --> 0:14:11.70]	  Let me move this a little bit.
+[0:14:12.18 --> 0:14:16.70]	  We have this container and there are some things running on this container.
+[0:14:17.08 --> 0:14:18.06]	  So there are different ports.
+[0:14:18.40 --> 0:14:22.04]	  Let's say one of this port is 9696.
+[0:14:22.66 --> 0:14:26.28]	  And this thing is running on our host machine.
+[0:14:26.80 --> 0:14:30.50]	  So this is our host machine and the host machine also has some ports.
+[0:14:30.76 --> 0:14:34.24]	  So what we need to do is first we need to expose this port.
+[0:14:34.24 --> 0:14:38.82]	  We want to tell Docker, hey Docker, we want this port to be open to the host machine.
+[0:14:39.04 --> 0:14:40.08]	  So we make it open.
+[0:14:40.46 --> 0:14:45.42]	  And then what we want to do also is let's say if we have something running here,
+[0:14:45.66 --> 0:14:51.86]	  I don't know, our test script that uses a request library to communicate to the turn service.
+[0:14:51.98 --> 0:14:56.76]	  So it needs to access this Docker container through a port.
+[0:14:56.88 --> 0:1]	  So it needs to be able to access this port.
+[0:14:59.10 --> 0:15:01.26]	  And this is done by port mapping.
+[0:15:01.26 --> 0:15:07.70]	  We actually need to map the port we have on the container to the port we have in our host machine.
+[0:15:08.06 --> 0:15:11.08]	  So let's say we have port 9696.
+[0:15:11.42 --> 0:15:19.20]	  And what will happen is our test dot pi will use this port and this port will be mapped to a port on a Docker machine.
+[0:15:19.42 --> 0:15:25.08]	  And then it will go to the our turn service and then our turn service will reply to the prediction.
+[0:15:25.34 --> 0:15:28.94]	  And then it will be forwarded to our test dot by file.
+[0:15:28.94 --> 0:15:32.82]	  So now what we need to do basically is to expose this port.
+[0:15:33.12 --> 0:15:38.64]	  And we can also do this inside a Docker container to expose 9696.
+[0:15:39.08 --> 0:15:40.74]	  So we have exposed the port.
+[0:15:41.16 --> 0:15:45.32]	  So now Docker knows that this port needs to be visible to the host machine.
+[0:15:45.50 --> 0:15:48.06]	  And finally, we need to specify entry point.
+[0:15:48.72 --> 0:15:52.26]	  So entry point, remember what we overwrote here.
+[0:15:52.86 --> 0:15:55.16]	  So we overwrote entry points.
+[0:15:55.16 --> 0:15:59.04]	  So if we don't do this, it will now run Python here.
+[0:15:59.18 --> 0:16:04.22]	  We probably can do import numpy already because we installed everything from PIP file.
+[0:16:04.30 --> 0:16:06.12]	  But this is not what we want to run.
+[0:16:06.30 --> 0:16:09.94]	  We want to run our predict server service with G unicorn.
+[0:16:10.42 --> 0:16:11.64]	  So let's do that.
+[0:16:12.50 --> 0:16:14.44]	  And here we just write this command.
+[0:16:15.04 --> 0:16:15.96]	  Let me copy it.
+[0:16:16.20 --> 0:16:17.14]	  Let's here.
+[0:16:18.60 --> 0:16:25.66]	  Except that every token here, like every word should be a separate thing here.
+[0:16:25.86 --> 0:1]	  And then we add commas.
+[0:16:27.98 --> 0:16:29.30]	  So this is how it looks like.
+[0:16:29.60 --> 0:16:30.38]	  Let's again, build it.
+[0:16:31.04 --> 0:16:32.74]	  So I'm building it.
+[0:16:33.06 --> 0:16:34.64]	  And now I want to run it.
+[0:16:35.86 --> 0:16:38.86]	  So now we have this in our Docker.
+[0:16:39.38 --> 0:16:40.66]	  Yeah, now it's running something.
+[0:16:40.94 --> 0:16:41.92]	  Now I want to make a request.
+[0:16:42.32 --> 0:16:43.64]	  Now let's go to different app.
+[0:16:43.78 --> 0:16:48.22]	  So I'm already in the directory and we do predict test.
+[0:16:48.82 --> 0:16:55.16]	  And now it says that it cannot connect to this, to this address, to this port.
+[0:16:55.32 --> 0:16:59.84]	  And the reason for this is that even though we exposed the port here,
+[0:17:00.14 --> 0:17:03.66]	  so even though we did this, what we didn't do is this part, the mapping.
+[0:17:04.02 --> 0:17:07.12]	  So now we need to map this port to a port on a host machine.
+[0:17:07.22 --> 0:17:12.36]	  So when our test by makes a request, it makes a request to our host machine.
+[0:17:12.36 --> 0:17:15.06]	  And then it needs to know where to forward this request.
+[0:17:15.92 --> 0:17:18.40]	  So now let's do this.
+[0:17:19.20 --> 0:17:20.42]	  So we need to stop it.
+[0:17:20.76 --> 0:17:24.94]	  And we need to execute it with this minus P.
+[0:17:25.74 --> 0:17:26.58]	  So it means port.
+[0:17:28.28 --> 0:17:32.82]	  So here the first thing means that this is the port on the container.
+[0:17:33.16 --> 0:17:34.30]	  So this is the port we exposed.
+[0:17:34.56 --> 0:17:36.10]	  And this is the port on the host machine.
+[0:17:36.28 --> 0:17:41.72]	  So we map the port 9696 of the container to the port 9696 of the host machine.
+[0:17:41.74 --> 0:17:43.08]	  And we just run that.
+[0:17:43.48 --> 0:17:47.58]	  And now hopefully when we execute this, it should work.
+[0:17:47.90 --> 0:17:51.40]	  So now because we opened the port, we exposed the port,
+[0:17:51.48 --> 0:17:55.48]	  and then we mapped it to port 9696 on our local host.
+[0:17:55.82 --> 0:17:59.70]	  Now our script can reach what we have in Docker.
+[0:18:00.36 --> 0:18:03.10]	  I think that covers more or less Docker.
+[0:18:03.70 --> 0:18:05.76]	  So at least from our point of view.
+[0:18:06.28 --> 0:18:07.78]	  So let me see if we haven't missed anything.
+[0:18:08.12 --> 0:18:09.72]	  So we talked about why we need Docker.
+[0:18:09.82 --> 0:18:12.62]	  This is to achieve isolation, complete isolation.
+[0:18:13.04 --> 0:18:17.30]	  So each service runs in its own container, completely isolated from other services.
+[0:18:17.50 --> 0:18:23.36]	  Then we run the base image, the Python image that we had.
+[0:18:23.46 --> 0:18:26.44]	  It was a Python 3.8 something.
+[0:18:26.76 --> 0:18:28.26]	  Then we looked at the Docker file.
+[0:18:28.70 --> 0:18:32.34]	  So Docker file specifies what kind of things we want to do inside the container.
+[0:18:32.66 --> 0:18:35.90]	  So what exactly we want to put there, what we want to run there,
+[0:1 --> 0:18:37.30]	  what kind of ports we want to expose,
+[0:18:37.30 --> 0:18:40.24]	  and what kind of the command we want to execute when we run it.
+[0:18:40.90 --> 0:18:44.40]	  Then we saw how to build it and we saw how to run it.
+[0:18:44.60 --> 0:18:48.12]	  So now we can run our service inside Docker container
+[0:18:48.12 --> 0:18:50.90]	  and access it from a script.
+[0:18:51.46 --> 0:18:52.16]	  So this is cool.
+[0:18:52.44 --> 0:18:54.56]	  But we talked about that once we have a container,
+[0:18:54.92 --> 0:18:59.62]	  so once we have this thing, it no longer needs to leave on our host machine.
+[0:18:59.72 --> 0:19:01.14]	  So we can deploy it to the cloud.
+[0:19:01.14 --> 0:19:07.32]	  And what we will do next is we will deploy it to AWS Elastic Beanstalk.
+[0:19:07.96 --> 0:19:08.80]	  So see you soon.

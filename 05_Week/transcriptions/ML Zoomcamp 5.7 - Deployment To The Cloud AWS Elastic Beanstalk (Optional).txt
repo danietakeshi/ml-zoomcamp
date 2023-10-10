@@ -1,0 +1,233 @@
+[0:00:00.26 --> 0:00:03.88]	  Welcome back. This is lesson seven of machine learning zoom comp session five.
+[0:00:04.08 --> 0:00:09.12]	  And in this lesson, we will talk about deploying our Docker container to the cloud.
+[0:00:09.46 --> 0:00:20.46]	  So in the previous lesson, we built a Docker image, we built a Docker container, we put our term prediction service there, we put the model there, we build this image, and we learn how to run it locally.
+[0:00:20.90 --> 0:00:24.04]	  Now we want to take this image and deploy it to the cloud.
+[0:00:24.12 --> 0:00:33.34]	  So for this particular lesson, I chose AWS. And the reason for that is because I know how to use AWS, I have experience using it.
+[0:00:33.40 --> 0:0]	  And it's also probably the most popular cloud provider. And the reason I chose elastic beanstalk is because it's relatively simple.
+[0:00:40.18 --> 0:00:44.76]	  So there are just a few comments that we need to run to be able to deploy something to the cloud.
+[0:00:44.92 --> 0:00:52.22]	  So I mark this lesson as optional, because I don't think you have to learn how to use AWS and elastic beanstalk in particular.
+[0:00:52.22 --> 0:01:00.20]	  I think it's useful, but it's up to you to decide if you want to invest your time into learning AWS or you want to learn something else.
+[0:01:00.50 --> 0:01:12.16]	  So here, I suggest you to use that, but you're free to explore other options like maybe Heroku, or Google Cloud or Azure or Python anywhere, or other cloud providers.
+[0:01:12.42 --> 0:01:18.46]	  So there are many different options. And actually, I list some of them here in the explore more session.
+[0:01:18.46 --> 0:01:23.38]	  But this is what we will do in this lesson. And I will show you how to use AWS.
+[0:01:23.92 --> 0:01:33.16]	  So actually, if you don't have an account in AWS, then you can go to the books website, machine learning book, go to articles.
+[0:01:33.60 --> 0:01:38.34]	  And then there is an article here creating an AWS account.
+[0:01:38.52 --> 0:01:42.26]	  You click on this and it describes what you need to do to actually create an account.
+[0:01:42.26 --> 0:01:47.34]	  So here, I assume that you already have an account, you already know how to create an instance.
+[0:01:47.86 --> 0:01:56.98]	  You don't actually need the instance, but you already have an account and you can access to your AWS account programmatically using a key or something like this.
+[0:01:57.76 --> 0:02:03.70]	  So here, the instruction, the article tells you what to do. I will not cover that here.
+[0:02:03.94 --> 0:02:08.38]	  I'll just add a link to this article. You can go through this in your own time.
+[0:02:08.76 --> 0:02:13.34]	  So I assume you have AWS account already, and it is configured.
+[0:02:13.82 --> 0:02:21.92]	  Actually, I'll tell you a secret. So what I was showing you now, this talker is actually I'm running this already on AWS.
+[0:02:22.32 --> 0:02:26.76]	  So this is an EC2 instance that I rented and I SSH to it.
+[0:02:26.96 --> 0:02:29.78]	  So you see that this is the URL.
+[0:02:30.42 --> 0:02:36.82]	  And then it's just up to this alias and then, yeah, I just SSH to this.
+[0:02:37.04 --> 0:02:46.50]	  And then I am on this computer and then this directory, zoom cam, and my visual story or code can also access this machine using SSH.
+[0:02:46.68 --> 0:02:53.38]	  So I'm actually doing this on the cloud, at least this lesson on the previous one, everything before I was doing on my tablet.
+[0:02:53.40 --> 0:02:56.66]	  And it isn't actually I'm doing it here because of Docker.
+[0:02:57.14 --> 0:03:04.02]	  So on my tablet, I have a specific architecture like it's our architecture, not usual AMD64.
+[0:03:04.38 --> 0:03:14.48]	  That's why I needed to rent the machine, but it's also quite handy because here call the services, AWS services work a lot faster when I do it from an EC2 instance.
+[0:03:14.86 --> 0:03:20.74]	  Okay, let's see how we can deploy our service with elastic Beanstalk.
+[0:03:20.90 --> 0:03:28.76]	  And by the way, maybe before I show you how to do this, I want to open console and just show you elastic Beanstalk.
+[0:03:29.22 --> 0:03:31.66]	  So this is one of the services in AWS.
+[0:03:32.84 --> 0:03:36.26]	  There is nothing here yet. You can just go there and treat.
+[0:03:36.54 --> 0:03:45.60]	  But this is an easy way to deploy your services also including dockerized, like your docker containers and the way it works.
+[0:03:45.60 --> 0:03:49.62]	  So let's say we have here elastic Beanstalk, right?
+[0:03:49.74 --> 0:03:54.58]	  So this is in the cloud, this AWS and it's right in our container here.
+[0:03:54.86 --> 0:03:56.28]	  So this is our turn service.
+[0:03:56.94 --> 0:04:02.40]	  And on this service in this container, we already have this port exposed, right?
+[0:04:02.50 --> 0:04:07.44]	  And let's say we have something outside of AWS or can be inside AWS doesn't matter.
+[0:04:07.66 --> 0:04:11.60]	  We have our marketing service and we want to score some clients.
+[0:04:11.96 --> 0:04:20.84]	  And so what we do is we take a client and send the request to elastic Beanstalk and then elastic Beanstalk forwards it to the container.
+[0:04:21.18 --> 0:04:22.32]	  So the container replies.
+[0:04:23.06 --> 0:04:24.56]	  So there's some entry point here.
+[0:04:24.78 --> 0:04:28.38]	  The container replies and the marketing service gets the predictions.
+[0:04:28.96 --> 0:04:31.62]	  Like what is the probability that this customer is churning.
+[0:04:31.86 --> 0:04:38.72]	  And what is cool about elastic Beanstalk is let's say our marketing service makes, I don't know, 100 requests per second.
+[0:04:38.72 --> 0:04:46.62]	  And then there are some other services, let's say, I don't know, service A and service B that also need to talk to the service.
+[0:04:46.94 --> 0:04:49.98]	  And every one of them starts sending a lot of requests.
+[0:04:50.46 --> 0:04:56.44]	  Elastic Beanstalk will notice that that there is a lot of new requests coming in and it will scale up our service.
+[0:04:56.62 --> 0:04:58.62]	  So it will add more containers here.
+[0:04:58.82 --> 0:05:03.54]	  So it will add more instances of our service, let's say three or four.
+[0:05:03.54 --> 0:05:12.70]	  And then here this thing, this entry point will figure out where to send the request to this particular instance, this instance or this instance.
+[0:05:12.90 --> 0:05:14.38]	  So it will do load balancing.
+[0:05:14.70 --> 0:05:16.22]	  So this thing is called scaling up.
+[0:05:16.90 --> 0:05:18.04]	  All right.
+[0:05:18.10 --> 0:05:25.22]	  So when we get more traffic, we add more instances and let's say these services, they finish their work.
+[0:05:25.44 --> 0:05:28.54]	  So they stopped hitting our churn service with requests.
+[0:05:28.76 --> 0:05:32.16]	  And now we don't need three instances of the churn service anymore.
+[0:05:32.16 --> 0:05:37.74]	  So what Elastic Beanstalk can do is it can scale down according to the traffic.
+[0:05:37.90 --> 0:05:44.80]	  It can see how many instances the service currently needs and it can scale down or up according to the demand.
+[0:05:45.34 --> 0:05:48.76]	  So when it doesn't need more services, it will just remove them.
+[0:05:48.96 --> 0:05:49.84]	  I think I removed too much.
+[0:05:50.16 --> 0:05:52.18]	  I'm going to undo this anyways.
+[0:05:52.50 --> 0:05:52.62]	  Okay.
+[0:05:52.84 --> 0:05:54.48]	  So that's Elastic Beanstalk.
+[0:05:54.76 --> 0:05:57.60]	  And now let me show you how you can use this.
+[0:05:57.60 --> 0:06:04.18]	  So here what we need is we need to install a special command line interface for Elastic Beanstalk.
+[0:06:04.42 --> 0:06:08.04]	  It's called AWS Elastic Beanstalk CLI.
+[0:06:08.30 --> 0:06:10.88]	  We will not install it here.
+[0:06:11.20 --> 0:06:13.92]	  What we will do, we will not install the system wide.
+[0:06:14.16 --> 0:06:24.60]	  So because now if we do which Python have a mini-convex installation here, so I don't want to install AWS Elastic Beanstalk CLI there.
+[0:06:24.60 --> 0:06:29.34]	  I want to install it only for this project, only for our churn prediction project.
+[0:06:29.62 --> 0:0]	  For that, I can use D-Penf.
+[0:06:31.32 --> 0:06:32.56]	  Install this.
+[0:06:33.44 --> 0:06:35.42]	  And this is actually a dev dependency.
+[0:06:35.96 --> 0:06:41.88]	  So this is something we only need to use to deploy things or like when we're developing.
+[0:06:42.22 --> 0:06:45.72]	  So this is not something we need to have inside the container.
+[0:06:46.26 --> 0:06:46.58]	  Right.
+[0:06:46.72 --> 0:06:48.90]	  So this is called a development dependency.
+[0:06:49.20 --> 0:06:51.08]	  So we only need this for development.
+[0:06:51.20 --> 0:06:55.46]	  That's why we can specify development dependency like this using minus, minus that.
+[0:06:55.72 --> 0:07:02.48]	  And now it will install this AWS Elastic Beanstalk CLI.
+[0:07:05.70 --> 0:07:13.52]	  It apparently also needs to install other things because this is the first time I am running B-Penf install on this computer.
+[0:07:13.68 --> 0:07:16.92]	  So it also installs NumPy, Secular and so on.
+[0:07:16.98 --> 0:07:21.14]	  Now, so if I just do this, it doesn't recognize it.
+[0:07:21.22 --> 0:07:25.66]	  So what I need to do now is B-Penf shell and then inside the shell.
+[0:07:26.06 --> 0:07:27.84]	  So now I am in the virtual environment.
+[0:07:28.28 --> 0:07:30.34]	  Now I think I just need to use EB.
+[0:07:31.08 --> 0:07:34.68]	  Let's check if EB is not found.
+[0:07:34.92 --> 0:07:37.78]	  So I go to the shell and now EB is found.
+[0:07:38.20 --> 0:07:44.50]	  So now what we want to do is we want to use this command line tool to deploy our service to Elastic Beanstalk.
+[0:07:44.50 --> 0:07:50.42]	  So for that we use init command and we say that this is Docker.
+[0:07:51.02 --> 0:07:55.54]	  So P stands for, so let's check EB init.
+[0:07:56.48 --> 0:07:58.96]	  So minus P is platform.
+[0:07:59.42 --> 0:08:01.26]	  So EB init P Docker.
+[0:08:01.98 --> 0:08:07.88]	  And then now what we need to do is we need to specify the name of this environment.
+[0:08:08.14 --> 0:08:10.10]	  So let's call it churn serving.
+[0:08:10.50 --> 0:08:11.72]	  Let's call it churn serving.
+[0:08:11.72 --> 0:08:15.74]	  So we will create Elastic Beanstalk project, which we will call churning.
+[0:08:16.12 --> 0:08:18.78]	  And the platform here is Docker.
+[0:08:19.12 --> 0:08:21.14]	  I think we also need to specify region here.
+[0:08:21.60 --> 0:08:24.60]	  So I am in Ireland, EU west one.
+[0:08:25.82 --> 0:08:29.22]	  So here it says that application churns serving was created.
+[0:08:29.48 --> 0:08:29.96]	  Let's check.
+[0:08:30.18 --> 0:08:30.26]	  Yeah.
+[0:08:30.28 --> 0:08:32.26]	  So now there is this folder Elastic Beanstalk.
+[0:08:32.42 --> 0:08:35.24]	  And if we look inside, there's this config YAML.
+[0:08:35.44 --> 0:08:36.84]	  See what is there.
+[0:08:37.90 --> 0:08:38.24]	  Yeah.
+[0:08:38.24 --> 0:08:44.38]	  So now it just says that the platform is Docker, region is Ireland, and then a bunch of other stuff.
+[0:08:44.64 --> 0:08:47.74]	  Now what we can do with this is we can test it locally.
+[0:08:48.54 --> 0:08:54.34]	  So before we deploy, we can just use Elastic Beanstalk to test that things work locally.
+[0:08:54.54 --> 0:08:58.34]	  And for that we use EB local, EB local run.
+[0:08:58.48 --> 0:09:01.12]	  And then we need to specify which port it's running on.
+[0:09:01.30 --> 0:09:02.20]	  It's 96.96.
+[0:09:04.84 --> 0:09:09.80]	  So now it actually needs to redo this, people install because the file changed.
+[0:09:10.12 --> 0:09:12.82]	  So we added the Elastic Beanstalk dependency there.
+[0:09:12.94 --> 0:09:13.24]	  Yeah.
+[0:09:13.28 --> 0:09:19.78]	  Even though it doesn't install the dependencies here, just is that the file changed and it will install everything from scratch.
+[0:09:20.48 --> 0:09:21.98]	  So it shouldn't take too much time.
+[0:09:22.24 --> 0:09:26.34]	  But as you see, it is running this Docker file now and it's building it.
+[0:09:26.38 --> 0:09:29.34]	  And then once it builds it, it will run it locally.
+[0:09:30.68 --> 0:09:31.42]	  Okay.
+[0:09:31.58 --> 0:09:34.84]	  So it finished building it and run the job.
+[0:09:35.28 --> 0:09:41.20]	  So we see that it already output something to our terminal, some logs.
+[0:09:41.62 --> 0:09:43.32]	  So now what we can do, we can test it.
+[0:09:43.52 --> 0:09:45.20]	  So let's use the same script.
+[0:09:45.66 --> 0:09:45.74]	  Yeah.
+[0:09:45.88 --> 0:09:50.28]	  So we see that maybe to make it a bit fun, let's change it a little bit.
+[0:09:50.78 --> 0:09:57.24]	  So we'll change tenure to 12 months.
+[0:09:57.58 --> 0:09:59.32]	  So let me see it.
+[0:09:59.56 --> 0:10:02.84]	  So change the tenure to 12 months and let's run it again.
+[0:10:02.98 --> 0:10:08.46]	  You see this probability of churning increased, but we're still not sending the promotional email to this user.
+[0:10:08.64 --> 0:10:13.96]	  And this is running now inside this Docker image that we run locally using Elastic Beanstalk.
+[0:10:14.20 --> 0:10:15.18]	  So now let's stop it.
+[0:10:15.48 --> 0:10:17.42]	  This thing probably no longer works.
+[0:10:17.78 --> 0:10:17.86]	  Yeah.
+[0:10:18.08 --> 0:10:20.24]	  So it says, sorry, I cannot find this port anymore.
+[0:10:20.60 --> 0:10:22.68]	  Now let's run this on the cloud.
+[0:10:22.68 --> 0:10:27.56]	  So what that do, eb create and then churn serving.
+[0:10:28.48 --> 0:10:30.18]	  So it will create an environment.
+[0:10:30.50 --> 0:10:33.88]	  Elastic Beanstalk environment that will call churning serving environment.
+[0:10:34.54 --> 0:10:35.36]	  That's it.
+[0:1 --> 0:10:39.62]	  So let's, yeah, now it's output some stuff.
+[0:10:39.72 --> 0:10:42.68]	  For example, the host machine that will run our Docker container.
+[0:10:42.80 --> 0:10:43.86]	  It uses Amazon Linux.
+[0:10:44.44 --> 0:10:46.58]	  And then there is a bunch of other stuff on here.
+[0:10:46.78 --> 0:10:47.78]	  Like this is our region.
+[0:10:48.04 --> 0:10:49.12]	  So this is Ireland.
+[0:10:49.12 --> 0:10:56.22]	  So for you, maybe you want to choose a different one, I don't know, like Singapore or Oregon, depending on where you're located.
+[0:10:56.56 --> 0:11:01.14]	  So for me, that the closest one is actually Frankfurt, but Ireland is a bit cheaper.
+[0:11:01.34 --> 0:11:02.48]	  That's why I'm using Ireland.
+[0:11:03.34 --> 0:11:06.56]	  So yeah, now it is creating some stuff.
+[0:11:06.80 --> 0:11:09.36]	  So actually some things are happening under the hood.
+[0:11:09.48 --> 0:11:13.32]	  So remember, I told you about being able to scale up and down.
+[0:11:13.86 --> 0:11:18.58]	  So for that, Elastic Beanstalk is creating a load balancer for us and auto scaling.
+[0:11:19.30 --> 0:11:19.82]	  Configuration.
+[0:1 --> 0:1]	  So it's doing some stuff under the hood.
+[0:11:22.24 --> 0:11:29.02]	  For us, it creates a production ready environment that is able to scale up and down when we need.
+[0:11:31.82 --> 0:11:38.12]	  That took some time.
+[0:11:38.68 --> 0:11:42.08]	  I think we started like it took three, four minutes.
+[0:11:42.22 --> 0:11:44.66]	  It's not instant, but it's very simple.
+[0:11:44.66 --> 0:11:49.54]	  All we needed to do was that and Elastic Beanstalk took care of all the deployment.
+[0:11:49.94 --> 0:11:54.44]	  So now we see that application is available at this address.
+[0:11:54.96 --> 0:11:56.44]	  So let's copy this address.
+[0:11:57.42 --> 0:12:05.14]	  So let me open this predict test file and then see this is the host.
+[0:12:05.46 --> 0:12:07.32]	  This is what we just copied from here.
+[0:12:07.74 --> 0:12:12.52]	  I'll just make instead of local host, I'll just host here.
+[0:12:12.52 --> 0:12:13.36]	  We don't need the port.
+[0:12:13.84 --> 0:12:19.72]	  So actually Elastic Beanstalk maps this 9696 to the port 80.
+[0:12:20.24 --> 0:12:26.02]	  So here we have port 80 and then internally it maps it to 9696.
+[0:12:26.32 --> 0:12:29.90]	  And because it's 90 port, we don't need to specify it at all.
+[0:12:30.02 --> 0:12:31.02]	  This is the default port.
+[0:12:31.34 --> 0:12:31.76]	  Let's do that.
+[0:12:32.34 --> 0:12:35.06]	  And we can change it again, maybe to one.
+[0:12:36.44 --> 0:12:38.82]	  No, we will not change anything else.
+[0:12:38.82 --> 0:12:45.72]	  So the only thing we changed here, well, in addition to making less tenure is we replaced the host now.
+[0:12:46.56 --> 0:12:48.60]	  And let's let's test it.
+[0:12:48.92 --> 0:12:56.54]	  So yeah, so now you see that the probability of turning for this customer is 63%.
+[0:12:56.54 --> 0:12:58.50]	  So we think that this customer is turning.
+[0:12:58.62 --> 0:13:00.62]	  So we are sending here an email.
+[0:13:01.10 --> 0:13:04.22]	  So and the only thing we need to replace here is the host.
+[0:13:04.22 --> 0:13:09.82]	  So I have to warn you that with these default settings that we use now for Elastic Beanstalk,
+[0:13:10.08 --> 0:13:13.08]	  it created a service that is open to the world.
+[0:13:13.32 --> 0:13:17.78]	  So right now, if somebody gets this address, they can also start using this.
+[0:13:17.94 --> 0:13:19.54]	  They can also start sending requests.
+[0:13:19.78 --> 0:13:20.66]	  I will of course disable.
+[0:13:21.44 --> 0:13:25.18]	  I will turn it down after I finish recording this video.
+[0:13:25.28 --> 0:13:27.82]	  But in practice, this is open to the world.
+[0:13:28.34 --> 0:13:28.38]	  Right.
+[0:13:28.50 --> 0:13:30.40]	  And you need to be a bit careful with that.
+[0:13:30.40 --> 0:13:37.68]	  So for a project like that, it's fine, but you need to make sure that you don't open to it to the entire world.
+[0:13:37.78 --> 0:13:42.22]	  Maybe you can open it just for your computer or maybe for the services.
+[0:13:42.92 --> 0:13:48.02]	  Let's say in our example, we have this marketing service and service A and service B that use the channel service.
+[0:13:48.18 --> 0:13:53.20]	  So we need to make sure that only these services or services within some network.
+[0:13:53.38 --> 0:13:55.66]	  So let's say the services leave within some network.
+[0:13:55.94 --> 0:13:59.60]	  So only services from this network can access the channel service.
+[0:13:59.66 --> 0:14:03.76]	  I am sure that you will find a lot of materials online on how to do this,
+[0:14:03.86 --> 0:14:11.98]	  or maybe you have some people from the security department or people who are cloud specialists who can help you to do this if you don't know how to do this.
+[0:14:12.44 --> 0:14:15.28]	  But for the projects like this one, this is excellent.
+[0:14:15.46 --> 0:14:17.84]	  Just be careful and don't forget to turn this down.
+[0:14:18.24 --> 0:14:23.08]	  And actually to do this, what we need to do now is Elastic Beanstalk terminate.
+[0:14:23.52 --> 0:14:27.78]	  Before I terminate, let me just show it how it looks from console.
+[0:1 --> 0:14:29.60]	  So Elastic Beanstalk.
+[0:14:31.06 --> 0:14:34.14]	  So now we have this churn service environment.
+[0:14:34.36 --> 0:14:38.78]	  So we know when it was created, we know the URL of the server, we know that it's Docker.
+[0:14:39.22 --> 0:14:44.76]	  We can click on this and we can see some logs.
+[0:14:45.34 --> 0:14:46.88]	  There should be a dashboard somewhere.
+[0:14:48.50 --> 0:14:53.32]	  And then, yeah, it shows like, okay, there was one request recently.
+[0:14:53.80 --> 0:14:56.18]	  So it just shows you what's going on.
+[0:14:56.52 --> 0:15:04.20]	  And then we can terminate it from here, terminate environment, or we can terminate it from the console, from the terminal.
+[0:15:04.60 --> 0:15:17.94]	  Let's do it from the terminal, terminate, and then we need the name of the terminal churn, churn, serving, and yeah, of course we need to do this inside this environment, inside this virtual environment.
+[0:15:19.86 --> 0:15:24.28]	  Okay, yes, I know what I'm doing. Please terminate it.
+[0:15:24.58 --> 0:15:26.86]	  Now it will take some time to actually terminate it.
+[0:15:27.46 --> 0:15:29.26]	  Okay, so now it's terminating.
+[0:15:29.38 --> 0:15:35.76]	  I think what I can do now is let's check if I didn't forget to cover anything.
+[0:15:36.20 --> 0:15:43.74]	  So what we covered in this lesson, we installed Elastic Beanstalk CLI in our virtual environment.
+[0:15:43.74 --> 0:15:48.88]	  And then we saw how to run our service with Elastic Beanstalk locally in Ovid Docker.
+[0:15:49.38 --> 0:1]	  And then we deployed the model.
+[0:15:51.26 --> 0:15:59.24]	  And if you remember, to deploy a model, what we needed to do is first run EB init, then run EB create, and that creates an environment.
+[0:15:59.62 --> 0:16:04.44]	  And then finally, when we don't no longer need the environment, we can just do EB terminate.
+[0:16:04.68 --> 0:16:05.94]	  So that's pretty simple.
+[0:16:06.26 --> 0:16:08.70]	  Yeah, I think that's all for this lesson.
+[0:16:08.86 --> 0:16:10.90]	  And feel free to explore other things.
+[0:16:11.14 --> 0:16:13.42]	  You don't have to use AWS here.
+[0:16:13.66 --> 0:16:14.86]	  You can use other cloud providers.
+[0:16:15.36 --> 0:16:18.48]	  And likewise, instead of Mission Flask, you can try other things.
+[0:16:18.88 --> 0:16:20.72]	  So please refer to this Explorer more session.
+[0:1 --> 0:16:24.30]	  I think it should actually should come after the summary.
+[0:16:24.78 --> 0:16:25.72]	  So let me change the order.
+[0:16:26.64 --> 0:16:28.62]	  Okay, so that's all.
+[0:16:29.04 --> 0:16:32.68]	  And in the next lesson, we wrap the session up and that's it.
+[0:16:33.28 --> 0:16:34.10]	  So practice on.

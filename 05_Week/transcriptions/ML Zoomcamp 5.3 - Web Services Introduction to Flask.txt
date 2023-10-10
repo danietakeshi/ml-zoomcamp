@@ -1,0 +1,63 @@
+[0:00:00.16 --> 0:00:03.74]	  Welcome back. This is lesson three of machine learning zoom comp session five.
+[0:00:03.98 --> 0:00:06.54]	  And in this lesson, we'll talk about web services.
+[0:00:06.78 --> 0:00:12.16]	  And we'll also talk about a framework, a Python framework for creating web services called Flask.
+[0:00:12.38 --> 0:00:17.80]	  Remember, we talked about this. So the way we want to use our model is we want to put it inside
+[0:00:17.80 --> 0:00:23.56]	  into a churn service. And this service, the marketing service will communicate with our
+[0:00:23.56 --> 0:00:28.66]	  churn service, we'll send some requests and we'll get some responses. So one, instead of
+[0:00:28.66 --> 0:00:33.62]	  writing this predict dot py script, putting the customer there in the script, we want to make it
+[0:00:33.62 --> 0:00:38.90]	  available as web service. And the web services we see is a method for communicating between two
+[0:00:38.90 --> 0:00:45.80]	  devices or a network. So let's say we have our web service. And let's say we have a user of our
+[0:00:45.80 --> 0:00:51.86]	  web service, somebody who wants to make a request. So they send the request, and they send some
+[0:00:51.86 --> 0:00:57.36]	  information in this request. For example, if you go to Google, like I just did, and look for
+[0:00:57.36 --> 0:01:04.34]	  web service. So you send a request and then there are some parameters like query equals web
+[0:01:04.34 --> 0:01:11.58]	  service. So this is what I sent here. So two equals web service. And then for spaces, they use
+[0:01:11.58 --> 0:01:18.14]	  plus. And then I get back a result with whatever web service wants to make with this query. So in
+[0:01:18.14 --> 0:01:23.78]	  this particular case, if we're talking about Google, Google returns us a web page with different
+[0:01:23.78 --> 0:01:29.82]	  results. So let's say if you Google for machine learning, zoom cam, it will return you some
+[0:01:29.82 --> 0:01:36.14]	  results. And one of them will be GitHub repo, which you can also start. So this is a web service.
+[0:01:36.36 --> 0:01:41.26]	  Web service is a service that you communicate with over a network using some protocol. So usually
+[0:01:41.26 --> 0:01:47.76]	  what we use is like this, like this, we don't need to worry about all that, because we can use
+[0:01:47.76 --> 0:01:54.76]	  Flask for implementing that. And it takes care of all these internals. All we need to know is
+[0:01:54.76 --> 0:02:00.98]	  how can we communicate with this. So let's create a simple service. So we want to create a service
+[0:02:00.98 --> 0:02:07.98]	  that you send it a query to pink address, and it replies with a book. And that's all it does.
+[0:0 --> 0:02:15.66]	  I just want to show you how to create web services with Flask. It's quite simple. So let's do that.
+[0:02:16.30 --> 0:02:22.50]	  Just create a file, which I'll call pink. So what we want to do is function, say,
+[0:02:22.82 --> 0:02:28.22]	  let's call this function pink, which will return Pong when we invoke it. So as simple as that,
+[0:02:28.36 --> 0:02:34.70]	  we can quickly test this function. So let's call Python and then import pink, and then pink,
+[0:02:35.06 --> 0:02:41.42]	  and then replace with Pong. So what I did, I just imported the file that we created, and I
+[0:02:41.42 --> 0:0]	  invoked a function from this file, right, that replied with Pong. What we want to do now is we
+[0:0 --> 0:02:53.90]	  want to turn this function into a web service, and we'll use Flask for that. So for that, we,
+[0:02:54.22 --> 0:02:58.92]	  of course, we need to install Flask. I think I have it here, people install Flask. If you don't
+[0:02:58.92 --> 0:03:03.62]	  have, yeah, I already have it, but this is how you install Flask using people install Flask,
+[0:03:03.80 --> 0:03:10.58]	  and then from Flask, you import Flask capital F, and then you create a Flask up until you need to
+[0:03:10.58 --> 0:03:16.30]	  give it a name. Let's call pink. And now you need to put a decorator on this function. So decorator
+[0:03:16.30 --> 0:03:21.62]	  is just a way to add some extra functionality to our functions. And this extra functionality
+[0:03:21.62 --> 0:03:28.08]	  that we're going to add will allow us to turn this function into a web service. So let's call
+[0:03:28.08 --> 0:03:34.42]	  up root, and root is, we will now specify on which address this function will leave. So let's
+[0:03:34.42 --> 0:03:41.52]	  say it will leave in the pink address, then methods, how exactly we are going to access
+[0:03:41.52 --> 0:03:47.26]	  this root, this address. So we will use the get method. So if you're not sure what get is,
+[0:03:47.36 --> 0:03:54.48]	  what post is, probably just also Google get, post, get a post to a service, then yeah,
+[0:03:54.64 --> 0:04:03.12]	  just take the first link and you can read an explanation. We'll just get what is post, what
+[0:04:03.12 --> 0:04:08.98]	  is the get request, the browser, something. So we want to access this function using the
+[0:04:08.98 --> 0:04:15.10]	  get method, and it will leave by the pink address slash pink. We're almost done. So what we need to
+[0:04:15.10 --> 0:04:22.16]	  do is now just do a run, we'll run it into debug mode. And then we need to specify the host we're
+[0:04:22.16 --> 0:04:32.14]	  running on. So we use 0000, which is the same as local host, and port will be 9696. And this thing
+[0:04:32.18 --> 0:04:41.54]	  should leave inside so called the main method in Python, main. So this is top level script
+[0:04:41.54 --> 0:04:46.78]	  environment. So this is underscore underscore main underscore underscore. So this is what we need
+[0:04:46.78 --> 0:04:54.72]	  to do. It is executed only when we do Python pink dot pi. And we do this by, let me just copy, paste
+[0:04:55.56 --> 0:05:03.72]	  it. This is our script. Let's run it. So you see that it's running on this address. And now we can
+[0:05:03.72 --> 0:05:10.28]	  use it. What we can do is let me just create a new terminal. We'll use curl and curl is a special
+[0:05:10.28 --> 0:05:15.50]	  command line utility for communicating with web services. And at least on local host,
+[0:05:16.14 --> 0:05:24.40]	  we can use 0000 like previously. And then port is 9696. I don't specify here HTTP by default.
+[0:05:24.58 --> 0:05:30.62]	  It's HTTP. We can keep it, we can remove it. And then the address is pink. And then it replies
+[0:05:30.62 --> 0:05:36.48]	  with wonk. You see, this is the response. And we can also use local host here. It will be the same.
+[0:05:37.34 --> 0:05:42.68]	  We can also do this from a browser, because here we say it's a get request, we can do this from
+[0:05:42.82 --> 0:05:51.50]	  browser. So local host 9696 slash pink. And then we get punk is the request. I think we also see that
+[0:05:51.50 --> 0:05:57.56]	  it keeps a lock off all the accesses. Yeah, so it's on the pink request. So first we send the pink
+[0:05:57.56 --> 0:06:02.48]	  request from curl, then again, we send the pink request from curl, and then we send the pink request
+[0:06:02.48 --> 0:06:09.14]	  from from the browser. And that's probably it for this lesson. So in this lesson, we looked at
+[0:06:09.14 --> 0:06:15.10]	  Flask and we saw that it's relatively simple to turn a Python function into web service,
+[0:06:15.46 --> 0:06:21.76]	  and then access this function from some other process like from terminal or from the browser,
+[0:0 --> 0:06:29.30]	  or from any other place. So that's it. And yes, we talked about that, we talked about creating
+[0:06:29.30 --> 0:06:34.72]	  a web service. And in the next lesson, we'll see how to create our turn service, how to put our
+[0:06:34.72 --> 0:06:39.28]	  turn protection model in Flask and have it available as web service. So see you soon.

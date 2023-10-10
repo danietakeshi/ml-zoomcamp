@@ -1,0 +1,243 @@
+[0:00:00.08 --> 0:00:03.78]	  Hello everyone, this is lesson five of machine learnings on com session five.
+[0:00:03.96 --> 0:00:07.96]	  And in this lesson, we'll talk about managing virtual environments and we will talk
+[0:00:07.96 --> 0:00:12.10]	  about two for doing that called pip-env. Let's say we want to install a library.
+[0:00:12.46 --> 0:00:17.86]	  So by now, you know that if you want to do this, what you do is you do pip install
+[0:00:17.86 --> 0:00:24.24]	  and then library name, for example, scikit-learn. So when you do this, what happens is
+[0:00:24.42 --> 0:00:29.92]	  your system where you type in this command, it looks up in this path variable.
+[0:00:30.26 --> 0:00:36.34]	  And it sees what kind of pip you're talking about. And let's say if you use anaconda for this lesson.
+[0:00:36.62 --> 0:00:43.38]	  So then pip usually is coming from your com directory, then you have anaconda three,
+[0:00:43.54 --> 0:00:49.52]	  and then there is a folder called bin. Then in this bin, you have pip, you have python,
+[0:00:49.52 --> 0:00:55.90]	  and you have other things. So when you type pip install scikit-learn, so it uses pip from this location
+[0:00:55.90 --> 0:01:03.50]	  or whatever location you have on your path variable, it uses this pip, and then this pip goes to pip.org,
+[0:01:03.62 --> 0:01:10.18]	  which is the python package index, py, it's python, py package index. So then it finds scikit-learn here
+[0:01:10.18 --> 0:01:16.54]	  and it installs the latest version because here you notice that we don't specify a version here.
+[0:01:16.54 --> 0:01:24.42]	  That's why it's the same as installing the latest one. So you execute this command, pip goes to pipy,
+[0:01:24.54 --> 0:01:30.52]	  it touches the scikit-learn wheel or some other format. So there is some package and that it installs
+[0:01:30.52 --> 0:01:35.98]	  back to the python that you have on your path variable. So it goes somewhere in this anaconda folder,
+[0:01:36.16 --> 0:01:43.64]	  there is a folder for your libraries and it goes there. And let's imagine a scenario where we have two applications.
+[0:01:43.74 --> 0:01:52.66]	  So we have churn service and let's say our churn service uses scikit-learn 0242.
+[0:01:53.18 --> 0:01:58.74]	  And by the way, this is how you can specify the exact package. So let's say if you want to use pip to install
+[0:01:58.74 --> 0:02:07.28]	  an exact version of a package, you write pip install scikit-learn and then you use equals equals and then the version you want to install.
+[0:02:07.28 --> 0:02:14.46]	  So churn service needs scikit-learn of this version, but let's say we have some other service, let's say lead scoring.
+[0:02:15.56 --> 0:02:23.30]	  So lead scoring service, a service that we used to estimate what is the probability that this potential client will become an actual client.
+[0:02:23.46 --> 0:02:31.92]	  And for example, this lead scoring service uses scikit-learn of the latest version. So it uses scikit-learn 1.0.
+[0:02:32.04 --> 0:02:41.12]	  And if we have two such services in our system, our churn service depends on this version of scikit-learn and lead scoring service depends on this scikit-learn.
+[0:02:41.34 --> 0:02:48.38]	  And these are two different versions of scikit-learn. For example, in this version, there is something new that doesn't exist here.
+[0:02:48.76 --> 0:02:53.20]	  So that is why we need to make sure that everything that the lead scoring service needs is there.
+[0:02:53.54 --> 0:02:59.28]	  And at the same time, there could be some things that were removed, for example, from this version of the library.
+[0:02:59.28 --> 0:03:02.98]	  We still need to make sure that the churn service still keeps running.
+[0:03:03.42 --> 0:03:05.86]	  So we need to find a way to keep them separated.
+[0:03:06.28 --> 0:03:14.82]	  Because if we just use the system Python or whatever Python we have in our path variable, we are risking that if we need to run two projects, they will have conflicts.
+[0:03:15.38 --> 0:03:17.62]	  So here, this is actually a conflict.
+[0:03:18.30 --> 0:03:20.22]	  So they need different versions of library.
+[0:03:20.56 --> 0:0]	  To solve this problem, what we usually do is we use virtual environments.
+[0:03:25.22 --> 0:03:33.06]	  The idea there is we put these two different services into different virtual environments and they stay separated this way.
+[0:03:33.24 --> 0:03:39.56]	  So each virtual environment has its own libraries, its own version of libraries, and these services do not depend on each other.
+[0:03:39.78 --> 0:03:46.02]	  So say we have our churn prediction service and we have our lead scoring service.
+[0:03:46.48 --> 0:03:51.70]	  So each of them lives in its own environment and isolated from the rest.
+[0:03:52.08 --> 0:04:03.42]	  So for example, for churn service, it uses its own Python, which can live, for example, in somewhere, vn, churn, bin, Python.
+[0:04:03.90 --> 0:04:10.04]	  And the lead scoring service has its own Python that lives in the nv, lead, bin, Python.
+[0:04:10.46 --> 0:04:12.54]	  So they have different pythons.
+[0:04:12.82 --> 0:04:15.34]	  Each of these pythons has its own packages.
+[0:04:15.62 --> 0:0]	  And when we do pip install here, it uses pip from here, right?
+[0:04:22.10 --> 0:04:28.82]	  And then it installs a package when we do scikit-learn, then it installs this scikit-learn to this Python.
+[0:04:29.20 --> 0:04:31.54]	  And the same happens for the lead scoring service.
+[0:04:31.72 --> 0:04:36.90]	  When we do pip install here, then it uses this Python, its own Python.
+[0:04:37.08 --> 0:04:43.76]	  And when you install scikit-learn here, you can install a different version of scikit-learn, which will have no conflicts with the churn service.
+[0:04:43.78 --> 0:04:46.20]	  So here we have no conflicts.
+[0:0 --> 0:04:50.64]	  So this way you can keep these things separated.
+[0:04:50.98 --> 0:04:54.40]	  So the churn service will have its own dependencies and its own environment.
+[0:04:54.72 --> 0:04:58.48]	  And the lead scoring service will have its own dependencies and its own environment.
+[0:04:58.74 --> 0:05:04.24]	  So this type of separation, so remember, these things, they still live on the same computer.
+[0:05:04.70 --> 0:05:07.26]	  So they still, like, let's say this is your laptop.
+[0:05:07.68 --> 0:05:14.56]	  So if you use Ubuntu, so both of them live on the same laptop, on the same operating system, the same Ubuntu.
+[0:05:14.74 --> 0:05:18.22]	  They just have different, let's say, folders where they keep dependencies.
+[0:05:18.52 --> 0:05:21.48]	  And this is how they manage to resolve the conflict.
+[0:05:21.90 --> 0:05:27.44]	  So each of them keeps their own personal Python that is isolated from the pythons of other projects.
+[0:05:27.66 --> 0:05:30.10]	  This separation is called virtual environments.
+[0:05:30.94 --> 0:05:35.34]	  And there are multiple ways of managing virtual environments.
+[0:05:35.34 --> 0:05:38.92]	  So you have the more classic Python one.
+[0:05:39.24 --> 0:05:40.28]	  It's called virtual inf.
+[0:05:40.54 --> 0:05:47.70]	  I think it's a built-in package for Python called the inf that you can use for creating environments like that.
+[0:05:48.14 --> 0:05:50.16]	  And then there is also Konda.
+[0:05:50.80 --> 0:05:52.06]	  This is what Anaconda uses.
+[0:05:52.54 --> 0:05:57.56]	  And if you were following the instructions from the setup, let me quickly open them.
+[0:05:57.92 --> 0:06:02.28]	  So in ZoomCamp, in our first introductory session, we had this environment.
+[0:06:02.70 --> 0:06:06.38]	  And so you can create environment for this course.
+[0:06:06.64 --> 0:06:09.64]	  And Konda here was creating a virtual environment.
+[0:06:09.88 --> 0:06:14.28]	  And this virtual environment was isolated from main Anaconda Python interpreter.
+[0:06:14.94 --> 0:06:17.34]	  So here we activated the environment.
+[0:06:17.68 --> 0:06:19.56]	  So this is, you can use Konda for that.
+[0:06:19.86 --> 0:06:21.28]	  And then there are other libraries.
+[0:06:21.88 --> 0:06:23.48]	  One is P-Penf.
+[0:06:23.66 --> 0:06:24.86]	  And then there is also poetry.
+[0:06:25.54 --> 0:06:31.44]	  In this lesson here, we will use P-Penf, but it's pretty similar to Konda or poetry.
+[0:06:31.44 --> 0:06:33.38]	  So there are no big differences.
+[0:06:33.84 --> 0:06:41.08]	  The only reason I chose P-Penf is it's officially recommended package management from the Python community.
+[0:06:41.28 --> 0:06:43.18]	  But they work pretty similar.
+[0:06:43.52 --> 0:06:48.72]	  And think poetry is considered more cool, but think at the end they work in exactly the same way.
+[0:06:48.94 --> 0:06:50.78]	  So we will cover P-Penf here.
+[0:06:51.28 --> 0:06:59.56]	  And as I said, P-Penf is a way to manage these dependencies of different versions and manage these virtual environments.
+[0:06:59.68 --> 0:07:02.28]	  Okay, so now let's install it.
+[0:07:02.32 --> 0:07:04.36]	  And before this lesson, I deleted it.
+[0:07:04.66 --> 0:07:06.46]	  So hopefully I should install it.
+[0:07:06.74 --> 0:07:07.88]	  P-Penf install P-Penf.
+[0:07:07.94 --> 0:07:10.22]	  This is how we install P-Penf on Windows.
+[0:07:10.96 --> 0:07:11.48]	  It's the same.
+[0:07:11.72 --> 0:07:13.28]	  So just do P-Penf install P-Penf.
+[0:07:13.32 --> 0:07:14.40]	  So we have P-Penf here.
+[0:07:14.76 --> 0:07:16.86]	  And now I am in this folder.
+[0:07:17.10 --> 0:07:25.46]	  Now to install a package, what we do is instead of using P-Penf style, let's say NumPy, we use P-Penf install NumPy.
+[0:07:25.64 --> 0:07:27.70]	  And then for this project, we need NumPy.
+[0:07:27.72 --> 0:07:30.62]	  Then we need, we don't need pandas.
+[0:07:30.76 --> 0:07:31.62]	  We need scikit-learn.
+[0:07:32.12 --> 0:07:35.38]	  And actually for scikit-learn, we need a specific version.
+[0:07:35.76 --> 0:07:36.86]	  Remember we had this warning.
+[0:07:37.88 --> 0:07:41.52]	  So it's when it was trying to unpick an estimator of this version.
+[0:07:41.58 --> 0:0]	  So we don't want to have this warning in production.
+[0:07:44.26 --> 0:07:48.28]	  So that's why we want to specify the exact version of scikit-learn here.
+[0:07:48.46 --> 0:07:49.28]	  And then we need flask.
+[0:07:49.80 --> 0:07:51.42]	  And this is how we install libraries.
+[0:07:51.58 --> 0:07:56.20]	  It's pretty much similar to P-Penf, except here instead of using P-Penf install.
+[0:07:56.36 --> 0:07:57.56]	  Let's install it.
+[0:07:58.98 --> 0:08:04.18]	  You see it's installing the exact version of scikit-learn that we specified.
+[0:08:05.26 --> 0:08:09.32]	  It has created two files, P-Penf, PIP file and file log.
+[0:08:09.62 --> 0:08:11.04]	  We will now look at these files.
+[0:08:11.92 --> 0:08:15.48]	  So see that there are two new files, PIP file and PIP file log.
+[0:08:15.92 --> 0:08:19.40]	  It was also referring to these files here during installation.
+[0:08:19.74 --> 0:08:26.18]	  So creating PIP file for this project, adding things to PIP file and then creating PIP file log.
+[0:08:26.18 --> 0:08:27.72]	  So let's look at these files.
+[0:08:28.02 --> 0:08:30.26]	  So let me open my Visual Studio Code.
+[0:08:30.76 --> 0:08:32.06]	  Let's start with PIP file.
+[0:08:32.38 --> 0:08:33.78]	  So we'll have PIP file here.
+[0:08:34.38 --> 0:08:36.76]	  So you see this is how PIP file looks like.
+[0:08:37.08 --> 0:08:39.22]	  So here we say which packages we need.
+[0:08:39.46 --> 0:08:41.44]	  So we say that we need package called numpy.
+[0:08:41.66 --> 0:08:45.12]	  We need a package called scikit-learn and we need a package called flask.
+[0:08:45.62 --> 0:08:50.60]	  And for scikit-learn we specify the exact version of scikit-learn that we want to have.
+[0:08:50.80 --> 0:08:52.24]	  So we specify the exact dependency.
+[0:08:52.62 --> 0:08:54.96]	  And we will come to that packages a bit later.
+[0:0 --> 0:08:58.90]	  So dev packages are basically packages that you only need for development.
+[0:08:58.92 --> 0:09:00.96]	  So you only want to have them on your laptop,
+[0:0 --> 0:09:04.40]	  but you don't want to have them when you deploy your service production environment.
+[0:09:04.62 --> 0:09:08.66]	  We will see an example of a dev package in the next lesson.
+[0:09:08.98 --> 0:09:11.56]	  So this is how our PIP file looks like.
+[0:09:11.84 --> 0:09:15.58]	  And you also remember that we need to install the unicorn.
+[0:09:16.36 --> 0:09:18.82]	  If you're on Windows, you want to install the address.
+[0:09:19.36 --> 0:09:21.82]	  So we do install the unicorn.
+[0:09:22.62 --> 0:09:28.24]	  What should happen is, you see it added a new line here in PIP file.
+[0:09:28.58 --> 0:09:29.86]	  It edited this file.
+[0:09:30.26 --> 0:09:33.96]	  And we save everything to git and clone this repo on a different computer.
+[0:09:34.22 --> 0:09:36.58]	  Let's say our colleague wants to start working on this project.
+[0:09:36.72 --> 0:09:39.60]	  What they do after cloning is they just do PIP and install.
+[0:09:40.08 --> 0:09:41.38]	  And that's all they need to do.
+[0:09:41.54 --> 0:09:44.68]	  So they don't need to write all the names of the libraries.
+[0:09:45.06 --> 0:09:48.30]	  PIP and will use the PIP file and PIP file log,
+[0:09:48.30 --> 0:09:51.76]	  which we'll look now to figure out which dependencies it needs to install.
+[0:09:51.94 --> 0:09:54.08]	  So now let's take a look at this PIP file log.
+[0:09:55.04 --> 0:10:00.20]	  So this is a JSON, a big JSON file.
+[0:10:00.86 --> 0:10:03.94]	  And what it contains, it contains versions,
+[0:10:04.42 --> 0:10:07.16]	  exact versions for every dependencies we have.
+[0:10:07.34 --> 0:10:08.90]	  So let's say we have flask here.
+[0:10:09.12 --> 0:10:11.90]	  It's specify the exact version of flask that was used.
+[0:10:12.40 --> 0:10:14.82]	  So this version of flask was used for this project.
+[0:10:14.82 --> 0:10:19.04]	  And this is the checksum for the files that PIP and Fton loads.
+[0:10:19.46 --> 0:10:22.06]	  And this is needed to avoid any surprises.
+[0:10:22.34 --> 0:10:24.42]	  So it kind of fixes, it pins the versions.
+[0:10:24.78 --> 0:10:27.18]	  And when you do PIP and F install,
+[0:10:27.36 --> 0:10:29.98]	  it makes sure that these exact versions are used
+[0:10:29.98 --> 0:10:33.24]	  when you create this virtual environment on a different computer.
+[0:10:33.38 --> 0:10:35.10]	  And this helps with reproducibility.
+[0:10:35.66 --> 0:10:39.30]	  You make sure that dependencies that you have on your machine
+[0:10:39.30 --> 0:10:42.30]	  will be exactly the same when your colleague tries to install it.
+[0:10:42.30 --> 0:10:44.46]	  So this is very important for reproducibility.
+[0:10:44.72 --> 0:10:48.72]	  And it helps avoiding some nasty bugs with version incompatibility
+[0:10:48.72 --> 0:10:51.32]	  and with when a new version is coming out
+[0:10:51.32 --> 0:10:53.62]	  that changes something in the behavior.
+[0:10:53.82 --> 0:10:55.58]	  You want to avoid such surprises.
+[0:10:55.76 --> 0:10:59.06]	  And that's why you want to pin your dependencies.
+[0:10:59.94 --> 0:11:04.34]	  And it does that for all the dependencies, basically.
+[0:11:05.26 --> 0:11:06.98]	  So you see, like NumPy.
+[0:11:07.46 --> 0:11:10.10]	  So specify the exact version of NumPy.
+[0:11:10.10 --> 0:11:12.10]	  These are all the files that NumPy has.
+[0:11:12.70 --> 0:11:14.26]	  So this is the purpose of the log file.
+[0:11:14.54 --> 0:11:15.94]	  And when you do PIP and Fton install,
+[0:11:16.04 --> 0:11:18.82]	  it tries to install things from PIP file log.
+[0:11:19.10 --> 0:11:20.66]	  And it looks at the exact versions.
+[0:11:20.90 --> 0:11:22.72]	  Because here we have the exact versions.
+[0:11:23.20 --> 0:11:25.80]	  And then it tries to install these exact versions.
+[0:11:26.14 --> 0:11:30.06]	  So this is how we install packages with PIP and Fton.
+[0:11:30.18 --> 0:11:32.70]	  And let's say we install these packages.
+[0:11:33.02 --> 0:11:38.06]	  So what we now want to do is, let's say, if you want to run our service.
+[0:11:38.06 --> 0:11:43.48]	  That's what we want to do now is we want to get in this environment.
+[0:11:43.82 --> 0:11:46.04]	  So we want to get in this environment.
+[0:11:46.90 --> 0:11:50.86]	  And let's say when we run Python predict.py,
+[0:11:51.06 --> 0:11:53.54]	  we want to make sure that this Python is used.
+[0:11:54.02 --> 0:11:57.34]	  And the dependencies for this particular service are used.
+[0:11:57.62 --> 0:11:59.32]	  No dependencies from this project,
+[0:11:59.44 --> 0:12:01.10]	  no dependencies from some other project,
+[0:12:01.22 --> 0:12:03.12]	  but dependencies from this specific project.
+[0:12:03.40 --> 0:12:06.34]	  And for that, we use PIP and shell.
+[0:12:06.40 --> 0:12:11.20]	  And this way we say it says launch in sub shell in virtual environment.
+[0:12:11.42 --> 0:12:16.62]	  And it actually shows which folder is used for storing this virtual environment.
+[0:12:16.98 --> 0:12:20.14]	  So it's actually, so we can see what is here.
+[0:12:20.68 --> 0:12:24.68]	  So it has this bin folder, right?
+[0:12:24.76 --> 0:12:29.04]	  And bin, we have Python, we have PIP, we have other things.
+[0:12:29.28 --> 0:12:31.96]	  We also have G Unicorn because we just installed it.
+[0:12:32.04 --> 0:12:35.30]	  So when we write now which G Unicorn,
+[0:12:35.68 --> 0:12:37.34]	  it points to this location.
+[0:12:37.56 --> 0:12:41.88]	  So when we type G Unicorn here, then this G Unicorn will be used.
+[0:12:42.38 --> 0:12:45.10]	  Because now I think if we do echo path,
+[0:12:45.90 --> 0:12:49.30]	  the first thing in our path is exactly that.
+[0:12:49.46 --> 0:12:52.66]	  This is how virtual environment is making this happen.
+[0:12:52.92 --> 0:12:56.52]	  So it prevents it, it's this virtual environment
+[0:12:56.52 --> 0:12:58.06]	  at the beginning of our path variable.
+[0:12:58.30 --> 0:13:01.62]	  And that's why first when it is looking for G Unicorn,
+[0:13:01.82 --> 0:13:03.34]	  it goes to this folder first.
+[0:13:03.34 --> 0:13:09.28]	  And when we type G Unicorn bind, then address, 9696,
+[0:13:09.74 --> 0:13:11.50]	  and then predict up.
+[0:13:12.26 --> 0:13:17.78]	  So now it actually uses G Unicorn from this virtual environment that we created.
+[0:13:18.14 --> 0:1]	  And yeah, it uses this Python file and it uses this variable
+[0:1 --> 0:13:23.78]	  for creating a web service.
+[0:13:24.22 --> 0:13:25.66]	  And let's call it.
+[0:13:25.84 --> 0:13:27.24]	  I'll go to zoom count again.
+[0:13:27.42 --> 0:13:30.16]	  And here we have this predict test.
+[0:13:30.80 --> 0:13:33.94]	  I remember, so this is something we used for testing.
+[0:13:34.36 --> 0:13:36.90]	  So let me execute this test.
+[0:13:37.22 --> 0:13:39.90]	  And then yeah, so it says that for this customer,
+[0:13:40.02 --> 0:13:41.96]	  the probability of churning is quite low.
+[0:13:42.12 --> 0:13:45.36]	  So it actually used this thing that we deployed here.
+[0:13:45.78 --> 0:13:46.76]	  Let me stop that.
+[0:13:47.34 --> 0:13:51.10]	  Yeah, and to exit this shell, we just do control T,
+[0:13:51.34 --> 0:13:55.34]	  it leaves and now we are back to check which G Unicorn.
+[0:13:55.76 --> 0:13:58.60]	  So now it uses a G Unicorn that I had previously installed
+[0:13:58.60 --> 0:14:02.12]	  and to which Python, yes, it uses the same.
+[0:14:02.28 --> 0:14:05.88]	  The previous Python that I used, it doesn't use the virtual environment anymore.
+[0:14:06.26 --> 0:14:08.64]	  So first, like if we want to do, to run something,
+[0:14:08.74 --> 0:14:12.88]	  we need to do pip and shell and then do Python, I don't know,
+[0:1 --> 0:14:15.32]	  G Unicorn something that is too much to write.
+[0:14:15.48 --> 0:14:18.42]	  So what we can do is just write pip and front and then the comment.
+[0:14:18.90 --> 0:14:22.42]	  And then what will happen is pip and will execute this comment,
+[0:14:22.70 --> 0:14:24.74]	  this line inside the virtual environment.
+[0:14:24.74 --> 0:14:29.42]	  So basically this is now is the same as doing pip and shell first,
+[0:14:29.68 --> 0:14:32.36]	  and then running G Unicorn bind, et cetera.
+[0:14:32.76 --> 0:14:35.88]	  Okay, I think that's it for this lesson.
+[0:14:36.08 --> 0:14:38.30]	  So in this lesson, we talked about virtual environments
+[0:14:38.30 --> 0:14:41.88]	  and we talked about pip and as a way of managing virtual environments.
+[0:14:42.08 --> 0:14:45.90]	  So we talked how to install pip and we talked how to install libraries
+[0:14:45.90 --> 0:14:51.12]	  with pip and how to run things with pip and so this thing creates
+[0:14:51.12 --> 0:14:51.94]	  virtual environments.
+[0:14:52.32 --> 0:14:56.88]	  So the way it does this is by preparing things to the path variable
+[0:14:56.88 --> 0:15:00.10]	  and it just places dependencies in different folders,
+[0:15:00.28 --> 0:15:02.22]	  but we're still running on the same laptop,
+[0:15:02.42 --> 0:15:04.42]	  on the same host machine, on the same Ubuntu.
+[0:15:04.76 --> 0:15:07.72]	  So yeah, they're still not very separated.
+[0:15:07.94 --> 0:15:12.16]	  And if one service needs some specific version of some specific system library
+[0:15:12.16 --> 0:15:14.98]	  like, I don't know, OpenMP or something like this,
+[0:15:15.06 --> 0:15:18.74]	  which is not a Python dependency, but some system dependency
+[0:15:18.74 --> 0:15:23.78]	  that you install with, I don't know, Uptget, install LibGump, for example.
+[0:15:24.16 --> 0:15:27.70]	  Yeah, and if these two services need different system dependencies,
+[0:15:27.70 --> 0:15:33.38]	  we're out of virtual environments, we'll not be able to help us here.
+[0:15:33.58 --> 0:15:37.44]	  So for that, we need one more level of isolation between things
+[0:15:37.44 --> 0:15:40.62]	  and this is what we will look at in the next lesson
+[0:15:40.62 --> 0:15:41.94]	  when we will talk about Docker.

@@ -1,0 +1,213 @@
+[0:0 --> 0:00:04.10]	  Welcome back. This is lesson two of machine learnings on come session five.
+[0:00:04.34 --> 0:00:10.84]	  And we will talk about taking a model that we trained in Jupyter notebook and saving it into a file.
+[0:0 --> 0:00:16.10]	  And then we will also take this notebook and turn this into a Python script for training our model
+[0:00:16.10 --> 0:00:19.40]	  and for saving this model into a file.
+[0:00:19.78 --> 0:00:26.20]	  So let's go to the notebook. So this is the notebook and it contains the most important code from the previous
+[0:00:26.20 --> 0:00:30.94]	  week that is used for preparing the data set. Let's just go through this.
+[0:00:31.28 --> 0:00:37.18]	  So I already put all the inputs on the top. So I did a bit of cleaning everything for training the model
+[0:00:37.18 --> 0:00:44.30]	  that we need is already here. So then this is data preparation, data splitting, all the variables that we have.
+[0:00:44.78 --> 0:00:49.22]	  Then we have these two functions train and predict. So this is something we wrote in the previous week.
+[0:00:49.36 --> 0:00:52.82]	  So we'll just use them. And these are the parameters of the model.
+[0:00:52.82 --> 0:00:57.04]	  So this we're going to train a model with the C equals to one.
+[0:00:57.14 --> 0:01:02.18]	  And we will use five splits for evaluating our model using cross validation.
+[0:01:03.16 --> 0:01:12.92]	  So and now let's run this. So this code uses keyfold fivefold cross validation to train a model and evaluate it.
+[0:01:13.04 --> 0:01:15.54]	  This is exactly the same thing we did last week.
+[0:01:15.54 --> 0:01:18.84]	  It's just to make sure that our model is performing well.
+[0:01:18.84 --> 0:01:25.12]	  Yeah, so we have the results. Then we can also look at this course and then we train our final model.
+[0:01:25.32 --> 0:01:34.06]	  So now we make sure that results look okay. So we train our final model and we look at the AC of this model on the training data.
+[0:01:34.30 --> 0:01:38.82]	  And of course here, I should say that the frame test.
+[0:01:40.92 --> 0:01:45.86]	  Okay, this is nothing new to us. So now we have this model, it still lives in our notebook.
+[0:01:45.88 --> 0:01:49.10]	  So we cannot just take this model and put it in a web service.
+[0:01:49.52 --> 0:01:58.82]	  So remember what we want to do is we want to take this model, put this in a web service in such a way that the marketing service can use our model to score the customers.
+[0:01:59.34 --> 0:02:03.22]	  So we need to be able to use this model and we cannot do this from the computer notebook.
+[0:02:03.68 --> 0:02:08.66]	  So now we need to save this model in order to be able to load it later for saving the model.
+[0:02:08.86 --> 0:0]	  We will use pickle. This is a built in library for saving Python objects.
+[0:02:14.06 --> 0:02:21.70]	  Let's import it. What we need to do now is we want to take our model and write it to a file.
+[0:02:22.06 --> 0:02:26.22]	  So from that, we need to first create a file where we will write it.
+[0:02:26.52 --> 0:02:32.80]	  So let's call it, let's create special variable for storing the name of the output.
+[0:02:35.20 --> 0:02:43.04]	  Output file, which could be model underscore. So we want to know what is the C we used for training this model.
+[0:02:43.20 --> 0:02:47.74]	  We can just put this in a file name and then bin and use the C.
+[0:02:48.56 --> 0:02:51.70]	  So this is how the name of our file will look like.
+[0:02:51.88 --> 0:02:57.14]	  And maybe a nicer way of doing this is using this F strings.
+[0:02:57.28 --> 0:03:04.46]	  So instead of formatting strings in such a way, we can just directly refer to the C variable here.
+[0:03:04.74 --> 0:03:09.82]	  C is defined somewhere here. Here it is. And we should get the same result.
+[0:03:10.06 --> 0:03:19.78]	  So now we take this output file and we want to create a file with this file name and we want to write this open function, opens a file.
+[0:03:19.88 --> 0:03:22.48]	  And here we specify what we want to do with this file.
+[0:03:22.48 --> 0:03:28.14]	  So here we say that we want to write to this file and the file is going to be binary.
+[0:03:28.46 --> 0:0]	  So we are not going to write text there. We are going to write bytes there.
+[0:03:32.32 --> 0:03:37.22]	  So we open a file. So next what we do is we use pickle to save from our model.
+[0:03:37.64 --> 0:03:43.82]	  So we use the dump function for that and so we write model and we write the file F out.
+[0:03:44.42 --> 0:03:47.56]	  And then the last thing we need to do is we need to close the file.
+[0:03:48.48 --> 0:03:52.50]	  And here I saved on the model, but actually have two things here.
+[0:03:52.78 --> 0:03:59.10]	  We have the dict vectorizer as well. And if you look at our predict function, we need to have both, not just the model.
+[0:03:59.28 --> 0:04:05.28]	  Because with just the model, we will not be able to translate a user, the customer into a feature matrix.
+[0:04:05.60 --> 0:04:10.48]	  That's why we need to have both. So what we can do is we can just write a tuple.
+[0:04:10.88 --> 0:04:15.82]	  So we will write to this model underscore C file. We will write two things.
+[0:04:15.82 --> 0:04:19.62]	  We will write the dictionary vectorizer and we will write the model.
+[0:04:19.96 --> 0:04:24.82]	  Yeah. So this is how we write it. So we open the file, we save the model there and we close it.
+[0:04:25.06 --> 0:0]	  Calling the close method is pretty important because if we don't do this,
+[0:04:29.10 --> 0:04:34.24]	  we cannot be sure if this file has the content and other services can use it.
+[0:04:34.34 --> 0:04:37.86]	  And it's very easy to accidentally forget to close the file.
+[0:04:38.04 --> 0:04:43.46]	  That's why I prefer to use the with statement, which makes sure that the file is closed all the time.
+[0:04:43.46 --> 0:04:51.14]	  So it automatically closes the file. So what we can do is with with open output file as F out,
+[0:04:51.28 --> 0:04:57.08]	  which is equivalent to this line. And then we do things inside this with statement.
+[0:04:57.30 --> 0:05:04.40]	  So we can do, do stuff. And once we leave this with block, do the stuff.
+[0:05:04.88 --> 0:05:09.96]	  So everything we do here inside the with statement, the file is still open.
+[0:05:09.96 --> 0:05:15.62]	  Once we go outside of the with statement, once we're here, then the file is automatically closed.
+[0:05:15.86 --> 0:05:20.88]	  This is a nice way and easy way to make sure that no matter what you do, the file is closed at the end.
+[0:05:21.18 --> 0:05:24.92]	  And it's also a bit shorter. So just two lines versus three.
+[0:05:25.06 --> 0:05:28.86]	  And this is how we save the models. And let me show you how we can load them.
+[0:05:29.10 --> 0:05:33.92]	  So for that, let me start the kernel. So we're pretending we're a different process now.
+[0:05:34.18 --> 0:05:37.74]	  So what we want to do now is we want to import pickle.
+[0:05:38.28 --> 0:05:40.36]	  And you see this is now cell number one.
+[0:05:40.48 --> 0:05:45.78]	  So because it started the Jupyter kernel from scratch, so it doesn't have the right model here.
+[0:05:45.88 --> 0:05:49.26]	  It says, yeah, I don't know what you're talking about because we restarted the kernel
+[0:05:49.26 --> 0:05:52.62]	  and it doesn't have access to the variables we used here.
+[0:05:52.74 --> 0:05:55.40]	  So we're starting from clean slate.
+[0:05:55.94 --> 0:05:58.56]	  And what we want to do now is we want to load the model.
+[0:05:59.60 --> 0:06:06.28]	  And it's pretty similar to saving the model, except here, let's call it f in file input.
+[0:06:06.42 --> 0:06:09.82]	  So here I call the f out, which means file output.
+[0:06:09.96 --> 0:06:12.12]	  So file that I created for writing.
+[0:06:12.90 --> 0:06:16.10]	  And here it will be a file for reading.
+[0:06:16.46 --> 0:06:19.50]	  And here we need to replace the w with r.
+[0:06:19.76 --> 0:06:20.86]	  So here we did a file.
+[0:0 --> 0:06:24.92]	  And this is very important if you don't, if you forget accidentally to change it
+[0:06:24.92 --> 0:06:30.22]	  and it leaves as a double here is right, then it will override the file.
+[0:06:30.32 --> 0:06:33.02]	  So it will just create a new file with zero bytes.
+[0:06:33.20 --> 0:06:34.28]	  We don't want to have that.
+[0:06:34.48 --> 0:06:38.86]	  So we want to open this file for reading and instead of dump, we use a lot.
+[0:06:38.98 --> 0:06:41.18]	  So a lot that it's from the file.
+[0:06:42.06 --> 0:06:46.90]	  And here we have file in and it returns the thing we saved here.
+[0:06:47.12 --> 0:06:48.64]	  So here this is what we saved.
+[0:06:48.80 --> 0:06:49.66]	  And this is what we load.
+[0:06:49.84 --> 0:06:51.50]	  And we don't need witnesses here.
+[0:06:52.94 --> 0:06:56.12]	  And yeah, of course, it doesn't know what output file is.
+[0:06:56.26 --> 0:06:57.68]	  Let me just create variable.
+[0:06:57.94 --> 0:06:59.14]	  I'll call it input file.
+[0:07:00.38 --> 0:07:02.14]	  So our model file.
+[0:07:03.24 --> 0:07:04.56]	  And this is what we want to read.
+[0:07:04.98 --> 0:07:11.12]	  Now you see that we have our dictionary vectorizer and we have our logistic regression.
+[0:07:11.42 --> 0:07:14.12]	  So this is what we trained and saved previously.
+[0:07:14.44 --> 0:07:17.14]	  And you can also notice that there are no imports.
+[0:07:17.14 --> 0:07:22.10]	  So I don't import scikit-learn here, but we have to have scikit-learn installed on our computer.
+[0:07:22.60 --> 0:07:24.24]	  So without that, this will not work.
+[0:07:24.48 --> 0:07:30.20]	  So when it will try to load the pickle file, it will complain saying that I don't know what this is.
+[0:07:30.40 --> 0:07:31.84]	  I cannot create these classes.
+[0:07:31.90 --> 0:07:37.94]	  I cannot create this dictionary vectorizer and logistic regression because scikit-learn is not installed on your computer.
+[0:07:38.36 --> 0:07:39.98]	  So we have the dictionary vectorizer.
+[0:07:40.06 --> 0:07:40.74]	  We have the model.
+[0:07:41.34 --> 0:07:44.10]	  So and we also have this customer.
+[0:07:44.38 --> 0:07:45.56]	  So I prepared this customer.
+[0:07:45.56 --> 0:07:51.24]	  So I think this is a customer from row number one from our dataset.
+[0:07:51.56 --> 0:07:56.78]	  I don't know if this customer is actually from train or not, but let's pretend this is a new customer.
+[0:07:56.78 --> 0:08:05.20]	  This is this person who we want to score, who we want to send to our turn service to understand what's the probability, the probability of turning.
+[0:08:05.64 --> 0:0]	  So let's have this customer in a variable.
+[0:08:09.54 --> 0:08:13.84]	  And now what we want to do is we want to turn this customer into a feature matrix.
+[0:08:13.84 --> 0:08:22.52]	  So for that, we use our dictionary vectorizer transform method and put the customer and the dictionary vectorizer expects a list of dictionaries.
+[0:08:22.66 --> 0:08:24.88]	  So that's why we create a list with just one customer.
+[0:08:25.20 --> 0:08:26.16]	  And this is the output.
+[0:08:26.48 --> 0:08:31.80]	  So let me save this output into X, but we have seen this already many times.
+[0:08:32.26 --> 0:08:38.28]	  And then what we do next is we call model.predictprova for this X.
+[0:08:38.48 --> 0:08:43.26]	  So we have a two-dimensional array as usual, and we're interested in this thing here.
+[0:08:43.52 --> 0:08:45.96]	  So let's write it like this.
+[0:08:46.30 --> 0:08:53.18]	  So the row number zero, the column number one, and we're getting the probability that this particular customer is going to turn.
+[0:08:53.58 --> 0:09:04.38]	  And we can see, let's say, if we add more months to the tenure, then the probability becomes smaller and then with 20, that's probably, yeah, so it decreases.
+[0:09:04.86 --> 0:09:09.46]	  But since this customer is new, she has been with us only for one month.
+[0:09:09.46 --> 0:09:15.94]	  So, and she's on month-to-month contract, and then, yeah, we're not so sure if she'll stay with us or not.
+[0:09:16.02 --> 0:09:18.96]	  So we want to probably give her some promotion.
+[0:09:19.32 --> 0:09:22.44]	  So we now know how to save the model.
+[0:09:22.80 --> 0:09:27.54]	  We know how to load the model, but this is not convenient to do it from a Jupyter notebook every time.
+[0:09:27.88 --> 0:09:30.08]	  So imagine that you want to train a model.
+[0:09:30.26 --> 0:09:33.66]	  You don't want to open Jupyter and execute all the cells.
+[0:09:33.92 --> 0:09:38.26]	  So what do you want to do is you just want to have a single Python file, a script that just does that.
+[0:09:38.26 --> 0:09:39.88]	  So let's create such a script.
+[0:09:40.12 --> 0:09:41.50]	  Let's create a train-summodel.
+[0:09:41.64 --> 0:09:49.74]	  From that, what we can do is we can just go to our Jupyter notebook and then download this notebook as a Python file.
+[0:0 --> 0:09:50.72]	  So click on that.
+[0:09:51.02 --> 0:09:52.36]	  So it saves the file.
+[0:09:52.74 --> 0:09:56.18]	  So now this is in my downloads folder.
+[0:09:56.48 --> 0:09:58.64]	  So now let me put it somewhere else.
+[0:09:59.66 --> 0:10:04.08]	  So I have a special folder I called Zuncam that we're going to use this week.
+[0:10:04.36 --> 0:10:06.26]	  And let me open it.
+[0:10:06.26 --> 0:10:09.72]	  So this is, I already have Visual Studio Code here.
+[0:10:09.96 --> 0:10:12.26]	  Of course, you can use any other editor for that.
+[0:10:12.36 --> 0:10:19.78]	  You can use PyCharm or you can use Sublime Text or you can use Vim or you can use Notepad++ or whatever you prefer.
+[0:10:20.04 --> 0:10:23.66]	  I like to use Visual Studio Code, but you don't have to use it.
+[0:10:23.90 --> 0:10:25.80]	  You can use your favorite editor.
+[0:10:26.32 --> 0:10:28.64]	  So this is the file we just saved.
+[0:10:28.76 --> 0:10:29.54]	  So this is our notebook.
+[0:10:30.06 --> 0:10:35.20]	  And you see for each of the cells, so it brought the content of the cell.
+[0:10:35.88 --> 0:10:37.80]	  This is all the code we have from the notebook.
+[0:10:38.68 --> 0:10:43.02]	  What I want to do now is I want to save this file as train.py.
+[0:10:43.18 --> 0:10:45.66]	  This will be our script for training the model.
+[0:10:45.94 --> 0:10:46.94]	  And let me clean it a bit.
+[0:10:47.60 --> 0:10:49.60]	  So I'll keep the import here.
+[0:10:49.90 --> 0:10:52.08]	  Then here we have our data preparation.
+[0:10:54.08 --> 0:10:55.64]	  Okay.
+[0:10:56.08 --> 0:10:58.64]	  So just keep it like that.
+[0:11:02.54 --> 0:11:04.78]	  Then let's call it training.
+[0:11:06.76 --> 0:11:08.46]	  Yeah, we have these parameters.
+[0:11:08.90 --> 0:11:14.86]	  So maybe let's put these parameters at the top of the file so it's easier to change it.
+[0:11:15.76 --> 0:11:20.56]	  And these parameters, we can configure it through command line interface.
+[0:11:20.78 --> 0:11:24.70]	  For example, I will not do it here, but this is usually what happens in practice.
+[0:11:24.70 --> 0:11:30.36]	  So you want to specify these parameters without having to edit the train.py file.
+[0:11:30.76 --> 0:11:33.58]	  So I put parameters at the top of the file.
+[0:11:34.28 --> 0:11:38.24]	  Here we have the actual training or validation.
+[0:11:38.88 --> 0:11:40.12]	  Yeah, I will call this training.
+[0:11:40.66 --> 0:11:47.38]	  So here we have validation, then train the final model and save in the model.
+[0:11:47.80 --> 0:11:49.84]	  So let me move pickle at the top.
+[0:11:50.28 --> 0:11:52.30]	  All the imports should be at the top.
+[0:11:52.30 --> 0:11:56.14]	  You don't have to do this, but just makes the script a bit nicer.
+[0:11:57.74 --> 0:12:01.94]	  And perhaps our profile will also put at the top.
+[0:12:02.26 --> 0:12:03.84]	  So it's easier to change if we need.
+[0:12:05.10 --> 0:12:09.44]	  And we need to use this with statement.
+[0:12:10.22 --> 0:12:11.28]	  So we'll keep only that.
+[0:12:12.20 --> 0:12:15.54]	  And we don't need the code for loading the model.
+[0:12:15.98 --> 0:12:20.62]	  Let's just remove it and I'll put it into a different file called predict.
+[0:1 --> 0:12:24.64]	  So let's add a bit of login here.
+[0:12:25.02 --> 0:12:27.40]	  And by login, I simply mean a couple of print statements.
+[0:12:28.18 --> 0:12:31.40]	  So yeah, let me just maybe run this and see what happens.
+[0:12:31.82 --> 0:12:33.60]	  So I'm on this directory here.
+[0:12:33.78 --> 0:12:36.20]	  We have this predict.py file.
+[0:12:37.48 --> 0:12:39.82]	  Oh, sorry, this train.py file, right?
+[0:12:40.74 --> 0:12:43.32]	  So this is the file and we want to run it.
+[0:12:43.74 --> 0:12:45.40]	  So use python.train.
+[0:12:45.88 --> 0:12:49.94]	  And yeah, so this is just some warning you should ignore it
+[0:12:49.94 --> 0:12:53.14]	  because this is the way I installed python on my computer.
+[0:12:53.38 --> 0:12:58.46]	  But now you see we're on it and we are not sure what exactly is it doing something.
+[0:12:58.90 --> 0:13:01.62]	  Is it just handing up or yeah, so it finished,
+[0:13:01.74 --> 0:13:05.70]	  but it would be nice to get some idea what exactly the script is doing right now.
+[0:13:05.80 --> 0:13:08.32]	  So for that, we can just add a couple of print statements.
+[0:13:08.32 --> 0:13:14.82]	  So like doing validation with C equals to,
+[0:13:15.16 --> 0:13:17.40]	  let's say I used f strings here,
+[0:13:18.04 --> 0:13:19.24]	  we see equals to C.
+[0:13:20.18 --> 0:13:24.20]	  And then yeah, maybe AC on fold.
+[0:13:24.92 --> 0:13:26.60]	  Yeah, we don't have a number of fold here.
+[0:13:27.30 --> 0:13:30.46]	  Let's call it fold zero.
+[0:13:31.34 --> 0:13:36.56]	  Fold is AC and then we increment the fold.
+[0:13:38.32 --> 0:13:39.66]	  So validation result.
+[0:13:40.66 --> 0:13:46.98]	  So let's also add a print statement saying that we are actually training the final model here
+[0:13:46.98 --> 0:13:52.60]	  and AC of the final model is that.
+[0:13:53.88 --> 0:14:01.34]	  And the final print statement is the model is saved to this.
+[0:14:01.94 --> 0:14:03.72]	  Okay, so let's run it.
+[0:14:05.28 --> 0:14:07.98]	  See now it's telling us what exactly it's doing.
+[0:14:08.52 --> 0:14:12.20]	  Think I forgot to use the edit f here.
+[0:14:12.68 --> 0:14:14.84]	  So let me stop it and restart it.
+[0:14:15.34 --> 0:14:19.28]	  Yeah, we're getting some idea what exactly it's doing right now.
+[0:14:19.44 --> 0:14:22.50]	  So you just finished relating the model on fold two.
+[0:14:23.24 --> 0:14:26.34]	  And we see that the model is saved here.
+[0:14:26.88 --> 0:14:31.66]	  We see yes, this is the model can also look at the size of this model.
+[0:14:31.66 --> 0:14:34.20]	  So it's a two and a five kilobytes.
+[0:14:34.42 --> 0:14:37.74]	  So this is our model and what we want to do now is we want to use it.
+[0:14:37.84 --> 0:14:40.54]	  And for that we have this predict.py script.
+[0:14:40.88 --> 0:14:48.50]	  It's also from our notebook that just loads the model and uses it already has this customer.
+[0:14:48.76 --> 0:14:50.24]	  We'll keep the customer here.
+[0:14:50.80 --> 0:14:54.04]	  So let's clean it a bit and just want to print.
+[0:14:54.38 --> 0:14:55.34]	  So let's write input.
+[0:14:55.94 --> 0:15:03.22]	  This is our customer and probability is my prediction.
+[0:15:04.56 --> 0:15:05.78]	  So just that.
+[0:15:06.08 --> 0:15:07.40]	  So let's run it as well.
+[0:15:09.56 --> 0:15:17.88]	  It loaded the model, it turned our customer into a feature matrix and then we applied the model to this feature matrix
+[0:15:17.88 --> 0:15:22.80]	  and we computed the probability that this customer is going to turn, which is 63%.
+[0:15:22.80 --> 0:15:31.16]	  So this is how we save a model to a pickle file and this is how we turn Jupiter notebook into a Python script.
+[0:15:31.66 --> 0:15:37.10]	  This is what we did in this lesson and the next lesson we'll talk about web services.
