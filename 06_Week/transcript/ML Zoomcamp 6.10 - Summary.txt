@@ -1,0 +1,57 @@
+[0:00:00.18 --> 0:00:03.70]	  Welcome back. This is lesson 10 of machine learning zoom comp session six.
+[0:00:04.32 --> 0:00:10.36]	  And in this lesson, we will go over all the materials of this session and we will summarize it.
+[0:00:10.54 --> 0:00:15.12]	  So in this session, this week, we saw three models.
+[0:00:15.32 --> 0:00:18.62]	  So decision trees, decision trees look like that.
+[0:00:19.16 --> 0:00:25.54]	  So we have nodes with condition where we split the data set and then we have decision nodes or leaves.
+[0:00:25.54 --> 0:00:31.68]	  When we take a decision, the decision tree learning algorithm that we used here is able to learn these
+[0:00:31.68 --> 0:00:35.86]	  rules from the data, but we also saw that decision trees can easily overfit.
+[0:00:36.08 --> 0:00:41.92]	  If we don't restrict them, if we let the trees grow as deep as possible, they overfit easily.
+[0:00:42.26 --> 0:00:50.96]	  We saw that when we trained our first model, first decision tree,
+[0:00:50.96 --> 0:00:57.34]	  we saw that it had the perfect score on the training data set, but quite bad score on validation data set.
+[0:00:57.46 --> 0:01:00.60]	  And the reason for that was that our model memorized the data set.
+[0:01:00.72 --> 0:01:05.64]	  So it came up with such a rules that we're able for each row of our training data set,
+[0:01:05.74 --> 0:01:12.96]	  it was able to uniquely identify each of the clients and then memorize the outcome for these particular clients.
+[0:01:13.16 --> 0:01:14.64]	  These rules didn't generalize well.
+[0:01:14.80 --> 0:01:17.88]	  So we needed to restrict our tree in size.
+[0:01:17.88 --> 0:01:24.30]	  So we didn't want to let it grow too deep and it helped to achieve better performance on the validation data set.
+[0:01:24.50 --> 0:01:28.16]	  Then we talked about the learning algorithm for the decision trees.
+[0:01:28.62 --> 0:01:34.66]	  So here the main idea that for each feature that we have, we try all possible thresholds and then we
+[0:01:34.66 --> 0:01:39.60]	  evaluate the impurity of the split and we select the split with the best impurity.
+[0:01:39.94 --> 0:01:42.98]	  And then we have some parameters like the size of the tree.
+[0:01:43.22 --> 0:01:44.26]	  Let me open it here.
+[0:01:44.80 --> 0:01:48.62]	  So this is our algorithm for learning decision trees.
+[0:01:48.86 --> 0:01:51.68]	  So we find the best split using the algorithm I just described.
+[0:0 --> 0:01:58.04]	  And then we check if max depth is reached or if data set on the left or on the right is sufficiently large.
+[0:01:58.22 --> 0:02:00.72]	  Then we keep splitting and we do this iteratively.
+[0:02:01.06 --> 0:02:08.50]	  And then we talked about random forest, which is a way of combining multiple decision trees into one model.
+[0:02:08.60 --> 0:02:13.38]	  You can think about this as a board of experts, except for experts who have models who spend some time
+[0:02:13.68 --> 0:02:20.12]	  training models, random forest models using scikit-learn and understanding how the performance looks like
+[0:02:20.12 --> 0:02:24.76]	  when we change the number of trees that we grow and different parameters.
+[0:02:25.20 --> 0:02:32.66]	  So here, because the base model here is also decision tree, then the parameters here that we change are the same as in decision tree.
+[0:02:32.84 --> 0:02:36.82]	  So max depth parameter and mean sample leaf parameter.
+[0:02:37.20 --> 0:02:43.62]	  And yeah, so we were able to tune the parameter by trying different values and seeing what works best.
+[0:02:44.16 --> 0:02:51.46]	  And then finally, we talked about a different way of combining decision trees into an ensemble called boosting.
+[0:02:51.94 --> 0:02:56.80]	  So in random forest, we train trees in parallel, but in boosting, we train trees sequentially.
+[0:02:57.36 --> 0:03:01.32]	  So each tree tries to fix the mistakes the previous tree is doing.
+[0:03:01.86 --> 0:03:04.64]	  So here we tuned it.
+[0:03:04.90 --> 0:03:07.64]	  So we started with a learning rate parameter or ETA.
+[0:03:07.88 --> 0:03:14.04]	  It controls how fast the tree learns and how big steps that it's making when learning are.
+[0:03:14.68 --> 0:03:18.96]	  And then the other two parameters we tuned were the same as in random forest.
+[0:03:19.26 --> 0:03:21.28]	  So we spent some time doing that.
+[0:03:21.50 --> 0:03:25.80]	  And then at the end, it turned out that Exhiboost was the best performing model,
+[0:03:25.92 --> 0:03:28.80]	  which is often the case for doubler data.
+[0:03:28.82 --> 0:03:34.58]	  And we train our final model and the performance of the test data set, but this model was quite good.
+[0:03:34.74 --> 0:03:37.42]	  So this is what we did in this session this week.
+[0:03:37.56 --> 0:03:39.46]	  We learned about tree based models.
+[0:03:39.66 --> 0:03:42.92]	  And remember that there are more things that you can explore.
+[0:03:43.18 --> 0:03:46.58]	  Check this out because we couldn't cover many, many different things.
+[0:03:46.78 --> 0:03:49.78]	  And there is a lot more that you can learn.
+[0:03:49.90 --> 0:03:54.30]	  So for example, one of the things that Exhiboost can deal with missing values out of the box.
+[0:03:54.38 --> 0:03:56.80]	  So we don't need to actually do anything with that.
+[0:03:56.80 --> 0:03:58.74]	  You can experiment with that as well.
+[0:03:59.24 --> 0:0]	  So check it out.
+[0:04:00.88 --> 0:04:05.48]	  And also I mentioned that tree based models can be used for solving regression problems.
+[0:04:05.86 --> 0:04:09.46]	  And actually, this is something we will look at in the homework.
+[0:04:10.32 --> 0:04:11.46]	  So enjoy doing the homework.
+[0:04:11.88 --> 0:04:16.86]	  And next week we'll have a project and you will get more information about the project soon.
+[0:04:17.14 --> 0:04:18.14]	  So enjoy learning.

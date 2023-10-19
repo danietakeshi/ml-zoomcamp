@@ -1,0 +1,144 @@
+[0:0 --> 0:00:03.48]	  Welcome back. This is lesson three of machine learning Zoom Camp session six.
+[0:00:03.84 --> 0:00:07.84]	  And in this lesson, we will talk about decision trees. So in the previous lesson,
+[0:0 --> 0:00:13.36]	  we prepared the data set. So now this data set is ready to use. And we want to use this data set
+[0:00:13.36 --> 0:00:18.92]	  to predict if customers are going to default or not, meaning if they will not be able to pay back
+[0:00:18.92 --> 0:00:23.70]	  the loan. We want to use decision trees for that. So decision tree is a data structure
+[0:00:23.70 --> 0:00:31.06]	  that looks like that. We have a note here. So here we have some condition. And then depending
+[0:00:31.06 --> 0:00:36.96]	  whether this condition is true or false, it's true. We go to the right. And if it's false,
+[0:00:37.18 --> 0:00:44.60]	  we go to the left. And then we repeat it again. So here we can have some conditions again. And
+[0:00:44.60 --> 0:00:50.70]	  again, finally at the end, we need to make a decision. So let's say we have a bunch of conditions
+[0:00:50.70 --> 0:00:58.34]	  and then attend to make a decision. So it's default. And this is okay. And here the decision
+[0:00:58.34 --> 0:01:06.40]	  could be also the default. And here, okay, and default. The condition can be so let's say,
+[0:01:06.98 --> 0:01:13.60]	  if we talk about our data set, for example, records. So let's say if we already know that
+[0:01:13.60 --> 0:01:20.32]	  this customer has previous records, so records. Yes. If this is true, we go here.
+[0:01:20.32 --> 0:01:24.68]	  If this is false, if the client doesn't have any records, then we go this way.
+[0:01:25.56 --> 0:01:32.76]	  Then another condition could be if job is part time. So I'll remove this to make it a bit simpler.
+[0:01:33.44 --> 0:01:39.38]	  So let's say if the customer has records and job is part time, then the decision could be a default.
+[0:01:40.22 --> 0:01:45.28]	  If the job is not part time, then the decision is okay.
+[0:01:46.98 --> 0:01:53.38]	  And so for example, here on the left, the condition could be how much money they have,
+[0:01:53.58 --> 0:01:59.48]	  like assets, more than let's say, 6000. Yeah, so this number is arbitrary, of course,
+[0:01:59.54 --> 0:02:05.36]	  and I don't really know what it means. But this is a good example of decision tree. So and if we
+[0:02:05.36 --> 0:02:11.34]	  take this decision tree, we can see that it's a bunch of if then else rules. So let's say if we
+[0:02:11.34 --> 0:0]	  have a customer who has records, then we go to the right. If they have a full time job,
+[0:02:16.16 --> 0:02:22.04]	  then we go to the current code this with if then else rules. So for example,
+[0:02:22.60 --> 0:02:27.16]	  we can create a function that is called assess risk, and we get a record here.
+[0:02:27.84 --> 0:02:36.98]	  And so here first we check if they have records or not. So if client records, yes. Then if it's
+[0:02:36.98 --> 0:02:47.52]	  the case, we go here, this part. So now we need to check client job part time, the job is part
+[0:02:47.52 --> 0:02:55.78]	  time, then we think they are going to default, return default. Else, we are here, if the job is
+[0:02:55.78 --> 0:03:04.42]	  not part time, then we're going to return okay. And now we need to handle this part if records
+[0:03:04.42 --> 0:03:13.74]	  is no, what happens. So then we check client assets greater than 6000. If it is the case,
+[0:03:13.94 --> 0:03:22.60]	  we return okay. Else, we return default. So this is how we can represent this decision tree,
+[0:03:22.86 --> 0:03:30.12]	  this decision tree in Python code. And let's say we can take the first record,
+[0:03:31.10 --> 0:03:39.28]	  turn to dictionary. So this is the first record. So they have a lot of assets, they don't have a
+[0:03:39.28 --> 0:03:46.84]	  full time job, whether it's not a part time job, I don't. So let's take this XI and then use assess
+[0:03:46.84 --> 0:03:53.34]	  risk on this client. The decision tree that we just created says that this customer is going to be
+[0:03:53.34 --> 0:03:58.70]	  fine. They have any records. So they don't have any records, right, but they have
+[0:03:58.70 --> 0:04:04.62]	  10,000 assets. So this is how we arrive at this decision.
+[0:04:06.24 --> 0:04:14.02]	  Okay, we can train this. So here we just encoded this manually. And these rules can be learned
+[0:04:14.02 --> 0:04:18.38]	  from the data. So we can learn these rules from the data using the decision tree algorithm.
+[0:04:19.14 --> 0:04:25.28]	  So let's quickly see how to do this. So we use cycle learn and then there is a model called tree.
+[0:04:25.88 --> 0:04:31.84]	  And in this model, we have decision tree classifier decision trees can also be used for regression
+[0:04:31.84 --> 0:04:35.68]	  for solving the regression problem. But here we have a classification, binary classification
+[0:04:35.68 --> 0:04:40.38]	  problem, we have a default and non default. So that's why we need the classifier. What we also
+[0:04:40.38 --> 0:04:46.76]	  need is actually we need, because we have categorical variables. So we also need dictionary
+[0:04:46.92 --> 0:04:55.12]	  vectorizer, feature instruction, import dictionary vectorizer. And then, so now we need to turn our
+[0:04:55.12 --> 0:04:59.60]	  training data frame into list of dictionaries and then turn this list of dictionaries into
+[0:04:59.60 --> 0:05:05.28]	  feature matrix. And then after that, we'll train model. So let's do that. Train dictionaries,
+[0:05:05.74 --> 0:05:12.34]	  train, train. We will just take all the features from here. So just everything that we have here
+[0:05:12.34 --> 0:05:16.78]	  will not select any features here. We'll just take everything as is to add.
+[0:05:17.64 --> 0:05:26.20]	  The records, train, let's take a look at the first five. Yeah, looks correct. So now what we
+[0:05:26.20 --> 0:05:28.60]	  need to do is train the dictionary vectorizer.
+[0:05:30.34 --> 0:05:39.52]	  Sparse false, x train is the dictionary vectorizer will fit transform, train dictionaries.
+[0:05:40.58 --> 0:05:47.92]	  So yeah, now we have our future metrics. Let's also take a look at the feature names we get,
+[0:05:48.36 --> 0:05:53.14]	  all the numerical features are left intact. And then we have encoding for categorical features.
+[0:05:53.54 --> 0:06:00.50]	  Cool. So now we can actually train our decision tree. So let's call these variables decision tree,
+[0:06:00.72 --> 0:06:07.54]	  decision tree classifier. And then here we use the pit method, like usual, train, train.
+[0:06:08.66 --> 0:06:14.84]	  And then it complains about missing values. So it says input contains none. That's why we,
+[0:06:15.14 --> 0:0]	  to remember, we had these lines and we replaced them with nays. So let's just quickly do fill
+[0:0 --> 0:06:27.14]	  na zero. Let's just fill them with zeros, three around this whole thing. Okay, so now we have
+[0:06:27.14 --> 0:06:33.80]	  our tree. And let's test it. We will use the validation data sets of validation dictionaries.
+[0:06:34.46 --> 0:06:41.58]	  And we create x validation using dictionary vectorizer, and then we only transform.
+[0:06:42.92 --> 0:06:50.58]	  And then it is, and now why diction is our decision tree predictable x validation.
+[0:06:50.88 --> 0:06:57.92]	  Now what we want to do is compute a UC score area under the every secret me at the import here
+[0:06:57.92 --> 0:07:02.66]	  from second law matrix import, UC score.
+[0:07:05.06 --> 0:07:14.48]	  So we have y validation y prediction. And of course here it says that something is wrong.
+[0:07:15.32 --> 0:07:20.64]	  It should be one DRA, but right now it's a two dimensional array.
+[0:07:24.22 --> 0:07:30.42]	  And we see that there are ones and zeros. We'll talk a bit about this a bit later.
+[0:07:30.98 --> 0:07:36.62]	  Now, what we need to do is we need to take the first column, the second column,
+[0:07:36.88 --> 0:07:40.06]	  the probability of the customer belonging to the positive class.
+[0:07:40.80 --> 0:07:45.80]	  Now let's compute the receipt here and we see that it's 65. It's not impressive.
+[0:07:46.26 --> 0:07:49.94]	  Let's see what is the AC score for our training data set.
+[0:07:50.24 --> 0:08:03.36]	  Our training data set. We see that it's one. So we have on the training data set, we have one.
+[0:08:03.56 --> 0:08:10.90]	  And on the validation data set, we have 65. So this is all overfitting. And overfitting is
+[0:08:10.90 --> 0:08:18.58]	  when our model simply memorizes the data. But it memorizes it in such a way when it sees a new
+[0:08:18.58 --> 0:08:23.44]	  example, it is clueless. It doesn't know what to do with this example, because it doesn't look like
+[0:08:23.44 --> 0:08:29.76]	  any of the memorized data points. So it memorizes the data, but fails to generalize because for
+[0:08:29.76 --> 0:08:34.66]	  new unseen examples, none of the memorized examples look like this new one. And just, okay,
+[0:08:34.70 --> 0:08:43.86]	  I don't know. And it outputs something completely incorrect. But failing to generalize. And the
+[0:08:43.86 --> 0:08:47.64]	  reason this happens with decision is, so let's say we have a decision tree,
+[0:08:48.40 --> 0:08:57.94]	  looks like that. So we'll have a bunch of notes here. And let's say we want to train this model to
+[0:08:57.94 --> 0:09:05.44]	  score a customer. So let's say we have this XI customer, right? And we know that
+[0:09:07.74 --> 0:09:17.60]	  this XI, they did default. And let's say for this customer, so let's say if home owner,
+[0:09:18.14 --> 0:09:27.30]	  then let's say age is more than 35. And age is less than 37. So this way, we select only customers
+[0:09:27.58 --> 0:09:38.04]	  that have aged 36 and have home and then let's say job freelance. And depth. So they have zero depth.
+[0:09:38.38 --> 0:09:45.62]	  So let's say more than zero depth. And with this rule, so this rule is very specific, and maybe
+[0:09:45.62 --> 0:09:52.28]	  only this one person ends here. And they actually have quite a lot of assets, right? But they still,
+[0:09:52.48 --> 0:09:58.50]	  so they end up here. And the model learn that this person, so I think the model learn that
+[0:09:58.50 --> 0:10:04.98]	  this person defaulted. And this rule is very specific. They have a house, they are 36 years old,
+[0:10:05.14 --> 0:10:10.92]	  they are freelancers, they have zero depth yet they defaulted. And when we see a new user,
+[0:10:11.30 --> 0:10:17.52]	  a new customer who has the same profile like that here, we will also think that they are going to
+[0:10:17.52 --> 0:10:22.52]	  default simply because of that. So here our model memorized the data. So it memorized that for this
+[0:10:22.52 --> 0:10:28.52]	  specific customer, they defaulted. So it learned that and it has a rule like that for every record
+[0:10:28.52 --> 0:10:34.92]	  we have in our data set. That's why it memorized the data. But these patterns didn't hold true for
+[0:10:34.92 --> 0:10:40.42]	  the validation data set. That's why for the validation data set, our AUC was very bad. But
+[0:10:40.42 --> 0:10:46.24]	  on the training data set, it was excellent. So the model was able to classify everyone from the
+[0:10:46.24 --> 0:10:53.58]	  data set correctly. And here the reason it happened, if we can see this, our tree is quite
+[0:10:53.58 --> 0:11:02.76]	  deep here. So it's six or seven. So basically if we let our tree grow too deep, our model can learn
+[0:11:02.76 --> 0:11:07.84]	  any possible combination, any possible customer. And then at the end, when we have this decision,
+[0:11:08.02 --> 0:11:14.70]	  it will contain only just one or two clients. So this way we let our tree memorize the data.
+[0:11:15.40 --> 0:11:23.44]	  So here depth is unrestricted. So it can go down as much as it wants. But if we restrict the depth,
+[0:11:23.98 --> 0:11:31.94]	  so let's say if we take a tree like that, if we say we only want to have a tree that is on the
+[0:11:31.94 --> 0:11:41.10]	  three levels deep, depth three, then it will learn rules that are less specific. So maybe here
+[0:11:42.38 --> 0:11:50.84]	  records. Yes. So let's see what happens. So what I want to do now is retrain the tree,
+[0:11:51.80 --> 0:11:58.26]	  but control the depth of the tree. I'll let it grow on the three levels and it will not be able
+[0:11:58.26 --> 0:12:13.86]	  to grow the fourth level. So when I do that, so let me see. So first we let's say we check
+[0:1 --> 0:12:18.70]	  ASEAN training data. Let's see.
+[0:12:20.64 --> 0:12:26.58]	  Train and then validation.
+[0:12:30.56 --> 0:12:36.82]	  And we see when we do that, if we just take the depth of trees to three, then now the
+[0:12:36.82 --> 0:12:43.20]	  performance of our model on validation is significantly better. So it's 73 compared to 65.
+[0:12:43.20 --> 0:12:49.96]	  So it's like 8% better. So by districting by not letting the tree grow in definitely many levels,
+[0:12:50.16 --> 0:12:58.20]	  we actually achieve better performance. And we can even set the depth to one. Then the model we
+[0:12:58.20 --> 0:13:05.76]	  have is worse actually than what we have here. So if we stick it to depth one, so we have a tree
+[0:13:05.76 --> 0:13:12.06]	  that looks like this. So there's some condition. And then here, let's say we say okay, here we say
+[0:13:12.12 --> 0:13:18.90]	  default. And here is only one condition. And this kind of tree is actually called decision stump.
+[0:13:20.06 --> 0:13:26.82]	  This is like not really a tree, only one condition here. But as you see, this tree,
+[0:13:26.96 --> 0:13:34.66]	  this decision stump is only a bit worse than this, the overfit one. We can actually take a look at
+[0:13:34.66 --> 0:13:39.54]	  the tree. We can take a look at what is inside, what are the rules that it learned. There is a
+[0:13:39.94 --> 0:13:43.30]	  function that can help us, that can visualize trees.
+[0:13:44.74 --> 0:13:58.90]	  And then we pass the decision tree. We need to print it. Okay, so it says if the feature 25 is
+[0:13:58.90 --> 0:14:05.94]	  less than 0.5, then we predict default. If it's more than 0.5, we predict okay. So to know what
+[0:14:05.94 --> 0:14:11.34]	  feature 25 actually means, we need to use our dictionary vectorizer feature names,
+[0:14:11.66 --> 0:14:16.46]	  dictionary vectorizer get feature names. Okay, and then it says if there are no records,
+[0:14:16.46 --> 0:14:25.14]	  then it's default. Yeah, actually if there are records. So here, remember that this is one
+[0:14:25.14 --> 0:14:32.50]	  hot encoding. So let's say we have these records, no call, and then it can be zero or one, zero.
+[0:14:32.64 --> 0:14:41.30]	  It's when it's not no, and one is when it's no. So here, this records equals no more than 0.5,
+[0:14:41.66 --> 0:14:48.84]	  actually means that the core is no, because we use one hot encoding here. This is how we
+[0:14:48.84 --> 0:1]	  translate this rule. So actually, the decision stump it learned, the rule it learned was
+[0:14:56.62 --> 0:15:08.34]	  so if records is yes, let's see if the records no records is no, then class is zero. So it's okay.
+[0:15:08.58 --> 0:15:16.42]	  And if records is yes, then it's default. So records, yes, probably means that there are records
+[0:15:16.42 --> 0:15:22.74]	  of this customer not paying back the loan, I guess. So this is how our decision stump that we
+[0:15:22.74 --> 0:15:29.56]	  just trained looks like. And then of course, we can train, let's say, decision tree with depth of
+[0:15:29.56 --> 0:15:36.44]	  two. So now that even like two levels is already better than what we had previously.
+[0:15:37.38 --> 0:15:43.98]	  Let's visualize it. So this is how it looks like. Let me draw it. Two levels.
+[0:15:47.46 --> 0:15:58.10]	  So the first condition is records equals no. I am now talking about this part. So records no,
+[0:15:58.38 --> 0:16:05.50]	  and then job part time. So if we don't have any records, and then the job is not part time,
+[0:16:05.50 --> 0:16:14.74]	  then the class is zero, meaning okay. And if job is part time, then class is default.
+[0:16:16.34 --> 0:16:23.06]	  And now let's translate this one. So here we have seniority, which is the number of years of
+[0:16:23.06 --> 0:16:32.40]	  experience. So it's seniority more than 6.5. So if seniority is more than 6.5, then the class is
+[0:16:33.50 --> 0:16:39.06]	  okay. Otherwise it's default. Just copy this for reference.
+[0:16:40.86 --> 0:16:48.92]	  Okay. So this is the decision tree we learned with two levels. So here max depth is equals two.
+[0:16:49.10 --> 0:16:53.66]	  And this is the decision tree we learned. And then we apply this decision tree. And then it turns
+[0:16:53.66 --> 0:16:59.84]	  out that AC of this simple decision tree with just two levels is actually better than a decision
+[0:16:59.84 --> 0:17:06.02]	  tree that will let grow in definitely many layers. Yeah. So this is the rules it came up with.
+[0:17:06.28 --> 0:17:12.56]	  And in the next lesson, we see how it actually manages to find rules like that, how it learns
+[0:17:12.56 --> 0:17:18.04]	  these rules, how it extracts these rules from data. We will see that in the next lesson. So see you soon.

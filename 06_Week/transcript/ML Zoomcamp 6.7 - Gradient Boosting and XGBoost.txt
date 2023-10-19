@@ -1,0 +1,329 @@
+[0:0 --> 0:00:06.18]	  Welcome back, this is lesson 7 of machine learning in CompSession 6 and in this lesson we will talk about gradient boosting,
+[0:00:06.56 --> 0:00:12.08]	  which is a different way of combining multiple decision tree models into one ensemble.
+[0:00:12.40 --> 0:00:14.92]	  So in the previous lesson we looked at random forest.
+[0:00:15.36 --> 0:00:23.98]	  In random forest you take a dataset and then you train multiple independent decision trees on this dataset.
+[0:0 --> 0:00:30.80]	  And then you combine the result into one single prediction by taking out an average for example.
+[0:00:31.50 --> 0:00:33.30]	  And this is the final prediction.
+[0:00:34.62 --> 0:00:38.62]	  So here in this case for random forest we train multiple independent trees.
+[0:0 --> 0:00:42.58]	  So each tree is independent, completely independent from each other.
+[0:00:42.76 --> 0:00:47.32]	  But there is a different way of combining multiple models into one ensemble, which is called boosting.
+[0:00:47.84 --> 0:00:53.84]	  In boosting we start first with a dataset and we train the first model.
+[0:00:55.08 --> 0:00:57.70]	  And then the first model makes predictions.
+[0:00:58.94 --> 0:01:05.30]	  And then what we do is we look at these predictions and look what are the errors that this model is making.
+[0:01:05.82 --> 0:01:09.10]	  So then we get the errors of model one.
+[0:01:09.98 --> 0:01:13.50]	  And based on these errors we train another model.
+[0:01:14.88 --> 0:01:18.36]	  And then this other model makes predictions again.
+[0:01:19.48 --> 0:01:23.98]	  And this model also makes some errors.
+[0:01:24.50 --> 0:01:30.74]	  And what we do is we train a third model that corrects the predictions of the second model.
+[0:01:31.56 --> 0:01:32.68]	  Let's change this.
+[0:01:33.52 --> 0:01:35.94]	  And we can keep repeating this.
+[0:01:37.98 --> 0:01:43.26]	  We do this for many iterations and then at the end what we do is
+[0:01:43.68 --> 0:01:45.06]	  hold it a little bit.
+[0:01:45.60 --> 0:01:49.84]	  Then we combine multiple predictions into the final prediction.
+[0:01:50.96 --> 0:01:53.08]	  This is the idea behind boosting.
+[0:01:53.52 --> 0:01:59.18]	  We sequentially train multiple models and each next model corrects the mistakes of the previous one.
+[0:01:59.52 --> 0:02:04.20]	  So let's say the model three here tries to correct the errors of the model two.
+[0:02:04.54 --> 0:02:08.92]	  The model four here corrects the mistakes of model three and so on.
+[0:02:09.10 --> 0:02:11.20]	  So here the process is sequential.
+[0:02:11.20 --> 0:02:17.52]	  So we first always train model one and then we train model two, then we train model three
+[0:02:17.52 --> 0:02:18.22]	  and so on.
+[0:02:18.26 --> 0:02:22.66]	  Unlike in random forest when we can train all these different models in parallel.
+[0:02:22.86 --> 0:0]	  If we take these models and we replace these models by trees.
+[0:02:36.28 --> 0:02:41.22]	  In this case we get gradient boosted trees or gradient boosting trees.
+[0:02:41.54 --> 0:02:47.72]	  So this is what we will use for this lesson.
+[0:02:47.88 --> 0:02:51.34]	  And there is one library that has quite a good implementation.
+[0:02:51.78 --> 0:02:52.98]	  It's called xgboost.
+[0:02:53.30 --> 0:02:55.22]	  This is what we will use for this lesson.
+[0:02:55.62 --> 0:02:59.04]	  So now to install xgboost we do the usual peep install
+[0:02:59.18 --> 0:03:03.06]	  and then the name of the library, which is in this case xgboost.
+[0:03:03.58 --> 0:03:06.98]	  I already have it so nothing should happen for me.
+[0:03:07.34 --> 0:03:13.76]	  And now we import it, import xgboost and as usual we have some alias xgb for short.
+[0:03:14.10 --> 0:03:16.44]	  So now we installed xgboost, we imported it.
+[0:03:16.54 --> 0:03:22.88]	  The next step we need to do is we need to wrap our training data into a special data structure
+[0:03:22.88 --> 0:03:25.32]	  internal to xgboost called dmatrix.
+[0:03:25.58 --> 0:03:27.50]	  So it's here in dmatrix.
+[0:03:27.50 --> 0:03:31.62]	  So this data structure is optimized for training xgboost models.
+[0:03:31.98 --> 0:03:36.10]	  It allows xgboost to train faster to what it needs.
+[0:03:36.30 --> 0:03:40.52]	  It needs the feature matrix then needs our target variable.
+[0:03:41.36 --> 0:03:44.44]	  It's called label not target.
+[0:03:44.86 --> 0:03:48.18]	  And what we can also pass here is feature names.
+[0:03:48.44 --> 0:03:52.18]	  Feature names and we have our features.
+[0:03:52.44 --> 0:03:54.14]	  We have our dictionary vectorizer.
+[0:03:54.40 --> 0:03:55.36]	  So let's get them.
+[0:03:56.04 --> 0:04:00.38]	  And then this will be our dtrain variable.
+[0:04:00.98 --> 0:04:02.38]	  So dmatrix for train.
+[0:04:02.94 --> 0:04:04.92]	  Then let's do the same for validation.
+[0:04:05.76 --> 0:04:11.68]	  So it's x validation and the label is y-station.
+[0:04:12.20 --> 0:04:13.98]	  So let's put this in one cell.
+[0:04:14.20 --> 0:04:17.62]	  So now we have all these dmatrices and now we can train a model.
+[0:04:17.92 --> 0:04:23.60]	  So the training model, we use the train function from xgboost package
+[0:04:23.70 --> 0:04:27.40]	  and then it actually needs multiple things here as we see.
+[0:04:27.58 --> 0:04:28.80]	  So it needs params.
+[0:04:29.16 --> 0:04:31.08]	  It's called xgboost.
+[0:04:31.08 --> 0:04:33.08]	  We will define this later.
+[0:04:33.38 --> 0:04:39.74]	  Then we need our dtrain matrix and here non-boost rounds.
+[0:04:40.10 --> 0:0]	  This is how many trees we want to grow.
+[0:04:42.42 --> 0:04:44.04]	  Let's do 200.
+[0:04:44.40 --> 0:04:46.68]	  This is just some arbitrary large number.
+[0:04:46.90 --> 0:04:48.44]	  Now it's not important why 200.
+[0:04:48.70 --> 0:04:50.10]	  This is just some large value.
+[0:04:50.40 --> 0:04:52.68]	  Here we need to specify some parameters.
+[0:04:54.82 --> 0:04:59.52]	  So there is a documentation that describes all the parameters that xgboost has.
+[0:04:59.92 --> 0:0]	  So this is the page.
+[0:05:02.10 --> 0:05:06.48]	  It tells what are the parameters there and what are the values.
+[0:05:06.80 --> 0:05:10.84]	  The important ones are eta, which is the learning rate.
+[0:05:11.08 --> 0:05:16.64]	  We will talk about this a bit later, but this is in essence how fast our model learns.
+[0:05:16.90 --> 0:05:21.48]	  The default value is 0.3 and you can check the default value in the page I just showed you.
+[0:05:21.48 --> 0:05:27.60]	  Then max depth controls the size of the trees, which is the same as in random forest and decision
+[0:05:27.60 --> 0:05:29.40]	  trees. The default value is 6.
+[0:05:30.18 --> 0:05:34.56]	  Then middle child weight is the same as mean samples live.
+[0:05:34.96 --> 0:05:38.38]	  So how many observations we should have in a leaf node?
+[0:05:38.58 --> 0:05:40.62]	  So default one is 1.
+[0:05:40.92 --> 0:05:42.90]	  So here we have a binary classification task.
+[0:05:43.04 --> 0:05:47.54]	  So we want to classify our clients into defaulting or non-defaulting.
+[0:05:47.70 --> 0:05:49.28]	  For that we need to specify objective.
+[0:05:49.56 --> 0:05:51.52]	  So there are many different objectives.
+[0:05:51.88 --> 0:05:56.24]	  So xgboost can also be used for solving the regression problem or different types of classification
+[0:05:56.24 --> 0:06:00.48]	  problems. So here what we need is we need binary logistic.
+[0:06:01.04 --> 0:0]	  So this is binary classification. Logistic means it will use something similar to logistic regression.
+[0:06:07.38 --> 0:06:09.46]	  So remember we have sigmoid and all that.
+[0:06:09.70 --> 0:06:11.12]	  So it will use something similar here.
+[0:06:11.40 --> 0:06:13.18]	  So we have a binary classification model.
+[0:06:13.44 --> 0:06:14.92]	  We need to specify that.
+[0:06:15.84 --> 0:06:18.08]	  So xgboost can parallelize training.
+[0:06:18.36 --> 0:06:20.30]	  So we need to specify how many threads we use.
+[0:06:20.54 --> 0:06:23.48]	  Nthread is the parameter for doing this.
+[0:06:23.78 --> 0:06:24.78]	  I have eight cores.
+[0:06:24.96 --> 0:0]	  So I set it to eight and then it also uses a lot of randomization.
+[0:06:29.20 --> 0:06:30.40]	  So we need to set the seed.
+[0:06:30.74 --> 0:06:35.16]	  So I'll set it to one and then finally we need to set the verbosity parameter.
+[0:06:35.62 --> 0:06:40.20]	  I'll set it to one so it controls what kind of warnings we have when we train our model.
+[0:06:40.38 --> 0:06:42.96]	  Or do we want to see warnings when training or not?
+[0:06:43.32 --> 0:06:46.48]	  So here I think one means show only warnings.
+[0:06:46.88 --> 0:06:49.78]	  I think these are the most important default parameters.
+[0:06:50.04 --> 0:06:51.02]	  There are of course more.
+[0:06:51.28 --> 0:06:53.86]	  You can refer to the page I showed you just now.
+[0:06:53.98 --> 0:06:55.66]	  But this should be enough for now.
+[0:06:56.84 --> 0:06:58.42]	  This thing returns some model.
+[0:06:58.84 --> 0:06:59.62]	  So let's train it.
+[0:07:00.32 --> 0:07:02.80]	  And you see so it outputs some warnings.
+[0:07:03.26 --> 0:07:07.62]	  So it says the default evaluation metric or the subjective was changed from error to log loss.
+[0:07:07.86 --> 0:07:08.04]	  Okay.
+[0:07:08.28 --> 0:07:10.38]	  And let's say if we don't want to see this error,
+[0:07:10.38 --> 0:07:12.68]	  I think let's see what happens if we put zero.
+[0:07:13.50 --> 0:07:15.68]	  So in this case, the warning is suppressed.
+[0:07:16.04 --> 0:07:19.86]	  And if we put two, we see a lot of things.
+[0:07:20.46 --> 0:07:22.62]	  Basically, info messages as well, not just warnings.
+[0:0 --> 0:07:24.70]	  So let's put it at one.
+[0:07:25.16 --> 0:07:26.26]	  So we want to see warnings.
+[0:07:26.66 --> 0:0]	  Later we'll see how to get rid of this warning.
+[0:07:29.36 --> 0:07:32.06]	  But what we want to do now is we want to test this model.
+[0:07:32.36 --> 0:07:35.06]	  So here's this model has a function predict.
+[0:07:35.48 --> 0:07:39.78]	  And we already have our validation matrix in here.
+[0:07:39.78 --> 0:07:40.66]	  We created it.
+[0:07:41.08 --> 0:07:43.54]	  So we pass the validation here.
+[0:07:44.04 --> 0:07:48.88]	  And what the XGBoost returns is already one dimensional array with predictions.
+[0:07:49.40 --> 0:07:51.72]	  So let's put it inside YPret.
+[0:07:52.36 --> 0:07:57.92]	  What we can do now is we can compute our AUC score, Y validation, Y prediction.
+[0:07:58.50 --> 0:08:01.60]	  And we see that our AUC is 80%.
+[0:08:01.60 --> 0:08:05.30]	  Which is quite good considering that we didn't do anything else.
+[0:08:05.44 --> 0:08:07.72]	  We only put the default parameters here.
+[0:08:07.88 --> 0:08:08.58]	  And that's it.
+[0:08:08.60 --> 0:08:11.66]	  So for default parameters, this is quite good.
+[0:08:12.02 --> 0:08:15.60]	  And so let's see what happens if we just train 10 models, 10 trees.
+[0:08:16.84 --> 0:08:20.96]	  I think it's actually even better, 81.5%.
+[0:08:20.96 --> 0:08:24.06]	  And these models also, XGBoost also overfeats.
+[0:08:24.24 --> 0:08:27.80]	  We'll later see how, but yeah, it's quite prone to overfitting.
+[0:08:28.08 --> 0:08:31.56]	  That's why we need to be careful about how many trees we train.
+[0:08:32.10 --> 0:08:33.68]	  And the size of these trees.
+[0:08:33.96 --> 0:08:35.82]	  So we don't want these trees to be too big.
+[0:08:37.36 --> 0:08:42.12]	  In XGBoost, it's possible to monitor the performance of the training procedure.
+[0:08:42.28 --> 0:08:47.06]	  So we can see what exactly is happening at each step of the training process.
+[0:08:47.32 --> 0:08:52.08]	  What we can do is we can, after each iteration, after each new tree is trained,
+[0:08:52.26 --> 0:08:55.44]	  we can immediately evaluate it on our validation data.
+[0:08:55.78 --> 0:08:57.80]	  We can see what are the results there.
+[0:0 --> 0:08:59.82]	  For that, we can create a watch list.
+[0:09:00.18 --> 0:09:05.20]	  So watch list contains the datasets on which we want to evaluate our model.
+[0:09:05.20 --> 0:09:09.20]	  So what we can put here is we can put our training dataset here.
+[0:09:09.38 --> 0:09:12.04]	  We need to give it a list of tuples.
+[0:09:12.54 --> 0:09:15.66]	  So first the actual dataset and the name of this dataset.
+[0:09:16.20 --> 0:09:18.22]	  So this is the validation and validation.
+[0:09:18.94 --> 0:09:20.24]	  So this is the watch list.
+[0:09:20.56 --> 0:09:23.96]	  So this is what we'll use to relate our model during training.
+[0:09:24.46 --> 0:09:26.40]	  Let's copy this here.
+[0:09:26.82 --> 0:09:31.50]	  Yeah, so what we want to specify here, we want to specify the watch list.
+[0:09:32.44 --> 0:09:33.72]	  This is a valse.
+[0:09:34.04 --> 0:09:36.08]	  This is what is going to be used for evaluation.
+[0:09:36.70 --> 0:09:39.16]	  And let's train it for 200 rounds.
+[0:09:39.56 --> 0:09:41.26]	  Let me rearrange it a little bit.
+[0:09:42.48 --> 0:09:44.58]	  And what we need to specify.
+[0:09:44.98 --> 0:09:48.12]	  And remember, I told you, I'll tell you how to get rid of this warning.
+[0:09:48.30 --> 0:09:52.48]	  If we don't specify anything here, it will show us the error rate.
+[0:09:52.68 --> 0:09:54.20]	  Yeah, it's actually showing log loss.
+[0:09:54.34 --> 0:09:58.92]	  I think this is what the warning is saying us that instead of error, it will print log loss.
+[0:09:58.92 --> 0:10:02.76]	  Log loss, this is something that logistic regression and this model
+[0:10:02.76 --> 0:10:06.90]	  Exhibust used to find the best parameters, the best splits.
+[0:10:07.18 --> 0:10:08.12]	  This is quite technical.
+[0:10:08.40 --> 0:10:10.14]	  We're not interested in this.
+[0:10:10.28 --> 0:10:12.68]	  What we want to see here is AOC.
+[0:10:13.06 --> 0:10:16.40]	  For that, let's specify a validation metric.
+[0:10:16.70 --> 0:10:19.50]	  This is what it's saying, the default evaluation metric.
+[0:10:19.82 --> 0:10:21.26]	  So a val metric AOC.
+[0:10:22.10 --> 0:10:24.68]	  So let's use AOC for evaluating the model.
+[0:10:24.86 --> 0:10:25.98]	  And now the warning is gone.
+[0:10:26.30 --> 0:10:30.36]	  What happens here is, so here we trained the first three.
+[0:10:30.54 --> 0:10:34.90]	  We evaluated this first three on the training data set and on the validation data set.
+[0:10:35.02 --> 0:10:36.56]	  Then we trained the second three.
+[0:10:36.96 --> 0:10:39.32]	  Evolved this on both data sets and so on.
+[0:10:39.44 --> 0:10:42.64]	  And we have 200 rounds, 200 trees.
+[0:10:42.86 --> 0:10:45.88]	  So we do this basically for every tree here.
+[0:10:46.14 --> 0:10:50.76]	  And you see that AOC on the training data goes to one.
+[0:10:50.96 --> 0:10:53.06]	  So here it achieves the perfect accuracy.
+[0:10:53.06 --> 0:10:55.92]	  Yeah. So it's here 99.999.
+[0:10:56.22 --> 0:11:00.54]	  And then after a step 107, it reaches 100% AOC.
+[0:11:00.82 --> 0:11:04.52]	  Of course, on the validation data set, it doesn't really improve.
+[0:11:04.68 --> 0:11:07.60]	  We see it stagnates around 80%.
+[0:11:07.60 --> 0:11:10.86]	  And I think it slowly goes down little by little.
+[0:11:11.26 --> 0:11:13.66]	  So the model clearly overfits.
+[0:11:14.08 --> 0:11:16.42]	  Using this output is not very convenient.
+[0:11:16.94 --> 0:11:19.30]	  So just going through this, it's a bit difficult.
+[0:11:19.90 --> 0:11:22.18]	  So it would be nice to be able to plot it.
+[0:11:22.18 --> 0:1]	  Then even before plotting it, we can instead of printing it at every step,
+[0:11:26.26 --> 0:11:29.60]	  we can print it at every five step or every 10 step.
+[0:11:29.96 --> 0:11:32.88]	  For that, there is this verboseval parameter.
+[0:11:33.26 --> 0:11:37.20]	  Let's say if we want to print the deviation at every five steps.
+[0:11:37.96 --> 0:11:38.74]	  So we do that.
+[0:11:39.12 --> 0:11:41.82]	  And you see here, it moves with increments of five.
+[0:11:42.10 --> 0:11:43.44]	  We get the same information basically.
+[0:11:43.98 --> 0:11:49.92]	  So we see that here it reaches perfect AOC on training, but not on validation.
+[0:11:50.12 --> 0:11:54.86]	  Yeah, it's a bit easier now to have a look here and see what's going on.
+[0:11:54.98 --> 0:12:02.86]	  So for example, we see that here around step 25, this is the best performance on the validation
+[0:12:02.86 --> 0:12:03.32]	  data set.
+[0:12:03.44 --> 0:12:05.96]	  But I think even at step 10, it's already quite good.
+[0:12:06.12 --> 0:12:09.76]	  Maybe we don't even need to train more models than just 10.
+[0:12:09.90 --> 0:12:11.50]	  And it's enough to stop at 10.
+[0:12:12.02 --> 0:12:14.48]	  It'd be interesting to see this on a plot.
+[0:12:15.10 --> 0:12:18.80]	  The problem with XGBoost is not easy to extract this information.
+[0:12:18.84 --> 0:12:22.52]	  So it just prints this to output, to standard output.
+[0:12:22.70 --> 0:12:26.66]	  There's no easy way, at least to my knowledge, there's no easy way to extract this.
+[0:12:26.88 --> 0:12:31.28]	  So what I sometimes do for that is there is a way in Jupyter notebook to capture this,
+[0:12:31.56 --> 0:12:36.08]	  whatever is printed to standard output, and then do whatever we want with this.
+[0:12:36.56 --> 0:12:39.36]	  For that, there is this magic command called capture.
+[0:12:39.60 --> 0:12:43.84]	  What it does, it captures everything that this code outputs to a string.
+[0:12:44.18 --> 0:12:45.54]	  Let's call this string output.
+[0:12:45.54 --> 0:12:50.30]	  It's not string, it's some special object that we can use to get the content out.
+[0:12:50.80 --> 0:12:54.50]	  Now something is happening, but we don't see it because it's captured.
+[0:12:54.98 --> 0:12:59.54]	  Can take a look what is inside this output, like standard output.
+[0:1 --> 0:13:02.08]	  And we see this is what we just captured.
+[0:13:02.44 --> 0:13:03.46]	  So we can print this.
+[0:13:04.28 --> 0:13:06.04]	  This is what this train output.
+[0:13:06.56 --> 0:13:12.32]	  We have it as a string, as a Python string, and we can actually pass this and extract this
+[0:13:12.32 --> 0:13:13.44]	  information for that.
+[0:13:13.86 --> 0:13:21.16]	  So let's say we have this string, I'll call it just S, and then we can split this using this
+[0:13:21.16 --> 0:13:23.26]	  backslash n, means a new line.
+[0:13:23.52 --> 0:13:28.56]	  So when we do split, now like this, we split it by, let me just print it again.
+[0:13:29.80 --> 0:13:34.30]	  Here we don't see this, but at the end of every line, we have this slash n,
+[0:13:34.46 --> 0:13:36.80]	  and this is what we use for splitting.
+[0:13:37.02 --> 0:13:41.18]	  And actually this is top, and this is encoded as backslash t.
+[0:13:41.18 --> 0:13:42.46]	  Here, backslash t.
+[0:13:42.64 --> 0:13:44.36]	  And then we have it for every line here.
+[0:13:44.56 --> 0:13:49.80]	  And what we do is we split by this backslash n.
+[0:13:49.98 --> 0:13:52.06]	  So we get a string per each line.
+[0:13:52.54 --> 0:13:55.30]	  Let's take the first line.
+[0:13:56.56 --> 0:13:58.96]	  So what we have here, there are three components.
+[0:13:59.32 --> 0:14:02.24]	  The first is the number of the tree, the number of the iteration,
+[0:14:02.52 --> 0:14:07.68]	  then the evaluation on the train data set, and then evaluation on the validation data set.
+[0:14:07.68 --> 0:14:11.88]	  Can again split it, this time using backslash t, because this is tabulation.
+[0:14:12.56 --> 0:14:15.34]	  And as a result, we get three things here.
+[0:14:15.58 --> 0:14:18.12]	  The first is the number of iteration, the number of tree, then we'll
+[0:14:18.12 --> 0:14:21.14]	  AC on train and AC on validation.
+[0:14:21.62 --> 0:14:25.08]	  Now we can write it to two, three variables.
+[0:14:25.72 --> 0:14:29.20]	  So train AC and validation AC.
+[0:14:29.64 --> 0:14:33.98]	  What this code will do, it will assign this part to this variable,
+[0:14:34.12 --> 0:14:37.90]	  this part to this variable, and this part to this variable.
+[0:14:38.50 --> 0:14:39.66]	  Now let's execute that.
+[0:14:39.84 --> 0:14:43.26]	  We see that number of iteration is zero.
+[0:14:43.46 --> 0:14:45.88]	  And we want to turn this into a number.
+[0:14:46.10 --> 0:14:49.42]	  So we want to get rid of these brackets right here.
+[0:14:49.52 --> 0:14:54.22]	  For that, we can do strip and say what kind of characters we want to strip away.
+[0:14:54.44 --> 0:14:58.06]	  So now when we say we want to remove brackets, so it removes brackets.
+[0:14:58.30 --> 0:15:00.90]	  And now we want to turn this into an integer.
+[0:15:01.22 --> 0:15:03.76]	  This is how we can extract the number of iteration.
+[0:15:04.30 --> 0:15:07.94]	  Then for training AC, what we can do is split using this colon.
+[0:15:08.50 --> 0:15:12.22]	  And then when we do this, we again have two elements here,
+[0:15:12.24 --> 0:15:14.80]	  and we are interested in this one.
+[0:15:15.50 --> 0:15:16.56]	  And this is how we get it.
+[0:15:16.64 --> 0:15:21.28]	  This is a string, and we can turn this string into a float by doing this,
+[0:15:21.48 --> 0:15:23.14]	  by putting it inside float.
+[0:15:23.82 --> 0:15:25.94]	  And then we can do the same with validation AC.
+[0:15:26.72 --> 0:15:28.48]	  And we can do this for every line.
+[0:15:28.48 --> 0:15:32.70]	  And then we will get, we can put this, say, into a data frame
+[0:15:32.70 --> 0:15:36.80]	  with the number of iterations with AC on train and AC on validation.
+[0:15:37.20 --> 0:15:39.56]	  And then we can plot it and do some analysis.
+[0:15:40.04 --> 0:15:41.36]	  So let me remove that.
+[0:15:41.58 --> 0:15:45.88]	  We don't need this because I already have it in a function.
+[0:15:46.14 --> 0:15:47.22]	  So we have a function here.
+[0:15:47.34 --> 0:15:48.94]	  Actually, it doesn't return a data frame.
+[0:15:49.10 --> 0:15:51.82]	  Here it parses all that that we saw.
+[0:15:52.06 --> 0:15:55.40]	  Maybe it's a good idea to actually turn this into a data frame.
+[0:15:55.62 --> 0:15:56.54]	  Let me do it now.
+[0:15:56.74 --> 0:16:05.46]	  And the number of iterations, then AC on train and AC on validation.
+[0:16:07.62 --> 0:16:12.28]	  Then we can turn this data frame results, data frame.
+[0:16:12.62 --> 0:16:15.56]	  Then, so this is a list of tuples.
+[0:16:16.44 --> 0:16:24.66]	  Columns here will be number iteration, then train AC,
+[0:16:25.66 --> 0:16:26.78]	  then validation AC.
+[0:16:27.70 --> 0:16:32.50]	  And then we want to return the results.
+[0:16:33.46 --> 0:16:36.70]	  And the rest, yeah, we did, we already saw how it works.
+[0:16:37.28 --> 0:16:41.16]	  So we split the output from this output.
+[0:16:41.16 --> 0:16:45.24]	  We split it by the new line character backslash n.
+[0:16:45.36 --> 0:16:47.60]	  And then each line we split by top.
+[0:16:47.94 --> 0:16:50.30]	  And then it's doing the same thing as we saw.
+[0:16:50.72 --> 0:16:52.76]	  And let's see, I hope it works.
+[0:16:54.66 --> 0:16:55.98]	  And it returns a data frame.
+[0:16:56.38 --> 0:16:56.80]	  Yes, exactly.
+[0:16:57.68 --> 0:16:59.16]	  So data frame with results.
+[0:16:59.74 --> 0:17:00.60]	  Let's call score.
+[0:17:01.50 --> 0:17:03.14]	  And we can plot it.
+[0:17:04.20 --> 0:17:08.44]	  So here we have number of iterations on the x-axis.
+[0:17:08.84 --> 0:17:12.54]	  And we have, let's say, let's plot the AC on train.
+[0:17:12.76 --> 0:17:15.52]	  And then we'll do the same and plot AC on validation.
+[0:17:16.50 --> 0:17:19.78]	  Train, here we have label validation.
+[0:17:20.52 --> 0:17:22.02]	  And we want to show the agent.
+[0:17:23.40 --> 0:17:27.10]	  And we see here, the train is always growing.
+[0:17:27.48 --> 0:17:30.86]	  Yeah, here around here, it's, I think it's almost perfect.
+[0:1 --> 0:17:32.20]	  And here it's perfect.
+[0:17:32.34 --> 0:17:33.86]	  Or was it somewhere here?
+[0:17:34.12 --> 0:17:34.56]	  I don't know.
+[0:17:34.66 --> 0:17:36.86]	  But here doesn't seem to make any difference.
+[0:17:37.22 --> 0:17:39.44]	  Around here, it's almost perfect.
+[0:17:39.62 --> 0:17:41.12]	  But for validation, it's different.
+[0:17:41.44 --> 0:17:41.48]	  Right?
+[0:17:41.62 --> 0:17:46.26]	  So I see the peak is here, but then it declines and stagnates here.
+[0:17:46.26 --> 0:17:47.34]	  So it's not improving.
+[0:17:47.70 --> 0:17:51.72]	  So here, this is where we start overfitting.
+[0:17:52.96 --> 0:17:55.50]	  Now it's where we're overfitting here.
+[0:17:55.98 --> 0:17:57.86]	  But let's look only at validation.
+[0:17:58.72 --> 0:18:03.28]	  We can see better here that we're indeed overfitting.
+[0:18:03.62 --> 0:18:04.86]	  So it declines, right?
+[0:18:05.44 --> 0:18:07.96]	  The accuracy on train stays at,
+[0:18:08.50 --> 0:1]	  AC on train stays at 100%, but this one seems to decline.
+[0:18:13.48 --> 0:18:15.74]	  So these are the default parameters that we have.
+[0:18:16.70 --> 0:18:20.12]	  And yeah, so we see now how we can train the model
+[0:18:20.12 --> 0:18:21.18]	  with these default parameters.
+[0:18:22.02 --> 0:18:26.46]	  We also saw how we can capture the output of XGBoost
+[0:18:26.46 --> 0:18:27.22]	  and display it.
+[0:18:28.02 --> 0:18:31.38]	  And yeah, we also talked about this concept of watchlist.
+[0:18:31.86 --> 0:18:35.58]	  So now what we want to do is we want to tune the parameters
+[0:18:35.58 --> 0:18:36.74]	  of XGBoost model.
+[0:18:37.10 --> 0:18:39.56]	  So we want to play again with the same things
+[0:18:39.56 --> 0:18:41.40]	  as we did with RandomForce.
+[0:18:41.56 --> 0:18:43.08]	  So we want to change the max depth parameter.
+[0:18:43.44 --> 0:18:47.72]	  And we want to change this other parameter here, mean child weight.
+[0:18:47.98 --> 0:18:49.74]	  So we want to experiment with them.
+[0:18:50.60 --> 0:18:53.58]	  And I also promised we'll talk about this learning rate.
+[0:18:53.74 --> 0:18:55.76]	  This is probably the most important parameter
+[0:18:55.76 --> 0:18:57.20]	  for gradient boosting model.
+[0:18:57.50 --> 0:18:59.04]	  So we will first talk about this,
+[0:18:59.28 --> 0:19:01.18]	  and then we'll tune this other two.
+[0:19:01.46 --> 0:19:03.52]	  And this is something we will do in the next lecture.
+[0:19:04.04 --> 0:19:04.56]	  So see you soon.

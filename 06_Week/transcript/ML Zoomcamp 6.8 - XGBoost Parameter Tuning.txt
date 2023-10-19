@@ -1,0 +1,150 @@
+[0:0 --> 0:00:03.34]	  Welcome back. This is lesson 8 of Machine Anism Comp Session 6.
+[0:00:03.66 --> 0:00:07.52]	  And in this lesson, we'll talk about tuning parameters for Exibust model.
+[0:00:08.22 --> 0:00:13.74]	  In the previous lesson, we talked about Exibust, and we trained our first model,
+[0:0 --> 0:00:19.12]	  and we used the default parameters. So this was the parameters we used here.
+[0:00:19.36 --> 0:00:25.06]	  We used the default parameters, and we saw how well or not well it performs.
+[0:00:25.06 --> 0:00:35.82]	  And we saw that we can get almost 82% of AUC, around 25 trees, and then the performance declines.
+[0:00:36.12 --> 0:00:41.24]	  So this is what we did in the previous lesson. And in this lesson, we will tune these three
+[0:00:41.24 --> 0:00:46.52]	  parameters. So we'll tune parameter eta, max depth, and mean child weight. We will start with eta.
+[0:00:46.80 --> 0:00:54.84]	  Eta is also called learning rate. Remember, I told you how exactly this model is trained.
+[0:00:55.06 --> 0:01:04.22]	  So let me take this and copy. When we train our second model, and when we combine the predictions
+[0:01:04.22 --> 0:01:09.94]	  from the first model with the second model, eta says how much weight this second model has
+[0:01:09.94 --> 0:01:17.14]	  when it's correcting the results of the first model. So if the weight is 1.0, then all the
+[0:01:17.14 --> 0:01:24.92]	  predictions are used to correct the predictions of the first model. If we use only 0.3,
+[0:01:25.24 --> 0:01:33.22]	  then instead of adding these predictions 100%, instead of correcting all 100%, we use only 30%.
+[0:01:33.22 --> 0:01:42.12]	  So we're moving in smaller steps. This is the size of step. If it sounds confusing, don't worry,
+[0:01:42.30 --> 0:01:46.98]	  we will now try different values of eta and see how different values of eta
+[0:01:46.98 --> 0:01:52.46]	  affect the performance of our model. So this is the model we trained previously. So these are
+[0:01:52.46 --> 0:01:57.88]	  the default parameters. Let's train it one more time. What I want to do now is create this
+[0:01:57.88 --> 0:02:04.80]	  dictionary that I'll call scores that is empty now. And I want to add the scores for each value
+[0:02:04.80 --> 0:02:12.02]	  of eta. For example, for eta equals to this parameter. So I want to make a key that looks
+[0:02:12.02 --> 0:02:20.72]	  like this, eta equals and then xj boost parameter eta. Then it is evaluated to this string.
+[0:02:21.48 --> 0:02:27.02]	  So I want to use as a key in this scores dictionary. Let me just call it key.
+[0:02:28.94 --> 0:02:36.80]	  And then the value will be the output of xj boost that we captured here. So let me use the function
+[0:02:36.80 --> 0:02:47.28]	  of this parse xj boost output. And now this dictionary for this eta, it contains the data frame.
+[0:02:47.32 --> 0:02:54.10]	  So I can print it like that. This is the output of xj boost that we captured. And now let's change
+[0:02:54.10 --> 0:03:01.82]	  this to 1.0. This is the maximum value we can have. Let's run it one more time. I will move scores
+[0:03:01.82 --> 0:03:09.10]	  up. I'll put scores here, not accidentally overwrite it. And now we can also see what the key is. So
+[0:03:09.10 --> 0:03:15.92]	  now the key is actually 1.0. So now the scores dictionary should have two values, two keys.
+[0:03:16.62 --> 0:03:23.38]	  This is the second key, the second value, which we will plot as well. But now I want to evaluate
+[0:03:23.38 --> 0:03:41.60]	  0.9. Let's see 0.1. And let's also take a look at 0.05. So now it will finish. Yes, 0.05 and 0.01.
+[0:0 --> 0:03:56.26]	  So let's see what kind of keys we have. So we have eta 0.3, 1.0, 0.1, 0.05 and 0.01. So we have
+[0:03:56.26 --> 0:04:02.80]	  all these data frames, all these scores, all these evaluation results. Now let's plot them. So for
+[0:04:02.80 --> 0:04:13.44]	  key, then data frames scores in scores items, we will plot it. So data frames scores is the first
+[0:04:13.44 --> 0:04:23.52]	  value. Just go ahead and go to this. Data frames score. So number iteration and AUC invalidation.
+[0:04:23.70 --> 0:04:32.48]	  And then for label, we will use the key. And let's plot also the legend. Yeah. Okay. So a lot of things
+[0:04:32.48 --> 0:04:40.54]	  are going on here. I think we've plotted too much. Let's do this for a couple of ethos. So first we'll
+[0:04:40.54 --> 0:04:55.46]	  do it equals 0.1, then we'll do it equals 0.3 and it equals 0.1 in ethos. So data frames score equals
+[0:04:56.98 --> 0:05:07.04]	  scores eta and label eta. This is a bit easier to understand. So this one is 0.1, this one is 0.3
+[0:05:07.04 --> 0:05:16.62]	  and this one is 0.1. So what we see here is that 1.0 is worst. Quite quickly. So around the first
+[0:05:16.62 --> 0:05:22.70]	  five iterations, you get k performance, but then it drops and it stays at quite a bit level. Then
+[0:05:22.86 --> 0:05:33.36]	  the next one is 0.3. We saw it already. So it has quite an okay AUC at iteration number 25.
+[0:05:33.88 --> 0:05:43.12]	  Then it goes down like that. When it comes to 0.1, it grows slower, reaches the peak around 75,
+[0:05:43.36 --> 0:05:51.82]	  and then it starts to decline. This is what learning rate is about. We can see how fast the model
+[0:05:51.82 --> 0:05:57.52]	  takes with each new iteration. And if the steps are too large, then the model learns something
+[0:05:57.52 --> 0:06:03.58]	  quite fast, but then at some point starts to degrade because the steps are too large. So it
+[0:06:03.58 --> 0:06:10.58]	  starts overfitting, but this model needs more iterations till it becomes better. But even though
+[0:06:10.58 --> 0:06:16.50]	  it needs more iterations, it learns slower, but it learns better. And then when it starts degrading,
+[0:06:16.50 --> 0:06:26.04]	  it also doesn't overfit as fast as this one. So then let's take a look at this 0.3, 0.1, and 0.01.
+[0:06:27.56 --> 0:06:35.32]	  For this 0.01, it's very slow. It learns slowly, slowly, slowly. And yeah, we don't know how much
+[0:06:35.32 --> 0:06:41.68]	  time it needs. Maybe it will be eventually better than this one, but it just needs too many iterations.
+[0:06:41.68 --> 0:06:47.86]	  So it takes forever to learn. So this is too slow. So the steps it makes are tiny. That's why it takes
+[0:06:47.86 --> 0:06:54.12]	  forever for this model to learn. While for this one, it takes quite a few big steps, but then
+[0:06:54.12 --> 0:06:59.82]	  it also starts overfitting faster. So maybe eventually this one will be better, but we'll
+[0:06:59.82 --> 0:07:05.86]	  just need to spend too much time computing this and seeing if it will be or not. This one seems to be
+[0:07:05.86 --> 0:07:11.50]	  in the sweet spot. It needs quite a few iterations, but then the performance is also better.
+[0:07:12.44 --> 0:07:19.44]	  Remember, we also evaluated the performance at 0.05. So let's see how it looks like.
+[0:07:20.48 --> 0:07:28.72]	  This one is 0.5. So we see that it takes approximately two times more to converge. So here it's 60,
+[0:07:29.06 --> 0:07:35.80]	  and here it's around 130, or maybe it's actually 70, something like this. So it takes two times
+[0:07:35.80 --> 0:07:41.96]	  more iterations to actually reach the peak, and this peak is even lower than this one. So even
+[0:07:41.96 --> 0:07:48.56]	  though it takes smaller steps, it takes two times more iterations to learn, at the end the result
+[0:07:48.56 --> 0:07:57.24]	  is still a bit worse than this one. Given that I think this model with 0.1 seems like the best,
+[0:07:57.44 --> 0:08:02.58]	  so it doesn't need a lot of trees, and it has the best performance. I think from that point of view,
+[0:08:02.58 --> 0:08:10.76]	  eta of 0.1 is the best parameter. And I usually first tune the eta parameter. I usually tune it
+[0:08:10.76 --> 0:08:17.68]	  in this order. First I tune eta, then I tune the depth parameter, and then I tune the mean child
+[0:08:17.68 --> 0:08:23.32]	  weight parameter. So the max depth parameter is exactly the same as in random forest, and this
+[0:08:23.32 --> 0:08:32.56]	  mean child weight is approximately the same as mean samples leave in random forest. So I usually
+[0:08:32.76 --> 0:08:38.58]	  train them in this order. First I tune the eta parameter, then I tune the max depth parameter,
+[0:0 --> 0:08:44.38]	  then I tune mean child weight parameter, and then if I want to tune other parameters. Okay,
+[0:08:44.40 --> 0:08:50.44]	  so we tuned the eta parameter, we decide to go with 0.1 as the best one. Let's copy it here,
+[0:08:50.68 --> 0:08:57.12]	  0.1. What we want to do now is we want to change the max depth parameter. And what we'll do is we
+[0:08:57.12 --> 0:09:03.86]	  will reset the scores here. We'll keep on the new experiments. So now we will train this model
+[0:09:03.86 --> 0:09:09.86]	  with these parameters. This is the same as the previous best model that we will use this as the
+[0:09:09.86 --> 0:09:17.58]	  baseline for comparing different max depth values. Let's copy this part. So here instead of eta,
+[0:09:18.08 --> 0:09:26.32]	  we'll use max depth. Let's save it. So we saved it as max depth of 6. And let's try 3.
+[0:09:27.12 --> 0:09:35.06]	  Relatively small model. Save it. Let's try 4. And let's also try 10.
+[0:09:36.84 --> 0:09:42.82]	  And then we'll see 4. We'll see 10 and this will give us some idea if we want to increase this,
+[0:09:42.92 --> 0:09:48.90]	  or if we want to decrease it, where do we want to go from 6. I think I accidentally
+[0:09:49.24 --> 0:09:57.14]	  deleted the code for plotting. So let me type it again for max depth, data frame score,
+[0:09:57.70 --> 0:10:11.68]	  scores, items. Copy this one. And label will be max depth. I want to show the legend.
+[0:10:13.32 --> 0:10:20.86]	  Okay, this is the plot we have. We see that this 10 is worse, right? So it quickly gets
+[0:10:20.86 --> 0:10:26.36]	  higher score. It gets good score before others. We see that if we look at iteration 10,
+[0:10:26.56 --> 0:10:32.22]	  then it's the best one among all four, but then the performance after iteration 10,
+[0:10:32.26 --> 0:10:38.34]	  it stagnates, it doesn't improve. While for others, they keep growing, keep growing. And then here
+[0:10:38.34 --> 0:10:44.84]	  the data verge. Let's remove this 10 from this plot. I'll do this by simply deleting
+[0:10:44.84 --> 0:10:53.84]	  this from the dictionary. Let me delete it. What I also want to do is I want to focus this area.
+[0:10:54.12 --> 0:11:01.02]	  So I want to zoom in a little bit. I want to limit the Y. This is our AUC. So I want to limit the Y
+[0:11:01.02 --> 0:11:12.04]	  in this range. From that, I'll use PLT Y limit. So I want the minimum one is 0.8. And then the
+[0:11:12.04 --> 0:11:20.76]	  max is 0.84. And so here it's easier to see what's going on. We see that the max depth six, it's
+[0:11:20.76 --> 0:11:26.64]	  actually always worse than the others. And then it also goes down faster. This one is four.
+[0:11:26.92 --> 0:11:35.82]	  Kind of stagnates also after 75 iterations, but this keeps growing, or at least up until here.
+[0:11:36.36 --> 0:11:44.18]	  So I think it maybe goes like that after this. But after 175 iterations, it gets a pretty good
+[0:11:44.18 --> 0:11:52.38]	  score, like 83.5%, something like this. Of course, it takes a lot more iterations for this to learn.
+[0:11:52.38 --> 0:11:59.44]	  But remember, the size of the tree is only three, has only three levels. So these are simple trees
+[0:11:59.44 --> 0:12:05.46]	  like this. Here, the depth is only three. That's why it needs a lot more iterations compared to
+[0:12:05.46 --> 0:12:13.32]	  trees with six levels. This one is best around 50, 60 iterations. But this one needs a lot more trees
+[0:12:13.32 --> 0:12:18.82]	  to actually get to the decent performance because of the size. But yeah, we see that actually,
+[0:12:18.94 --> 0:12:25.14]	  it's a lot better. So even though it learns slower, but eventually it learns it quite well.
+[0:12:25.32 --> 0:12:31.20]	  From that, what we conclude is that the max depth of three is the best depth for this one.
+[0:12:31.66 --> 0:12:38.56]	  So we tuned this already, we tuned this one. And now we need to tune this mean child weight.
+[0:12:38.90 --> 0:12:47.72]	  Let me copy this thing here. So we decided that the best one is three. Let me copy this one here
+[0:12:47.72 --> 0:12:55.36]	  as well. So the next one we will tune is mean child weight. So let me put it here. And we'll
+[0:12:55.36 --> 0:13:01.84]	  start with one is the baseline to something we will compare other values against. Let's evaluate it.
+[0:13:02.26 --> 0:13:11.42]	  So one, and then we can also try, let's say 10. And 30, perhaps, so this should give us some idea
+[0:13:11.42 --> 0:13:16.90]	  if we actually need to increase this value or not. Then let's look at the plots and see if we need to
+[0:13:16.90 --> 0:13:24.42]	  try other values. This one here, we probably don't need to limit it yet. Let's see what happens.
+[0:13:25.02 --> 0:13:32.48]	  We forgot to delete this max depth. So let me just quickly do that. What should have happened is I
+[0:13:32.48 --> 0:13:38.88]	  should have executed this before. So what I don't want to rerun it. What I'll do is I'll simply
+[0:13:38.94 --> 0:13:43.82]	  remove the keys I don't want. So I'll remove this max depth 3, 4, and 6.
+[0:13:45.96 --> 0:13:58.08]	  6. Okay. Let me plot it one more time. From what we see here, doesn't seem to make much difference.
+[0:13:58.54 --> 0:14:03.58]	  So one is slightly better than the other. It's hard to see which one exactly. I think we need to
+[0:14:03.58 --> 0:14:13.60]	  enlarge it a little bit. So let's say from 82 to 85. 84. Yeah. So here it's not really worth
+[0:14:13.60 --> 0:14:19.64]	  experimenting with this perimeter because even though like if we zoom in really close, then we
+[0:14:19.64 --> 0:14:27.32]	  see that this one is always better than let's say this one, but it's a very tiny difference. So let's
+[0:14:27.32 --> 0:14:33.30]	  say we will go with this one simply because it's a default one. So it means that this is our final
+[0:14:33.30 --> 0:14:41.34]	  model. So let me let me train it. And also what we need to know is for how many iterations we want
+[0:14:41.34 --> 0:14:50.84]	  to train, I think 175 seems like a good spot. So let's train our model for 175 iterations.
+[0:14:51.64 --> 0:1]	  175. And the rest we don't change. Let's remove this one, this one, and train it. And this will be
+[0:1 --> 0:15:09.44]	  our final model, final exe boost model. To be honest, I don't always do these plots. So what I
+[0:15:09.44 --> 0:15:16.78]	  usually do when train models is I just look at this output, this row output. And sometimes I just
+[0:15:16.78 --> 0:15:23.64]	  have a pen and paper with me and I write it down. Sometimes maybe I use Excel spreadsheet when
+[0:15:23.64 --> 0:15:31.40]	  experimenting. So you can try and see what works best for you. I think this plotting works quite
+[0:15:31.40 --> 0:15:37.42]	  nice to get some initial intuition. But then you can see if you really need to have these plots,
+[0:15:37.74 --> 0:15:43.36]	  you need to capture the output, because that's a bit of overhead. So you will see if you need this
+[0:15:43.36 --> 0:15:49.58]	  overhead or not, if it's worth it. Then finally, I wanted to add that these three parameters are
+[0:15:49.58 --> 0:15:55.36]	  important. So at a max depth and min child weight, so they are important parameters, but there are
+[0:15:55.36 --> 0:16:01.44]	  other useful parameters, especially subsample and cold sample by three read more about these
+[0:16:01.44 --> 0:16:06.76]	  parameters in the official documentation. But I can quickly mention that subsample is first,
+[0:16:06.88 --> 0:16:11.94]	  let's start with cold sample by three. So this is very similar to what we saw in random forest.
+[0:16:12.04 --> 0:16:18.94]	  In random forest, every tree, every decision tree can get a subset of columns. Here is cold sample
+[0:16:18.94 --> 0:16:25.26]	  by three controls how many features each tree at each iteration gets to see when training.
+[0:16:25.64 --> 0:16:32.22]	  You should experiment with that as well. So you can try values from the default one is 1.0. So what
+[0:16:32.22 --> 0:16:41.02]	  I usually do is I try 0.6 and I try 0.3. And then this I see which one works best. And then if I see
+[0:16:41.02 --> 0:16:47.34]	  if it's let's say 0.6, then I try some values around that. And then slowly I see which one is
+[0:16:47.46 --> 0:16:54.18]	  better. That subsample is similar to that. But instead of sampling columns, sampling features,
+[0:16:54.36 --> 0:16:59.80]	  we're sampling rows. So let's say at each iteration, instead of getting all the training data, we get
+[0:16:59.80 --> 0:17:08.38]	  only if we set it to 0.5, we get only 50% of the data. And we randomly select this 50% of the data.
+[0:17:08.38 --> 0:17:15.48]	  So you can also experiment it like set it to 0.7, 0.5, 0.3. And then this will give you some idea
+[0:17:15.96 --> 0:17:21.82]	  what kind of value makes sense for this parameter or whether you should change it at all or not.
+[0:17:22.10 --> 0:17:27.86]	  Okay, and this concludes this lesson for parameter tuning. So what we did here is we experimented
+[0:17:27.86 --> 0:17:32.06]	  with data, we experimented with max depth parameter, and we experimented with mean
+[0:17:32.06 --> 0:17:37.92]	  child weight parameter. This one actually should be one. And this is the order in which I change
+[0:17:37.92 --> 0:17:43.56]	  these parameters in which I tune these parameters. So this works well for me, but it's not the only
+[0:17:43.56 --> 0:17:50.98]	  way of tuning parameters. We can perhaps tune them in other sequence, but I like this one.
+[0:17:51.66 --> 0:17:58.52]	  And it's not precise. There are many rules of thumbs. If you look it up on the internet,
+[0:17:58.94 --> 0:1]	  like if you search for tuning XGBoost parameters, then you will find a lot of resources. It's
+[0:1 --> 0:18:12.40]	  probably the best one to check as Kaggle. On Kaggle, there are many tutorials on tuning
+[0:18:12.72 --> 0:18:18.64]	  XGBoost parameters. And you will find many different ways of approaching this game.
+[0:1 --> 0:18:25.46]	  This is our final XGBoost model. And what we will do next in the next lesson is we will take a look
+[0:18:25.46 --> 0:18:30.86]	  at all these three models that we trained. So decision tree, random forest and XGBoost,
+[0:18:30.98 --> 0:18:35.92]	  and we will select the best one. And then we will train the final model. So see you soon.

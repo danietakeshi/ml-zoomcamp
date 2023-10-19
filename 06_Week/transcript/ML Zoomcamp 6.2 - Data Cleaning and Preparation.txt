@@ -1,0 +1,168 @@
+[0:00:00.12 --> 0:00:03.74]	  Welcome back. This is lesson two of machine learning Zoom Comp Session six.
+[0:00:04.18 --> 0:00:11.52]	  And in this lesson, we will take a look at credit risk scoring data set and we will prepare it and we will clean it a little bit.
+[0:00:11.72 --> 0:00:18.76]	  So this is the data set again. And we already took a look at the columns there are in this data set.
+[0:00:19.26 --> 0:00:25.28]	  We took a look at the CSV file. What we can do now is we can download this data set for that.
+[0:00:26.74 --> 0:00:31.32]	  I use VKET as well. So now it downloads the data set.
+[0:00:32.60 --> 0:00:37.12]	  And so this is how it looks like. We already saw it in the previous video.
+[0:00:37.52 --> 0:00:41.12]	  So we saw how this looks like and this head, by the way, if you don't know,
+[0:00:41.32 --> 0:00:45.18]	  so it just looks at first 10 rows of a text file and just shows them.
+[0:00:45.28 --> 0:00:48.98]	  This is a Linux tool. So if you're on Windows, you might not have it.
+[0:00:49.10 --> 0:00:53.80]	  But this is the same as dataframe.head in pandas, but for text files.
+[0:00:53.80 --> 0:00:57.04]	  So it shows what kind of information we have here in this file.
+[0:00:57.38 --> 0:00:59.32]	  And let's load this with pandas.
+[0:00:59.40 --> 0:01:01.72]	  CSV. I check if I input it.
+[0:01:01.86 --> 0:01:05.50]	  So it's CSV.
+[0:01:06.24 --> 0:01:08.32]	  And then let's write it to dataframe.
+[0:01:10.34 --> 0:01:17.36]	  Then it shows us the first five rows and we can already see that for some of the variables.
+[0:01:17.84 --> 0:01:22.52]	  So first of all, they start with capital letter. We can lowercase this.
+[0:01:22.52 --> 0:0]	  But what we call also see that some of the categorical variables, like status,
+[0:01:27.36 --> 0:01:32.08]	  home, marital, meaning marital status, records, job, what else?
+[0:01:33.48 --> 0:01:37.82]	  Yeah, these variables, so they are categorical variables, but they are encoded as numbers.
+[0:01:38.18 --> 0:01:42.34]	  So one, two, one, two, three, which is not pretty nice.
+[0:01:42.44 --> 0:01:49.58]	  We want them to contain text to understand what this status one is or what this marital two is and so on.
+[0:01:49.58 --> 0:01:52.46]	  So first let's lowercase the code names.
+[0:01:53.50 --> 0:01:58.06]	  We have seen many times how we do this.
+[0:01:58.80 --> 0:02:00.68]	  So now they are lowercase.
+[0:02:00.94 --> 0:02:03.38]	  So now we need to figure out what to do with these categorical variables.
+[0:02:03.78 --> 0:02:11.08]	  And if we go to the original data set, there is some R code that shows how to pre-process this data.
+[0:02:11.30 --> 0:02:14.14]	  You don't have to understand R, but let's take a look at this.
+[0:02:15.18 --> 0:02:19.42]	  So first we see that there are some missing values. We will see them a bit later.
+[0:02:20.10 --> 0:02:24.64]	  So these missing values are coded as bunch of names. So we need to do something with them.
+[0:02:25.38 --> 0:02:29.28]	  Yeah, so here they are working with categorical variables.
+[0:02:29.60 --> 0:02:35.90]	  And here they say that for status, there is status that is good and then the status that is bad.
+[0:02:36.10 --> 0:02:38.86]	  So meaning I think good is no default, but default.
+[0:02:38.98 --> 0:02:44.12]	  And since it's R and they know a bit of R, in R indices start with one.
+[0:02:44.46 --> 0:02:49.82]	  So here it means that one is good and two is bad and the same with home.
+[0:02:50.36 --> 0:02:53.96]	  So one means rent, two means owner, three means brief.
+[0:02:54.42 --> 0:02:55.08]	  I think it's private.
+[0:02:55.40 --> 0:02:57.12]	  Then ignore parents and other.
+[0:02:57.58 --> 0:03:00.36]	  So parents live with parents, other, I don't know, something else.
+[0:03:00.56 --> 0:03:02.88]	  And we have five variables like that.
+[0:0 --> 0:03:06.78]	  So now let's see how we can translate this R code into Python.
+[0:03:06.80 --> 0:03:10.36]	  How we can translate these numbers into strings.
+[0:03:10.92 --> 0:03:11.74]	  So let's start with status.
+[0:03:12.38 --> 0:03:16.86]	  And for that we can use the map method for series on what map is doing.
+[0:03:17.04 --> 0:03:18.22]	  So it takes in a dictionary.
+[0:03:18.42 --> 0:03:24.08]	  And here in this dictionary, we map every value from the original data frame to some new value.
+[0:03:24.22 --> 0:03:28.26]	  So for example, for one, we say it's okay for two, it's default.
+[0:03:28.58 --> 0:03:30.80]	  Let's actually think there is also zero.
+[0:03:33.28 --> 0:03:34.50]	  Yeah, so there is zero.
+[0:03:35.08 --> 0:03:37.90]	  So let's say for zero, it's unknown.
+[0:03:38.30 --> 0:03:43.86]	  So I'm not sure how R exactly deals with zeros, but let's treat this as unknown.
+[0:03:44.28 --> 0:03:46.78]	  And then we get a data frame like that here.
+[0:03:46.94 --> 0:03:49.44]	  Now we simply write it back to status.
+[0:03:50.02 --> 0:03:53.68]	  Now if we look at our data frame, this is what we get.
+[0:03:53.96 --> 0:03:56.04]	  So we get the status and now it's not number.
+[0:03:56.42 --> 0:03:57.68]	  It is a string.
+[0:03:58.08 --> 0:03:59.22]	  We have some text here.
+[0:03:59.22 --> 0:04:00.72]	  So let's make it a bit nicer.
+[0:04:01.52 --> 0:04:06.26]	  So status values will be in a dictionary status values.
+[0:04:06.98 --> 0:04:10.58]	  Just format a little bit like that.
+[0:04:11.04 --> 0:04:17.82]	  Now we will use the same code for changing home for changing marital status for changing records and job.
+[0:04:18.06 --> 0:04:25.22]	  Actually, if you did the homework homework for week four, when we were talking about evaluating binary classification models,
+[0:04:25.22 --> 0:04:28.08]	  this is the homework and we already used this data set.
+[0:04:29.10 --> 0:04:39.06]	  And here we had some preparation and I said, I wrote here that we will talk about this data set a bit later and now it happens.
+[0:04:39.36 --> 0:04:43.60]	  So yeah, we're on week six and we are using this data set now.
+[0:0 --> 0:04:45.96]	  And let me just copy this.
+[0:04:46.20 --> 0:04:47.34]	  So I don't want to type it.
+[0:04:47.68 --> 0:04:49.60]	  So there's a lot of code here.
+[0:04:51.78 --> 0:04:54.72]	  So we already did we process status.
+[0:04:54.72 --> 0:04:59.82]	  Now we do the same with home, marital status, records and job.
+[0:05:00.50 --> 0:05:05.86]	  So for this, if we look at this home, the rent is one, owner is two, private is three.
+[0:05:06.34 --> 0:05:07.84]	  And yeah, one, two, three.
+[0:05:08.24 --> 0:05:11.48]	  So basically we translate that R code into pandas.
+[0:05:11.98 --> 0:05:13.12]	  Let's execute that.
+[0:05:14.20 --> 0:05:19.86]	  And now we have all the categorical variables nicely decoded back to strings.
+[0:05:19.86 --> 0:05:23.14]	  So now it's easier for us to make sense what's going on here.
+[0:05:23.46 --> 0:05:28.72]	  And then the numerical variables like seniority, time, age, expenses, income and so on.
+[0:05:28.80 --> 0:05:30.10]	  We're not doing anything with them.
+[0:05:30.72 --> 0:05:34.14]	  The other thing we saw here was missing values.
+[0:05:34.72 --> 0:05:36.74]	  So we can now deal with them.
+[0:05:37.02 --> 0:05:43.56]	  Let's first take a look at all these numerical variables using this describe method that describes what happened.
+[0:05:43.56 --> 0:05:50.22]	  So we can data set like all these statistics like mean max, the average value and then percentiles.
+[0:05:50.52 --> 0:05:52.86]	  And yeah, it's hard to see here.
+[0:05:53.02 --> 0:05:54.06]	  So let's surround it.
+[0:05:54.80 --> 0:06:01.40]	  And when we round, we see that income assets and debt have these large numbers as max values.
+[0:06:01.76 --> 0:06:05.86]	  So what we can do now, we can replace these numbers with n a.
+[0:06:06.08 --> 0:06:07.78]	  So these are actually missing numbers.
+[0:06:07.78 --> 0:06:12.14]	  So we can say, okay, this number actually means that this number is missing.
+[0:06:12.52 --> 0:06:14.98]	  And then later we'll decide what to do with these missing numbers.
+[0:06:15.54 --> 0:0]	  So we have three columns that have these missing values.
+[0:06:20.48 --> 0:06:26.94]	  I think I first will show you how to actually replace and then we will do a loop to the frame income.
+[0:06:27.30 --> 0:06:29.74]	  So this is where we want to place this.
+[0:06:30.04 --> 0:06:33.78]	  So if we look at max here, so here the max is this high number.
+[0:06:33.78 --> 0:06:38.92]	  So what we want to do is we want to replace, replace nines with an a.
+[0:06:39.32 --> 0:06:47.56]	  So here to replace, this is what we want to replace the value we want to replace and value is what we wanted to replace with.
+[0:06:47.74 --> 0:06:49.96]	  So in our case, it's not number.
+[0:06:50.16 --> 0:06:56.58]	  And here now if we look at max of this thing, it is not nines anymore.
+[0:06:56.86 --> 0:07:00.12]	  So this is how we replace something with something else.
+[0:07:00.12 --> 0:07:04.74]	  So this is similar to map in a way, but it's just for one number.
+[0:07:05.56 --> 0:07:10.40]	  We can do this in a loop now or see in, we have three columns like that.
+[0:07:10.56 --> 0:07:15.24]	  So one is income, then assets, assets in and that.
+[0:07:16.28 --> 0:07:25.54]	  So what we want to do is we want to now access this column and we want to replace this and try to back the results.
+[0:07:25.82 --> 0:07:28.18]	  So this should be it.
+[0:07:28.70 --> 0:07:30.78]	  Now let's rerun this.
+[0:07:31.12 --> 0:07:32.50]	  Copy this.
+[0:07:33.10 --> 0:07:36.50]	  And now we see that these nines are gone now.
+[0:07:36.80 --> 0:07:38.52]	  So we don't have them anymore.
+[0:07:38.92 --> 0:07:45.40]	  And remember we also looked at the status variable and we saw that there are zeros, meaning missing values there as well.
+[0:07:45.64 --> 0:07:47.72]	  So let's see again status.
+[0:07:49.08 --> 0:07:51.52]	  So we have this one unknown.
+[0:07:51.82 --> 0:07:53.56]	  So this is pretty useless for us.
+[0:07:53.56 --> 0:07:57.48]	  So what we are interested in in okay and default values.
+[0:07:57.78 --> 0:08:02.66]	  So we're interested in case when customers defaulted, when customers were fine.
+[0:08:03.24 --> 0:08:05.62]	  And this, it's not clear what to do with this.
+[0:08:05.72 --> 0:08:09.02]	  So we can simply remove this from our data set.
+[0:08:09.44 --> 0:08:14.96]	  So we're interested in all records that are not unknown, which is okay and default.
+[0:08:15.34 --> 0:08:17.54]	  This is how we can filter this out.
+[0:08:18.76 --> 0:08:22.40]	  Somewhere here, there's this record that we removed.
+[0:08:22.72 --> 0:08:27.04]	  And somewhere here, the index jumps one record.
+[0:08:27.24 --> 0:08:31.86]	  So it's like, for example, 50 and then 52 immediately, because one record is moved.
+[0:08:32.06 --> 0:08:33.24]	  So I don't like this.
+[0:08:33.62 --> 0:08:42.66]	  This is like, you don't have to do this, but I want to keep it sequential just to have less confusion if we need to do some debugging later.
+[0:08:42.66 --> 0:08:47.42]	  We will not need to do this debugging in this session, but this is just a habit I have.
+[0:08:48.66 --> 0:08:51.22]	  So let's do that.
+[0:08:52.38 --> 0:08:54.56]	  What else we wanted to do.
+[0:08:55.14 --> 0:08:59.82]	  So we also wanted to do train validation test split here.
+[0:09:00.34 --> 0:09:01.52]	  So let's do that.
+[0:09:01.84 --> 0:09:05.12]	  You already have done this multiple times by now.
+[0:09:05.54 --> 0:09:10.90]	  So from second learn model selection, train test split.
+[0:09:11.86 --> 0:09:16.96]	  What we do is we first split our data frame.
+[0:09:17.60 --> 0:09:19.74]	  So we leave aside 20%.
+[0:09:19.74 --> 0:09:21.86]	  Select some random state.
+[0:09:22.26 --> 0:0]	  I don't know, 11.
+[0:09:23.68 --> 0:09:28.48]	  Here the result is the frame for train and test.
+[0:09:29.16 --> 0:09:31.10]	  We repeat one more time.
+[0:09:31.40 --> 0:09:38.38]	  We'll get the frame train and the frame validation to split the full train data set here.
+[0:09:38.38 --> 0:09:41.96]	  We take 25%, something like that.
+[0:09:42.68 --> 0:09:47.80]	  So this is how our data frame now looks like.
+[0:09:48.12 --> 0:09:49.70]	  So let's reset the index.
+[0:09:51.24 --> 0:09:56.02]	  I'll do this for all three data frames for validation as well.
+[0:09:57.20 --> 0:10:05.26]	  The last thing I want to do is remove the default variable from the data frames.
+[0:10:05.26 --> 0:10:09.96]	  So even before removing, so first it is train status.
+[0:10:10.70 --> 0:10:15.42]	  It's text because we encoded or decoded the number into text.
+[0:10:15.66 --> 0:10:19.20]	  But now we want to turn it into a number, but to a different number.
+[0:10:19.62 --> 0:10:21.68]	  So previously it was 0, 1, 2.
+[0:10:21.92 --> 0:10:26.02]	  So now all the default ones, we want to turn into ones.
+[0:10:26.88 --> 0:10:32.02]	  So if it's default, we want to have a 1 and 0 otherwise.
+[0:10:35.26 --> 0:10:38.72]	  So for all the records that are default, they are true.
+[0:10:38.88 --> 0:10:41.70]	  And then we want to turn this through into a number.
+[0:10:42.66 --> 0:10:46.62]	  So basically the same as we did in week three, I think.
+[0:10:46.94 --> 0:10:48.36]	  We're interested in values.
+[0:10:48.78 --> 0:10:51.18]	  So this would be our Y train.
+[0:10:52.28 --> 0:10:56.92]	  And we will do the same for validation and test.
+[0:10:57.28 --> 0:10:58.76]	  Of course we need to replace it here.
+[0:11:00.70 --> 0:11:05.84]	  And finally what we want to do is we want to remove the default variable from our data frames.
+[0:11:08.02 --> 0:11:13.40]	  Okay.
+[0:11:16.22 --> 0:11:21.72]	  So now this is how our data frames look like.
+[0:11:21.86 --> 0:11:24.78]	  So we don't have the status column here anymore.
+[0:11:25.12 --> 0:11:26.94]	  We have all these features.
+[0:11:27.42 --> 0:11:27.98]	  Okay.
+[0:11:28.12 --> 0:11:30.38]	  Let's use them for train a decision tree.
+[0:11:30.80 --> 0:11:32.48]	  So we prepared our data set.
+[0:11:32.82 --> 0:11:35.24]	  We decoded the numbers back into strings.
+[0:11:35.56 --> 0:11:37.76]	  We worked a bit with missing values.
+[0:11:38.30 --> 0:11:43.82]	  We decoded them again from a bunch of nines to nays, missing numbers.
+[0:11:44.32 --> 0:11:47.34]	  We did the split and now we're ready to train a model.
+[0:11:47.64 --> 0:11:49.64]	  And we will do that in the next lesson.
+[0:11:50.26 --> 0:11:50.56]	  See you soon.

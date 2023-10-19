@@ -1,0 +1,335 @@
+[0:0 --> 0:00:02.66]	  Welcome back. This is lesson six of machine learning zoom
+[0:00:02.66 --> 0:00:05.50]	  comes session six. And in this lesson, we will talk about
+[0:00:05.50 --> 0:00:08.80]	  random forest as a way of putting multiple decision trees
+[0:00:08.80 --> 0:00:12.42]	  together. So let's talk a bit about what we have done so far.
+[0:00:12.54 --> 0:00:20.84]	  Client comes to us to a bank. They want to borrow some money.
+[0:0 --> 0:00:25.04]	  So they sent an application and application contains some
+[0:00:25.04 --> 0:00:29.12]	  basic information about the item they want to buy how much
+[0:00:29.12 --> 0:00:31.68]	  money they have how much money they want to borrow and so on.
+[0:00:31.94 --> 0:00:38.62]	  So then what we have is we have a decision tree here. We take
+[0:00:38.62 --> 0:00:42.70]	  this document, we extract some features from this, we send it
+[0:00:42.70 --> 0:00:46.68]	  to the decision tree, and then decision tree gives us score,
+[0:00:47.08 --> 0:00:49.78]	  the probability that this customer is going to default or
+[0:00:49.78 --> 0:00:54.52]	  not probability of default. And then based on that, we can
+[0:00:54.52 --> 0:00:58.12]	  take a decision whether we agree to lend some money or with
+[0:00:58.12 --> 0:01:02.88]	  the jetties. Yes, or no. So this is what we did so far. Let's
+[0:01:02.88 --> 0:01:06.86]	  imagine for a moment that we don't have this part. So I'll
+[0:01:06.86 --> 0:01:11.08]	  just set it aside. What we have instead is we have a board of
+[0:01:11.08 --> 0:01:21.44]	  experts experts here. Yeah, let's say we have five experts. So
+[0:01:21.44 --> 0:01:24.58]	  when somebody comes with us with an application, we forward
+[0:01:24.58 --> 0:01:28.52]	  this application to our board of experts. So each of them gets
+[0:01:28.52 --> 0:01:35.38]	  a copy. And then they independently each of them
+[0:01:35.38 --> 0:0]	  independently on their own decide based on this application
+[0:0 --> 0:01:42.72]	  whether they want to agree and give some money or they want
+[0:01:42.72 --> 0:01:47.26]	  to reject. So let's say this expert says yes, this expert says
+[0:01:47.26 --> 0:01:52.36]	  no, this expert says yes, this expert says yes, and this says
+[0:01:52.36 --> 0:01:56.78]	  no. So here what we have if we have three decisions of yes and
+[0:01:56.78 --> 0:02:01.92]	  two no. So here, yes wins. This is what we will look at the
+[0:02:01.92 --> 0:02:05.80]	  majority board. So whatever wins and you can notice that we
+[0:02:05.80 --> 0:02:08.98]	  actually have five experts here. In this case, we cannot have
+[0:02:08.98 --> 0:02:13.52]	  a tie here. So since the majority says yes, we reply with
+[0:02:13.52 --> 0:0]	  yes, and we lend some money to the client. So this is the
+[0:0 --> 0:02:21.36]	  idea behind the board of experts. We think that five experts
+[0:02:21.48 --> 0:02:24.90]	  know it better than just one expert and instead of relying
+[0:02:24.90 --> 0:02:29.04]	  on one expert, we rely on five of them. And if some of them
+[0:02:29.04 --> 0:02:32.16]	  disagree, then we take the majority vote. And this way,
+[0:02:32.44 --> 0:02:36.42]	  we think that decisions we make are better because five people
+[0:02:36.42 --> 0:02:40.72]	  each has their own perspective. Yeah, so in general, they should
+[0:02:40.72 --> 0:02:44.32]	  make a better decision than than just one person. And the same
+[0:02:44.32 --> 0:02:49.48]	  idea can be applied to models. So instead of people, we can
+[0:02:49.48 --> 0:02:54.26]	  have models. So let's say this could be model g one model g
+[0:02:54.26 --> 0:03:00.28]	  two model g three model g four and model g five. Then each of
+[0:03:00.28 --> 0:03:05.16]	  these models returns some probability of default. So remove
+[0:03:05.16 --> 0:03:09.12]	  these decisions. Each of these models applies with the
+[0:03:09.12 --> 0:03:19.46]	  probability of default. So it could be 0.6 0.7 0.3 0.7 0.3 0.7
+[0:03:19.56 --> 0:03:25.54]	  0.65. And what we can do with a little bit of it down. So what
+[0:03:25.54 --> 0:03:28.88]	  we can do now is we can take these decisions and aggregate
+[0:03:28.88 --> 0:03:33.44]	  them. So let's say we have here some sort of aggregation from
+[0:03:33.44 --> 0:03:36.58]	  all these scores from all these probabilities, we can take
+[0:03:36.58 --> 0:03:39.92]	  an average. So let's say if we have an experts in our case,
+[0:03:40.14 --> 0:03:44.96]	  we have five, but in general case, it will be n. P i is the
+[0:03:44.96 --> 0:03:48.58]	  score that the model number i outputs and we simply take an
+[0:03:48.58 --> 0:03:52.30]	  average. And this is what we use for aggregating the decisions
+[0:03:52.30 --> 0:03:56.72]	  this way for aggregating multiple models can work for any
+[0:03:56.72 --> 0:04:00.52]	  model. But if instead of just taking arbitrary models, we take
+[0:04:00.52 --> 0:04:05.92]	  decision trees. Then in this case, we have a random forest
+[0:04:05.92 --> 0:04:13.12]	  experts here. But now you might be thinking now why random, why
+[0:04:13.12 --> 0:04:16.92]	  not just forest. And the reason for this is if we just take the
+[0:04:17.04 --> 0:04:19.82]	  same application, so the same set of features, and we build
+[0:04:19.82 --> 0:04:23.76]	  the same bunch of trees here. So using the same parameter, then
+[0:04:23.76 --> 0:04:27.32]	  the trees that we will have here, they will be the same. So
+[0:04:27.32 --> 0:04:30.58]	  and then let's say we have five different trees that are
+[0:04:30.58 --> 0:04:33.54]	  exactly the same, each of them outputs the same probability
+[0:04:33.54 --> 0:04:37.02]	  of default, and then the average will be the same. So it's
+[0:04:37.02 --> 0:04:40.02]	  kind of pointless. We don't want to train the same model five
+[0:04:40.02 --> 0:04:43.94]	  times. So what happens in a random forest, each of these
+[0:04:44.44 --> 0:04:48.40]	  applications, each of these features that the trees get a
+[0:04:48.40 --> 0:04:51.50]	  little bit different. So let's say if we have 10 features in
+[0:04:51.50 --> 0:04:54.88]	  total, these three might get seven of them. So these three
+[0:04:54.88 --> 0:04:58.64]	  also get seven of them, but a different set of features. So
+[0:04:58.64 --> 0:05:02.40]	  then this also gets seven, seven, seven, but each of them gets
+[0:05:02.40 --> 0:05:05.70]	  a different set of features. Let's take a smaller example.
+[0:05:05.92 --> 0:05:10.30]	  For example, we have a data set with, let's say three features,
+[0:05:11.40 --> 0:05:17.94]	  assets, depth and price of the item. So we have these three
+[0:05:17.94 --> 0:05:22.24]	  features. Let's say we train only three models. So we can
+[0:05:22.24 --> 0:05:31.78]	  train a model using only assets and depth. So this would be
+[0:05:31.78 --> 0:05:37.18]	  our decision tree number one. Then we can train another model,
+[0:05:37.18 --> 0:05:42.52]	  but instead of using assets and depth, we can use, for example,
+[0:05:42.82 --> 0:05:49.50]	  assets and price. And then we can train yet another model
+[0:05:49.50 --> 0:05:57.56]	  this time using depth and price. So this way we will have three
+[0:05:57.56 --> 0:06:02.98]	  different models. Change that decision tree number two and
+[0:06:02.98 --> 0:06:06.52]	  three. So this way we will have three different models. And
+[0:06:06.52 --> 0:06:09.90]	  what we will do at the end, we will just compute the average
+[0:06:09.90 --> 0:06:16.54]	  score of all three. P1 plus P2 plus P3. And we will do this,
+[0:06:16.76 --> 0:06:21.22]	  we will take the average score for every client. So this way
+[0:06:21.22 --> 0:06:26.92]	  we have some sort of a board of experts. But instead of experts,
+[0:06:27.04 --> 0:06:30.02]	  we have models. And the idea here, of course, that features
+[0:06:30.02 --> 0:06:33.42]	  to here because we only had three columns and we wanted to
+[0:06:33.42 --> 0:06:36.08]	  train three models, we couldn't really select here features
+[0:06:36.08 --> 0:06:39.98]	  randomly. But the idea here is features are always selected
+[0:06:39.98 --> 0:06:48.78]	  randomly. So each model gets a random subset of features. So
+[0:06:48.78 --> 0:06:51.92]	  here, response will be probability of default as well.
+[0:06:53.08 --> 0:06:57.66]	  We can remove this part. So this is the main idea behind
+[0:06:57.66 --> 0:07:05.70]	  Random Forest. So let's train it. To use it in Cycle Learn, we
+[0:07:05.70 --> 0:07:08.04]	  can use the same Cycle Learn sample, import random forest.
+[0:07:08.48 --> 0:07:11.62]	  Again, we have random forest, classifier and regressor. So in
+[0:07:11.62 --> 0:07:15.50]	  this case, we need classifier. Let's say let's create random
+[0:07:15.50 --> 0:07:19.20]	  forest, classifier. For now, we will use default parameters.
+[0:07:20.36 --> 0:07:24.32]	  We'll train only 10. So number of estimators here, it's number
+[0:07:24.32 --> 0:07:28.54]	  of models we want to use. So let's keep it at 10 for now. And
+[0:07:28.54 --> 0:07:34.04]	  then the random forest feed, X train, Y train. So we just train
+[0:07:34.04 --> 0:07:40.70]	  a model. And let's use it for predicting. So predict probability
+[0:07:40.70 --> 0:07:45.78]	  X validation. This is how it looks like. We need only the
+[0:07:45.78 --> 0:07:50.32]	  positive column, Y spread. What we want to do now is compute
+[0:07:50.32 --> 0:07:56.52]	  the UC score, Y validation, Y prediction. So it is
+[0:07:56.52 --> 0:08:00.98]	  relatively good actually. So this is as good as our best
+[0:08:00.98 --> 0:08:04.96]	  decision tree is, and we didn't do any tuning here. So we just
+[0:08:04.96 --> 0:08:09.50]	  took the default values and we reduce the size of the model
+[0:08:09.50 --> 0:08:13.88]	  from 100. I think the default one is 100 estimators, we reduced
+[0:08:13.88 --> 0:08:19.14]	  it to 10. And we got a score that is as good as the best
+[0:08:19.14 --> 0:08:22.68]	  model, the best decision tree we had. Notice this random here,
+[0:08:22.92 --> 0:08:27.62]	  we talked that each tree gets a subset, a random subset of
+[0:08:27.62 --> 0:08:33.06]	  features. Say if we apply this model to see predict probability
+[0:08:33.06 --> 0:08:38.48]	  for we can take the first row of X validation. So first row.
+[0:08:38.70 --> 0:08:42.60]	  So this is our prediction 0.5. But if we train this model
+[0:08:42.60 --> 0:08:46.86]	  again, and we apply this model again, so see now we have a
+[0:08:46.86 --> 0:08:51.42]	  different result. We train it again, apply it again now. Yeah.
+[0:08:51.68 --> 0:08:57.60]	  So now it's the same. I think if we keep repeating this, we
+[0:08:57.60 --> 0:09:03.92]	  get 0.3. And then this is a positive example. Now 0.1, it's
+[0:09:03.92 --> 0:09:08.62]	  even less. Let's see what happens now. So now it's a zero.
+[0:09:08.94 --> 0:09:12.48]	  Yeah, so we can keep trying this and we will get different
+[0:09:12.48 --> 0:09:16.06]	  results every time because there is some randomization here.
+[0:09:16.48 --> 0:09:19.58]	  So every tree gets a random subset of features. So there's
+[0:09:19.58 --> 0:09:23.34]	  some randomization involved. And as usual, we can fix the
+[0:09:23.66 --> 0:09:27.52]	  random seed. So if we fix it, let's say if we set it to one,
+[0:09:27.66 --> 0:09:31.06]	  so then no matter how many times we try, the result will be
+[0:09:31.06 --> 0:09:35.20]	  the same. So let's train it again. Yeah, it's still the same.
+[0:09:35.84 --> 0:09:39.88]	  So for repeat this ability, it's always important to fix the
+[0:09:39.88 --> 0:09:43.72]	  random seed for the random forest model, because if we don't
+[0:09:43.72 --> 0:09:47.80]	  do this, then our results will be different each time we run
+[0:09:47.80 --> 0:09:51.16]	  this. So let's see what we can actually do with this random
+[0:09:51.16 --> 0:09:57.16]	  forest. So first, let's try to see how the performance of our
+[0:09:57.16 --> 0:10:00.74]	  model changes when we increase the number of estimators here,
+[0:10:00.86 --> 0:10:04.56]	  the number of models. So for that, what we can do, let me just
+[0:10:04.56 --> 0:10:12.40]	  clean it a little bit. So what we can do is iterate over many
+[0:10:12.40 --> 0:10:18.16]	  different values, let's say we can go from 10 to 200. So first
+[0:10:18.16 --> 0:10:21.64]	  try it for 10, then try it for 20, and so on until we reach
+[0:10:21.64 --> 0:10:26.94]	  200. We first check if we actually include 200 here. 200 is
+[0:10:26.94 --> 0:10:31.38]	  not included. But if we do 201, yeah, so we have 200 here. So
+[0:10:31.38 --> 0:10:36.82]	  what we want to do now is we want to take this code and take
+[0:10:36.82 --> 0:10:41.08]	  this code and see how the performance of a model improves
+[0:10:41.08 --> 0:10:45.30]	  or changes when we increase the number of trees. So this will
+[0:10:45.30 --> 0:10:51.68]	  be AC. What we also want to do now is write these two scores.
+[0:10:52.82 --> 0:11:03.08]	  So what will you know is bent and AC. Let's execute that. It took
+[0:11:03.08 --> 0:11:06.44]	  some time, like less than a minute, maybe 30 seconds, I
+[0:11:06.44 --> 0:11:09.68]	  didn't measure. For you, maybe it was faster because I edit the
+[0:11:09.68 --> 0:11:13.84]	  video. So if for you, it takes longer than it is taken here
+[0:11:13.84 --> 0:11:17.64]	  for me, it's because I added the video. So yeah, now let's take
+[0:11:17.64 --> 0:11:21.82]	  a look at this course. So we have, let's create a data frame
+[0:11:21.82 --> 0:11:29.62]	  for that scores. So this is our data frame. Here would be
+[0:11:29.62 --> 0:11:35.96]	  number of estimators. And there you see, let's call it data
+[0:11:35.96 --> 0:11:42.26]	  frame scores. Take another look at this. So we see how the
+[0:11:42.72 --> 0:11:47.84]	  performance of our model changes as we increase the number of
+[0:11:47.84 --> 0:11:50.48]	  estimators. So what we can do now is we can just plot this
+[0:11:50.48 --> 0:11:55.88]	  using Macplotlib. So on the x axis, we'll have number
+[0:11:55.88 --> 0:12:01.52]	  estimators, and then on the y axis, we'll have AC. Again, this
+[0:12:01.52 --> 0:12:08.34]	  is number of trees. This is AC. We see that it grows until
+[0:12:08.48 --> 0:12:15.18]	  somewhere here. So around 40 trees, I think it's 40. So it
+[0:12:15.18 --> 0:12:21.06]	  grows until 40. Maybe it's actually 50. Yeah, it's 50. So
+[0:12:21.06 --> 0:12:25.42]	  it grows up until 50. But then it kind of stagnates. It doesn't
+[0:12:25.42 --> 0:12:29.22]	  really grow after 50. So here, no matter how many more trees
+[0:12:29.22 --> 0:12:37.62]	  we add after 50, the performance isn't really improving. So I
+[0:12:37.62 --> 0:12:40.76]	  think this, I think. So here we see that at some point, it
+[0:12:40.76 --> 0:12:43.82]	  doesn't make sense to train more trees. It's enough to just
+[0:12:43.82 --> 0:12:48.46]	  have 50. And say we have 50 experts, it's fine. But 51, 52
+[0:12:48.46 --> 0:12:53.12]	  and so on expert do not contribute that much. But the
+[0:12:53.12 --> 0:12:56.48]	  increase here that we have is quite rapid. So you see, and
+[0:12:56.48 --> 0:13:00.44]	  adding more experts here, more models actually helps a lot.
+[0:13:01.04 --> 0:13:05.62]	  Just like in decision trees, we can now tune our random forest
+[0:13:05.62 --> 0:13:10.04]	  model. And what we actually can tune there is exactly the same
+[0:13:10.04 --> 0:13:14.28]	  as what we tune in decision trees, because random forest
+[0:13:14.28 --> 0:13:17.24]	  consists of multiple decision trees. So the parameters we
+[0:13:17.24 --> 0:13:20.86]	  tune in random forest are the same. Namely, we are interested
+[0:13:20.86 --> 0:13:25.46]	  in max depth parameter and mean leaf size parameter. So let's
+[0:13:25.46 --> 0:13:29.16]	  again, start with max depth parameter. What I'll do now is
+[0:13:29.16 --> 0:13:36.36]	  I'll take this code, put it here. And I will now train a random
+[0:13:36.36 --> 0:1]	  forest model for different depth parameters. So for D in 510
+[0:1 --> 0:13:49.22]	  and 15. And then for each of these depth, we will train a
+[0:13:49.22 --> 0:13:55.04]	  model using this many estimators, and then set max depth to
+[0:13:55.14 --> 0:14:01.56]	  n, sorry, D. Then we keep random state here. And yes, what
+[0:14:01.56 --> 0:14:06.94]	  we also want to do now is add D to this course. It will take
+[0:14:06.94 --> 0:14:12.22]	  some time now. So let me in the meantime, copy this code here.
+[0:14:13.42 --> 0:14:20.28]	  So I want to add now one more column here. So the column would
+[0:14:20.28 --> 0:14:25.98]	  be max depth. And actually finish training. So max depth
+[0:14:25.98 --> 0:14:37.16]	  So this is how our data frame looks like. So for different
+[0:14:37.16 --> 0:14:41.08]	  values of max depth and number of estimators, we get a different
+[0:14:41.08 --> 0:14:48.46]	  AC. Now let's plot it. So we will take this. Don't just do a
+[0:14:48.46 --> 0:14:59.14]	  loop for D in this loop. Here, I'll call diff subset, then we'll
+[0:14:59.14 --> 0:15:04.66]	  take our scores, and we filter scores with max depth equals
+[0:15:04.66 --> 0:15:10.46]	  3d. Right. And then we plot, we plot this number of estimators
+[0:15:10.46 --> 0:15:15.68]	  on the x axis and the c on the y axis into to distinguish
+[0:15:15.68 --> 0:15:19.20]	  between different values of depth. Let's also add a legend
+[0:15:19.20 --> 0:15:27.38]	  label. Let's just put D here, or maybe max depth equals 2d. And
+[0:15:27.38 --> 0:15:32.22]	  now we need to display the legend. Yeah, let's plot it. I
+[0:15:32.22 --> 0:15:40.30]	  forgot to add D here. So this is what we see. This is five. This
+[0:15:40.30 --> 0:15:45.70]	  is 10. And this is 15. So 10 is the best one. First 10 and 15
+[0:15:45.70 --> 0:15:50.66]	  they're relatively close. But then so for 15, it kind of stops
+[0:15:50.66 --> 0:15:54.42]	  growing, it's growing, but little bit. And for 10, yeah, it's
+[0:15:54.42 --> 0:15:57.88]	  really so it's doing a lot better. I think this is probably
+[0:15:57.88 --> 0:16:02.18]	  the best one. And then after that, it kind of stagnates around
+[0:16:02.18 --> 0:16:09.60]	  125. So what we see here is that depth actually matters. So we
+[0:16:09.60 --> 0:16:13.80]	  need to set a good value for depth here. The value of 10 seems
+[0:16:13.80 --> 0:16:17.68]	  to be the best one. And because the difference between 10 and
+[0:16:17.68 --> 0:16:23.76]	  15 is at least 1%. Right. And the difference between 10 and 5
+[0:16:23.76 --> 0:16:29.82]	  is thinking like maybe 2.5%, which is, I would say quite
+[0:16:29.82 --> 0:16:34.28]	  significant. So for this data set, the value of max depth 10
+[0:16:34.28 --> 0:16:38.94]	  seems to be the best one. So let's take a note. So 10.
+[0:16:39.60 --> 0:16:43.20]	  So we selected the best max depth parameter. Now what we want
+[0:16:43.20 --> 0:16:47.02]	  to check is what is the best mean leaf size parameter. We'll do
+[0:16:47.02 --> 0:16:54.94]	  it in the same way. So let me just copy it and paste here. So
+[0:16:54.94 --> 0:17:00.30]	  paste it here. Let's see, we can try one, we can try three, we
+[0:17:00.30 --> 0:17:05.60]	  can try five, 10, 15. Maybe this is quite a few parameters and
+[0:17:05.60 --> 0:17:07.94]	  it will take some time to train around and for us because
+[0:17:07.94 --> 0:17:12.08]	  remember, we are also trying to train many, many different
+[0:17:12.08 --> 0:17:16.60]	  models here, like here 200. So it will take some time. But let's
+[0:17:16.60 --> 0:17:20.84]	  try that. So max depth here is fixed. So this is the best max
+[0:17:20.84 --> 0:17:25.44]	  depth from the previous step. Here, let's say call it as this
+[0:17:25.44 --> 0:17:30.46]	  will be mean sample sleeve s, right. And then here instead of
+[0:17:30.46 --> 0:17:35.10]	  D to this course will append not D but S. And let's test it.
+[0:17:35.58 --> 0:17:40.52]	  Let's run it. So while it's running, I'll copy this code. So
+[0:17:40.52 --> 0:17:46.74]	  this code, I'll put it here. Now this is not max depth anymore.
+[0:17:47.34 --> 0:17:53.74]	  This is mean sample sleeve. What I want to do next is do that.
+[0:17:54.64 --> 0:17:59.86]	  So plot it. Now instead of looping over values of D, we'll
+[0:17:59.86 --> 0:18:04.28]	  loop over values of S. You see it's still running. Oh, it
+[0:18:04.28 --> 0:18:08.20]	  finished. So now we'll loop over values of S and then select
+[0:18:08.20 --> 0:18:12.64]	  the values of mean sample leaf and then plot it. Let's change
+[0:18:12.64 --> 0:18:18.46]	  the legend a little bit. So let's run it. And let's run this
+[0:18:18.46 --> 0:18:24.12]	  one. I think there is a mistake. So let me just fix it real
+[0:18:24.12 --> 0:18:30.80]	  quick. Okay, so this one is one, right? So this is, I think
+[0:18:30.80 --> 0:18:35.20]	  it's not clear. This one and this one have the same color. So
+[0:18:35.20 --> 0:18:44.12]	  we need to fix that colors black. So what we want to do is now
+[0:18:44.12 --> 0:18:48.42]	  for each of these lines define a color, and then we will loop
+[0:18:48.42 --> 0:18:52.56]	  over this and say this must be this color. So black, blue,
+[0:18:52.78 --> 0:18:58.30]	  orange, red, and let's go with gray. Some for the values will
+[0:19:00.88 --> 0:19:06.24]	  be this. And what we want to do now is iterate over. So for one,
+[0:19:06.40 --> 0:19:09.68]	  it will be black for three, it will be blue for five, it will
+[0:19:09.68 --> 0:19:12.84]	  be orange for 10, it will be red and for 50, it will be great.
+[0:19:13.08 --> 0:19:18.58]	  So we can do this by zipping two lists. And I think we already
+[0:19:18.58 --> 0:19:22.44]	  talked about zipping in one of the lessons. But let me repeat
+[0:19:22.44 --> 0:19:26.28]	  that. So let's say we can zip this in sub or leaf values with
+[0:19:26.28 --> 0:19:30.30]	  color, and we execute it, we will not see anything now, because
+[0:19:30.30 --> 0:19:34.24]	  this is an iterator. So it doesn't display. So if we want to
+[0:19:34.24 --> 0:19:38.08]	  display it, we need to turn this iterator into a list by doing
+[0:19:38.08 --> 0:19:42.56]	  this. And this is what we have for each value here, we get a
+[0:19:42.56 --> 0:19:47.12]	  value from here. So one is paired with black, then blue is
+[0:19:47.12 --> 0:19:50.44]	  paired with three, orange is paired with five, red is paired
+[0:19:50.44 --> 0:19:54.84]	  with 10, and gray is paired with 50. We'll do that here. So
+[0:19:54.84 --> 0:20:03.42]	  this color in zip means some values and colors. Yeah, here we
+[0:20:03.42 --> 0:20:09.42]	  have color. Nothing is true. Yes, color. And the color will be
+[0:20:09.42 --> 0:20:15.90]	  cool. So let's execute that. Now we see that the gray one is 50
+[0:20:15.90 --> 0:20:20.28]	  is the worst one, right? And these three, these three here,
+[0:20:20.28 --> 0:20:26.72]	  this is black, orange, and blue. So this is one, three and five.
+[0:20:27.28 --> 0:20:32.16]	  And the red one is 10 is significantly worse, not
+[0:20:32.16 --> 0:20:36.64]	  significantly, but at least 1%. Yeah, I think we can clearly
+[0:20:36.64 --> 0:20:40.66]	  see that these two are best ones. And yeah, it's not really
+[0:20:40.66 --> 0:20:45.52]	  clear what to keep here. I would actually probably go with the
+[0:20:45.52 --> 0:20:49.70]	  blue one here, because it starts getting good performance
+[0:20:49.70 --> 0:20:54.18]	  earlier than others. I think also the red one, yeah, the red
+[0:20:54.18 --> 0:20:58.58]	  one then goes down. Yeah, so I would say somewhere here, or
+[0:20:58.58 --> 0:21:02.78]	  maybe here in this range, I think going with blue makes more
+[0:21:02.78 --> 0:21:07.56]	  sense to increases a little bit. But yeah, I think, or maybe
+[0:21:07.56 --> 0:21:13.44]	  around 100. So yeah, around 100, this blue one is three, it
+[0:21:13.44 --> 0:21:18.04]	  looks like it's good enough. Then let's go with mean sample
+[0:21:18.04 --> 0:21:24.12]	  leaf equals to three is our best value. Let's retrain a model
+[0:21:24.12 --> 0:21:28.06]	  with these values, let's retrain our random forest. And I
+[0:21:28.06 --> 0:21:32.08]	  think we said we can train it around 100, because there is no
+[0:21:32.08 --> 0:21:35.98]	  much difference between 100 and 200. Yeah, I think we can do
+[0:21:35.98 --> 0:21:45.04]	  that. So let me copy this code here. We have the best max
+[0:21:45.04 --> 0:21:48.86]	  depth, which I think is 10, then the mean sample if is three,
+[0:2 --> 0:21:53.08]	  and let's train our model. So this is our final random forest
+[0:21:53.08 --> 0:21:56.98]	  model, which we will use at the end when we compare all
+[0:21:56.98 --> 0:22:01.12]	  different models. This is not the only two parameters that we
+[0:22:01.12 --> 0:22:04.70]	  can tune. There are a lot more parameters, you can check what
+[0:22:04.70 --> 0:22:08.60]	  are these parameters by going to the documentation, you can see
+[0:22:08.60 --> 0:22:11.62]	  that there is a ton of different parameters, and you can read
+[0:22:11.62 --> 0:22:15.52]	  more about these parameters. So I think the most useful ones
+[0:22:15.52 --> 0:22:19.78]	  are max depth and mean sample leaf. Actually, this one, this
+[0:22:19.78 --> 0:22:24.04]	  one are pretty similar. And what is also interesting to tune
+[0:22:24.04 --> 0:22:27.48]	  is this max features. So remember the way random forest
+[0:22:27.48 --> 0:22:31.44]	  works, it doesn't get all the features, it gets only a part of
+[0:22:31.44 --> 0:22:35.66]	  features. And this feature max features specifies how many
+[0:22:35.66 --> 0:22:38.98]	  features each decision tree actually gets during training,
+[0:22:38.98 --> 0:22:42.62]	  we can just put an int. So if let's say we have 10 features,
+[0:22:42.76 --> 0:22:46.16]	  we can put seven there, it means every decision tree will get
+[0:22:46.16 --> 0:22:50.08]	  a randomly selected subset of seven features, or we can put
+[0:22:50.08 --> 0:22:55.48]	  a fraction here saying 75% of features, or different ways of
+[0:22:55.48 --> 0:22:58.12]	  doing this, you can check it here. And the other interesting
+[0:22:58.12 --> 0:23:02.38]	  one is bootstrap. So we talked about selecting a subset of
+[0:23:02.38 --> 0:23:06.40]	  features subset of columns, and bootstrap is another way of
+[0:23:06.78 --> 0:23:09.90]	  randomization, but on the raw level. So we'll not go into
+[0:23:09.90 --> 0:23:13.62]	  details of what bootstrap is, you can look it up in Google,
+[0:23:13.76 --> 0:23:16.64]	  for example, but this is basically adding some randomization
+[0:23:16.64 --> 0:23:21.16]	  on the raw level. So because we want our decision trees as
+[0:23:21.16 --> 0:23:24.84]	  different from each other as possible. And this bootstrap is
+[0:23:24.84 --> 0:23:28.12]	  another way of making them different from each other. Okay,
+[0:23:28.20 --> 0:23:31.10]	  and the last one probably also worth mentioning is n jobs,
+[0:23:31.16 --> 0:23:34.46]	  because the process of training decision trees can be
+[0:23:34.46 --> 0:23:37.54]	  parallelized. So all let's say if we have five models, all
+[0:23:37.54 --> 0:23:40.58]	  these models are independent from each other. So we can
+[0:23:40.58 --> 0:23:44.02]	  actually train them in parallel. And this number of jobs says
+[0:23:44.02 --> 0:2]	  how many trees we can train in parallel. So default is known,
+[0:23:48.04 --> 0:23:51.46]	  means that we are not training them in parallel, but we can
+[0:23:51.46 --> 0:23:56.58]	  put this to minus one and use all available processors. So I
+[0:23:56.58 --> 0:24:01.42]	  can quickly show you maybe here that number jobs equals
+[0:24:01.42 --> 0:24:05.96]	  minus one, then I will also when H top, which shows how many
+[0:24:05.96 --> 0:24:11.30]	  processors I have, we run this. And you see that, yeah, we
+[0:24:11.30 --> 0:24:15.84]	  couldn't see this, it was too fast. But here, it would use all
+[0:24:15.84 --> 0:24:20.28]	  the course they have, and then it finishes a lot faster. So this
+[0:24:20.28 --> 0:24:23.28]	  is potentially something we could do here when we train a lot
+[0:24:23.28 --> 0:24:26.78]	  of models, this will speed up the process to go through this,
+[0:24:26.94 --> 0:24:30.26]	  and to see and you can of course read more about this
+[0:24:30.50 --> 0:24:33.62]	  parameters. So in this lesson, what we did is we trained
+[0:24:33.62 --> 0:24:37.76]	  random forest model, we first talked about why it's a good idea
+[0:24:37.76 --> 0:24:42.58]	  to have multiple models, why it's a good idea to have an
+[0:24:42.58 --> 0:24:45.82]	  ensemble, which is a way of combining multiple models
+[0:24:45.82 --> 0:24:49.14]	  together. We compared it with a board of experts. So it's
+[0:24:49.14 --> 0:24:52.56]	  similar instead of experts, we have models. And then random
+[0:24:52.56 --> 0:24:56.82]	  forest is a way of combining multiple decision trees into one
+[0:24:56.82 --> 0:24:59.88]	  single model, one single ensemble. Here, the decision trees
+[0:24:59.88 --> 0:25:02.76]	  have to be different from each other. So that's why we do some
+[0:25:02.76 --> 0:25:06.70]	  randomization for them, like select different subset of
+[0:25:06.70 --> 0:25:10.94]	  columns. And then we tuned the we looked how the performance of
+[0:25:10.94 --> 0:25:14.42]	  the of a model will depends on the number of trees we have in
+[0:25:14.42 --> 0:25:18.04]	  our ensemble, then we tuned the max depth parameter and in
+[0:25:18.04 --> 0:25:22.58]	  sample leaf parameter. And yeah, we actually wanted to train not
+[0:25:22.58 --> 0:25:27.42]	  200, but 100. Yeah, so this is our final random forest model.
+[0:25:27.42 --> 0:25:32.60]	  And in the next lesson, we will talk about a different way of
+[0:25:32.60 --> 0:25:36.82]	  combining decision trees. So here, the trees that we train are
+[0:25:36.82 --> 0:25:39.90]	  independent from each other. So we can train them in parallel.
+[0:25:40.14 --> 0:25:43.14]	  But there is a different way of combining models, when we train
+[0:25:43.14 --> 0:25:46.18]	  our models sequentially one after another. And each model
+[0:25:46.18 --> 0:25:49.42]	  corrects the errors of the previous model. This way of
+[0:25:49.42 --> 0:25:52.70]	  combining models is called boosting. And we will talk about
+[0:25:52.70 --> 0:25:56.48]	  one particular way of boosting gradient boosting, and we will
+[0:25:56.48 --> 0:26:00.70]	  use xg boost, which is a library for implementing gradient
+[0:26:00.70 --> 0:26:04.10]	  boosted tree algorithm. So see you soon.

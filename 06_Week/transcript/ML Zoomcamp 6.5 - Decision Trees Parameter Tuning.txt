@@ -1,0 +1,128 @@
+[0:0 --> 0:00:04.08]	  Hello everyone, welcome back. This is lesson 5 of machine learning Zoom Come session 6.
+[0:00:04.76 --> 0:00:08.56]	  And in this lesson we will talk about parameter tuning for decision trees.
+[0:00:09.72 --> 0:00:15.86]	  To one lesson ago we trained our first decision tree, so that was our decision tree,
+[0:00:16.02 --> 0:00:20.86]	  and it was a pretty basic one. Even before that we trained a decision tree without restricting
+[0:00:20.86 --> 0:00:26.40]	  the depth for the tree, and tree we got as a result overfit. Then we trained a simpler tree,
+[0:00:26.40 --> 0:00:30.36]	  it was pretty small and the performance of these three wasn't impressive.
+[0:00:30.90 --> 0:00:34.70]	  And then in the previous lesson we talked about the learning algorithm for building decision trees.
+[0:00:35.26 --> 0:00:40.22]	  And what I mentioned here that the tree has multiple parameters. So first this max depth
+[0:00:40.22 --> 0:00:46.12]	  parameter, which tells us how deep the tree can grow, like how many layers in the tree we can
+[0:00:46.12 --> 0:00:51.46]	  have. And then the second parameter was that how we decide if a leaf is sufficiently large,
+[0:00:51.46 --> 0:00:56.06]	  if a group is sufficiently large. So this is another parameter that controls the
+[0:00:56.06 --> 0:01:01.02]	  minimum size of a group. So there are two parameters, there are actually more parameters
+[0:01:01.02 --> 0:01:06.26]	  in decision trees, but these two are probably the most important ones. And we can now tune them.
+[0:01:06.52 --> 0:01:12.18]	  We can tune them and select these parameters. So by tuning, I mean selecting parameters and
+[0:01:12.18 --> 0:01:17.88]	  situate at the performance, the AUC of this model or whatever other metric is maximized or
+[0:01:18.16 --> 0:01:22.56]	  minimized depending what kind of metric it is. So since we use AUC here, we want to find
+[0:01:22.56 --> 0:01:28.10]	  parameters such that AUC is maximum. And we do this of course on the validation set,
+[0:01:28.26 --> 0:01:31.92]	  we try to find such parameters that the scoring validation is maximized.
+[0:01:32.06 --> 0:01:38.22]	  First of all, let's look at decision tree one more time. So what kind of things it has. So there
+[0:01:38.22 --> 0:01:43.96]	  are quite a few parameters, like criterion, this is the impurity measure we discussed. So there's
+[0:01:43.96 --> 0:01:49.90]	  genie, there's entropy, all these parameters, we will leave them as is. What we are interested in
+[0:01:49.90 --> 0:01:55.46]	  is this max depth parameter, which controls the size of the tree and then mean leaf size,
+[0:01:55.78 --> 0:02:00.80]	  which controls the size of a leaf. And leaf is the node, the decision node, when we actually
+[0:02:00.80 --> 0:02:05.76]	  make a decision, when we say if prediction for the client is going to be default or not. So this
+[0:02:05.76 --> 0:02:11.58]	  is the decision leaf and how many samples or observations we want to have in each leaf.
+[0:02:11.58 --> 0:02:15.06]	  So basically the size of a group. So these two are the most important ones.
+[0:02:15.52 --> 0:02:21.08]	  And the rest you can go through the documentation and see what it's actually saying,
+[0:02:21.44 --> 0:02:25.82]	  what kind of parameters are there. So you can of course play with other parameters. But yeah,
+[0:02:25.86 --> 0:02:28.88]	  let's start with these two. I think these two are the most important ones.
+[0:02:29.88 --> 0:02:35.04]	  Let's train a decision tree. So first we will tune, we will adjust the max depth parameter.
+[0:02:35.38 --> 0:02:39.60]	  And then we will find best value for the other parameter, which is in sample sleeve.
+[0:02:39.60 --> 0:02:46.24]	  So what we do is this is very similar to what we did with logistic regression. So we will just
+[0:02:46.24 --> 0:0]	  iterate over different values of max depth. So let's say we will try values like one, two, three,
+[0:02:55.30 --> 0:03:03.64]	  four, five, six, 10, 15, 20 and none. So none means no restriction. And it should grow
+[0:03:03.64 --> 0:03:09.42]	  T as deep as possible, have as many layers as possible. And we already know what happens when
+[0:03:09.42 --> 0:03:15.94]	  we don't restrict it. So but for comparison, let's leave it here. So we train many different
+[0:03:15.94 --> 0:03:22.92]	  decision trees with different values of this parameter. So let's train fit x train, y train.
+[0:03:23.44 --> 0:03:30.08]	  And then what we do is we use predict probe on validation data set. And remember, we need
+[0:03:30.08 --> 0:03:37.20]	  the column with negative scores. This will be our predictions. And now we need to compute
+[0:03:37.20 --> 0:03:44.94]	  AC, so let's rock, REC score, then it's validation one prediction. And then let's just print it.
+[0:03:45.16 --> 0:03:52.68]	  Here we want to print depth, the depth and the AC just rounded to three digits, D and AC.
+[0:03:53.12 --> 0:03:58.48]	  To make it look nicer, to make it look a bit aligned, like I'll say for the first thing,
+[0:03:58.48 --> 0:04:04.60]	  I always want to have four characters. You will see what it's doing. Yeah, so it always keeps it
+[0:04:04.60 --> 0:04:12.64]	  aligned. So now it's aligned. And it has finished. And what we can see here is that the best values
+[0:04:12.64 --> 0:04:22.76]	  seem to be this, right? So it's 76%. Let's say the best one is five, but four and six are quite
+[0:04:22.76 --> 0:04:30.06]	  close. So we can say that all these three are good ones. So our three should have the depth from four
+[0:04:30.06 --> 0:04:36.88]	  to six layers, not more. And say if there was no other parameter, just this one, so I would probably
+[0:04:36.88 --> 0:04:43.76]	  go with the max depth of four. And the reason for this is the three is a bit simpler. So it has four
+[0:04:43.76 --> 0:0]	  layers only, not five. It's easier to read, easier to understand what's going on there. Yeah, so maybe
+[0:0 --> 0:04:53.92]	  if that was the only parameter, I would go with just four. But this is not the only parameter.
+[0:04:54.28 --> 0:05:00.86]	  We also talked about the other parameter, mean samples leaf. So now we get an idea that the best
+[0:05:00.86 --> 0:05:08.24]	  depth is somewhere here for five or six. What we can do now is for each of these depth values,
+[0:05:08.58 --> 0:05:14.90]	  we can try different mean sample leaf values and see what happens. So let's have another loop for
+[0:05:15.28 --> 0:05:20.54]	  D in this. And now what we want to do is iterate over different values for the other
+[0:05:20.54 --> 0:05:31.46]	  parameter, this mean sample leaf. Can try values like one, two, five, 10, 15, 20, 100, 200,
+[0:0 --> 0:05:38.62]	  maybe 500 as well. So this is, remember, this is the side of the group when we decide whether we
+[0:05:38.62 --> 0:05:45.08]	  want to split it again or not. Actually, to be more precise, this is if we look in the
+[0:05:45.08 --> 0:05:51.58]	  documentation, if we look in the documentation, mean sample, mean samples leaf is the minimal
+[0:05:51.58 --> 0:05:57.62]	  number of samples required to be at the leaf node. Like this is our leaf node. So it has to have
+[0:05:57.62 --> 0:06:04.48]	  at least this amount of samples here. Yeah, let's do that. Then we'll take the code we have from here.
+[0:06:08.88 --> 0:06:18.86]	  Now we need to add one more parameter, mean sample leaf S. Then with it, we predict on the
+[0:06:18.86 --> 0:06:25.72]	  validation dataset with computer C. So now let's, here we will need, let's say three, three characters.
+[0:06:26.62 --> 0:06:32.84]	  So S and let's do it. Yeah, it's a bit actually difficult to read here now. Like what are the
+[0:06:32.84 --> 0:06:43.96]	  values here? We can see this 64. So this one is even better, 77.4%. And here we have even more,
+[0:06:44.06 --> 0:06:50.80]	  like 78%. So it seems that it's actually better to have slightly larger trees, but then put a limit
+[0:06:50.80 --> 0:06:55.86]	  on the number of samples per group, which makes sense. In some cases, it will stop splitting
+[0:06:55.86 --> 0:07:02.36]	  before going to the level number six, because simply there are not enough samples. So this one
+[0:07:02.36 --> 0:07:08.02]	  is a bit difficult to look at. So what we can do now is instead of printing it and then going
+[0:07:08.02 --> 0:07:14.04]	  through these numbers ourselves, what we can do is we can just put this in a data frame. So let's say
+[0:07:14.04 --> 0:07:25.46]	  scores, then what we will add to this scores list, we will add our G, our S and a she. So we will put
+[0:07:25.46 --> 0:07:32.34]	  that in scores, and then we'll create a data frame from that data frame scores, and this data frame
+[0:07:33.60 --> 0:07:37.68]	  scores, this is how it looks like. Now, of course, we need to give names to the columns.
+[0:07:38.36 --> 0:07:48.22]	  Columns, so that would be max.neph, samples leaf, and then a she. So let me just put this in the
+[0:07:48.22 --> 0:07:59.72]	  variable. And this is better now, what we can do now is just sort by a she. And it should be
+[0:08:01.98 --> 0:08:08.86]	  ascending, not ascending. So ascending false. And we see that the depth of six seems to be the
+[0:08:08.86 --> 0:08:14.82]	  best one when we put a limit on the size of the leaf. We can look at this a bit differently.
+[0:08:15.32 --> 0:08:23.66]	  This is informative, of course. But we can turn this data frame into this has pairs like max,
+[0:08:23.98 --> 0:08:30.84]	  depth, mean samples and value. We can turn this into a data frame where on the rows we have,
+[0:08:30.90 --> 0:08:36.46]	  let's say, mean samples leaf, and columns we have max depth and the cells will be a you see.
+[0:08:36.86 --> 0:08:43.62]	  So for that, we can do pivot. pivot is doing exactly that. When we have three values. So first
+[0:08:43.62 --> 0:08:52.42]	  could be, let's say column, row, value, column, row, cell. So then index would be this is put as a row.
+[0:08:52.42 --> 0:09:04.08]	  So mean samples leaf, then columns will be max depth. And then values will be a you see.
+[0:09:04.50 --> 0:09:11.38]	  So this is the table we get. This I think is maybe more, it's easier to see what's going on than
+[0:09:11.38 --> 0:09:18.06]	  just a wall of text, we see that this one is largest. So I think it's actually better if we
+[0:09:18.06 --> 0:09:21.32]	  let's say just create the frame scores pivot.
+[0:09:23.12 --> 0:09:26.62]	  So we have this other frame that scores pivot.
+[0:09:27.54 --> 0:09:31.90]	  So what we can do with this, we can now visualize it as a heat map.
+[0:09:32.38 --> 0:09:37.86]	  So first of all, maybe just let's look at this rounded a little bit. Yeah, so now it's a bit
+[0:09:37.86 --> 0:09:44.26]	  easier to see this one is the highest one. And what we can do now is we can visualize it as a
+[0:09:44.26 --> 0:09:51.74]	  heat map. This is something we have NC born. There's this heat map. And I think what we need to do
+[0:09:51.74 --> 0:09:58.76]	  here is just pass this that frame. So let's see if it works. Yeah, so it doesn't show us the values
+[0:09:58.76 --> 0:10:05.72]	  here. There is a parameter called annotation, which should be true. And then we can say how
+[0:10:05.72 --> 0:10:12.88]	  exactly we want to format our annotations, which is something like this. Yes, we want to round our
+[0:10:14.22 --> 0:10:22.32]	  AUCs with three numbers. It doesn't like this. I think for C born, we just need to remove the
+[0:10:22.32 --> 0:10:28.74]	  person's height. Okay, yeah, this maybe is a bit easier to see what is the highest value,
+[0:10:28.90 --> 0:10:36.86]	  because it's the lightest one. So the most light and then the darkest is the worst one. So we're
+[0:10:36.86 --> 0:10:44.06]	  interested in this cell means our beliefs is 15. And I know it's quite it's called AC six, but this
+[0:10:44.06 --> 0:10:52.04]	  is max depth six. Okay, and I need to add here that this way of selecting the best parameter is
+[0:10:52.04 --> 0:1]	  could be suboptimal. So we first thought, okay, what could be the best max depth values, so it can be
+[0:1 --> 0:11:04.98]	  four, five and six. And we thought, okay, let's fix this. And for these three, try other values of
+[0:11:04.98 --> 0:11:11.32]	  mean sample leaves. But it could be that maybe max depth of seven or 10 or something else works
+[0:11:11.32 --> 0:11:17.42]	  better. But we didn't try going there because first we tuned the max depth parameter. And then we
+[0:11:17.42 --> 0:11:22.74]	  selected the best mean samples. If actually for this particular data set, it makes sense to try
+[0:11:22.74 --> 0:11:28.82]	  more values. But if a data set is big, then we cannot try every possible combination. Right. So
+[0:11:28.82 --> 0:11:34.48]	  we need to somehow restrict our search space when we are looking for the best parameters. That's why
+[0:11:34.48 --> 0:11:39.66]	  it usually makes sense first to tune. At least this is how I do this. I first tune the max depth
+[0:11:39.66 --> 0:11:45.90]	  parameter. And then after that, I tune the mean sample sleeve parameter. We can actually experiment
+[0:11:45.90 --> 0:11:54.50]	  here because yeah, this is a pretty small data set training here is fast. Let's try other values,
+[0:11:54.74 --> 0:11:58.18]	  maybe even non. And then let's see what happens.
+[0:12:01.76 --> 0:12:08.86]	  We can see that actually max depth of 10 and mean samples leave of 15 gives the best performance.
+[0:12:09.18 --> 0:12:15.86]	  And the second best is when we don't restrict the depth of three, but we only restrict the size
+[0:12:15.86 --> 0:12:21.32]	  of the leaf. Now that's interesting. I actually didn't try that before. Yeah. So we see we can
+[0:12:21.40 --> 0:12:29.06]	  get slightly better performance. So by like 0.4%. But it's worth keeping in mind that
+[0:12:29.06 --> 0:12:33.62]	  it can be difficult to try every possible combination. Here we have only two parameters.
+[0:12:34.04 --> 0:12:38.84]	  We tried only two parameters, but there are actually more parameters. And that's why I personally
+[0:12:38.84 --> 0:12:46.10]	  first look for the best depth and then look for the best sample leaves. Okay. Yeah, let's see what
+[0:12:46.10 --> 0:12:54.94]	  actually happens here. This one, we see that this one, this one, and this one are quite good.
+[0:12:55.58 --> 0:13:00.54]	  And we can choose whatever we want. I think I would still go with this one,
+[0:13:00.96 --> 0:13:04.84]	  because it's a relatively small tree. The performance between them is not
+[0:13:04.84 --> 0:13:10.74]	  significantly different. But it's up to you to actually, like, I think this could be also fine.
+[0:13:11.28 --> 0:13:16.70]	  I wouldn't go with this one, because I think it can be a bit dangerous when you don't control
+[0:13:16.70 --> 0:13:24.18]	  the size of the tree. It can just be too big. So this is how we tune the parameters for decision
+[0:13:24.18 --> 0:13:29.58]	  tree. So first we tune the max depth, then we tune the mean sample leaf. Yeah, I think what we
+[0:13:29.58 --> 0:13:36.52]	  need to do now is try in the final decision tree, decision tree, classifier. So max depth,
+[0:13:36.74 --> 0:13:44.86]	  I said I would go with this six and then mean sample leaves 15. So let me try it.
+[0:13:46.60 --> 0:13:52.66]	  Okay, we trained it. This is something we will use then at the end for comparing multiple models,
+[0:13:52.66 --> 0:13:59.38]	  because what we will do now in the next lesson, we will actually look at how we can combine
+[0:13:59.38 --> 0:1]	  multiple decision trees together in one big model. So we will talk about random forest. See you soon.

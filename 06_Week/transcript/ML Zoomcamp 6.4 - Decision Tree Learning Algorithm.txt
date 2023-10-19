@@ -1,0 +1,419 @@
+[0:00:00.14 --> 0:00:04.02]	  Welcome back. This is lesson four of machine learning zoom comp session six.
+[0:00:04.32 --> 0:00:08.06]	  And in this lesson, we will talk about decision tree learning algorithm.
+[0:00:08.60 --> 0:00:12.66]	  So in the previous lesson, we looked at training decision trees with cycle learn.
+[0:00:12.82 --> 0:00:15.02]	  So we were able to train a tree.
+[0:00:15.46 --> 0:00:18.70]	  We experimented with one perimeter already max depth.
+[0:00:19.18 --> 0:00:23.78]	  And we saw if we let the tree grow indefinitely big indefinitely deep,
+[0:00:23.94 --> 0:00:26.78]	  if we don't control the depth of perimeter, then it over fits.
+[0:00:26.78 --> 0:00:31.86]	  So we played a bit with this perimeter with trained the decision stamp at three
+[0:00:31.86 --> 0:00:37.12]	  with just one level and trained the decision tree of depth to look at this decision tree.
+[0:00:37.18 --> 0:00:41.42]	  So now let's see how a decision tree can actually come up with rules like that.
+[0:00:41.92 --> 0:00:47.56]	  So let's do that. So again, this is how a decision tree looks like.
+[0:00:47.74 --> 0:00:52.88]	  So we have a note. So this thing here, we call it a note with condition.
+[0:00:52.88 --> 0:00:58.92]	  So it's condition node. Then inside this note, we have, we have a condition.
+[0:00:59.84 --> 0:01:02.40]	  And this condition usually takes form.
+[0:01:03.68 --> 0:01:06.88]	  The form of this condition is some feature.
+[0:01:07.36 --> 0:01:10.26]	  And then it's larger than some threshold T.
+[0:01:10.84 --> 0:01:14.70]	  So there is a number and can be true. It can be false.
+[0:01:15.56 --> 0:01:20.02]	  We talk about a simple decision stamp, a decision tree with just one level.
+[0:01:20.02 --> 0:01:24.96]	  Then we arrive at decision notes. So here can be a, let's say, okay, or default.
+[0:01:25.84 --> 0:01:27.70]	  This is decision note.
+[0:01:28.48 --> 0:01:34.34]	  And it's often called leaf. So these are leaves, leaves of the tree.
+[0:01:34.66 --> 0:01:39.76]	  So this is where the tree doesn't go deeper. This is where we make a decision to illustrate
+[0:01:39.76 --> 0:01:42.94]	  how the learning algorithm looks like, how it works.
+[0:01:43.14 --> 0:01:44.72]	  Let's use a simple data set.
+[0:01:44.72 --> 0:01:50.14]	  So I already prepared the data set. Let me just take a look at this. Let me just copy it.
+[0:01:50.66 --> 0:01:53.24]	  Yeah. So this is how it looks like. So we have two columns here.
+[0:01:53.52 --> 0:01:57.08]	  The first column is assets. And the second column is the status.
+[0:01:57.62 --> 0:02:01.74]	  I'll call it data frame example. And let's turn this list into a lot of frame.
+[0:02:02.68 --> 0:02:08.24]	  Now, of course, we need to have proper column names.
+[0:02:08.96 --> 0:02:12.50]	  So call assets and status.
+[0:02:13.04 --> 0:02:20.06]	  This is how it looks like. So what we want to do now is we want to use this numerical column here, assets.
+[0:02:20.44 --> 0:02:24.58]	  So we want to train our decision using this assets column.
+[0:02:24.96 --> 0:02:32.10]	  So what we want to do is here, condition would be assets greater than some threshold T.
+[0:02:32.80 --> 0:02:39.32]	  And the question we have, the question we have here is what is the best T?
+[0:02:39.34 --> 0:02:43.06]	  So what is the best split on here? So this is called split.
+[0:02:43.76 --> 0:02:51.06]	  So we want to split the data set into two parts and yeah, it will split it into a data set where the condition holds through.
+[0:02:51.28 --> 0:02:59.42]	  So let's say we have a decision tree here. So we'll have some data frame and then we have the split assets greater than T.
+[0:02:59.54 --> 0:03:03.30]	  And then what we have is data frame is called right.
+[0:03:03.70 --> 0:03:05.64]	  This is where this condition is true.
+[0:03:05.64 --> 0:03:11.86]	  So all the records for which asset is greater than T and here we have data frame left.
+[0:03:12.46 --> 0:03:14.74]	  So here through and false.
+[0:03:15.40 --> 0:03:21.04]	  So this is called splitting. So we're splitting the data set into two parts where it's true and where it's false.
+[0:03:21.34 --> 0:03:26.20]	  So what we can do now is we can sort our data by the assets column.
+[0:03:26.50 --> 0:03:29.32]	  Sort values by assets.
+[0:03:30.20 --> 0:03:39.14]	  So here we see that for this data set, we want to remember that we want to come up with a rule assets greater than T.
+[0:03:39.42 --> 0:03:42.68]	  So what are the possible T's? So T here is a threshold.
+[0:03:42.96 --> 0:03:46.20]	  So we can split our data set here.
+[0:03:46.58 --> 0:03:50.50]	  Right. So T can be 2000 when we can split it here.
+[0:03:50.74 --> 0:03:52.42]	  So it can be 3000.
+[0:03:52.52 --> 0:04:02.88]	  Then we can split the data set here and by splitting, I mean that we just had it here and then it becomes our left part and this becomes our right part.
+[0:04:03.08 --> 0:04:05.56]	  Then we can have threshold of four.
+[0:04:05.78 --> 0:04:09.12]	  If we split here, then five, we can split.
+[0:04:09.60 --> 0:04:11.94]	  So here it's 5000.
+[0:04:12.72 --> 0:04:17.98]	  Then here it's 8000 and 9000 doesn't make much sense.
+[0:04:18.60 --> 0:04:24.76]	  Because if we use these assets more than 9000, there will be nothing on the right.
+[0:04:25.12 --> 0:04:33.24]	  So we don't need 9000 and in the same way we don't need a threshold of zero because if we have this threshold of zero, then on the left there will be nothing.
+[0:04:33.56 --> 0:04:36.86]	  So these are potential thresholds that we can try.
+[0:04:37.14 --> 0:04:39.76]	  So let me just create a list that I'll call T's.
+[0:04:40.16 --> 0:04:46.12]	  So 2000, 3000, 4000, 5000, 8000.
+[0:04:46.24 --> 0:04:48.40]	  So these are the potential thresholds.
+[0:04:48.96 --> 0:04:52.48]	  And what we want to do now is we want to cut.
+[0:04:52.94 --> 0:0]	  So for each of these T's, we want to cut our data set into left and right and see which one is the best one.
+[0:05:01.36 --> 0:05:07.52]	  So we can move this, we can put it here, then we can put it here, here, here, here.
+[0:05:07.68 --> 0:05:12.86]	  And this way we can just slide it down and see which split is the best one.
+[0:05:12.86 --> 0:05:13.88]	  So let's do that.
+[0:05:14.26 --> 0:05:23.98]	  So for T in T's, what we will do now, we'll now take our example and then assets greater than T.
+[0:05:24.32 --> 0:05:26.88]	  So this will be our right data frame.
+[0:05:27.12 --> 0:05:28.38]	  So let's start with left actually.
+[0:05:28.66 --> 0:05:34.80]	  It's less or equals to T and then right is this.
+[0:05:35.04 --> 0:05:37.12]	  And now we want to show this left and right.
+[0:05:37.48 --> 0:05:42.40]	  So for that, if we just do data frame left here and data frame right, we will not see them.
+[0:05:42.54 --> 0:05:50.22]	  So we need to actually use a display function from my Python, my Python display, input display.
+[0:05:50.70 --> 0:05:55.56]	  And the reason they don't show up because we are doing this in the loop so they are not plus statement in SL.
+[0:05:55.94 --> 0:06:00.84]	  So that's why Jupyter doesn't show them display left display right.
+[0:06:01.16 --> 0:06:03.76]	  And then let's also print the T.
+[0:06:05.66 --> 0:06:09.02]	  So this is how each split looks like.
+[0:06:09.04 --> 0:06:13.52]	  So this is the split for, okay, I don't want to print T two times.
+[0:06:14.28 --> 0:06:18.10]	  So this is how the split looks like for 2000.
+[0:06:19.02 --> 0:06:20.64]	  I think we should have started with zero.
+[0:06:22.88 --> 0:06:28.32]	  Yeah, so here, because it's less or equals to that's why we have something on the left.
+[0:06:28.44 --> 0:06:29.72]	  This is what we have on the left.
+[0:06:29.86 --> 0:06:31.16]	  This is what we have on the right.
+[0:06:31.54 --> 0:06:34.54]	  So now we have a lot of splits across all these thresholds.
+[0:06:34.54 --> 0:06:38.58]	  So now we need to know which split is the best for evaluating that we have different.
+[0:06:38.92 --> 0:06:41.78]	  Evaluation criteria or split evaluation criteria.
+[0:06:42.48 --> 0:06:47.66]	  So we have our split, the split is assets greater than T.
+[0:06:47.94 --> 0:06:49.72]	  And we want to find the best one.
+[0:06:49.86 --> 0:06:52.24]	  Let's think how this could be used.
+[0:06:52.58 --> 0:06:58.96]	  So we have the split, which is assets greater than T, then we split our data set into two parts left and right.
+[0:06:59.14 --> 0:07:00.60]	  So this is if it's true.
+[0:07:00.98 --> 0:07:02.28]	  And this is false.
+[0:07:02.70 --> 0:07:05.20]	  And just to make it easier, let's use an example.
+[0:07:05.98 --> 0:07:09.10]	  So use an example with 4,000.
+[0:07:09.60 --> 0:07:12.60]	  So let's say T equals 4,000.
+[0:07:12.80 --> 0:07:15.64]	  So our left and right data sets look like that on the left.
+[0:0 --> 0:07:17.82]	  We have three default and one okay.
+[0:07:18.04 --> 0:07:20.14]	  And on the right, we have one default and three.
+[0:07:20.30 --> 0:07:20.42]	  Okay.
+[0:07:20.58 --> 0:07:24.24]	  Let's say this is assets more than 4,000.
+[0:07:24.60 --> 0:07:27.48]	  So when it's true, what we'll do here is we'll predict.
+[0:07:27.72 --> 0:07:34.82]	  Okay, because the majority of people here, the majority of clients have the okay status prediction.
+[0:07:34.82 --> 0:07:38.86]	  The default status prediction is okay here and the same likewise in left.
+[0:07:39.34 --> 0:07:46.88]	  So we'll predict default and to understand how good our predictions are here, we can look at misclassification rate.
+[0:07:48.42 --> 0:07:57.92]	  So misclassification rate is when we predict everyone as default here, how many errors we make, what is the fraction of errors here.
+[0:07:58.12 --> 0:08:01.20]	  So here we have three default and one.
+[0:08:01.20 --> 0:08:01.74]	  Okay.
+[0:08:02.02 --> 0:08:03.96]	  So predict everyone as default.
+[0:08:04.64 --> 0:08:09.04]	  So here, if we do this, we'll make one error out of four.
+[0:08:09.18 --> 0:08:12.20]	  So our misclassification rate is 25%.
+[0:08:12.20 --> 0:08:18.14]	  So this is our left and on the right, we have three K and one default.
+[0:08:18.42 --> 0:08:21.42]	  So then we predict everyone as okay.
+[0:08:21.50 --> 0:08:25.26]	  And again, we'll have misclassification rate of 25%.
+[0:08:25.26 --> 0:08:30.16]	  So here misclassification rate is 25%.
+[0:08:30.24 --> 0:08:32.60]	  And here is also 25%.
+[0:08:32.60 --> 0:08:36.12]	  This is how we can evaluate the quality of our split.
+[0:08:36.78 --> 0:08:45.58]	  So for T equals 4,000, when we do this, we get 25 error rate misclassification rate on the left, 25 on the right.
+[0:08:45.74 --> 0:08:48.40]	  And then let's say we can take an average here.
+[0:08:48.90 --> 0:08:50.48]	  So average is 25%.
+[0:08:50.48 --> 0:08:59.52]	  We can say, okay, if we use this T4000 as the split, then the average misclassification rate we get is 25%.
+[0:08:59.52 --> 0:0]	  So we don't have to take average.
+[0:09:01.34 --> 0:09:02.94]	  So we can take a weighted average.
+[0:09:03.08 --> 0:09:10.10]	  For example, we have one example here and takes the examples here, then it makes more sense to take a weighted average.
+[0:09:10.34 --> 0:09:13.56]	  So we will give this one more weight than this one.
+[0:09:13.68 --> 0:09:16.54]	  But here for simplicity, we will just use the usual average.
+[0:09:16.82 --> 0:09:20.74]	  And of course, in real life, the way these algorithms work, they use a weighted average.
+[0:09:20.96 --> 0:09:27.54]	  So let's take an average for the split of 4,000, the misclassification average misclassification rate is 25%.
+[0:09:28.72 --> 0:09:37.52]	  And actually we can see this by doing value counts, so that the frame left status value counts.
+[0:09:38.52 --> 0:09:43.88]	  So we can see that here it says one out of four is misclassified.
+[0:09:44.10 --> 0:09:47.60]	  We can actually already normalize this too.
+[0:0 --> 0:09:52.36]	  And when we do this, we instead of looking at absolute numbers, we look at ratios.
+[0:09:52.70 --> 0:09:55.66]	  So here 75% are default.
+[0:09:55.66 --> 0:09:57.58]	  So this is the majority class here.
+[0:09:57.70 --> 0:10:03.06]	  And then it means that for this okay people, for those who did not default, we make an error.
+[0:10:03.26 --> 0:10:06.28]	  And our error rate misclassification rate is 25%.
+[0:10:06.28 --> 0:10:07.74]	  And the same is here.
+[0:10:08.30 --> 0:10:10.52]	  So we predict everyone has default.
+[0:10:11.04 --> 0:10:13.28]	  So our misclassification rate is 25%.
+[0:10:13.28 --> 0:10:15.84]	  So let's actually do this now in the loop.
+[0:10:16.50 --> 0:10:17.92]	  So we'll have this loop here.
+[0:10:18.86 --> 0:10:21.80]	  And let's just execute that.
+[0:10:22.36 --> 0:10:26.30]	  To keep track of all the rates, let's just do a table.
+[0:10:27.10 --> 0:10:31.94]	  So what we want to do, we'll have this split, we have different t's.
+[0:10:32.50 --> 0:10:34.64]	  And then let's see a decision on the right.
+[0:10:35.64 --> 0:10:38.70]	  Then this misclassification rate, it's called impurity.
+[0:10:39.78 --> 0:10:42.06]	  This is just one way of measuring impurity.
+[0:10:42.30 --> 0:10:46.32]	  So we want our lifts here be as pure as possible.
+[0:10:46.70 --> 0:10:50.58]	  And misclassification rate tells us how impure they are.
+[0:10:50.58 --> 0:10:53.04]	  So there are other ways of measuring impurity.
+[0:10:53.42 --> 0:10:57.34]	  So here we use misclassification rate, but in general, this is called impurity.
+[0:10:57.70 --> 0:11:03.38]	  So let's call impurity right, then decision left.
+[0:11:03.96 --> 0:11:05.76]	  Let me just place that.
+[0:11:06.66 --> 0:11:14.60]	  So here decision left, impurity left, decision right, impurity right.
+[0:11:15.02 --> 0:11:19.50]	  And then let's also have average impurity table like that.
+[0:11:23.72 --> 0:11:27.54]	  So we start with threshold of zero for threshold of zero.
+[0:11:28.08 --> 0:11:32.28]	  Threshold of zero on the left, we have default or decision.
+[0:11:33.24 --> 0:11:37.72]	  Impurity on the left is zero, because this is a pretty pure split.
+[0:11:38.14 --> 0:11:41.68]	  So on the left, everyone is default and there is just one person.
+[0:11:42.04 --> 0:11:43.28]	  So impurity is zero.
+[0:11:43.42 --> 0:11:46.66]	  And then on the right, I think I have another here, should be.
+[0:11:48.16 --> 0:11:51.34]	  So on the right, the majority class is okay.
+[0:11:51.60 --> 0:11:58.44]	  So we predict K and in this case, the misclassification rate will be 43%.
+[0:11:58.44 --> 0:12:02.56]	  So the next threshold is 2000.
+[0:12:03.42 --> 0:12:09.06]	  So for 2000, we again on the left predict default and on the right, we predict okay.
+[0:12:09.38 --> 0:12:16.10]	  And misclassification rate here for the left is again zero, because everyone is default here.
+[0:12:16.10 --> 0:12:20.46]	  And then for the right misclassification rate is 33%.
+[0:12:20.46 --> 0:12:24.88]	  So two out of six are default and we predict everyone is okay.
+[0:12:25.12 --> 0:12:26.10]	  So these are mistakes.
+[0:12:26.90 --> 0:12:31.84]	  So again, default zero, okay, 33%.
+[0:12:31.84 --> 0:12:34.66]	  So let's take a look at the next one.
+[0:12:35.02 --> 0:12:36.48]	  So the next one is 3000.
+[0:12:36.90 --> 0:12:39.32]	  So for this one, we split.
+[0:12:39.54 --> 0:12:41.62]	  So again, on the left, we have everyone is default.
+[0:12:41.78 --> 0:12:43.70]	  This is again a pure data set.
+[0:12:43.70 --> 0:12:48.70]	  And on the right, we have one default and the rest are okay.
+[0:12:49.02 --> 0:12:52.08]	  So then the misclassification rate here is 20%.
+[0:12:52.08 --> 0:12:59.46]	  So it's 3000 default zero, okay, 20%.
+[0:12:59.46 --> 0:13:01.90]	  So then let's do this for 4000.
+[0:13:02.26 --> 0:13:05.06]	  So I think we did this already on the previous slide.
+[0:13:05.22 --> 0:13:08.38]	  So it's again, default and okay.
+[0:13:08.80 --> 0:13:12.72]	  And here the misclassification rate for both is 25%.
+[0:13:12.74 --> 0:13:15.52]	  So here we have one misclassified example.
+[0:13:15.78 --> 0:13:19.24]	  And on the right, we also have one misclassified example.
+[0:13:19.92 --> 0:13:22.40]	  So 25% in each.
+[0:13:23.06 --> 0:13:26.34]	  Then the next threshold we have this 5000.
+[0:13:26.76 --> 0:13:31.50]	  So for 5000, we already have like on the left, we have 5050.
+[0:13:31.86 --> 0:13:34.52]	  So three out of six are misclassified.
+[0:13:36.02 --> 0:13:37.58]	  50%.
+[0:13:37.58 --> 0:13:42.42]	  And then for the right, it's also, we have only two examples.
+[0:13:42.42 --> 0:13:44.88]	  But one of them is correct and one is not correct.
+[0:13:45.40 --> 0:13:48.64]	  So we again predict okay, 50%.
+[0:13:48.64 --> 0:13:53.48]	  And here when it's 5050, the decision whether to go with default
+[0:13:53.48 --> 0:13:55.66]	  or okay is a pretty arbitrary one.
+[0:13:55.80 --> 0:13:58.86]	  So I just went with here default and okay to stay consistent.
+[0:13:59.08 --> 0:14:02.06]	  But yeah, it can be default and default or okay and okay.
+[0:14:02.30 --> 0:14:04.72]	  It doesn't matter in this case because in both cases,
+[0:14:04.74 --> 0:14:06.56]	  the decision is pretty arbitrary.
+[0:14:06.94 --> 0:14:10.26]	  I think this is the last one, 8000.
+[0:14:10.96 --> 0:14:14.46]	  So let's again do default here.
+[0:14:15.58 --> 0:1]	  Yeah.
+[0:14:16.14 --> 0:14:19.80]	  And then we have 42 misclassification rate.
+[0:14:20.10 --> 0:14:21.86]	  Actually 43.
+[0:14:22.28 --> 0:14:25.84]	  And then okay here, which is pretty pure.
+[0:14:26.12 --> 0:14:29.02]	  Like just one record with 100% purity.
+[0:14:29.56 --> 0:14:31.14]	  So it's zero.
+[0:14:31.70 --> 0:14:34.18]	  So now let's calculate the average.
+[0:14:34.48 --> 0:14:36.94]	  So here it can be, let's go 21.
+[0:14:37.08 --> 0:14:40.22]	  Here is 16%.
+[0:14:40.22 --> 0:14:41.90]	  Here it's 10.
+[0:14:42.34 --> 0:14:45.44]	  Then 25, 25, the average is 25.
+[0:14:45.96 --> 0:14:47.78]	  50, 50, the average is 50.
+[0:14:48.30 --> 0:14:51.24]	  And here we again have 21.5.
+[0:14:51.62 --> 0:14:55.74]	  And we see that this split, split of 3000.
+[0:14:56.32 --> 0:15:01.54]	  So the reason is it's the best one because this 10% here is
+[0:15:01.54 --> 0:15:02.24]	  the lowest one.
+[0:15:02.40 --> 0:15:03.76]	  That's why it's the best one.
+[0:15:04.38 --> 0:15:07.28]	  Best T here is 3000.
+[0:15:07.80 --> 0:15:10.88]	  First impurity here is 10%.
+[0:15:10.88 --> 0:15:16.32]	  So this is how we find the best split if we just have one column.
+[0:15:16.98 --> 0:15:21.72]	  So what we do is we find all the possible thresholds like we did
+[0:15:21.72 --> 0:15:26.46]	  here, we sorted our dataset and we looked at all,
+[0:15:26.52 --> 0:15:30.44]	  what are the all possible thresholds and we selected all the
+[0:15:30.44 --> 0:15:32.98]	  distinct values except the last one, right?
+[0:1 --> 0:15:35.26]	  Because we always want to make sure that there is at least one
+[0:15:35.26 --> 0:15:36.26]	  record when we split.
+[0:15:36.56 --> 0:15:37.24]	  So we did that.
+[0:15:37.48 --> 0:15:41.66]	  And then for each of the thresholds, we split the dataset
+[0:15:41.66 --> 0:15:44.94]	  and we calculate the impurity on the left and on the right.
+[0:15:45.20 --> 0:15:47.54]	  And then we computed the average impurity.
+[0:15:47.90 --> 0:15:51.24]	  And then from all the splits, we look at the tower edge impurity
+[0:15:51.24 --> 0:15:54.70]	  and selected the one with the best impurity, the lowest one.
+[0:15:54.80 --> 0:15:55.94]	  And it was 3000.
+[0:15:56.70 --> 0:1]	  So here we're still making some mistakes, but this is the best
+[0:1 --> 0:16:02.20]	  possible split for this particular dataset.
+[0:16:02.94 --> 0:16:05.84]	  And this way we learn decision three that looks like this.
+[0:16:06.50 --> 0:16:09.24]	  So it's greater than 3000.
+[0:16:09.66 --> 0:16:13.86]	  And then here we decide okay, and here we have default.
+[0:16:14.38 --> 0:16:16.36]	  So this is three we learned here.
+[0:16:16.74 --> 0:16:19.54]	  So we looked at how to do this with one feature.
+[0:1 --> 0:16:21.88]	  Let's see what happens when we have two features.
+[0:16:22.46 --> 0:16:23.92]	  So I'll add another feature now.
+[0:16:24.10 --> 0:16:27.14]	  Let's say we have a depth feature, which says how much depth
+[0:16:27.14 --> 0:1]	  the clients have.
+[0:16:28.38 --> 0:16:30.18]	  Let me just put some values here.
+[0:16:31.30 --> 0:16:39.72]	  So this 1000 depth, this let's say 500 and this person has 2000.
+[0:16:40.32 --> 0:16:41.70]	  So we have another feature.
+[0:16:42.48 --> 0:16:46.12]	  So this is how our data frame looks like now.
+[0:16:46.28 --> 0:16:48.72]	  We already tried the assets feature.
+[0:16:49.06 --> 0:16:52.56]	  So let's see what happens if we try to split by the depth feature.
+[0:16:53.84 --> 0:16:58.42]	  Again, what we do is we sort values by that.
+[0:16:59.38 --> 0:17:02.98]	  See that the possible thresholds are here.
+[0:17:03.48 --> 0:17:08.26]	  So 500, then 1000, then we can split by 2000.
+[0:17:08.86 --> 0:17:14.08]	  So it means that 500, 1000, and 2000.
+[0:17:14.78 --> 0:17:19.26]	  Just three possible thresholds that we can use to split this dataset.
+[0:17:19.40 --> 0:17:22.08]	  Because here we have a bunch of 1000.
+[0:17:22.90 --> 0:17:29.12]	  So here is 500, 1000, 2000.
+[0:17:29.64 --> 0:17:32.06]	  And we can do the same thing as we did previously.
+[0:17:32.56 --> 0:17:34.92]	  But let's try to also generalize it a bit.
+[0:17:35.64 --> 0:17:41.52]	  So previously we saw it for one feature and the teeth we have here,
+[0:17:41.74 --> 0:17:42.60]	  they are for assets.
+[0:17:42.86 --> 0:17:46.32]	  So let's just put them in a dictionary.
+[0:17:46.38 --> 0:17:50.40]	  Let's say thresholds, assets.
+[0:17:51.34 --> 0:17:53.88]	  For assets, these are the thresholds.
+[0:17:54.06 --> 0:17:57.10]	  And then for depth, the thresholds are this.
+[0:17:57.48 --> 0:17:59.12]	  And let's say if we have more features,
+[0:17:59.40 --> 0:18:02.18]	  then we can put thresholds for them here as well.
+[0:18:02.56 --> 0:18:07.66]	  And then what we do is we iterate over each of the pairs here for feature,
+[0:18:08.80 --> 0:18:12.20]	  I'll call it T in threshold items.
+[0:18:12.96 --> 0:18:17.58]	  Then what we do is we basically do the same thing as here.
+[0:18:17.76 --> 0:18:21.56]	  We repeat the same, but not for assets, but for all the features.
+[0:18:23.14 --> 0:18:26.96]	  So here, let's set of assets we use feature.
+[0:18:29.06 --> 0:18:31.36]	  And we print this.
+[0:18:31.64 --> 0:18:33.92]	  So let me just also print the feature name.
+[0:18:34.44 --> 0:18:36.74]	  So just to separate them.
+[0:18:44.06 --> 0:18:47.42]	  So for assets, we already did this exercise.
+[0:18:47.66 --> 0:18:49.78]	  So this is exactly the same as we did.
+[0:18:50.14 --> 0:18:51.88]	  So let me just scroll this.
+[0:18:52.10 --> 0:18:52.92]	  And now we have that.
+[0:18:53.18 --> 0:18:56.14]	  And then there are multiple thresholds again.
+[0:18:56.48 --> 0:18:59.50]	  So let's copy this.
+[0:19:00.98 --> 0:19:02.86]	  I'll delete this one.
+[0:19:05.82 --> 0:19:07.90]	  Did this for assets already.
+[0:19:09.68 --> 0:19:11.96]	  Now let's do this for depth as well.
+[0:19:12.70 --> 0:19:14.84]	  For depth, we have three thresholds.
+[0:19:15.14 --> 0:19:19.08]	  So that first one is 500 for 500.
+[0:19:19.38 --> 0:19:23.66]	  So we predict okay and zero impurity.
+[0:19:25.14 --> 0:19:31.34]	  And then for the right, we predict default and it's 43% impurity.
+[0:19:33.86 --> 0:19:36.30]	  Next one is 1000.
+[0:19:37.06 --> 0:19:45.84]	  And here the impurity for this for the left is 33% and we predict okay.
+[0:19:45.98 --> 0:19:51.38]	  And then for the right, we impurity is 0% and we predict default.
+[0:19:57.42 --> 0:20:00.30]	  And then we have the last one, 2000.
+[0:20:00.80 --> 0:20:04.78]	  We predict okay here on the left and we predict default on the right.
+[0:20:04.94 --> 0:20:11.22]	  And impurity on the left is 43% and impurity on the right is 0%.
+[0:20:11.22 --> 0:20:17.92]	  And then again, let's compute the average here.
+[0:20:17.92 --> 0:20:20.12]	  Let's say it's 21%.
+[0:20:20.12 --> 0:20:23.10]	  Here 16%.
+[0:20:23.10 --> 0:20:25.74]	  And here it's again 21%.
+[0:20:25.74 --> 0:20:31.66]	  So we see that for depth, depth is not as useful for making the split as the assets.
+[0:20:32.10 --> 0:20:35.98]	  And still the best split here is actually this one.
+[0:20:36.48 --> 0:20:37.90]	  So this one is the best one.
+[0:20:38.12 --> 0:2]	  Okay, even if we try to use depth, we see that this one is still best.
+[0:2 --> 0:20:47.84]	  So then we decided the best split is assets greater than 3000.
+[0:20:48.34 --> 0:20:50.46]	  This is how we do it for two features.
+[0:20:50.82 --> 0:20:58.44]	  For three features, it would be another group in the table, another bunch of rows with another variable that is doing the same thing.
+[0:20:58.66 --> 0:2]	  We can summarize this.
+[0:21:00.30 --> 0:21:03.30]	  So let's write this down, finding the best split.
+[0:21:05.18 --> 0:21:10.86]	  So what we do is for all the features we have, our example had two features.
+[0:21:10.86 --> 0:21:14.26]	  But if we had three or four features, we do this for every feature.
+[0:21:14.84 --> 0:21:17.34]	  So over F in features.
+[0:21:18.14 --> 0:21:21.46]	  And then for each feature, we find all the possible thresholds.
+[0:21:21.58 --> 0:21:24.74]	  Like for assets, we had like 67 thresholds.
+[0:21:25.02 --> 0:21:27.34]	  For that, we have three thresholds.
+[0:21:27.42 --> 0:21:32.34]	  So for each feature, we find the thresholds and we iterate for all the thresholds for this feature.
+[0:21:32.92 --> 0:21:36.96]	  So find all thresholds for F.
+[0:21:36.96 --> 0:21:42.14]	  And then we iterate over these thresholds for T in thresholds.
+[0:21:42.18 --> 0:21:53.36]	  So what we do here is we put it, data set using this feature greater than T threshold condition.
+[0:21:53.70 --> 0:21:57.26]	  And we compute the impurity of the split.
+[0:22:00.34 --> 0:22:03.48]	  So we do this for all the features for all the thresholds.
+[0:22:03.48 --> 0:22:11.48]	  And then at the end, what we do is we select this condition with the lowest impurity.
+[0:22:12.44 --> 0:22:16.38]	  So this is what we do when we have multiple features.
+[0:22:16.68 --> 0:22:21.36]	  So for every feature we select now find the all possible thresholds, iterate over these thresholds.
+[0:22:21.36 --> 0:22:24.10]	  And then at the end, we find one single best split.
+[0:22:24.10 --> 0:22:28.38]	  We split this and let's say we have our three here.
+[0:22:28.66 --> 0:22:29.40]	  Let me copy it.
+[0:22:30.34 --> 0:22:35.50]	  So let's say we have a data frame here with eight records.
+[0:22:35.78 --> 0:22:41.28]	  We split it into a data frame with three records and data frame with five records.
+[0:22:41.52 --> 0:22:44.02]	  And if we want, we can repeat this process.
+[0:22:44.56 --> 0:22:50.40]	  So we can split on the right and we can split left course.
+[0:22:50.80 --> 0:22:53.46]	  So when it's just five or three, maybe it doesn't make sense to split.
+[0:22:53.66 --> 0:22:58.82]	  But let's say we have 800 here and 300 here and 500 here.
+[0:22:59.08 --> 0:23:00.76]	  Here it makes sense to keep splitting.
+[0:23:01.32 --> 0:23:04.40]	  So we recursively apply this algorithm to the left and to the right.
+[0:23:04.92 --> 0:23:06.20]	  But at some point we need to stop.
+[0:23:06.46 --> 0:2]	  So previously, remember we talked about if we let our three grow indefinitely deep,
+[0:23:12.20 --> 0:23:14.30]	  then we're just overfitting to the data set.
+[0:23:14.62 --> 0:23:18.32]	  So here, actually, so here maybe it doesn't make sense to stop.
+[0:23:18.46 --> 0:23:20.06]	  Maybe it doesn't make sense to stop here.
+[0:23:20.06 --> 0:23:21.98]	  So we need to have some stopping criteria.
+[0:23:22.40 --> 0:23:27.32]	  Like we recursively apply this splitting, but how do we know where to stop?
+[0:23:27.60 --> 0:23:33.20]	  Then there are some criteria, some stopping criteria that we can use for deciding
+[0:23:33.20 --> 0:23:36.92]	  if we should iterate here one more time or it's time to stop.
+[0:23:37.30 --> 0:23:42.26]	  These criteria are, so the first one group is already pure.
+[0:23:43.24 --> 0:23:46.58]	  So for example, for this one, this group is already pure.
+[0:23:46.74 --> 0:23:48.30]	  So it has 0% impurity.
+[0:23:48.30 --> 0:23:51.32]	  So all the records here are default ones.
+[0:23:51.80 --> 0:23:54.34]	  So here it doesn't make sense to split this group again.
+[0:23:54.64 --> 0:23:58.32]	  So because if we split then here we'll predict default.
+[0:23:58.78 --> 0:24:01.32]	  And here we'll predict default.
+[0:24:01.86 --> 0:24:06.90]	  It doesn't make sense here to split because all of these records are default anyways.
+[0:24:08.20 --> 0:24:10.60]	  But this one is not pure yet.
+[0:24:11.98 --> 0:24:13.70]	  So here we can keep splitting it.
+[0:24:14.10 --> 0:24:15.24]	  So group already pure.
+[0:24:16.10 --> 0:24:20.32]	  Then another thing we talked about, we talked about this max depth parameter.
+[0:24:21.04 --> 0:24:25.06]	  So another stopping criteria is 3 reached the depth limit.
+[0:24:25.96 --> 0:24:33.70]	  So if we already built six levels and our max depth is 6, we cannot keep growing the tree.
+[0:24:33.92 --> 0:24:36.48]	  And then the last one is here.
+[0:24:36.80 --> 0:24:38.02]	  Let's say we have only 5.
+[0:24:38.58 --> 0:24:44.22]	  So again, we're back to the case when it's not 800 and 300 and 500, but just 5.
+[0:24:44.22 --> 0:24:46.54]	  So this group is already too small.
+[0:24:46.88 --> 0:24:51.02]	  Suppose we don't want to split the group and it's just 5.
+[0:24:51.40 --> 0:24:53.46]	  So if it's more than 5, okay, we can split it.
+[0:24:53.50 --> 0:24:56.04]	  But if it's 5, we don't want to touch this anymore.
+[0:24:56.36 --> 0:25:01.48]	  So in this case, we can set the minimum size of the group, which we attempt to split.
+[0:25:01.92 --> 0:25:04.28]	  Then we stop when the group is too small.
+[0:25:04.80 --> 0:25:08.40]	  Group too small to split.
+[0:25:08.98 --> 0:25:13.32]	  Let's say if we see that the group is too small and this is something we can control as well.
+[0:25:13.36 --> 0:25:20.56]	  If we see this is too small, we say, okay, here we stop and we make a decision, even though we know that maybe there is one.
+[0:25:21.08 --> 0:25:25.84]	  So in this case here, we had one default and the rest were okay.
+[0:25:26.30 --> 0:25:29.20]	  So if it's the case, okay, we still stop.
+[0:25:29.66 --> 0:25:36.20]	  So when we use this criteria, we force our model to be simpler and this way we prevent it from overfitting.
+[0:25:36.72 --> 0:25:40.22]	  So with this, let's summarize the learning algorithm.
+[0:25:40.22 --> 0:25:42.84]	  So we'll call it decision tree learning algorithm.
+[0:25:45.30 --> 0:25:50.48]	  So first step is we find the best split.
+[0:25:50.90 --> 0:25:52.76]	  So this is what we described here.
+[0:25:53.08 --> 0:25:57.82]	  So we go over all features, we go over all the thresholds and we find the best split.
+[0:25:58.36 --> 0:25:59.72]	  So find the best split.
+[0:26:01.64 --> 0:26:07.58]	  Then we check if the max depth stopping criteria is met.
+[0:26:07.76 --> 0:2]	  Stop if max depth is reached.
+[0:26:12.98 --> 0:26:18.28]	  If it's not reached, then we check if the data set on the left is sufficiently large.
+[0:26:18.50 --> 0:26:21.98]	  So we don't want to keep splitting something very small.
+[0:26:22.66 --> 0:26:31.14]	  If left is sufficiently large and if left is not pure yet.
+[0:26:32.34 --> 0:26:39.54]	  So if left is sufficiently large and not pure yet, what we do in this case, we repeat this on the left.
+[0:26:41.48 --> 0:26:51.88]	  We execute the same algorithm, but for the data set after splitting, so whatever is on the left, we recursively do the same algorithm, and then we do the same for the right.
+[0:26:52.46 --> 0:26:55.06]	  So let me just copy it.
+[0:26:55.10 --> 0:26:57.62]	  And replace this left with right.
+[0:26:59.50 --> 0:27:03.12]	  This is the learning algorithm for decision tree.
+[0:27:03.74 --> 0:27:05.92]	  Of course, it's more complex than that.
+[0:27:06.24 --> 0:27:09.52]	  So if you want to learn more about this, there is Encyclonearn.
+[0:27:09.68 --> 0:27:15.70]	  If you Google for Encyclonearn decision tree and you go into this decision tree's documentation.
+[0:27:16.06 --> 0:27:19.86]	  So they talk quite extensively about this model, how it works.
+[0:27:20.20 --> 0:27:23.98]	  And so there is one interesting thing here at the end, I think.
+[0:27:24.22 --> 0:2]	  Scroll it.
+[0:27:25.56 --> 0:27:27.48]	  Yeah, so these are the criteria.
+[0:27:27.88 --> 0:27:29.98]	  So this is what we call the impurity here.
+[0:27:30.18 --> 0:27:34.60]	  What we used here is this misclassification rate as a way of measuring impurity.
+[0:27:34.84 --> 0:27:37.84]	  But there are other ones like entropy and genie.
+[0:27:37.84 --> 0:27:42.06]	  And actually in practice, you use this, you don't really use misclassification.
+[0:27:42.32 --> 0:27:48.28]	  But I find it's easier to explain this learning algorithm using this example.
+[0:27:49.24 --> 0:27:53.78]	  But they are similar in a way that they say how pure the dataset is.
+[0:27:53.94 --> 0:27:55.82]	  Just using slightly different formulas.
+[0:27:56.02 --> 0:27:56.88]	  So here are the formulas.
+[0:27:57.12 --> 0:28:02.62]	  And if you're curious how it's working exactly, you can check it here.
+[0:28:03.10 --> 0:28:07.08]	  And as I mentioned, decision trees can also be used for solving regression problems.
+[0:28:07.38 --> 0:28:09.92]	  And they also explain how it actually works.
+[0:28:10.16 --> 0:28:16.36]	  What kind of impurity criteria you can use for solving regression problem.
+[0:28:17.60 --> 0:28:21.68]	  And actually the impurity criteria in this case is mean squared error.
+[0:28:22.04 --> 0:28:26.80]	  So if you're interested in that, you can just go to this link and read more about this.
+[0:28:27.20 --> 0:28:29.32]	  Okay, and this is it for this lesson.
+[0:28:29.52 --> 0:28:31.50]	  So we covered a lot of things here.
+[0:28:31.64 --> 0:28:34.04]	  And this is actually the summary of this lesson.
+[0:28:34.18 --> 0:28:37.06]	  So this is how exactly we approach learning decision trees.
+[0:28:37.30 --> 0:28:38.66]	  We will not implement this.
+[0:28:38.72 --> 0:28:41.96]	  This is just to give you an idea how it works internally.
+[0:28:42.10 --> 0:28:50.90]	  So what we want to do in the next lesson is we can see that there are some parameters for the learning algorithm here.
+[0:28:51.26 --> 0:28:53.58]	  So this max depth is one of these parameters.
+[0:28:53.80 --> 0:28:58.78]	  Then here, like sufficiently large, how large is sufficiently large.
+[0:28:58.92 --> 0:29:00.90]	  So this is another parameter that we have.
+[0:29:00.98 --> 0:29:05.26]	  And what we will do in the next lesson is we will tune these parameters.
+[0:29:05.52 --> 0:29:10.60]	  So we will try to set different values for these parameters and see which one works best.
+[0:29:11.16 --> 0:29:12.70]	  So I'll see you in the next lesson.

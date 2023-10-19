@@ -1,0 +1,110 @@
+[0:0 --> 0:00:02.82]	  Hello everyone, welcome to session 6 of Machine Learning Come.
+[0:00:03.02 --> 0:00:06.44]	  And in this session, we will talk about decision trees and sample learning.
+[0:00:06.66 --> 0:00:10.02]	  And the project we will do this week is credit risk scoring.
+[0:00:10.40 --> 0:00:12.68]	  So imagine that you want to buy a mobile phone.
+[0:00:13.62 --> 0:00:15.92]	  So what you do is you come to a bank.
+[0:00:16.34 --> 0:00:17.74]	  Let's say this is a bank.
+[0:00:19.40 --> 0:00:20.86]	  This is my mobile phone.
+[0:00:21.02 --> 0:00:21.44]	  You want to buy.
+[0:00:21.80 --> 0:00:28.22]	  You come to a bank and you want to get along to buy this mobile phone.
+[0:00:28.36 --> 0:00:34.24]	  You fill in some application form that asks some basic statistics about you,
+[0:00:34.50 --> 0:00:36.94]	  like about your income, how much this item costs,
+[0:00:37.36 --> 0:00:39.84]	  how much money you need to buy this item,
+[0:00:39.94 --> 0:00:44.20]	  whether you own a house or whether you rent a house,
+[0:00:44.42 --> 0:00:45.88]	  how much money you have in general,
+[0:00:46.12 --> 0:00:47.30]	  how much money you earn,
+[0:00:47.58 --> 0:00:50.30]	  how much experience you have, things like this.
+[0:00:50.46 --> 0:00:55.62]	  So you fill in this application and send it to the bank and you ask for money.
+[0:00:56.32 --> 0:01:00.36]	  And then the bank look at this application and they say,
+[0:01:00.48 --> 0:01:01.88]	  okay, here you go.
+[0:01:02.14 --> 0:01:06.58]	  So they say yes or they can say no, sorry, we are not giving you any money.
+[0:01:07.48 --> 0:01:12.64]	  And the bank is doing this by analyzing the application you filled in
+[0:01:12.64 --> 0:01:15.48]	  and by analyzing what they know about you already.
+[0:01:15.78 --> 0:01:19.04]	  What we want to do in this lesson is we want to build a model
+[0:01:19.04 --> 0:01:22.86]	  that the bank can use to actually make this decision
+[0:01:22.86 --> 0:01:24.90]	  if they should lend the money or not.
+[0:01:25.30 --> 0:01:31.20]	  And the bank can give this to the model how much money they want to lend and so on.
+[0:01:31.54 --> 0:01:35.82]	  And what the model will respond with will be what is the risk
+[0:01:35.82 --> 0:01:38.12]	  that this customer is not going to pay back.
+[0:01:38.44 --> 0:01:39.98]	  And this is called default.
+[0:01:40.52 --> 0:01:46.72]	  So the model will return the probability or risk that this customer is going to default.
+[0:01:47.22 --> 0:01:52.66]	  And then the bank can use this service to make a decision
+[0:01:52.66 --> 0:01:55.32]	  whether to lend the money to the customer or not.
+[0:01:56.68 --> 0:02:00.64]	  And the way we can do this as a bank, the way we can build this model
+[0:02:00.64 --> 0:02:05.28]	  is we can analyze all the customers we have, all the historical data we have.
+[0:02:05.42 --> 0:02:10.16]	  So we have some information about the customers and about their applications.
+[0:02:10.82 --> 0:02:12.62]	  So we have a lot of history like that.
+[0:02:13.68 --> 0:02:18.80]	  And then for each of these applications, we know how much money they asked
+[0:02:18.82 --> 0:02:22.32]	  and whether they were able to pay back the loan or not.
+[0:02:22.50 --> 0:02:26.06]	  For example, this customer was able to pay back the loan.
+[0:02:26.34 --> 0:02:30.20]	  This customer was able to pay back the loan, but this one didn't.
+[0:02:30.38 --> 0:02:31.34]	  They defaulted.
+[0:02:31.86 --> 0:02:33.88]	  So they say, okay, sorry, I don't have any money.
+[0:02:34.10 --> 0:02:36.48]	  There is nothing I can pay you with.
+[0:02:36.80 --> 0:02:38.94]	  And this is the situation the bank wants to avoid.
+[0:02:39.68 --> 0:02:44.26]	  Say this one is also default and this one is okay.
+[0:02:44.80 --> 0:02:48.36]	  So what we have here is we have a binary classification problem.
+[0:02:49.28 --> 0:02:53.34]	  Where y in our case, like it's a binary can be zero or one.
+[0:02:53.58 --> 0:02:56.52]	  Zero in this case is okay.
+[0:02:56.96 --> 0:02:58.38]	  And one is default.
+[0:02:58.92 --> 0:03:02.26]	  And we want to train a model that for each new customer
+[0:03:02.26 --> 0:03:05.98]	  gives us the probability that this customer is going to default.
+[0:03:06.16 --> 0:03:11.18]	  So what we want to do is we want to train a model, model g for a new customer
+[0:03:11.18 --> 0:03:13.74]	  will give us probability of default.
+[0:03:14.20 --> 0:03:16.62]	  So what we have here.
+[0:03:16.62 --> 0:03:19.96]	  So this is our training data set.
+[0:03:20.22 --> 0:03:22.50]	  So we have y here.
+[0:03:23.08 --> 0:03:28.32]	  So this is our target variable and we have our x here and x is all the information
+[0:03:28.32 --> 0:03:33.34]	  about the users that we have, which includes their income, the price of the item,
+[0:03:33.50 --> 0:03:34.74]	  and things like this.
+[0:03:35.52 --> 0:03:39.20]	  So basically all the information that we have on the application that the clients
+[0:03:39.20 --> 0:03:43.42]	  make plus some of the information we already know about the customer.
+[0:03:43.42 --> 0:0]	  If they are our clients already.
+[0:0 --> 0:03:47.08]	  This is what our features are.
+[0:03:47.48 --> 0:03:52.70]	  And this is what we will use to predict if a new customer is going to be able
+[0:03:52.70 --> 0:03:54.96]	  to pay back the loan or they're going to default.
+[0:03:55.50 --> 0:03:59.16]	  And the data set we will use for that is this.
+[0:03:59.56 --> 0:04:00.58]	  So I have a link here.
+[0:04:01.04 --> 0:04:03.20]	  So this data set is called credit scoring.
+[0:04:03.88 --> 0:04:08.42]	  And this is, here's this data, credit scoring.cc.
+[0:04:09.80 --> 0:04:13.92]	  So we have here and call this information and status is actually
+[0:04:13.92 --> 0:04:15.28]	  if they defaulted or not.
+[0:04:15.52 --> 0:04:16.64]	  And let me just go back.
+[0:04:17.12 --> 0:04:19.62]	  There is a description of what each column means.
+[0:04:20.50 --> 0:04:26.54]	  So here status is credit status default not then what we also have is seniority.
+[0:04:26.64 --> 0:04:30.72]	  It's like how many years of experience they have, whether they own a home or not.
+[0:04:31.04 --> 0:04:36.02]	  For how long they have the loan, the age of the client, the marital status.
+[0:04:36.84 --> 0:04:41.98]	  If they have, so I think this is one is if they have prior history of taking
+[0:04:41.98 --> 0:04:43.38]	  credit with this one.
+[0:04:43.38 --> 0:04:48.80]	  I'm not sure about this one to be honest, but I think this is that then this is a
+[0:04:48.80 --> 0:04:52.72]	  kind of job they have how much money they spend, how much money they earn,
+[0:04:52.96 --> 0:04:56.96]	  how much money they have in general, how much money they owe now.
+[0:04:57.12 --> 0:05:02.30]	  So how much debt they have already and how much money they requested and how much
+[0:05:02.30 --> 0:05:05.90]	  at the price of the thing they want to buy a phone.
+[0:05:06.04 --> 0:05:09.46]	  For example, this data set was used for some data mining course.
+[0:05:09.62 --> 0:05:10.42]	  This is quite good.
+[0:05:10.42 --> 0:05:12.76]	  So it's not very large data set.
+[0:05:12.94 --> 0:05:16.44]	  This week we'll use this data set for experimenting with three models.
+[0:05:17.10 --> 0:05:18.56]	  This is the notebook we'll use.
+[0:05:19.04 --> 0:05:21.98]	  We'll first take a look at the data set in the next lesson.
+[0:05:22.18 --> 0:05:23.50]	  Then we'll talk about decision trees.
+[0:05:23.82 --> 0:05:27.98]	  The decision tree is a special algorithm that learns rules from the data set.
+[0:05:28.36 --> 0:05:30.02]	  Like if then else rules.
+[0:05:30.44 --> 0:05:36.08]	  So we will see how to use such an algorithm and we'll see how to use the
+[0:05:36.08 --> 0:05:36.96]	  existing implementation.
+[0:05:37.28 --> 0:05:42.28]	  Then we will talk about how the decision tree algorithm works, how decision
+[0:05:42.28 --> 0:05:44.66]	  trees are able to learn these rules.
+[0:05:44.90 --> 0:05:46.62]	  Then they have some parameters.
+[0:05:46.92 --> 0:05:48.40]	  We'll see how to tune these parameters.
+[0:05:48.92 --> 0:05:53.24]	  And then in lesson six, we will see what happens if we put many,
+[0:05:53.26 --> 0:05:57.30]	  many different trees together, we get a forest, a random forest model,
+[0:05:57.46 --> 0:06:01.84]	  and we'll see how to do this, how to combine multiple decision trees together.
+[0:06:02.36 --> 0:06:06.44]	  And there is a different way of combining decision trees together called
+[0:06:06.44 --> 0:06:09.52]	  gradient boosting and there is a library that implements that called
+[0:06:09.52 --> 0:06:10.14]	  fixed you boost.
+[0:06:10.26 --> 0:06:14.14]	  We will cover this as well in lesson seven and lesson eight.
+[0:06:14.66 --> 0:06:19.70]	  And then finally we'll select the best model and this is what we are going
+[0:06:19.70 --> 0:06:21.02]	  to do this week.
+[0:06:21.74 --> 0:06:26.56]	  So and in the next lesson, we will talk about this data set.
+[0:06:26.98 --> 0:06:29.86]	  We'll prepare the data and we will do a bit of cleaning.
+[0:06:30.42 --> 0:06:30.98]	  See you soon.
