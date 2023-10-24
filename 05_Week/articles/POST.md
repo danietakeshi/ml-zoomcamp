@@ -1,6 +1,6 @@
 🚀 Acabamos de encerrar mais uma fantástica sessão de aprendizado de máquina em nossa série Zoomcamp! Nesta semana, mergulhamos em uma lição crucial sobre como tornar nossos modelos acessíveis e utilizáveis por outros serviços. Vamos desmembrar isso para você, que não é da área de tecnologia:
 
-🔍 O objetivo desta semana 6 do Machine Learning Zoomcamp foi como tornar nosso modelo de aprendizado de máquina disponível para outros serviços. Não se trata apenas de criar um ótimo modelo; é igualmente importante garantir que outros possam se beneficiar.
+🔍 O objetivo da semana 6 do Machine Learning Zoomcamp foi como tornar nosso modelo de aprendizado de máquina disponível para outros serviços. Não se trata apenas de criar um ótimo modelo; é igualmente importante garantir que outros possam se beneficiar.
 
 🗂️ Principais Tópicos:
 
