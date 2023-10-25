@@ -71,7 +71,7 @@ model = xgb.train(xgb_params, dtrain, num_boost_round=100,
 y_pred = model.predict(dval)
 score = rmse(y_test, y_pred)
 
-output_file = f'../model/model_eta={eta}_max_depth={max_depth}_v{score.round(2)}.bin'
+output_file = f'model_eta={eta}_max_depth={max_depth}_v{score.round(2)}.bin'
 
 print(f'Saving the model on {output_file}')
 
